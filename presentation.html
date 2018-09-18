@@ -4,26 +4,32 @@
 <head>
   <title>Once upon a Slide</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 
 <body>
-  <div id="slideDiv" class="mainDiv"></div>
+  <div id="slideDiv" class="displayDiv"></div>
 
-  <p id="indexOfSlide">Slide number 1 (total = 1)</p>
-
-  <input id="textAdding" placeholder="Add text" />    
-  <button id="btnAddText">Add text</button>
-  <button id="btnAddPicture">Add picture</button>
+  <div class="leftControlSlide">
+    <button id="btnDeleteSlide">Delete slide</button>
+    <i id="btnPreviousSlide" class="fas fa-arrow-alt-circle-left"></i>
+  </div>
   
-  <select id="selectSlide"></select>
-
-  <button id="btnDeleateText">l__l</button>
-
-  <button id="btnAddSlide">New slide</button>
-  <button id="btnDeleateSlide">Deleate slide</button>
-
-  <button id="btnPreviousSlide"><</button>
-  <button id="btnNextSlide">></button>
-
-</body>
+  <div class="middleControlSlide">
+    <p id="indexOfSlide">Slide number 1 (total = 1)</p>
+    <select id="selectSlide"></select>
+  </div>
+  
+  <div class="rightControlSlide">
+    <i id="btnNextSlide" class="fas fa-arrow-alt-circle-right"></i>
+    <button id="btnAddSlide">New slide</button>
+  </div>
+  
+  <div class="EditToolsSlide">
+    <input id="textAdding" placeholder="Add text" />    
+    <button id="btnAddText">Add text</button>
+    <button id="btnAddPicture">Add picture</button>
+    <i class="fas fa-trash-alt"></i>
+  </div> 
+  </body>
 </html>
