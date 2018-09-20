@@ -148,6 +148,10 @@ table {
   border-color: #333;
 }
 
+.displayDiv img {
+  max-width: 50%;
+}
+
 /* For tools controlling visible slide --------------------------------*/
 .controlSlideColumn {
   float: left;
