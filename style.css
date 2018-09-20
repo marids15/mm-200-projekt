@@ -153,6 +153,7 @@ table {
 
 .displayDiv img {
   max-width: 50%;
+  position: absolute;
 }
 
 /* For tools controlling visible slide --------------------------------*/
@@ -186,8 +187,6 @@ table {
   margin-bottom: 10px;
 }
 
-/*  -------------- Test Seb --------------------*/
-
 .creationDiv {
   position: absolute;
   top: 0;
@@ -196,7 +195,7 @@ table {
   height: 100%;
 }
 
-.AddingElement {
+.textElementSlide {
   position: absolute;
   left: 0px;
   top: 0px;

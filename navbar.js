@@ -10,16 +10,3 @@ function expandNavigation(evt) {
     navbar.className = "navbar";
   }
 }
-
-function addImage(evt) {
-  let slideDiv = document.getElementById('slideDiv');
-  let txtIn = document.getElementById('inTxt');
-  let src = txtIn.value;
-
-  let image = document.createElement('img');
-  image.src = src;
-  image.class = "slideImage";
-
-  slideDiv.appendChild(image);
-  txtIn.value = "";
-}

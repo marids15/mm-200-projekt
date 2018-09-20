@@ -12,11 +12,11 @@ let inTxt  = document.getElementById("inTxt");
 let slideDiv = document.getElementById("slideDiv");
 
 let btnAddText    = document.getElementById("btnAddText");
-let btnAddSlide = document.getElementById("btnAddSlide"); 
+let btnAddSlide = document.getElementById("btnAddSlide");
 let btnNextSlide = document.getElementById("btnNextSlide");
 let btnPreviousSlide = document.getElementById("btnPreviousSlide");
 
-//--------------- add onclik function to button   
+//--------------- add onclik function to button
 btnAddText.onclick = btnAddTextClick;
 btnAddSlide.onclick = AddNewSlide;
 btnNextSlide.onclick = goToNextSlide;
@@ -36,19 +36,41 @@ AddNewSlide();
 function displayNumberCurrentSlide(){
   indexOfSlide.innerHTML = `Slide number ${numCurrentSlide + 1} (total = ${listOfSlide.length})`;
 }
-    
+
 //--------------- function to Add text in a slide
 function btnAddTextClick() {
   let cont = document.getElementById("creationDiv_" + numCurrentSlide);
-  let myText = document.createElement("div");
-  //myText.innerHTML = `<p contentEditable=true>${inTxt.value}</p>`;
+  let myText = document.createElement("p");
+
+  myText.contentEditable = true;
   myText.innerHTML = inTxt.value;
-  myText.setAttribute( 'class', 'AddingElement');
+  myText.setAttribute( 'class', 'textElementSlide');
   myText.id = `text${cont.childElementCount}ofDiv${numCurrentSlide}`;
 
   cont.appendChild(myText);
 
   inTxt.value = "";
+}
+
+
+//--------------- function to add image in a slide
+function addImage() {
+  let slideDiv = document.getElementById('creationDiv_' + numCurrentSlide);
+  //let txtIn = document.getElementById('inTxt');
+  let src = inTxt.value;
+
+  let image = document.createElement('img');
+  image.src = src;
+  image.class = "slideImage";
+  image.onclick = scaleImage;
+  image.draggable = false;
+
+  slideDiv.appendChild(image);
+  inTxt.value = "";
+}
+
+// -------------- function to scale images
+function scaleImage(evt) {
 }
 
 //--------------- function to Add a new slide
@@ -101,7 +123,7 @@ function goToPreviousSlide(){
 }
 
 
-//--------------------- parameter = the id of the div 
+//--------------------- parameter = the id of the div
 //--------------------- every child of the div will be draggable
 function makeDivDraggable (nameDiv){
 // thanks to https://www.kirupa.com/html5/drag.htm
@@ -112,7 +134,7 @@ function makeDivDraggable (nameDiv){
   let active = false;
 
   //div position
-   
+
   let xLeftBox = container.offsetLeft;
   let xRightBox = xLeftBox + container.offsetWidth;
   let yTopBox = container.offsetTop;
@@ -149,7 +171,7 @@ function makeDivDraggable (nameDiv){
         if (e.type === "touchstart") {
           activeItem.initialX = e.touches[0].clientX - activeItem.xOffset;
           activeItem.initialY = e.touches[0].clientY - activeItem.yOffset;
-        } 
+        }
         else {
           activeItem.initialX = e.clientX - activeItem.xOffset;
           //console.log( e.clientX , activeItem.xOffset);
@@ -161,6 +183,7 @@ function makeDivDraggable (nameDiv){
   }
 
   function dragEnd(e) {
+    console.log("end");
     if (activeItem !== null) {
       activeItem.initialX = activeItem.currentX;
       activeItem.initialY = activeItem.currentY;
@@ -177,7 +200,7 @@ function makeDivDraggable (nameDiv){
 
         activeItem.currentX = e.touches[0].clientX - activeItem.initialX;
         activeItem.currentY = e.touches[0].clientY - activeItem.initialY;
-      } 
+      }
 
       else {
         activeItem.currentX = e.clientX - activeItem.initialX;
@@ -200,8 +223,8 @@ function makeDivDraggable (nameDiv){
       if (activeItem.currentY < yTopBox ){
         activeItem.currentY = 0;
       }
-      
-      
+
+
       activeItem.xOffset = activeItem.currentX;
       activeItem.yOffset = activeItem.currentY;
 
