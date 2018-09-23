@@ -1,23 +1,28 @@
-//--------------- usefull variable
+//--------------- usefull variables
 let numCurrentSlide = 0;
 
-//---------------- my array of every div
+//---------------- array of every div
 let listOfSlide = [];
 
-//---------------- document.getElementById variable
+//---------------- document.getElementById variables
 let indexOfSlide = document.getElementById("indexOfSlide");
 
 let inTxt  = document.getElementById("inTxt");
 
 let slideDiv = document.getElementById("slideDiv");
 
-let btnAddText    = document.getElementById("btnAddText");
+let btnAddPicture = document.getElementById("btnAddPicture");
+let btnAddText = document.getElementById("btnAddText");
+//let btnAddVideo = document.getElementById("btnAddVideo");
 let btnAddSlide = document.getElementById("btnAddSlide");
 let btnNextSlide = document.getElementById("btnNextSlide");
 let btnPreviousSlide = document.getElementById("btnPreviousSlide");
+let selectorSlide = document.getElementById("selectSlide");
 
-//--------------- add onclik function to button
+//--------------- eventhandlers
+btnAddPicture.onclick = addImage;
 btnAddText.onclick = btnAddTextClick;
+//btnAddVideo.onclick = addVideo;
 btnAddSlide.onclick = AddNewSlide;
 btnNextSlide.onclick = goToNextSlide;
 btnPreviousSlide.onclick = goToPreviousSlide;
@@ -56,7 +61,6 @@ function btnAddTextClick() {
 //--------------- function to add image in a slide
 function addImage() {
   let slideDiv = document.getElementById('creationDiv_' + numCurrentSlide);
-  //let txtIn = document.getElementById('inTxt');
   let src = inTxt.value;
 
   let image = document.createElement('img');
@@ -69,9 +73,19 @@ function addImage() {
   inTxt.value = "";
 }
 
-// -------------- function to scale images
-function scaleImage(evt) {
-}
+/*// -------------- function add video (TODO!!!!)
+
+function addVideo() {
+  let slideDiv = document.getElementById('creationDiv_' + numCurrentSlide);
+  let src = inTxt.value + "&output=embed";
+
+  let video = document.createElement('iframe');
+  video.src = src;
+
+  slideDiv.appendChild(video);
+  inTxt.value = "";
+
+}*/
 
 //--------------- function to Add a new slide
 function AddNewSlide(){
@@ -84,6 +98,7 @@ function AddNewSlide(){
 
   makeDivDraggable(myNewDiv.id);
 
+  updateSlideselector(listOfSlide.length-1);
   goToLastSlide();
 }
 
@@ -122,6 +137,42 @@ function goToPreviousSlide(){
   displayNumberCurrentSlide();
 }
 
+
+// displays slide by an index
+function goToSlide(num) {
+  document.getElementById("creationDiv_" + numCurrentSlide).style.display = "none";
+  numCurrentSlide = num;
+  document.getElementById("creationDiv_" + numCurrentSlide).style.display = "block";
+
+  //TODO Fix selector display!!!
+/*
+  console.log(num);
+  let number = num;
+  selectSlide.selectedIndex = num;
+  console.log(selectSlide.selectedIndex);
+
+  displayNumberCurrentSlide(); */
+}
+
+// updates the options in the slide selector
+function updateSlideselector(num) {
+    selectorSlide.innerHTML = "";
+    selectorSlide.onchange = selectSlide;
+    for (let slide in listOfSlide) {
+       let option = document.createElement("option");
+       let slideNumber = parseInt(slide, 10) + 1;
+       option.innerHTML = `Slide ${slideNumber}`
+       option.value = slide;
+       selectorSlide.appendChild(option);
+    }
+}
+
+// handles the change of the slide selector
+function selectSlide() {
+    let selectedElement = selectorSlide.value;
+    let slideID = parseInt(selectedElement, 10);
+    goToSlide(slideID);
+}
 
 //--------------------- parameter = the id of the div
 //--------------------- every child of the div will be draggable
