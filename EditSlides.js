@@ -18,6 +18,7 @@ let btnAddSlide = document.getElementById("btnAddSlide");
 let btnNextSlide = document.getElementById("btnNextSlide");
 let btnPreviousSlide = document.getElementById("btnPreviousSlide");
 let selectorSlide = document.getElementById("selectSlide");
+let btnDeleteSlide = document.getElementById("btnDeleteSlide");
 
 //--------------- eventhandlers
 btnAddPicture.onclick = addImage;
@@ -26,15 +27,16 @@ btnAddText.onclick = btnAddTextClick;
 btnAddSlide.onclick = AddNewSlide;
 btnNextSlide.onclick = goToNextSlide;
 btnPreviousSlide.onclick = goToPreviousSlide;
+btnDeleteSlide.onclick = DeleteCurrentSlide;
 
 //------------ first slide
-AddNewSlide();
+AddFirstSlide();
 
 // UGLY ==> need to change that
 //------------ lance fct makeDivDraggable every 100ms
 //------------  to adapt the size of the div if there is a changing
 
-//setInterval("makeDivDraggable(listOfSlide[numCurrentSlide].id)",100);
+setInterval("makeDivDraggable(listOfSlide[numCurrentSlide])",100);
 
 
 //-------------------- function to display the number and the total of slide
@@ -44,14 +46,13 @@ function displayNumberCurrentSlide(){
 
 //--------------- function to Add text in a slide
 function btnAddTextClick() {
-  let cont = document.getElementById("creationDiv_" + numCurrentSlide);
+  let cont = listOfSlide[numCurrentSlide];
   let myText = document.createElement("p");
 
-  myText.contentEditable = true;
+  //myText.contentEditable = true;
   myText.innerHTML = inTxt.value;
   myText.setAttribute( 'class', 'textElementSlide');
-  myText.id = `text${cont.childElementCount}ofDiv${numCurrentSlide}`;
-
+ 
   cont.appendChild(myText);
 
   inTxt.value = "";
@@ -60,16 +61,16 @@ function btnAddTextClick() {
 
 //--------------- function to add image in a slide
 function addImage() {
-  let slideDiv = document.getElementById('creationDiv_' + numCurrentSlide);
+  let cont = listOfSlide[numCurrentSlide];
   let src = inTxt.value;
 
   let image = document.createElement('img');
   image.src = src;
   image.class = "slideImage";
-  image.onclick = scaleImage;
+  //image.onclick = scaleImage;
   image.draggable = false;
 
-  slideDiv.appendChild(image);
+  cont.appendChild(image);
   inTxt.value = "";
 }
 
@@ -88,36 +89,67 @@ function addVideo() {
 }*/
 
 //--------------- function to Add a new slide
+//  /!\ now div has no id 
 function AddNewSlide(){
   let myNewDiv = document.createElement("div");
-  myNewDiv.id = "creationDiv_" + listOfSlide.length;
   myNewDiv.setAttribute( 'class', 'creationDiv' );
 
-  slideDiv.appendChild(myNewDiv);
-  listOfSlide.push(myNewDiv);
-
-  makeDivDraggable(myNewDiv.id);
+  listOfSlide.splice(numCurrentSlide + 1, 0, myNewDiv);
 
   updateSlideselector(listOfSlide.length-1);
-  goToLastSlide();
+  goToNextSlide();
+  
+
+}
+
+function AddFirstSlide(){
+  let myNewDiv = document.createElement("div");
+  myNewDiv.setAttribute( 'class', 'creationDiv' );
+
+  listOfSlide.push(myNewDiv);
+  slideDiv.appendChild(myNewDiv);
+
+  updateSlideselector(listOfSlide.length-1);
+
+}
+
+function DeleteCurrentSlide(){
+  listOfSlide.splice(numCurrentSlide, 1);
+  //if we delete the only slide
+  if( listOfSlide.length === 0){
+    slideDiv.removeChild(slideDiv.firstChild);
+    AddFirstSlide();
+  }
+  //if you delete the first slide
+  else if (numCurrentSlide === 0) {
+    numCurrentSlide = -1;
+    goToNextSlide();
+  }
+
+  else {
+    goToPreviousSlide();
+  }
+  updateSlideselector(listOfSlide.length-1);
 }
 
 //-----------------------------------
+/*
 function goToLastSlide(){
-    document.getElementById("creationDiv_" + numCurrentSlide).style.display = "none";
+    slideDiv.removeChild(slideDiv.firstChild);
     numCurrentSlide = listOfSlide.length - 1;
-    document.getElementById("creationDiv_" + numCurrentSlide).style.display = "block";
+    slideDiv.appendChild(listOfSlide[numCurrentSlide]);
 
     displayNumberCurrentSlide();
     selectOptionInSelector(numCurrentSlide);
 }
+*/
 
 //-------------------------------------
 function goToNextSlide(){
   if (numCurrentSlide + 1 < listOfSlide.length){
-    document.getElementById("creationDiv_" + numCurrentSlide).style.display = "none";
+    slideDiv.removeChild(slideDiv.firstChild)
     numCurrentSlide++;
-    document.getElementById("creationDiv_" + numCurrentSlide).style.display = "block";
+    slideDiv.appendChild(listOfSlide[numCurrentSlide]);
   }
   else{
     console.log("Error : it's the last slide!");
@@ -132,9 +164,9 @@ function goToPreviousSlide(){
     console.log("Error : it's the first slide!");
   }
   else{
-    document.getElementById("creationDiv_" + numCurrentSlide).style.display = "none";
+    slideDiv.removeChild(slideDiv.firstChild);
     numCurrentSlide--;
-    document.getElementById("creationDiv_" + numCurrentSlide).style.display = "block";
+    slideDiv.appendChild(listOfSlide[numCurrentSlide]);
   }
   displayNumberCurrentSlide();
   selectOptionInSelector(numCurrentSlide);
@@ -143,13 +175,15 @@ function goToPreviousSlide(){
 
 // displays slide by an index
 function goToSlide(num) {
-  document.getElementById("creationDiv_" + numCurrentSlide).style.display = "none";
+  slideDiv.removeChild(slideDiv.firstChild);
   numCurrentSlide = num;
-  document.getElementById("creationDiv_" + numCurrentSlide).style.display = "block";
+  slideDiv.appendChild(listOfSlide[numCurrentSlide]);
+
   displayNumberCurrentSlide();
 }
 
 // updates the options in the slide selector
+
 function updateSlideselector(num) {
     selectorSlide.innerHTML = "";
     selectorSlide.onchange = selectSlide;
@@ -162,6 +196,7 @@ function updateSlideselector(num) {
     }
 }
 
+
 //displays the current slide number in the selector
 function selectOptionInSelector(num) {
     let number = num;
@@ -172,6 +207,7 @@ function selectOptionInSelector(num) {
 function selectSlide() {
     let selectedElement = selectorSlide.value;
     let slideID = parseInt(selectedElement, 10);
+
     goToSlide(slideID);
 }
 
@@ -180,7 +216,7 @@ function selectSlide() {
 function makeDivDraggable (nameDiv){
 // thanks to https://www.kirupa.com/html5/drag.htm
 
-  let container = document.getElementById(nameDiv);
+  let container = nameDiv;
   let activeItem = null;
 
   let active = false;
