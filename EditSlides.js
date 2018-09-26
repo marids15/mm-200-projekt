@@ -109,6 +109,7 @@ function goToLastSlide(){
     document.getElementById("creationDiv_" + numCurrentSlide).style.display = "block";
 
     displayNumberCurrentSlide();
+    selectOptionInSelector(numCurrentSlide);
 }
 
 //-------------------------------------
@@ -122,6 +123,7 @@ function goToNextSlide(){
     console.log("Error : it's the last slide!");
   }
   displayNumberCurrentSlide();
+  selectOptionInSelector(numCurrentSlide);
 }
 
 //-------------------------------------
@@ -135,6 +137,7 @@ function goToPreviousSlide(){
     document.getElementById("creationDiv_" + numCurrentSlide).style.display = "block";
   }
   displayNumberCurrentSlide();
+  selectOptionInSelector(numCurrentSlide);
 }
 
 
@@ -143,15 +146,7 @@ function goToSlide(num) {
   document.getElementById("creationDiv_" + numCurrentSlide).style.display = "none";
   numCurrentSlide = num;
   document.getElementById("creationDiv_" + numCurrentSlide).style.display = "block";
-
-  //TODO Fix selector display!!!
-/*
-  console.log(num);
-  let number = num;
-  selectSlide.selectedIndex = num;
-  console.log(selectSlide.selectedIndex);
-
-  displayNumberCurrentSlide(); */
+  displayNumberCurrentSlide();
 }
 
 // updates the options in the slide selector
@@ -165,6 +160,12 @@ function updateSlideselector(num) {
        option.value = slide;
        selectorSlide.appendChild(option);
     }
+}
+
+//displays the current slide number in the selector
+function selectOptionInSelector(num) {
+    let number = num;
+    selectorSlide.selectedIndex = num;
 }
 
 // handles the change of the slide selector
