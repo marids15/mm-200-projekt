@@ -1,4 +1,4 @@
-//--------------- usefull variables
+ //--------------- usefull variables
 let numCurrentSlide = 0;
 
 //---------------- array of every div
@@ -38,8 +38,10 @@ AddFirstSlide();
 
 setInterval("makeDivDraggable(listOfSlide[numCurrentSlide])",100);
 
+//-----------eventlisteners-----------
+ window.addEventListener("keydown", clickKeyArrows, true);
 
-//-------------------- function to display the number and the total of slide
+ //-------------------- function to display the number and the total of slide
 function displayNumberCurrentSlide(){
   indexOfSlide.innerHTML = `Slide number ${numCurrentSlide + 1} (total = ${listOfSlide.length})`;
 }
@@ -324,3 +326,18 @@ function makeDivDraggable (nameDiv){
     el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
   }
 }
+ 
+ // this works
+  function clickKeyArrows(event){
+
+    if (event.key === "ArrowLeft"){
+      console.log("gogogog");
+        goToPreviousSlide();
+    }
+    if (event.key === "ArrowRight"){
+        goToNextSlide();
+    }
+}
+
+
+
