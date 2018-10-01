@@ -1,4 +1,4 @@
- //--------------- usefull variables
+//--------------- usefull variables
 let numCurrentSlide = 0;
 
 //---------------- array of every div
@@ -24,6 +24,7 @@ let btnDeleteSlide = document.getElementById("btnDeleteSlide");
 btnAddPicture.onclick = addImage;
 btnAddText.onclick = btnAddTextClick;
 //btnAddVideo.onclick = addVideo;
+btnDelete.onclick = deleteElement;
 btnAddSlide.onclick = AddNewSlide;
 btnNextSlide.onclick = goToNextSlide;
 btnPreviousSlide.onclick = goToPreviousSlide;
@@ -38,10 +39,11 @@ AddFirstSlide();
 
 setInterval("makeDivDraggable(listOfSlide[numCurrentSlide])",100);
 
+
 //-----------eventlisteners-----------
  window.addEventListener("keydown", clickKeyArrows, true);
 
- //-------------------- function to display the number and the total of slide
+//-------------------- function to display the number and the total of slide
 function displayNumberCurrentSlide(){
   indexOfSlide.innerHTML = `Slide number ${numCurrentSlide + 1} (total = ${listOfSlide.length})`;
 }
@@ -49,11 +51,12 @@ function displayNumberCurrentSlide(){
 //--------------- function to Add text in a slide
 function btnAddTextClick() {
   let cont = listOfSlide[numCurrentSlide];
-  let myText = document.createElement("p");
+  let myText = document.createElement("text");
 
-  //myText.contentEditable = true;
+  myText.contentEditable = true;
   myText.innerHTML = inTxt.value;
   myText.setAttribute( 'class', 'textElementSlide');
+  myText.setAttribute('spellcheck', "false");
  
   cont.appendChild(myText);
 
@@ -71,6 +74,8 @@ function addImage() {
   image.class = "slideImage";
   //image.onclick = scaleImage;
   image.draggable = false;
+
+  console.log(image.offsetWidth);
 
   cont.appendChild(image);
   inTxt.value = "";
@@ -134,21 +139,11 @@ function DeleteCurrentSlide(){
   updateSlideselector(listOfSlide.length-1);
 }
 
-//-----------------------------------
-/*
-function goToLastSlide(){
-    slideDiv.removeChild(slideDiv.firstChild);
-    numCurrentSlide = listOfSlide.length - 1;
-    slideDiv.appendChild(listOfSlide[numCurrentSlide]);
-
-    displayNumberCurrentSlide();
-    selectOptionInSelector(numCurrentSlide);
-}
-*/
 
 //-------------------------------------
 function goToNextSlide(){
   if (numCurrentSlide + 1 < listOfSlide.length){
+    removeBorderStyle(listOfSlide[numCurrentSlide].children);
     slideDiv.removeChild(slideDiv.firstChild)
     numCurrentSlide++;
     slideDiv.appendChild(listOfSlide[numCurrentSlide]);
@@ -166,6 +161,7 @@ function goToPreviousSlide(){
     console.log("Error : it's the first slide!");
   }
   else{
+    removeBorderStyle(listOfSlide[numCurrentSlide].children);
     slideDiv.removeChild(slideDiv.firstChild);
     numCurrentSlide--;
     slideDiv.appendChild(listOfSlide[numCurrentSlide]);
@@ -273,12 +269,16 @@ function makeDivDraggable (nameDiv){
   }
 
   function dragEnd(e) {
-    console.log("end");
     if (activeItem !== null) {
       activeItem.initialX = activeItem.currentX;
       activeItem.initialY = activeItem.currentY;
-    }
 
+      //convert left and top frompx to %
+      let leftPercent = (activeItem.currentX * 100 / container.offsetWidth);
+      let topPercent = (activeItem.currentY * 100 / container.offsetHeight);
+      activeItem.setAttribute('style', `left: ${leftPercent}%; top: ${topPercent}%`); 
+    }
+    
     active = false;
     activeItem = null;
   }
@@ -323,11 +323,16 @@ function makeDivDraggable (nameDiv){
   }
 
   function setTranslate(xPos, yPos, el) {
-    el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    //el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    let leftPercent = (activeItem.currentX * 100 / container.offsetWidth);
+    let topPercent = (activeItem.currentY * 100 / container.offsetHeight);
+    activeItem.setAttribute('style', `left: ${leftPercent}%; top: ${topPercent}%`); 
+ 
   }
 }
- 
- // this works
+
+ //------------------------------------------
+ //gotonext/previous with arrow keyboard
   function clickKeyArrows(event){
 
     if (event.key === "ArrowLeft"){
@@ -339,5 +344,43 @@ function makeDivDraggable (nameDiv){
     }
 }
 
+//-----------------------------------------------------------
+// function to be able to select an element inside slide
+
+setInterval("makeDivSelectable(listOfSlide[numCurrentSlide])",100);
+
+function makeDivSelectable(nameDiv) {
+  nameDiv.addEventListener("click", selectElement, false);
 
 
+  function selectElement(evt) {
+    let slideConts = nameDiv.children;
+    activeElement = evt.target;
+    if (activeElement !== null){
+
+      removeBorderStyle(slideConts);
+
+      if (activeElement !== nameDiv){
+        activeElement.style.border = "1.5px solid blue";
+      }
+    }
+  }
+}
+
+//param = list of all the children of the div
+function removeBorderStyle(nameDivChildren){
+    for (let i = 0; i < nameDivChildren.length; i++) {
+      nameDivChildren[i].style.borderStyle = "none";
+    }
+}
+
+function deleteElement() {
+  let slideConts = listOfSlide[numCurrentSlide].children;
+
+  for (let i = 0; i < slideConts.length; i++) {
+
+    if(slideConts[i].style.border === "1.5px solid blue"){
+      listOfSlide[numCurrentSlide].removeChild(listOfSlide[numCurrentSlide].childNodes[i]);
+    }
+  }
+}
