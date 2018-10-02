@@ -1,5 +1,6 @@
 //--------------- usefull variables
 let numCurrentSlide = 0;
+let activeElement;
 
 //---------------- array of every div
 let listOfSlide = [];
@@ -373,10 +374,6 @@ function removeBorderStyle(nameDivChildren){
 function deleteElement() {
   let slideConts = listOfSlide[numCurrentSlide].children;
 
-  for (let i = 0; i < slideConts.length; i++) {
+  listOfSlide[numCurrentSlide].removeChild(activeElement);
 
-    if(slideConts[i].style.border === "1.5px solid blue"){
-      listOfSlide[numCurrentSlide].removeChild(listOfSlide[numCurrentSlide].childNodes[i]);
-    }
-  }
 }
