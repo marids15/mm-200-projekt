@@ -108,11 +108,8 @@ table {
   }
 
   .textElementSlide {
-  font-size: 4vw;
-}
-
-
-
+    font-size: 4vw;
+  }
 }
 
 .navbar {
@@ -216,5 +213,4 @@ table {
   top: 0%;
   background-color: #FF9933;
   user-select: none;
-  
 }

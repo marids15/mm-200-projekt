@@ -2,44 +2,58 @@ const TEXT = "text";
 const IMAGE = "image";
 const VIDEO = "video";
 
+/* === Class for creating elements =========================================*/
 class Element {
-  constructor(type, content){
+  // initializing element
+  constructor(type, content, id){
     this.type = type;
     this.content = content;
+    this.id = id;
   }
 
-  function getHTMLElement() {
+  // gets id of element
+  getID(){
+    return this.id;
+  }
+
+  // gets HTML of element
+  getHTMLElement() {
     if (this.type === TEXT) {
-      createHTMLText();
+      return this.createHTMLText();
     }
     else if (this.type === IMAGE) {
-      createHTMLImage();
+      return this.createHTMLImage();
     }
     else if (this.type === VIDEO) {
-      createHTMLVideo();
+      return this.createHTMLVideo();
     }
     else {
       console.error("This is not a correct element");
     }
   }
 
-  function createHTMLText(){
+  // gets HTML for text
+  createHTMLText(){
     let myText = document.createElement("text");
     myText.contentEditable = true;
     myText.innerHTML = this.content;
     myText.setAttribute( 'class', 'textElementSlide');
     myText.setAttribute('spellcheck', "false");
+    myText.setAttribute('id', this.id);
     return myText;
   }
 
-  function createHTMLImage() {
+  // gets HTML for image
+  createHTMLImage() {
     let myImage = document.createElement('img');
     myImage.src = this.content;
     myImage.draggable = false;
+    myImage.setAttribute('id', this.id);
     return myImage;
   }
 
-  function createHTMLVideo() {
+  // gets HTML for video
+  createHTMLVideo() {
     return null;    //TODO!
   }
 

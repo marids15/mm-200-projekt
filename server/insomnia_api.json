@@ -1,0 +1,84 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-10-04T08:50:31.297Z",
+	"__export_source": "insomnia.desktop.app:v6.0.2",
+	"resources": [
+		{
+			"_id": "wrk_d2d3e326c4074b6db6ca8646b4198098",
+			"created": 1538642103079,
+			"description": "",
+			"modified": 1538642103079,
+			"name": "Insomnia",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_43aa502e82d643f0a6c9adae8fe46d10",
+			"color": null,
+			"created": 1538642103121,
+			"data": {},
+			"isPrivate": false,
+			"metaSortKey": 1538642103121,
+			"modified": 1538642112335,
+			"name": "New Environment",
+			"parentId": "wrk_d2d3e326c4074b6db6ca8646b4198098",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_3c72ea34aabc4c3f9a1b8f57e89dad53",
+			"cookies": [],
+			"created": 1538642103128,
+			"modified": 1538642103128,
+			"name": "Default Jar",
+			"parentId": "wrk_d2d3e326c4074b6db6ca8646b4198098",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_af2ce7301db743cdaf9bc573f451f7ff",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"John Doe\",\n\t\"email\": \"john.doe@email.com\", \n\t\"password\": \"password1\"\n}"
+			},
+			"created": 1538642223991,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_7863aa28c81b43e59f70a51a6c5570e9",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538642223992,
+			"method": "POST",
+			"modified": 1538642894776,
+			"name": "Create user",
+			"parameters": [],
+			"parentId": "wrk_d2d3e326c4074b6db6ca8646b4198098",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http:/{{ server  }}/api/user",
+			"_type": "request"
+		},
+		{
+			"_id": "env_3f3f67d4d60d44c899eef682703586ab",
+			"color": null,
+			"created": 1538642115749,
+			"data": {
+				"server": "localhost:8080"
+			},
+			"isPrivate": false,
+			"metaSortKey": 1538642115749,
+			"modified": 1538642139430,
+			"name": "Localhost",
+			"parentId": "env_43aa502e82d643f0a6c9adae8fe46d10",
+			"_type": "environment"
+		}
+	]
+}
