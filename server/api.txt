@@ -1,0 +1,6 @@
+Create user:
+
+METHOD: POST
+ENDPOINT: api/user
+REQUEST (JSON): {"name": "John Doe", "email": "john.doe@email.com", "password": "password1"}
+RESPONSE (JSON): {"id": "000001", "name": "John Doe", "email":"john.doe@email.com", "password": "password1"}
