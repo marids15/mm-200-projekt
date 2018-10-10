@@ -54,7 +54,26 @@ class Element {
 
   // gets HTML for video
   createHTMLVideo() {
-    return null;    //TODO!
+    //let myDiv = document.createElement('div');
+    let myVidFrame = document.createElement('iframe');
+    //let myHeader = document.createElement('h1');
+
+    myVidFrame.src = this.content;
+    myVidFrame.frameborder = "0";
+    myVidFrame.className = "vidElement";
+    myVidFrame.allow = 'encrypted-media, autoplay';
+    myVidFrame.setAttribute('allowFullScreen', '');
+
+    //myDiv.className = "vidElement";
+    //myHeader.innerHTML = "movie title";
+    //myHeader.className = "vidHeader";
+    //myDiv.appendChild(myHeader);
+    //myDiv.appendChild(myVidFrame);
+    //return myDiv;
+    return myVidFrame;
+
+    //https://www.youtube.com/embed/xbhCPt6PZIU works
+    //https://www.youtube.com/embed/dmKeIlJq4gM doesn't
   }
 
 }

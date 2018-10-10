@@ -4,10 +4,12 @@ const NAME = "myP";
 //---------------- document.getElementById variables
 let indexOfSlide = document.getElementById("indexOfSlide");
 let inTxt  = document.getElementById("inTxt");
+let inNote = document.getElementById('inNote');
 let slideDiv = document.getElementById("slideDiv");
+let btnSaveNote = document.getElementById('btnStoreNote');
 let btnAddPicture = document.getElementById("btnAddPicture");
 let btnAddText = document.getElementById("btnAddText");
-//let btnAddVideo = document.getElementById("btnAddVideo");
+let btnAddVideo = document.getElementById("btnAddVideo");
 let btnAddSlide = document.getElementById("btnAddSlide");
 let btnNextSlide = document.getElementById("btnNextSlide");
 let btnPreviousSlide = document.getElementById("btnPreviousSlide");
@@ -20,9 +22,10 @@ let myPresentation = new Presentation(NAME, slideDiv);
 AddFirstSlide();
 
 //--------------- eventhandlers
+btnSaveNote.onclick = saveNote;
 btnAddPicture.onclick = addImage;
 btnAddText.onclick = btnAddTextClick;
-//btnAddVideo.onclick = addVideo;
+btnAddVideo.onclick = addVideo;
 btnDelete.onclick = deleteElement;
 btnAddSlide.onclick = AddNewSlide;
 btnNextSlide.onclick = goToNextSlide;
@@ -33,6 +36,18 @@ btnDeleteSlide.onclick = DeleteCurrentSlide;
 //--------------------------------
 setInterval("myPresentation.makeDivDraggable()",100);
 setInterval("myPresentation.makeDivSelectable()",1000);
+
+// ------------------- function to save note
+function saveNote() {
+  let noteText = inNote.value;
+  myPresentation.getCurrentSlide().setNote(noteText);
+}
+
+function updateNote() {
+  let noteText = myPresentation.getCurrentSlide().getNote();
+  inNote.value = noteText;
+}
+
 
 //-------------------- function to display the number and the total of slide
 function displayNumberCurrentSlide() {
@@ -79,11 +94,17 @@ function addImage() {
   inTxt.value = "";
 }
 
+function addVideo() {
+  myPresentation.getCurrentSlide().addVideo(inTxt.value);
+  inTxt.value = "";
+}
+
 //--------------- function to go to next slide
 function goToNextSlide(){
   myPresentation.goToNextSlide();
   displayNumberCurrentSlide();
   selectOptionInSelector(myPresentation.getCurrentSlideIndex());
+  updateNote();
 }
 
 //--------------- function to go to previous slide
@@ -91,12 +112,14 @@ function goToPreviousSlide(){
   myPresentation.goToPreviousSlide();
   displayNumberCurrentSlide();
   selectOptionInSelector(myPresentation.getCurrentSlideIndex());
+  updateNote();
 }
 
 //------------- displays slide by an index
 function goToSlide(num) {
   myPresentation.goToSlide(num);
   displayNumberCurrentSlide();
+  updateNote();
 }
 
 //--------------- function to Add a new slide
@@ -112,6 +135,7 @@ function AddFirstSlide() {
   myPresentation.setCurrentSlideIndex(0);
   myPresentation.addSlide(0);
   updateSlideselector();
+  updateNote();
 }
 
 //-------------- function to delete current slide

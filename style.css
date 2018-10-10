@@ -85,10 +85,23 @@ table {
   }
 
   .textElementSlide {
-  font-size: 7.6vw;
-}
+    font-size: 7.6vw;
+  }
 
+  /* For displaying note ----------------------------------------------*/
+  .noteDivContainer {
+    margin-left: 2.5%;
+    margin-right: 3%;
+    width: 94.5%;
+    margin-bottom: 20px;
+  }
 
+  .noteDivContainer textarea {
+    max-width: 100%;
+    padding-bottom: 5%;
+    width: 100%;
+    height: 5%;
+  }
 }
 
 /* CSS specifically for desktops -----------------------------------------*/
@@ -102,20 +115,42 @@ table {
   .displayDivContainer {
     width: 50%;
     margin-top: 20px;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 20%;
     margin-bottom: 20px;
+    float: left;
   }
 
   .textElementSlide {
     font-size: 4vw;
   }
-}
 
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /* For displaying note ----------------------------------------------*/
+  .noteDivContainer {
+    padding-top: 20px;
+    margin-right: 10%;
+    float: right;
+    width: 15%;
+  }
+
+  .noteDivContainer textarea {
+    max-width: 100%;
+    padding-bottom: 100%;
+    margin-bottom: 5%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .controlSlide {
+    float: left;
+    width: 50%;
+    margin-left: 20%;
+  }
+
+  .EditToolsSlide {
+    float: left;
+    width: 50%;
+    margin-left: 20%;
+  }
 }
 
 /* CSS for both desktop and mobile screens -------------------------------*/
@@ -125,7 +160,17 @@ table {
   width: 33.3%;
 }
 
+textarea {
+  resize: none;
+}
+
 /* For navbar ---------------------------------------------------------*/
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .navbar a {
   float: left;
   display: block;
@@ -164,7 +209,21 @@ table {
   position: absolute;
 }
 
+.vidElement {
+  width: 30%;
+  border-top: 5%;
+  position: absolute;
+}
+
+.vidHeader {
+  background-color: black;
+}
+
 /* For tools controlling visible slide --------------------------------*/
+.controlSlide {
+  clear: both;
+}
+
 .controlSlideColumn {
   float: left;
   width: 20%;
