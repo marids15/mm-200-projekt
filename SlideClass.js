@@ -112,7 +112,7 @@ class Slide {
   removeBorder() {
     for (let i in this.elements) {
       if (this.div.children[i].className == "vidElement") {
-        this.div.children[i].style.borderStyle = "5% solid black";
+        this.div.children[i].style.border = "5px solid darkgrey";
       } else {
         this.div.children[i].style.borderStyle = "none";
       }

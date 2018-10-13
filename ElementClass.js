@@ -54,9 +54,7 @@ class Element {
 
   // gets HTML for video
   createHTMLVideo() {
-    //let myDiv = document.createElement('div');
     let myVidFrame = document.createElement('iframe');
-    //let myHeader = document.createElement('h1');
 
     myVidFrame.src = this.content;
     myVidFrame.frameborder = "0";
@@ -64,12 +62,6 @@ class Element {
     myVidFrame.allow = 'encrypted-media, autoplay';
     myVidFrame.setAttribute('allowFullScreen', '');
 
-    //myDiv.className = "vidElement";
-    //myHeader.innerHTML = "movie title";
-    //myHeader.className = "vidHeader";
-    //myDiv.appendChild(myHeader);
-    //myDiv.appendChild(myVidFrame);
-    //return myDiv;
     return myVidFrame;
 
     //https://www.youtube.com/embed/xbhCPt6PZIU works
