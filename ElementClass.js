@@ -55,6 +55,10 @@ class Element {
   // gets HTML for video
   createHTMLVideo() {
     let myVidFrame = document.createElement('iframe');
+    let vidDiv = document.createElement('div');
+    let dragIcon = document.createElement('icon');
+    vidDiv.className = "vidDiv"
+    dragIcon.className = "fas fa-arrows-alt";
 
     myVidFrame.src = this.content;
     myVidFrame.frameborder = "0";
@@ -62,7 +66,9 @@ class Element {
     myVidFrame.allow = 'encrypted-media, autoplay';
     myVidFrame.setAttribute('allowFullScreen', '');
 
-    return myVidFrame;
+    vidDiv.appendChild(myVidFrame);
+    vidDiv.appendChild(dragIcon);
+    return vidDiv;
 
     //https://www.youtube.com/embed/xbhCPt6PZIU works
     //https://www.youtube.com/embed/dmKeIlJq4gM doesn't

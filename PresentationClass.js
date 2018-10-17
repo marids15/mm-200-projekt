@@ -228,7 +228,6 @@ class Presentation {
       if (activeElement !== null){
         myCurrentSlide.removeBorder();
         myCurrentSlide.selectElement(null);
-
         if (activeElement !== myCurrentSlideHTML){
           myCurrentSlide.selectElement(activeElement);
           myCurrentSlide.setBorder();

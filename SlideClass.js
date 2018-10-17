@@ -95,6 +95,11 @@ class Slide {
       this.currentElement = element;
       this.setBorder();
     }
+    // when you click on the icon, which is a child of the video div:
+    else if (element !== null && element.parentElement.className === "vidDiv") {
+      this.currentElement = element.parentElement;
+      this.setBorder();
+    }
     else {
       this.currentElement = null;
     }
@@ -111,11 +116,11 @@ class Slide {
   // removes all borders from elements in slide
   removeBorder() {
     for (let i in this.elements) {
-      if (this.div.children[i].className == "vidElement") {
-        this.div.children[i].style.border = "5px solid darkgrey";
-      } else {
+      //if (this.div.children[i].className == "vidDiv") {
+      //  this.div.children[i].style.border = "5px solid darkgrey";
+      //} else {
         this.div.children[i].style.borderStyle = "none";
-      }
+      //}
     }
   }
 }
