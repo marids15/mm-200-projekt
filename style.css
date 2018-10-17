@@ -155,9 +155,9 @@ table {
 
 /* CSS for both desktop and mobile screens -------------------------------*/
 /* General css --------------------------------------------------------*/
-.column3 {
+.column4 {
   float: left;
-  width: 33.3%;
+  width: 25%;
 }
 
 textarea {
@@ -195,11 +195,8 @@ textarea {
 .displayDiv {
   padding-top: 56.25%;
   width: 100%;
-  background-color: #EFEFEF;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #333;
-
+  background-color: #FEFEFE;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   overflow: hidden;
   position: relative;
 }
@@ -228,6 +225,10 @@ textarea {
   float: right;
   margin: 3px;
   padding: 3px;
+}
+
+.soundElement {
+  position: absolute;
 }
 
 /* For tools controlling visible slide --------------------------------*/

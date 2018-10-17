@@ -75,6 +75,14 @@ class Slide {
     }
   }
 
+  addSound(src) {
+    let mySound = new Element(SOUND, src, this.idGenerator);
+    let soundHTML = mySound.getHTMLElement();
+    this.elements.push(soundHTML);
+    this.div.appendChild(soundHTML);
+    this.idGenerator++;
+  }
+
   // deletes element from slide
   deleteElement() {
     try {

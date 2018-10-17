@@ -6,10 +6,10 @@ let indexOfSlide = document.getElementById("indexOfSlide");
 let inTxt  = document.getElementById("inTxt");
 let inNote = document.getElementById('inNote');
 let slideDiv = document.getElementById("slideDiv");
-let btnSaveNote = document.getElementById('btnStoreNote');
 let btnAddPicture = document.getElementById("btnAddPicture");
 let btnAddText = document.getElementById("btnAddText");
 let btnAddVideo = document.getElementById("btnAddVideo");
+let btnAddSound = document.getElementById("btnAddSound");
 let btnAddSlide = document.getElementById("btnAddSlide");
 let btnNextSlide = document.getElementById("btnNextSlide");
 let btnPreviousSlide = document.getElementById("btnPreviousSlide");
@@ -22,10 +22,11 @@ let myPresentation = new Presentation(NAME, slideDiv);
 AddFirstSlide();
 
 //--------------- eventhandlers
-btnSaveNote.onclick = saveNote;
+inNote.onchange = saveNote;
 btnAddPicture.onclick = addImage;
 btnAddText.onclick = btnAddTextClick;
 btnAddVideo.onclick = addVideo;
+btnAddSound.onclick = addSound;
 btnDelete.onclick = deleteElement;
 btnAddSlide.onclick = AddNewSlide;
 btnNextSlide.onclick = goToNextSlide;
@@ -94,8 +95,15 @@ function addImage() {
   inTxt.value = "";
 }
 
+// --------------- function to add video to a slide
 function addVideo() {
   myPresentation.getCurrentSlide().addVideo(inTxt.value);
+  inTxt.value = "";
+}
+
+// -------------- function to add sounds to a slide
+function addSound() {
+  myPresentation.getCurrentSlide().addSound(inTxt.value);
   inTxt.value = "";
 }
 
