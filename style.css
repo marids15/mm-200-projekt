@@ -88,6 +88,10 @@ table {
     font-size: 7.6vw;
   }
 
+  .vidDiv {
+    font-size: 2.5vw;
+  }
+
   /* For displaying note ----------------------------------------------*/
   .noteDivContainer {
     margin-left: 2.5%;
@@ -150,6 +154,10 @@ table {
     float: left;
     width: 50%;
     margin-left: 20%;
+  }
+
+  .vidDiv {
+    font-size: 1.5vw;
   }
 }
 
@@ -223,12 +231,13 @@ textarea {
 
 .vidDiv icon {
   float: right;
-  margin: 3px;
-  padding: 3px;
+  margin: 2%;
+  padding: 2%;
 }
 
 .soundElement {
   position: absolute;
+  width: 50%;
 }
 
 /* For tools controlling visible slide --------------------------------*/
