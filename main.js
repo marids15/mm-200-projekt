@@ -15,6 +15,7 @@ let btnNextSlide = document.getElementById("btnNextSlide");
 let btnPreviousSlide = document.getElementById("btnPreviousSlide");
 let selectorSlide = document.getElementById("selectSlide");
 let btnDeleteSlide = document.getElementById("btnDeleteSlide");
+let divContainer = document.getElementById("divContainer");
 
 
 //----------------- presentation object
@@ -32,6 +33,7 @@ btnAddSlide.onclick = AddNewSlide;
 btnNextSlide.onclick = goToNextSlide;
 btnPreviousSlide.onclick = goToPreviousSlide;
 btnDeleteSlide.onclick = DeleteCurrentSlide;
+btnDisplayFullScreen.onclick = displayInFullScreen;
 
 
 //--------------------------------
@@ -170,3 +172,64 @@ function DeleteCurrentSlide(){
 function deleteElement() {
   myPresentation.getCurrentSlide().deleteElement()
 }
+
+//--------------- full screen
+function displayInFullScreen(){
+
+
+  divContainer.addEventListener("webkitfullscreenchange", onFullScreenChange, true);
+  openFullscreen(divContainer);
+  //divContainer.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+  
+  //document.exitFullscreen();
+}
+
+/* View in fullscreen */
+function openFullscreen(elem) {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+  elem.FScreen = true;
+}
+
+/* Close fullscreen */
+function closeFullscreen(elem) {
+  if (elem.exitFullscreen) {
+    elem.exitFullscreen();
+  } else if (elem.mozCancelFullScreen) { /* Firefox */
+    elem.mozCancelFullScreen();
+  } else if (elem.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+    elem.webkitExitFullscreen();
+  } else if (elem.msExitFullscreen) { /* IE/Edge */
+    elem.msExitFullscreen();
+  }
+}
+
+  function onFullScreenChange (e) {
+    let element = e.target;
+    if (element.FScreen){
+      //console.log("go fullscreen");
+      window.addEventListener("keydown", clickKeyArrows, true);
+      element.FScreen = false;
+    }
+
+    else{
+      //console.log("exit fullscreen");
+      window.removeEventListener("keydown", clickKeyArrows, true);
+    }
+  }
+
+   function clickKeyArrows(event){
+    if (event.key === "ArrowLeft"){
+        goToPreviousSlide();
+    }
+    if (event.key === "ArrowRight"){
+        goToNextSlide();
+    }
+  }

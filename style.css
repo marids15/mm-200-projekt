@@ -294,3 +294,14 @@ textarea {
   background-color: #FF9933;
   user-select: none;
 }
+
+@media all and (display-mode: fullscreen) {
+  .textElementSlide {
+    font-size: 8vw;
+  }
+
+  .displayDivContainer{
+    width: 100% ;
+  }
+
+}
