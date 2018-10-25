@@ -214,3 +214,49 @@ table {
   background-color: #FF9933;
   user-select: none;
 }
+/* Styles in the login page --------------------------------------------*/
+
+.LoginDIV {
+width: 95%;
+margin-top: 40px;
+margin-left: 2.5%;
+margin-right: 2.5%;
+margin-bottom: 20px;
+align-content: center;
+text-align: center;
+padding-top: 20%;
+font-size: 16px;
+}
+    .inputElementLoginclass {
+            font-size: 16px;
+        margin: 1%;
+    }
+
+/* Styles for the User's show presentations page --------------------------------------------*/
+.dsiplayPresentationsDIV{
+    float: left;
+    margin: 5%;
+    width: 200px;
+    height: 200px;
+    background: lightblue;
+    align-content: center;
+    text-align: center;
+      }
+.buttonCenter {
+    margin-top: 50%;
+}
+.ShowPresentationsDIV{
+    float: left;
+    width: 100%;
+    margin:1%;
+    align-content: center;
+    text-align: center;
+    font-size: 16px;
+      }
+.HeaderDIV{
+    margin: 1%;
+      }
+.inputElementclass{
+    margin: 1%;
+    font-size: 16px;
+      }

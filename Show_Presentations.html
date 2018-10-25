@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Once upon a Slide</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <style>
+h1 {
+font-size: 25px;
+font-style: bold;
+      }
+h2 {
+font-size: 20px;
+font-style: bold;
+      }
+</style>
+</head>
+
+<body>
+  <div class="navbar" id="topnav">
+    <a href=#>Home</a>
+    <a href=# class="active">My presentations</a>
+    <a href=#>My account</a>
+    <a href=#>Settings</a>
+    <i class="fas fa-bars" onclick="expandNavigation()"></i>
+  </div>
+    <div class="HeaderDIV" id="TopHeaderDIV"><h2><b>My Presentations</b></h2></div>
+    <div class="ShowPresentationsDIV" id="MyPresentationDIV">
+    <div class="dsiplayPresentationsDIV" id="showDemo"></div>
+    <div class="dsiplayPresentationsDIV" id="AddSLIDEDIV"><button class="buttonCenter" id="NewUserBUTTON">Add Slide</button></div>
+    </div>
+
+    <div class="HeaderDIV" id="midHeaderDIV"><h2><b>Public Presentations</b></h2></div>
+    <div class="ShowPresentationsDIV" id="MyPresentationDIV">
+    <div class="dsiplayPresentationsDIV" id="showDemo"></div>
+    </div>
+
+  <script src="navbar.js"></script>
+  <script src="Show_Presentations.js"></script>
+</body>
+</html>
