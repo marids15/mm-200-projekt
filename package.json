@@ -1,18 +1,19 @@
 {
-  "name": "once-upon-a-slide",
+  "name": "once-upon-a-time",
   "version": "1.0.0",
-  "description": "Presentation Web App",
+  "description": "Presentation webapp",
   "main": "index.html",
-  "scripts": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/marids15/mm-200-projekt.git"
+    "url": "git+https://github.com/marids15/mm-200-projekt.git"
   },
-  "author": "Group 11",
+  "author": "Group 12",
   "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "pg": "^7.5.0"
-  }
+  "bugs": {
+    "url": "https://github.com/marids15/mm-200-projekt/issues"
+  },
+  "homepage": "https://github.com/marids15/mm-200-projekt#readme"
 }
