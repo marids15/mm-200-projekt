@@ -1,12 +1,12 @@
 {
-  "name": "",
+  "name": "once-upon-a-slide",
   "version": "1.0.0",
   "description": "Presentation Web App",
-  "main": "presentation.html",
+  "main": "index.html",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/marids15/mm-200-projekt.git",
+    "url": "https://github.com/marids15/mm-200-projekt.git"
   },
   "author": "Group 11",
   "license": "ISC",
