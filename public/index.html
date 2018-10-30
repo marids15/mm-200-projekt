@@ -3,13 +3,12 @@
 
 <head>
   <title>Once upon a Slide</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    
-    
-    <style>
-    
-    .LoginDIV {
+
+
+  <style>
+  .LoginDIV {
     width: 95%;
     margin-top: 40px;
     margin-left: 2.5%;
@@ -20,17 +19,17 @@
     padding-top: 20%;
     font-size: 16px;
   }
-        .inputElementclass {
-                font-size: 16px;
-            margin: 1%;
-        }
 
+  .inputElementclass {
+    font-size: 16px;
+    margin: 1%;
+  }
 
-    h1 {
-        font-size: 25px;
-        font-style: bold;
-          }
-    </style>
+  h1 {
+    font-size: 25px;
+    font-style: bold;
+  }
+  </style>
 </head>
 
 <body>
@@ -53,15 +52,15 @@
     <button class="inputElementclass" id="loginButton">Login</button>
     <br>
     <button class="inputElementclass" id="createNewUser">New user?</button>
-    
-    
+
+
     </div>
     <script >
-        
-        
-        
-        
-        
+
+
+
+
+
 //RegisterBTN.onclick = register;
     loginButton.onclick = LOGIN;
     createNewUser.onclick = NEWUSER;
@@ -72,20 +71,15 @@
         }
         function NEWUSER(){
             document.getElementById("extra1").innerHTML = ` <input class="inputElementclass" type="text" id="passwordINPUT2" placeholder="Repeat password">`;
-            
+
             document.getElementById("extra2").innerHTML = ` <button class="inputElementclass" id="RegisterBTN">Register</button>`;
-          let Username = document.getElementById("usernameINPUT").value =""; 
-           let Password = document.getElementById("passwordINPUT").value =""; 
+          let Username = document.getElementById("usernameINPUT").value ="";
+           let Password = document.getElementById("passwordINPUT").value ="";
         }
       function register (){
-          
+
       }
     </script>
-  <script src="navbar.js"></script>
-
-      <style>
-    
-
-    </style>
+  <script src="../js/navbar.js"></script>
 </body>
 </html>
