@@ -2,7 +2,7 @@
   "name": "once-upon-a-time",
   "version": "1.0.0",
   "description": "Presentation webapp",
-  "main": "index.html",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
