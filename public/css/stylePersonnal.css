@@ -1,0 +1,81 @@
+
+/* CSS specifically for mobile screens -----------------------------------*/
+@media only screen and (max-width: 768px) {
+	.wrapper {
+	  grid-template-columns: repeat(1, 1fr);
+	}
+
+	#MyPresentations {
+		width: 95%;
+	    margin-left: 2.5%;
+	    margin-right: 2.5%;
+	}
+}
+
+/* CSS specifically for desktops -----------------------------------------*/
+@media screen and (min-width: 768px) {
+	.wrapper {
+	  grid-template-columns: repeat(3, 1fr);
+	}
+
+	#MyPresentations {
+		width: 70%;
+	    margin-left: 15%;
+	    margin-right: 15%;
+	}
+}
+
+
+
+.headerP{
+	font-family: sans-serif;
+	font-size: 20px;
+	border: 3px solid #333;
+	border-radius: 5px;
+	margin: 10px;
+	float: center;
+}
+
+.wrapper {
+  display: grid;
+  grid-gap: 10px;
+  margin: 10px;
+  grid-auto-rows: auto;
+}
+
+.presentation {
+	border: 3px solid #EEE;
+	border-radius: 5px;
+    grid-template-columns: 1fr 1fr;
+    
+    grid-template-areas: 
+        "miniView miniView"
+        "buttonDeleteP buttonDeleteP"
+        "buttonStatusP buttonPresenterP";
+}
+
+
+.miniView {
+  padding-top: 56.25%;
+  width: 100%;
+  background-color: #f18973;
+  overflow: hidden;
+  position: relative;
+}
+
+.buttonDeleteP{
+    float: right;
+    width: 50%;
+}
+
+.buttonStatusP{
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.buttonPresenterP{
+    float: right;
+    width: 100%;
+}
+

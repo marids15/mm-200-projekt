@@ -7,6 +7,7 @@ class Slide {
     this.elements = [];
     this.currentElement = null;
     this.idGenerator = 0;
+    this.note = "Write your notes here";
   }
 
   // get HTML of slide
@@ -24,6 +25,14 @@ class Slide {
     return this.currentElement;
   }
 
+  // gets note
+  getNote() {
+    return this.note;
+  }
+
+  setNote(noteText) {
+    this.note = noteText;
+  }
   // add image element to slide
   addImage(src) {
     try {
@@ -45,7 +54,7 @@ class Slide {
       let textHTML = myText.getHTMLElement();
       this.elements.push(textHTML);
       this.div.appendChild(textHTML);
-      this.idGenerator ++;
+      this.idGenerator++;
     }
     catch {
       console.error("Could not add Text");
@@ -54,7 +63,24 @@ class Slide {
 
   // add video element to slide
   addVideo(src) {
-    //TODO!
+    try {
+      let myVideo = new Element(VIDEO, src, this.idGenerator);
+      let vidHTML = myVideo.getHTMLElement();
+      this.elements.push(vidHTML);
+      this.div.appendChild(vidHTML);
+      this.idGenerator++;
+    }
+    catch {
+      console.error("Could not add video");
+    }
+  }
+
+  addSound(src) {
+    let mySound = new Element(SOUND, src, this.idGenerator);
+    let soundHTML = mySound.getHTMLElement();
+    this.elements.push(soundHTML);
+    this.div.appendChild(soundHTML);
+    this.idGenerator++;
   }
 
   // deletes element from slide
@@ -77,6 +103,11 @@ class Slide {
       this.currentElement = element;
       this.setBorder();
     }
+    // when you click on the icon, which is a child of the video div:
+    else if (element !== null && element.parentElement.className === "vidDiv") {
+      this.currentElement = element.parentElement;
+      this.setBorder();
+    }
     else {
       this.currentElement = null;
     }
@@ -93,7 +124,11 @@ class Slide {
   // removes all borders from elements in slide
   removeBorder() {
     for (let i in this.elements) {
-      this.div.children[i].style.borderStyle = "none";
+      //if (this.div.children[i].className == "vidDiv") {
+      //  this.div.children[i].style.border = "5px solid darkgrey";
+      //} else {
+        this.div.children[i].style.borderStyle = "none";
+      //}
     }
   }
 }

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Once upon a Slide</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div class="navbar" id="topnav">
+    <a href=#>Home</a>
+    <a href=# class="active">My presentations</a>
+    <a href=#>My account</a>
+    <a href=#>Settings</a>
+    <i class="fas fa-bars" onclick="expandNavigation()"></i>
+  </div>
+
+  <div id="divContainer" class="displayDivContainer">
+    <div id="slideDiv" class="displayDiv"></div>
+  </div>
+
+  <div class="noteDivContainer">
+    <textarea id="inNote">Write your notes here</textarea>
+  </div>
+
+  <div class="controlSlide">
+    <div class="controlSlideColumn">
+      <button id="btnDeleteSlide">Delete slide</button>
+    </div>
+    <div class="controlSlideColumn">
+      <i id="btnPreviousSlide" class="fas fa-arrow-alt-circle-left"></i>
+    </div>
+    <div class="controlSlideColumn">
+      <p id="indexOfSlide">Slide number 1 (total: 1)</p>
+      <select id="selectSlide"></select>
+    </div>
+    <div class="controlSlideColumn">
+      <i id="btnNextSlide" class="fas fa-arrow-alt-circle-right"></i>
+    </div>
+    <div class="controlSlideColumn">
+      <button id="btnAddSlide">New slide</button>
+    </div>
+  </div>
+
+  <div class="EditToolsSlide">
+    <input id="inTxt" placeholder="Add text or URL" />
+    <i id="btnDelete" class="fas fa-trash-alt"></i>
+    <div class="column4">
+      <button id="btnAddText">Add text</button>
+    </div>
+    <div class="column4">
+      <button id="btnAddPicture">Add picture</button>
+    </div>
+    <div class="column4">
+      <button id="btnAddVideo">Add video</button>
+    </div>
+    <div class="column4">
+      <button id="btnAddSound">Add sound</button>
+    </div>
+    <button id="btnDisplayFullScreen">FullScreen</button>
+  </div>
+  <script src="../JS/navbar.js"></script>
+  <script src="../JS/ElementClass.js"></script>
+  <script src="../JS/SlideClass.js"></script>
+  <script src="../JS/PresentationClass.js"></script>
+  <script src="../JS/main.js"></script>
+</body>
+</html>

@@ -85,10 +85,27 @@ table {
   }
 
   .textElementSlide {
-  font-size: 7.6vw;
-}
+    font-size: 7.6vw;
+  }
 
+  .vidDiv {
+    font-size: 2.5vw;
+  }
 
+  /* For displaying note ----------------------------------------------*/
+  .noteDivContainer {
+    margin-left: 2.5%;
+    margin-right: 3%;
+    width: 94.5%;
+    margin-bottom: 20px;
+  }
+
+  .noteDivContainer textarea {
+    max-width: 100%;
+    padding-bottom: 5%;
+    width: 100%;
+    height: 5%;
+  }
 }
 
 /* CSS specifically for desktops -----------------------------------------*/
@@ -102,30 +119,66 @@ table {
   .displayDivContainer {
     width: 50%;
     margin-top: 20px;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 20%;
     margin-bottom: 20px;
+    float: left;
   }
 
   .textElementSlide {
     font-size: 4vw;
   }
+
+  /* For displaying note ----------------------------------------------*/
+  .noteDivContainer {
+    padding-top: 20px;
+    margin-right: 10%;
+    float: right;
+    width: 15%;
+  }
+
+  .noteDivContainer textarea {
+    max-width: 100%;
+    padding-bottom: 100%;
+    margin-bottom: 5%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .controlSlide {
+    float: left;
+    width: 50%;
+    margin-left: 20%;
+  }
+
+  .EditToolsSlide {
+    float: left;
+    width: 50%;
+    margin-left: 20%;
+  }
+
+  .vidDiv {
+    font-size: 1.5vw;
+  }
 }
 
+/* CSS for both desktop and mobile screens -------------------------------*/
+/* General css --------------------------------------------------------*/
+.column4 {
+  float: left;
+  width: 25%;
+}
+
+textarea {
+  resize: none;
+}
+
+/* For navbar ---------------------------------------------------------*/
 .navbar {
   overflow: hidden;
   background-color: #333;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* CSS for both desktop and mobile screens -------------------------------*/
-/* General css --------------------------------------------------------*/
-.column3 {
-  float: left;
-  width: 33.3%;
-}
-
-/* For navbar ---------------------------------------------------------*/
 .navbar a {
   float: left;
   display: block;
@@ -150,11 +203,8 @@ table {
 .displayDiv {
   padding-top: 56.25%;
   width: 100%;
-  background-color: #EFEFEF;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #333;
-
+  background-color: #FEFEFE;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   overflow: hidden;
   position: relative;
 }
@@ -164,7 +214,37 @@ table {
   position: absolute;
 }
 
+.vidElement {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  border: none;
+}
+
+.vidDiv {
+  position: absolute;
+  width: 40%;
+  height: 60%;
+  display: inline-block;
+  background-color: darkgrey;
+}
+
+.vidDiv icon {
+  float: right;
+  margin: 2%;
+  padding: 2%;
+}
+
+.soundElement {
+  position: absolute;
+  width: 50%;
+}
+
 /* For tools controlling visible slide --------------------------------*/
+.controlSlide {
+  clear: both;
+}
+
 .controlSlideColumn {
   float: left;
   width: 20%;
@@ -213,4 +293,15 @@ table {
   top: 0%;
   background-color: #FF9933;
   user-select: none;
+}
+
+@media all and (display-mode: fullscreen) {
+  .textElementSlide {
+    font-size: 8vw;
+  }
+
+  .displayDivContainer{
+    width: 100% ;
+  }
+
 }
