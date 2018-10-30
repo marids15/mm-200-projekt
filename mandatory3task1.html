@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="container"></div>
+<img src="https://image.flaticon.com/icons/svg/65/65307.svg" id="bin">
+<script>
+    let cars = ["Volvo", "Peugeot", "Citroen", "Porche", "Skoda"];
+    let container = document.getElementById("container")
+    let bin = document.getElementById('bin');
+    makeList();
+    //-----------------------------------------
+    bin.ondragover = function(evt) {
+        evt.preventDefault();
+        //evt.dataTransfer.dropEffect = "move";
+    }
+    //----------------------------------------
+    bin.ondrop = function delCar(evt){
+        let id = evt.target.id;
+        cars.splice(id, 1);
+        makeList();
+
+    }
+
+    function makeList() {
+        container.innerHTML = '';
+        for (let i = 0; i < cars.length; i++) {
+            let div = document.createElement("div");
+            let btn1 = document.createElement("button");
+          //  let btn2 = document.createElement("button");
+            btn1.innerHTML = "Edit";
+           // btn2.innerHTML = 'delete';
+           // btn2.onclick = delCar;
+            div.innerHTML = cars[i];
+           // btn2.id = i;
+            div.appendChild(btn1);
+
+           // div.appendChild(btn2);
+            div.draggable = true;
+
+            container.appendChild(div);
+        }
+    }
+
+</script>
+</body>
+</html>
