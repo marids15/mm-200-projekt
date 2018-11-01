@@ -1,73 +1,70 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Once upon a Slide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-<head>
-  <title>Once upon a Slide</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <style>
+    .LoginDIV {
+      width: 95%;
+      margin-top: 40px;
+      margin-left: 2.5%;
+      margin-right: 2.5%;
+      margin-bottom: 20px;
+      align-content: center;
+      text-align: center;
+      padding-top: 20%;
+      font-size: 16px;
+    }
 
+    .inputElementclass {
+      font-size: 16px;
+      margin: 1%;
+    }
 
-  <style>
-  .LoginDIV {
-    width: 95%;
-    margin-top: 40px;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    margin-bottom: 20px;
-    align-content: center;
-    text-align: center;
-    padding-top: 20%;
-    font-size: 16px;
-  }
+    h1 {
+      font-size: 25px;
+      font-style: bold;
+    }
+    </style>
+  </head>
 
-  .inputElementclass {
-    font-size: 16px;
-    margin: 1%;
-  }
-
-  h1 {
-    font-size: 25px;
-    font-style: bold;
-  }
-  </style>
-</head>
-
-<body>
-  <div class="navbar" id="topnav">
-    <a href="index.html" class="active">Home</a>
-    <a href="personnal.html">My presentations</a>
-    <a href="my_account.html">My account</a>
-
-    <i class="fas fa-bars" onclick="expandNavigation()"></i>
-  </div>
-<div class="LoginDIV" id="LoginDIV">
-    <h1><b>Once upon a Slide</b></h1>
-    <br>
-
-    <button class="inputElementclass"  id="loginButton">Login</button>
-    <br>
-    <button class="inputElementclass"  id="createNewUser">New user?</button>
-
-
+  <body>
+    <div class="navbar" id="topnav">
+      <a href=#>Home</a>
+      <a href=# class="active">My presentations</a>
+      <a href=#>My account</a>
+      <a href=#>Settings</a>
+      <i class="fas fa-bars" onclick="expandNavigation()"></i>
     </div>
-    <script >
 
+    <div id="view"></div>
 
+    <template id="createUserView">
+      <form id="createUserForm" onsubmit="createUser()">
+        <label for="inpUserName">User name: </label>
+        <input id="inpUserName" required>
+        <label for="inpEmail">Email: </label>
+        <input id="inpEmail" type="email" required>
+        <label for="inpPsw">Password: </label>
+        <input id="inpPsw" type="password" required>
+        <input id="btnCreate" type="submit" value="Create user">
+      </form>
+      <button id="btnGoToLogin" onclick="goToLogin()">Login</button>
+    </template>
 
-
-
-//RegisterBTN.onclick = register;
-    loginButton.onclick = LOGIN;
-    createNewUser.onclick = NEWUSER;
-        function LOGIN(){
-          console.log("clicked logon");
-      window.location.href="logon.html";
-        }
-        function NEWUSER(){
-            window.location.href="logon.html";
-        }
-
-    </script>
-  <script src="../js/navbar.js"></script>
-</body>
+    <template id="loginView">
+      <form id="loginForm" >
+        <label for="inpUserName">User name: </label>
+        <input id="inpUserName" required>
+        <label for="inpPsw">Password: </label>
+        <input id="inpPsw" type="password" required>
+        <input id="btnLogin" type="submit" value="Login">
+      </form>
+      <button id="btnGoToCreate" onclick="goToCreate()">Sign up</button>
+    </template>
+    <script src="./js/login_register.js"></script>
+    <script src="./js/navbar.js"></script>
+  </body>
 </html>
