@@ -34,24 +34,19 @@
 
 <body>
   <div class="navbar" id="topnav">
-    <a href=#>Home</a>
-    <a href=# class="active">My presentations</a>
-    <a href=#>My account</a>
-    <a href=#>Settings</a>
+    <a href="index.html" class="active">Home</a>
+    <a href="personnal.html">My presentations</a>
+    <a href="my_account.html">My account</a>
+
     <i class="fas fa-bars" onclick="expandNavigation()"></i>
   </div>
 <div class="LoginDIV" id="LoginDIV">
     <h1><b>Once upon a Slide</b></h1>
     <br>
-    <input class="inputElementclass" type="text" id="usernameINPUT" placeholder="Username">
+
+    <button class="inputElementclass"  id="loginButton">Login</button>
     <br>
-    <input class="inputElementclass" type="text" id="passwordINPUT" placeholder="Password">
-    <div id="extra1" ></div>
-    <br>
-    <div id="extra2" ></div>
-    <button class="inputElementclass" id="loginButton">Login</button>
-    <br>
-    <button class="inputElementclass" id="createNewUser">New user?</button>
+    <button class="inputElementclass"  id="createNewUser">New user?</button>
 
 
     </div>
@@ -65,20 +60,13 @@
     loginButton.onclick = LOGIN;
     createNewUser.onclick = NEWUSER;
         function LOGIN(){
-        let USERNAME = document.getElementById("usernameINPUT").value;
-    let PASSWORD = document.getElementById("passwordINPUT").value;
-            console.log(USERNAME, PASSWORD);
+          console.log("clicked logon");
+      window.location.href="logon.html";
         }
         function NEWUSER(){
-            document.getElementById("extra1").innerHTML = ` <input class="inputElementclass" type="text" id="passwordINPUT2" placeholder="Repeat password">`;
-
-            document.getElementById("extra2").innerHTML = ` <button class="inputElementclass" id="RegisterBTN">Register</button>`;
-          let Username = document.getElementById("usernameINPUT").value ="";
-           let Password = document.getElementById("passwordINPUT").value ="";
+            window.location.href="logon.html";
         }
-      function register (){
 
-      }
     </script>
   <script src="../js/navbar.js"></script>
 </body>

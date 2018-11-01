@@ -11,21 +11,28 @@
 
 <body>
   <div class="navbar" id="topnav">
-    <a href=#>Home</a>
+    <a href="index.html">Home</a>
     <a href=# class="active">My presentations</a>
-    <a href=#>My account</a>
-    <a href=#>Settings</a>
+    <a href="my_account.html">My account</a>
+
     <i class="fas fa-bars" onclick="expandNavigation()"></i>
   </div>
   <div id="MyPresentations">
     <div id="headerMyPresentations" class="headerP">
       <h1 class="h1header">MY PRESENTATIONS</h1>
-      <button type="button" id="buttonAddPresentation">Create new Presentation</button>      
+      <button type="button" id="buttonAddPresentation">Add new Presentation</button>
+      <button type="button" id="buttonCreate">Create new Presentation</button>
     </div>
     <div class="wrapper" id="presentations">
     </div>
   </div>
+<script>
+buttonCreate.onclick= gotoCreate;
+function gotoCreate(){
+window.location.href="presentation.html";
+}
 
+</script>
   <script src="../JS/navbar.js"></script>
   <script src="../JS/personnalJS.js"></script>
 </body>
