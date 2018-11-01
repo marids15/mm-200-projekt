@@ -1,6 +1,18 @@
+===USER STUFF===================================================================
+
 Create user:
 
 METHOD: POST
 ENDPOINT: api/user
-REQUEST (JSON): {"name": "John Doe", "email": "john.doe@email.com", "password": "password1"}
-RESPONSE (JSON): {"id": "000001", "name": "John Doe", "email":"john.doe@email.com", "password": "password1"}
+REQUEST (JSON): {"username": "John Doe", "email": "john.doe@email.com", "password": "password1", "role": '0'}
+RESPONSE (JSON): {"id": "000001", "username": "John Doe", "email":"john.doe@email.com", "password": "password1"}
+
+Login:
+
+METHOD: POST
+ENDPOINT: api/users/auth
+REQUEST (JSON): {"username": "JohnDoe", "password": "password"}
+RESPONSE (JSON): {"username": JohnDoe"} //add token later
+
+0 = standard user role
+1 = admin
