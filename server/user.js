@@ -38,3 +38,5 @@ router.post('/api/users/auth', async function(req, res, next) {
     res.status(401).json({}).end();
   }
 })
+
+module.exports = router;

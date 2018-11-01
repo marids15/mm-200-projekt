@@ -52,4 +52,4 @@ db.update = async function (query) {
     return await runQuery(query);
 }
 
-module.exports = db
+module.exports = db;
