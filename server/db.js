@@ -5,7 +5,7 @@ const {
 
 const connectionString = process.env.DATABASE_URL;
 
-const bd = {}
+const db = {}
 
 async function runQuery(query) {
   let response = null;
