@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const user = require('./js/user.js');
-const db = require('./js/db.js');
+const user = require('./server/user.js');
+const db = require('./server/db.js');
 const app = express();
 
 app.set('port', (process.env.PORT || 8080));
