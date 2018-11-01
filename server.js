@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const user = require('./js/user.js');
-const db = require('./js/db.js')
+const db = require('./js/db.js');
 const app = express();
 
 app.set('port', (process.env.PORT || 8080));
@@ -12,7 +12,7 @@ app.use(user);
 app.use(function(err, req, res, next) {
   console.err(err.stack);
   res.status(500).send('Error...');
-})
+});
 
 app.listen(app.get('port'), function() {
   console.log('server is running', app.get('port'));
