@@ -9,12 +9,8 @@
 </head>
 
 <body>
-  <div class="navbar" id="topnav">
-    <a href="index.html">Home</a>
-    <a href="personnal.html" class="active">My presentations</a>
-    <a href="my_account.html">My account</a>
-  
-    <i class="fas fa-bars" onclick="expandNavigation()"></i>
+  <div class="navbar" id="top">
+
   </div>
 
   <div id="divContainer" class="displayDivContainer">
@@ -66,5 +62,9 @@
   <script src="../JS/SlideClass.js"></script>
   <script src="../JS/PresentationClass.js"></script>
   <script src="../JS/main.js"></script>
+  <script>
+  var activePage = 2;
+  MakeNavbar(activePage);
+  </script>
 </body>
 </html>

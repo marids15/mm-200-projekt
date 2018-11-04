@@ -10,12 +10,8 @@
 </head>
 
 <body>
-  <div class="navbar" id="topnav">
-    <a href="index.html">Home</a>
-    <a href=# class="active">My presentations</a>
-    <a href="my_account.html">My account</a>
+  <div class="navbar" id="top">
 
-    <i class="fas fa-bars" onclick="expandNavigation()"></i>
   </div>
   <div id="MyPresentations">
     <div id="headerMyPresentations" class="headerP">
@@ -35,5 +31,9 @@ window.location.href="presentation.html";
 </script>
   <script src="../JS/navbar.js"></script>
   <script src="../JS/personnalJS.js"></script>
+  <script>
+  var activePage = 2;
+  MakeNavbar(activePage);
+  </script>
 </body>
 </html>
