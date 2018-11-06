@@ -12,7 +12,10 @@ router.post('/api/user', async function(req, res, next) {
   let queryUser = `SELECT * FROM public.users t
   WHERE username = '${userName}'`;
 
-  if(queryUser) {
+  let userExists = await db.select(queryUser);//? true : false;
+
+  console.log(userExists);
+  if(userExists) {
     res.status(403).json({}).end();
   }
 
