@@ -4,7 +4,7 @@ const CREATE_USER_URL = '/api/user';
 const LOGIN_USER_URL = '/api/users/auth';
 
 addElementinView(createElementFromTemplate("#loginView"));
-document.getElementById('id')
+document.getElementById('createUserForm').onsubmit = createUser;
 
 function addElementinView(element) {
   view.appendChild(element);
