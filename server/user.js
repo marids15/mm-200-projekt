@@ -9,6 +9,7 @@ router.post('/api/user', async function(req, res, next) {
   let userPass = req.body.password;
   let userRole = req.body.role;
 
+  /*
   let queryUser = `SELECT * FROM public.users t
   WHERE username = '${userName}'`;
 
@@ -17,12 +18,13 @@ router.post('/api/user', async function(req, res, next) {
   console.log(userExists);
   if(userExists) {
     res.status(403).json({}).end();
-  }
+  }*/
 
   let query = `INSERT INTO "public"."users" ("id", "username", "email", "password", "role")
   VALUES (DEFAULT, '${userName}', '${userEmail}', '${userPass}', '${userRole}')`;
 
-  let status = await db.insert(query) ? 200 : 500;
+  let status = await db.insert(query) //? 200 : 500;
+  console.log(status);
   res.status(status).json({}).end();
 });
 

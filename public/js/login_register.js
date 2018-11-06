@@ -51,6 +51,7 @@ async function createUser(evt) {
       "Content-Type": "application/json; charset=utf-8"
     }
   }).then(response => {
+    console.log(response.status)
     if (response.status < 400) {
       console.log('created user!!!! :D');
     } else {
