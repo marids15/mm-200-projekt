@@ -10,23 +10,23 @@
 </head>
 
 <body>
-  <div class="navbar" id="topnav">
-    <a href=#>Home</a>
-    <a href=# class="active">My presentations</a>
-    <a href=#>My account</a>
-    <a href=#>Settings</a>
-    <i class="fas fa-bars" onclick="expandNavigation()"></i>
-  </div>
+  <div class="navbar" id="top">
+
+    </div>
   <div id="MyPresentations">
     <div id="headerMyPresentations" class="headerP">
       <h1 class="h1header">MY PRESENTATIONS</h1>
-      <button type="button" id="buttonAddPresentation">Create new Presentation</button>      
+      <button type="button" id="buttonAddPresentation">Create new Presentation</button>
     </div>
     <div class="wrapper" id="presentations">
     </div>
   </div>
 
-  <script src="../JS/navbar.js"></script>
-  <script src="../JS/personnalJS.js"></script>
+  <script src="./js/navbar.js"></script>
+  <script src="./js/personnalJS.js"></script>
+  <script>
+  var activePage = 2;
+  MakeNavbar(activePage);
+  </script>
 </body>
 </html>
