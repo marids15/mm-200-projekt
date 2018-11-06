@@ -10,12 +10,8 @@
   </head>
 
   <body class="loginSignupPage">
-    <div class="navbar" id="topnav">
-      <a href=#>Home</a>
-      <a href=# class="active">My presentations</a>
-      <a href=#>My account</a>
-      <a href=#>Settings</a>
-      <i class="fas fa-bars" onclick="expandNavigation()"></i>
+    <div class="navbar" id="top">
+
     </div>
 
     <div class="pageTitle">
@@ -65,5 +61,9 @@
     </template>
     <script src="./js/login_register.js"></script>
     <script src="./js/navbar.js"></script>
+    <script>
+  var activePage = 1;
+  MakeNavbar(activePage);
+  </script>
   </body>
 </html>
