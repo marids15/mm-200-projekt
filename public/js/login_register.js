@@ -3,7 +3,7 @@ const USER_ROLE = '0';
 const CREATE_USER_URL = '/api/user';
 const LOGIN_USER_URL = '/api/users/auth';
 
-addElementinView(createElementFromTemplate("#loginView"));
+goToLogin();
 
 function addElementinView(element) {
   view.appendChild(element);
@@ -32,9 +32,7 @@ function goToCreate() {
 }
 
 async function createUser(evt) {
-  console.log(1);
   evt.preventDefault();
-  console.log(2);
 
   let data = JSON.stringify({
     username: document.getElementById('inpUserName').value,
@@ -42,8 +40,6 @@ async function createUser(evt) {
     password: document.getElementById('inpPsw').value,
     role: USER_ROLE
   });
-
-  console.log(data);
 
   fetch(CREATE_USER_URL, {
     method: 'POST',
@@ -61,7 +57,7 @@ async function createUser(evt) {
   .catch(err => console.err(err));
 }
 
-async function login(evt) {
+async function loginUser(evt) {
   evt.preventDefault();
 
   let data = JSON.stringify({
@@ -69,9 +65,7 @@ async function login(evt) {
     password: document.getElementById('inpPsw').value
   });
 
-  console.log(data);
-
-  fetch(LOGIN_USER_UR, {
+  fetch(LOGIN_USER_URL, {
     method: 'POST',
     body: data,
     headers: {
