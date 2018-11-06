@@ -13,13 +13,13 @@ router.post('/api/user', async function(req, res, next) {
   let queryUser = `SELECT * FROM public.users t
   WHERE username = '${userName}'`;
 
-  let userExists = await db.select(queryUser) ? true : false;
+  let userExists = (await db.select(queryUser)) == [] ? true : false;
 
   //console.log(userExists);
   if(userExists) {
     res.status(403).json({}).end();
   } else {
-    
+
     let query = `INSERT INTO "public"."users" ("id", "username", "email", "password", "role")
     VALUES (DEFAULT, '${userName}', '${userEmail}', '${userPass}', '${userRole}')`;
 
