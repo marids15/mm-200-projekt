@@ -13,10 +13,10 @@ router.post('/api/user', async function(req, res, next) {
   let queryUser = `SELECT * FROM public.users t
   WHERE username = '${userName}'`;
 
-  let userExists = (await db.select(queryUser)) == [] ? true : false;
+  let userExists = await db.select(queryUser);
 
   //console.log(userExists);
-  if(userExists) {
+  if(!userExists) {
     res.status(403).json({}).end();
   } else {
 
@@ -36,7 +36,7 @@ router.post('/api/users/auth', async function(req, res, next) {
   let query = `SELECT * FROM public.users t
   WHERE username = '${userName}' and password = '${userPass}'`;
 
-  let user = db.select(query);
+  let user = await db.select(query);
   if(user) {
     res.status(200).json(user).end();
   } else {

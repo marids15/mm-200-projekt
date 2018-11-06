@@ -26,7 +26,10 @@ async function runQuery(query) {
       console.err(err);
     });
 
-    response = res.rows; //returns array with resulting rows of query
+    console.log(res.rows);
+    if (res.rows && res.rows.length > 0) {
+        response = res.rows; //returns array with resulting rows of query
+    }
   } catch (e) {
     console.err("Error: ");
     console.log(e);
