@@ -22,6 +22,7 @@ function createElementFromTemplate(id) {
 function goToLogin() {
   clearView();
   addElementinView(createElementFromTemplate("#loginView"));
+  document.getElementById('loginForm').onsubmit = loginUser;
 }
 
 function goToCreate() {
@@ -60,7 +61,31 @@ async function createUser(evt) {
   .catch(err => console.err(err));
 }
 
+async function login(evt) {
+  evt.preventDefault();
 
+  let data = JSON.stringify({
+    username: document.getElementById('inpUserName').value,
+    password: document.getElementById('inpPsw').value
+  });
+
+  console.log(data);
+
+  fetch(LOGIN_USER_UR, {
+    method: 'POST',
+    body: data,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8"
+    }
+  }).then(response => {
+    if (response.status < 400) {
+      console.log('login success!!! :D');
+    } else {
+      console.log('login did not work :(');
+    }
+  }).then(data => console.log('next'))
+  .catch(err => console.err(err));
+}
 
 //RegisterBTN.onclick = register;
 /*
