@@ -4,6 +4,7 @@ const CREATE_USER_URL = '/api/user';
 const LOGIN_USER_URL = '/api/users/auth';
 
 addElementinView(createElementFromTemplate("#loginView"));
+document.getElementById('id')
 
 function addElementinView(element) {
   view.appendChild(element);
@@ -16,7 +17,6 @@ function clearView() {
 function createElementFromTemplate(id) {
   let viewTemplate = document.querySelector(id);
   let clone = document.importNode(viewTemplate.content, true);
-  console.log(clone);
   return clone;
 }
 
@@ -31,14 +31,18 @@ function goToCreate() {
 }
 
 async function createUser(evt) {
+  console.log(1);
   evt.preventDefault();
+  console.log(2);
 
   let data = JSON.stringify({
     username: document.getElementById('inpUserName').value,
     email: document.getElementById('inpEmail').value,
     password: document.getElementById('inpPsw').value,
     role: USER_ROLE
-  })
+  });
+
+  console.log(data);
 
   fetch(CREATE_USER_URL, {
     method: 'POST',
