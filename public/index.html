@@ -3,34 +3,13 @@
   <head>
     <title>Once upon a Slide</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login_signup.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-    <style>
-    .LoginDIV {
-      width: 95%;
-      margin-top: 40px;
-      margin-left: 2.5%;
-      margin-right: 2.5%;
-      margin-bottom: 20px;
-      align-content: center;
-      text-align: center;
-      padding-top: 20%;
-      font-size: 16px;
-    }
-
-    .inputElementclass {
-      font-size: 16px;
-      margin: 1%;
-    }
-
-    h1 {
-      font-size: 25px;
-      font-style: bold;
-    }
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
-  <body>
+  <body class="loginSignupPage">
     <div class="navbar" id="topnav">
       <a href=#>Home</a>
       <a href=# class="active">My presentations</a>
@@ -39,30 +18,52 @@
       <i class="fas fa-bars" onclick="expandNavigation()"></i>
     </div>
 
-    <div id="view"></div>
+    <div class="pageTitle">
+      <h1>Once Upon a Slide</h1>
+    </div>
+
+    <div id="view" class ="loginRegisterDiv"></div>
 
     <template id="createUserView">
+      <div class="tabs">
+        <button id="btnGoToLogin" onclick="goToLogin()" class="nonActiveViewTitle">Login</button>
+        <div class="activeViewTitle">
+          <h1>Sign up</h1>
+        </div>
+      </div>
       <form id="createUserForm" onsubmit="createUser()">
         <label for="inpUserName">User name: </label>
-        <input id="inpUserName" required>
+        <input id="inpUserName" type="text" required>
+        <br>
         <label for="inpEmail">Email: </label>
         <input id="inpEmail" type="email" required>
+        <br>
         <label for="inpPsw">Password: </label>
         <input id="inpPsw" type="password" required>
-        <input id="btnCreate" type="submit" value="Create user">
+        <br>
+        <input id="btnCreate" type="submit" value="Sign up">
       </form>
-      <button id="btnGoToLogin" onclick="goToLogin()">Login</button>
     </template>
 
     <template id="loginView">
-      <form id="loginForm" >
+      <div class="tabs">
+        <div class="activeViewTitle">
+          <h1>Login</h1>
+        </div>
+        <button id="btnGoToCreate" onclick="goToCreate()" class="nonActiveViewTitle">Sign up</button>
+      </div>
+      <form id="loginForm">
         <label for="inpUserName">User name: </label>
-        <input id="inpUserName" required>
+        <br>
+        <input id="inpUserName" type="text" required>
+        <br>
         <label for="inpPsw">Password: </label>
+        <br>
         <input id="inpPsw" type="password" required>
-        <input id="btnLogin" type="submit" value="Login">
+        <br>
+        <input id="btnLogin" type="submit" class="button" value="Login">
+        <br>
       </form>
-      <button id="btnGoToCreate" onclick="goToCreate()">Sign up</button>
     </template>
     <script src="./js/login_register.js"></script>
     <script src="./js/navbar.js"></script>

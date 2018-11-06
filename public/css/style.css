@@ -47,6 +47,40 @@ table {
 
 /* Our actual css -----------------------------------------------------------*/
 
+/* Variables for css -----------------------------------------------------*/
+:root {
+/* COLOR THEME: pastel
+--main-color: #ABE188;
+--second-color: #F7EF99;
+--third-color: #F1BB87;
+--fourth-color: #F78E69;
+--grey: #5D675B;
+*/
+
+/* COLOR THEME: colorful green
+  --main-color: #9FD356;
+  --second-color: #3C91E6;
+  --third-color: #FA824C;
+  --grey: #342E37;
+*/
+
+/* COLOR THEME: red teints
+  --main-color: #F2545B;
+  --second-color: #A93F55;
+  --third-color: #8C5E58;
+  --grey: #19323C;
+*/
+
+/* COLOR THEME: colorful */
+  --main-color: #FE4A49;
+  --second-color: #009FB7;
+  --third-color: #FED766;
+  --grey: #333;
+
+  --title-font: 'Pacifico', cursive;
+  --text-font: 'Roboto', sans-serif;
+}
+
 /* CSS specifically for mobile screens -----------------------------------*/
 @media only screen and (max-width: 768px) {
   /* For navbar -------------------------------------------------------*/
@@ -60,7 +94,7 @@ table {
     font-size: 16px;
     text-align: center;
     padding: 14px 16px;
-    color: #EEE;
+    color: var(--third-color);
   }
 
   .navbar.expanded i {
@@ -175,7 +209,7 @@ textarea {
 /* For navbar ---------------------------------------------------------*/
 .navbar {
   overflow: hidden;
-  background-color: #333;
+  background-color: var(--grey);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -190,7 +224,7 @@ textarea {
 }
 
 .navbar .active {
-  background-color: #fc8a00;
+  background-color: var(--main-color);
   color: white;
 }
 
@@ -226,13 +260,14 @@ textarea {
   width: 40%;
   height: 60%;
   display: inline-block;
-  background-color: darkgrey;
+  background-color: var(--grey);
 }
 
 .vidDiv icon {
   float: right;
   margin: 2%;
   padding: 2%;
+  color: var(--second-color);
 }
 
 .soundElement {
@@ -254,7 +289,7 @@ textarea {
 .controlSlideColumn i {
   cursor: pointer;
   font-size: 2em;
-  color: #333;
+  color: var(--second-color);
 }
 
 .controlSlideColumn p {
@@ -277,6 +312,7 @@ textarea {
 
 .EditToolsSlide i {
   display: block;
+  color: var(--second-color);
 }
 
 .creationDiv {
@@ -291,7 +327,7 @@ textarea {
   position: absolute;
   left: 0%;
   top: 0%;
-  background-color: #FF9933;
+  background-color: var(--third-color);
   user-select: none;
 }
 
