@@ -53,6 +53,7 @@ class Element {
     myImage.src = this.content;
     myImage.draggable = false;
     myImage.setAttribute('id', this.id);
+    myImage.className = 'image';
     return myImage;
   }
 

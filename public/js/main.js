@@ -115,6 +115,7 @@ function goToNextSlide(){
   displayNumberCurrentSlide();
   selectOptionInSelector(myPresentation.getCurrentSlideIndex());
   updateNote();
+  updateSlideMenu();
 }
 
 //--------------- function to go to previous slide
@@ -123,6 +124,7 @@ function goToPreviousSlide(){
   displayNumberCurrentSlide();
   selectOptionInSelector(myPresentation.getCurrentSlideIndex());
   updateNote();
+  updateSlideMenu();
 }
 
 //------------- displays slide by an index
@@ -130,6 +132,7 @@ function goToSlide(num) {
   myPresentation.goToSlide(num);
   displayNumberCurrentSlide();
   updateNote();
+  updateSlideMenu();
 }
 
 //--------------- function to Add a new slide
@@ -138,6 +141,7 @@ function AddNewSlide() {
   //myPresentation.setCurrentSlideIndex(myPresentation.getCurrentSlideIndex() + 1);
   updateSlideselector();
   goToNextSlide();
+  updateSlideMenu();
 }
 
 // -------------- function to add the first slide
@@ -146,6 +150,7 @@ function AddFirstSlide() {
   myPresentation.addSlide(0);
   updateSlideselector();
   updateNote();
+  updateSlideMenu();
 }
 
 //-------------- function to delete current slide
@@ -166,6 +171,7 @@ function DeleteCurrentSlide(){
     goToPreviousSlide();
   }
   updateSlideselector();
+  updateSlideMenu();
 }
 
 //-------------- function to delete an element
@@ -232,7 +238,7 @@ function closeFullscreen(elem) {
 
   // credit: http://www.javascriptkit.com/javatutors/touchevents2.shtml
 function swipedetect(el){
-  
+
     var touchsurface = el,
     startX,
     startY,
@@ -240,7 +246,7 @@ function swipedetect(el){
     restraint = 100, // maximum distance allowed at the same time in perpendicular direction
     allowedTime = 1000, // maximum time allowed to travel that distance
     startTime;
-  
+
     touchsurface.addEventListener('touchstart', function(e){
         var touchobj = e.changedTouches[0];
         dist = 0;
@@ -249,11 +255,11 @@ function swipedetect(el){
         startTime = new Date().getTime(); // record time when finger first makes contact with surface
         e.preventDefault();
     }, false)
-  
+
     touchsurface.addEventListener('touchmove', function(e){
         e.preventDefault(); // prevent scrolling when inside DIV
     }, false)
-  
+
     touchsurface.addEventListener('touchend', function(e){
         var touchobj = e.changedTouches[0];
         let distX = touchobj.pageX - startX; // get horizontal dist traveled by finger while in contact with surface
@@ -261,7 +267,7 @@ function swipedetect(el){
         let elapsedTime = new Date().getTime() - startTime // get time elapsed
         if (elapsedTime <= allowedTime){ // first condition for awipe met
             if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
-                (distX < 0)? goToPreviousSlide() : goToNextSlide(); 
+                (distX < 0)? goToPreviousSlide() : goToNextSlide();
             }
             else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
                 console.log("exit");
@@ -272,3 +278,19 @@ function swipedetect(el){
     }, false);
 }
 
+function updateSlideMenu() {
+  let slideMenu = document.getElementById("slideMenu");
+  slideMenu.innerHTML = "";
+  let listSlide = myPresentation.getSlides();
+  for (let i = 0; i < listSlide.length; i++){
+    let newDiv = document.createElement("div");
+    newDiv.className = "divSlideMenu";
+    let copy = listSlide[i].getSlideHTML().cloneNode(true);
+    newDiv.appendChild(copy);
+    newDiv.addEventListener('click', function() {
+            goToSlide(i);
+        });
+
+    slideMenu.appendChild(newDiv);
+  }
+}

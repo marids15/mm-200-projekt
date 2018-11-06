@@ -243,7 +243,7 @@ textarea {
   position: relative;
 }
 
-.displayDiv img {
+.image {
   width : 30%;
   position: absolute;
 }
@@ -330,6 +330,46 @@ textarea {
   background-color: var(--third-color);
   user-select: none;
 }
+
+/* For displaying scrolling menu for slides -----------------*/
+#slideMenu{
+    width: 95%;
+    margin-top: 20px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+
+.divSlideMenu{
+  padding-top: 11.250%;
+  width: 20%;
+  display: inline-block;
+  border: 1px solid red;
+  margin: 2px;
+  position: relative;
+}
+
+.divSlideMenu .textElementSlide {
+    font-size: 1.52vw;
+  }
+#slideMenu::-webkit-scrollbar {
+    width: 1em;
+}
+
+#slideMenu::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+#slideMenu::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
 
 @media all and (display-mode: fullscreen) {
   .textElementSlide {
