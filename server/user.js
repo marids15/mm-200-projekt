@@ -25,7 +25,7 @@ router.post('/api/user', async function(req, res, next) {
 
   let status = await db.insert(query) //? 200 : 500;
   console.log(status);
-  res.status(status).json({}).end();
+  res.status(200).json(status).end();
 });
 
 // Logging in
