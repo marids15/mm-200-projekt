@@ -23,9 +23,8 @@ router.post('/api/user', async function(req, res, next) {
   let query = `INSERT INTO "public"."users" ("id", "username", "email", "password", "role")
   VALUES (DEFAULT, '${userName}', '${userEmail}', '${userPass}', '${userRole}')`;
 
-  let status = await db.insert(query) //? 200 : 500;
-  console.log(status);
-  res.status(200).json(status).end();
+  let status = await db.insert(query) ? 200 : 500;
+  res.status(status).json({}).end();
 });
 
 // Logging in
