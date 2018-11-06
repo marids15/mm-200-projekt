@@ -4,7 +4,6 @@ const CREATE_USER_URL = '/api/user';
 const LOGIN_USER_URL = '/api/users/auth';
 
 addElementinView(createElementFromTemplate("#loginView"));
-document.getElementById('createUserForm').onsubmit = createUser;
 
 function addElementinView(element) {
   view.appendChild(element);
@@ -28,6 +27,7 @@ function goToLogin() {
 function goToCreate() {
   clearView();
   addElementinView(createElementFromTemplate("#createUserView"));
+  document.getElementById('createUserForm').onsubmit = createUser;
 }
 
 async function createUser(evt) {
