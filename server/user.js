@@ -31,7 +31,7 @@ router.post('/api/user', async function(req, res, next) {
 // Logging in
 router.post('/api/users/auth', async function(req, res, next) {
   let userName = req.body.username;
-  let userPass = req.body.pass;
+  let userPass = req.body.password;
 
   let query = `SELECT * FROM public.users t
   WHERE username = '${userName}' and password = '${userPass}'`;
