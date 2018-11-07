@@ -52,14 +52,14 @@
           <i class="fas fa-music"></i>
         </button>
       </div>
-      <div class="tab" title="Transition tool">
-        <button id="transitionToolTab" onclick="showTransitionTool()">
-          <i class="fas fa-stopwatch"></i> <!-- or maybe this one: "fas fa-star-half-alt" -->
+      <div class="tab" title="Presenter tool">
+        <button id="presenterToolTab" onclick="showPresenterTool()">
+          <i class="fas fa-chalkboard-teacher"></i> <!-- or maybe this one: "fas fa-star-half-alt" -->
         </button>
       </div>
       <div class="tab last" title="Other tools">
-        <button id="otherToolTab" onclick="showOtherTool()">
-          <i class="fas fa-wrench"></i>
+        <button id="exportToolTab" onclick="showExportTool()">
+          <i class="fas fa-file-download"></i>
         </button>
       </div>
     </div>
@@ -98,13 +98,20 @@
     <i class="fas fa-trash-alt"></i>
   </template>
 
-  <template id="transitionContent">
-    <h2>Transitions</h2>
+  <template id="presenterContent">
+    <h2>Presentation</h2>
+    <select id="timedTransitions">
+      <option value="noTimer">No timer</option>
+      <option value="10">10s</option>
+      <option value="30">30s</option>
+      <option value="60">1min</option>
+    </select>
+    <button id="btnDisplayFullScreen">Play presentation</button>
   </template>
 
-  <template id="toolsContent">
+  <template id="exportContent">
     <h2>Tools</h2>
-    <button id="btnDisplayFullScreen">Play presentation</button>
+    <button id="btnExportNotes">Download notes</button>
   </template>
 
 <!-- We probably don't need this anymore now...

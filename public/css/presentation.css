@@ -360,7 +360,7 @@ textarea {
   border-radius: 4px;
   box-shadow: 0 0 3px 1.5px rgba(0, 0, 0, 0.2);
   font-family: var(--text-font);
-  font-size: 20px;
+  font-size: 2vw;
   color: #FFF;
   box-sizing: border-box;
 }
@@ -384,6 +384,7 @@ textarea {
 
 .tabContent {
   background-color: var(--main-color);
+  position: relative;
 }
 
 /* For presentation mode -------------------------------------*/

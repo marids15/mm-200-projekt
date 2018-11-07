@@ -8,6 +8,11 @@ class Presentation {
     this.containerDiv = containerDiv;
   }
 
+  // get name of presentation
+  getName() {
+    return this.name;
+  }
+
   // get array of slides (instances of class Slide)
   getSlides(){
     return this.slides;

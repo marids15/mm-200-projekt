@@ -145,9 +145,25 @@ function deleteElement() {
 }
 
 //--------------- full screen
-function displayInFullScreen(){
+async function displayInFullScreen(){
+  goToSlide(0);
   divContainer.addEventListener("webkitfullscreenchange", onFullScreenChange, true);
   openFullscreen(divContainer);
+
+  let timedTransitions = document.getElementById("timedTransitions");
+  let value = timedTransitions[timedTransitions.selectedIndex].value;
+  if(value !== "noTimer"){
+    let listSlide = myPresentation.getSlides();
+    for (let i = 0; i < listSlide.length - 1; i++){
+      await timeout(parseInt(value) * 1000);
+      goToNextSlide();
+    }
+    await timeout(parseInt(value) * 1000);
+  }
+}
+
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /* View in fullscreen */
@@ -298,22 +314,26 @@ function showSoundTool() {
   makeToolActive(soundTab);
 }
 
-function showTransitionTool() {
-  let transitionToolTemplate = document.getElementById('transitionContent');
-  let transitionToolClone = transitionToolTemplate.content.cloneNode(true);
+function showPresenterTool() {
+  let presenterToolTemplate = document.getElementById('presenterContent');
+  let presenterToolClone = presenterToolTemplate.content.cloneNode(true);
   tabContent.innerHTML = "";
-  tabContent.appendChild(transitionToolClone);
-  let transitionTab = document.getElementById('transitionToolTab');
-  makeToolActive(transitionTab);
+  tabContent.appendChild(presenterToolClone);
+  let presenterTab = document.getElementById('presenterToolTab');
+  makeToolActive(presenterTab);
+  let btnDisplayFullScreen = document.getElementById('btnDisplayFullScreen');
+  btnDisplayFullScreen.onclick = displayInFullScreen;
 }
 
-function showOtherTool() {
-  let otherToolTemplate = document.getElementById('toolsContent');
-  let otherToolClone = otherToolTemplate.content.cloneNode(true);
+function showExportTool() {
+  let exportToolTemplate = document.getElementById('exportContent');
+  let exportToolClone = exportToolTemplate.content.cloneNode(true);
   tabContent.innerHTML = "";
-  tabContent.appendChild(otherToolClone);
-  let otherTab = document.getElementById('otherToolTab');
-  makeToolActive(otherTab);
+  tabContent.appendChild(exportToolClone);
+  let exportTab = document.getElementById('exportToolTab');
+  makeToolActive(exportTab);
+  let btnExportNotes = document.getElementById('btnExportNotes');
+  btnExportNotes.onclick = exportNote;
 }
 
 function makeToolActive(elem) {
@@ -322,4 +342,33 @@ function makeToolActive(elem) {
       oldActiveElement.classList.remove('activeTab');
   }
   elem.classList.add('activeTab');
+}
+
+function exportNote(){
+  let title = `${myPresentation.getName()}_Note.txt`;
+  let note = "";
+  let listSlide = myPresentation.getSlides();
+  for (let i = 0; i < listSlide.length; i++){
+    note += `Slide ${i+1}`;
+    note += '\n\n';
+    if (listSlide[i].getNote() !== "Write your notes here"){
+      note += listSlide[i].getNote();
+      note += '\n\n\n';
+    }
+  }
+  saveData(note,title);
+}
+
+function saveData(data, filename) {
+    let a = document.createElement('a');
+    document.body.appendChild(a);
+    a.style = "display: none";
+    let blob = new Blob([data], {type: "octet/stream"});
+    let url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = filename;
+    a.click();
+
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
 }
