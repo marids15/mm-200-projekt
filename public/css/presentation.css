@@ -124,6 +124,16 @@ table {
     margin-right: 2.5%;
   }
 
+  /* For creating and deleting slide ----------------------------------*/
+  .createDeleteSlide {
+    margin-left: 2.5%;
+    width: 95%;
+  }
+
+  .createDeleteSlide button {
+    font-size: 3vw;
+  }
+
   /* For displaying note ----------------------------------------------*/
   .noteDivContainer {
     width: 95%;
@@ -211,6 +221,10 @@ table {
   .createDeleteSlide {
     width: 90%;
     margin-right: 10%;
+  }
+
+  .createDeleteSlide {
+
   }
 
 
@@ -315,6 +329,7 @@ textarea {
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
+    box-sizing: border-box;
 }
 
 .divSlideMenu{
@@ -344,12 +359,16 @@ textarea {
 
 /* For deleting and adding slides -------------------------------------*/
 .createDeleteSlide {
-  padding-left: 4.8%;
-  padding-right: 4.8%;
+  text-align: center;
 }
 
 .createDeleteSlide p {
-  width: 10%;
+  display: block;
+  position: relative;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  width: 35%;
+  float: left;
 }
 
 .createDeleteSlide button {
@@ -360,9 +379,11 @@ textarea {
   border-radius: 4px;
   box-shadow: 0 0 3px 1.5px rgba(0, 0, 0, 0.2);
   font-family: var(--text-font);
-  font-size: 2vw;
   color: #FFF;
   box-sizing: border-box;
+  float: left;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
 }
 
 /* For tools editing slide --------------------------------------------*/
