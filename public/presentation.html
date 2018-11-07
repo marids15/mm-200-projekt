@@ -12,14 +12,22 @@
 <body>
   <div class="navbar" id="top"></div>
 
-  <div id="divContainer" class="displayDivContainer">
-    <div id="slideDiv" class="displayDiv"></div>
-  </div>
+  <div class="rightSide">
+    <div id="divContainer" class="displayDivContainer">
+      <div id="slideDiv" class="displayDiv"></div>
+    </div>
 
-  <div id="slideMenu"></div>
+    <div id="slideMenu"></div>
 
-  <div class="noteDivContainer">
-    <textarea id="inNote">Write your notes here</textarea>
+    <div class="createDeleteSlide">
+      <button id="btnAddSlide">New slide</button>
+      <p id="indexOfSlide">Slide number 1 (total: 1)</p>
+      <button id="btnDeleteSlide">Delete slide</button>
+    </div>
+
+    <div class="noteDivContainer">
+      <textarea id="inNote">Write your notes here</textarea>
+    </div>
   </div>
 
   <div class="editToolsSlide">
@@ -59,9 +67,12 @@
   </div>
 
   <template id="textContent">
-    <h2>Edit text</h2>
-    <label>Text: </label>
-    <input id="inTxt" name="text" placeholder="Enter your text here">
+    <form id="formEditingText">
+      <h2>Edit text</h2>
+      <label>Text: </label>
+      <input id="inTxt" type="text" name="text" placeholder="Enter your text here">
+      <input id="btnAddText" type="submit" value="Add text">
+    </form>
     <i class="fas fa-trash-alt"></i>
   </template>
 

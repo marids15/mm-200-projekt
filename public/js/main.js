@@ -3,18 +3,15 @@ const NAME = "myP";
 
 //---------------- document.getElementById variables
 let indexOfSlide = document.getElementById("indexOfSlide");
-let inTxt  = document.getElementById("inTxt");
+//let inTxt  = document.getElementById("inTxt");
 let inNote = document.getElementById('inNote');
 let slideDiv = document.getElementById("slideDiv");
-let btnAddPicture = document.getElementById("btnAddPicture");
-let btnAddText = document.getElementById("btnAddText");
-let btnAddVideo = document.getElementById("btnAddVideo");
-let btnAddSound = document.getElementById("btnAddSound");
+//let btnAddPicture = document.getElementById("btnAddPicture");
+//let btnAddText = document.getElementById("btnAddText");
+//let btnAddVideo = document.getElementById("btnAddVideo");
+//let btnAddSound = document.getElementById("btnAddSound");
 let btnAddSlide = document.getElementById("btnAddSlide");
-//let btnNextSlide = document.getElementById("btnNextSlide");
-//let btnPreviousSlide = document.getElementById("btnPreviousSlide");
-//let selectorSlide = document.getElementById("selectSlide");
-//let btnDeleteSlide = document.getElementById("btnDeleteSlide");
+let btnDeleteSlide = document.getElementById("btnDeleteSlide");
 let divContainer = document.getElementById("divContainer");
 let tabContent = document.getElementById('tabContent');
 
@@ -25,16 +22,14 @@ AddFirstSlide();
 
 //--------------- eventhandlers
 inNote.onchange = saveNote;
-btnAddPicture.onclick = addImage;
-btnAddText.onclick = btnAddTextClick;
-btnAddVideo.onclick = addVideo;
-btnAddSound.onclick = addSound;
-btnDelete.onclick = deleteElement;
+//btnAddPicture.onclick = addImage;
+//btnAddText.onclick = btnAddTextClick;
+//btnAddVideo.onclick = addVideo;
+//btnAddSound.onclick = addSound;
+//btnDelete.onclick = deleteElement;
 btnAddSlide.onclick = AddNewSlide;
-btnNextSlide.onclick = goToNextSlide;
-btnPreviousSlide.onclick = goToPreviousSlide;
 btnDeleteSlide.onclick = DeleteCurrentSlide;
-btnDisplayFullScreen.onclick = displayInFullScreen;
+//btnDisplayFullScreen.onclick = displayInFullScreen;
 
 
 //--------------------------------
@@ -58,36 +53,10 @@ function displayNumberCurrentSlide() {
   	indexOfSlide.innerHTML = `Slide number ${myPresentation.getCurrentSlideIndex() + 1} (total: ${myPresentation.getSlides().length})`;
 }
 
-// updates the options in the slide selector
-function updateSlideselector() {
-    selectorSlide.innerHTML = "";
-    selectorSlide.onchange = selectSlide;
-    for (let slide in myPresentation.getSlides()) {
-       let option = document.createElement("option");
-       let slideNumber = parseInt(slide, 10) + 1;
-       option.innerHTML = `Slide ${slideNumber}`
-       option.value = slide;
-       selectorSlide.appendChild(option);
-    }
-}
-
-
-//displays the current slide number in the selector
-function selectOptionInSelector(num) {
-    let number = num;
-    selectorSlide.selectedIndex = num;
-}
-
-// handles the change of the slide selector
-function selectSlide() {
-    let selectedElement = selectorSlide.value;
-    let slideID = parseInt(selectedElement, 10);
-
-    goToSlide(slideID);
-}
-
 //--------------- function to Add text in a slide
-function btnAddTextClick() {
+function btnAddTextClick(evt) {
+  evt.preventDefault();
+  let inTxt = document.getElementById('inTxt');
   myPresentation.getCurrentSlide().addText(inTxt.value);
   inTxt.value = "";
 }
@@ -114,7 +83,6 @@ function addSound() {
 function goToNextSlide(){
   myPresentation.goToNextSlide();
   displayNumberCurrentSlide();
-  selectOptionInSelector(myPresentation.getCurrentSlideIndex());
   updateNote();
   updateSlideMenu();
 }
@@ -123,7 +91,6 @@ function goToNextSlide(){
 function goToPreviousSlide(){
   myPresentation.goToPreviousSlide();
   displayNumberCurrentSlide();
-  selectOptionInSelector(myPresentation.getCurrentSlideIndex());
   updateNote();
   updateSlideMenu();
 }
@@ -140,7 +107,6 @@ function goToSlide(num) {
 function AddNewSlide() {
   myPresentation.addSlide(myPresentation.getCurrentSlideIndex() + 1);
   //myPresentation.setCurrentSlideIndex(myPresentation.getCurrentSlideIndex() + 1);
-  updateSlideselector();
   goToNextSlide();
   updateSlideMenu();
 }
@@ -149,7 +115,6 @@ function AddNewSlide() {
 function AddFirstSlide() {
   myPresentation.setCurrentSlideIndex(0);
   myPresentation.addSlide(0);
-  updateSlideselector();
   updateNote();
   updateSlideMenu();
 }
@@ -171,7 +136,6 @@ function DeleteCurrentSlide(){
   else {
     goToPreviousSlide();
   }
-  updateSlideselector();
   updateSlideMenu();
 }
 
@@ -303,6 +267,8 @@ function showTextTool() {
   tabContent.appendChild(textToolClone);
   let textTab = document.getElementById('textToolTab');
   makeToolActive(textTab);
+  let formEditingText = document.getElementById("formEditingText");
+  formEditingText.onsubmit = btnAddTextClick;
 }
 
 function showImageTool() {
@@ -351,7 +317,9 @@ function showOtherTool() {
 }
 
 function makeToolActive(elem) {
-  let oldActiveElement = document.getElementsByClassName('active')[0];
-  oldActiveElement.classList.remove('active');
-  elem.classList.add('active');
+  let oldActiveElement = document.getElementsByClassName('activeTab')[0];
+  if (oldActiveElement) {
+      oldActiveElement.classList.remove('activeTab');
+  }
+  elem.classList.add('activeTab');
 }
