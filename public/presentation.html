@@ -4,25 +4,99 @@
 <head>
   <title>Once upon a Slide</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/presentation.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-  <div class="navbar" id="top">
-
-    </div>
+  <div class="navbar" id="top"></div>
 
   <div id="divContainer" class="displayDivContainer">
     <div id="slideDiv" class="displayDiv"></div>
   </div>
 
+  <div id="slideMenu"></div>
+
   <div class="noteDivContainer">
     <textarea id="inNote">Write your notes here</textarea>
   </div>
 
-  <div id="slideMenu"></div>
+  <div class="editToolsSlide">
+    <div class="tabContainer">
+      <div class="tab" title="Text tool">
+        <button id="textToolTab" onclick="showTextTool()">
+          <i class="fas fa-font"></i>
+        </button>
+      </div>
+      <div class="tab" title="Image tool">
+        <button id="imageToolTab" onclick="showImageTool()">
+          <i class="fas fa-image"></i>
+        </button>
+      </div>
+      <div class="tab" title="Video tool">
+        <button id="videoToolTab" onclick="showVideoTool()">
+          <i class="fas fa-video"></i>
+        </button>
+      </div>
+      <div class="tab" title="Sound tool">
+        <button id="soundToolTab" onclick="showSoundTool()">
+          <i class="fas fa-music"></i>
+        </button>
+      </div>
+      <div class="tab" title="Transition tool">
+        <button id="transitionToolTab" onclick="showTransitionTool()">
+          <i class="fas fa-stopwatch"></i> <!-- or maybe this one: "fas fa-star-half-alt" -->
+        </button>
+      </div>
+      <div class="tab last" title="Other tools">
+        <button id="otherToolTab" onclick="showOtherTool()">
+          <i class="fas fa-wrench"></i>
+        </button>
+      </div>
+    </div>
+    <div id="tabContent" class="tabContent"></div>
+  </div>
 
+  <template id="textContent">
+    <h2>Edit text</h2>
+    <label>Text: </label>
+    <input id="inTxt" name="text" placeholder="Enter your text here">
+    <i class="fas fa-trash-alt"></i>
+  </template>
+
+  <template id="imageContent">
+    <h2>Edit image</h2>
+    <label>Source of image: </label>
+    <input id="inImgSrc" name="image source" placeholder="Enter a URL">
+    <i class="fas fa-trash-alt"></i>
+  </template>
+
+  <template id="videoContent">
+    <h2>Edit video</h2>
+    <label>Source of video (embed link): </label>
+    <input id="inVidSrc" name="video source" placeholder="Enter a URL">
+    <p>The embed link of a YouTube video can be found by clicking 'share' beneath the video, then click on 'embed' and find the src link.</p>
+    <i class="fas fa-trash-alt"></i>
+  </template>
+
+  <template id="soundContent">
+    <h2>Edit sound</h2>
+    <label>Source of sound: </label>
+    <input id="inSoundSrc" name="sound source" placeholder="Enter a URL">
+    <i class="fas fa-trash-alt"></i>
+  </template>
+
+  <template id="transitionContent">
+    <h2>Transitions</h2>
+  </template>
+
+  <template id="toolsContent">
+    <h2>Tools</h2>
+    <button id="btnDisplayFullScreen">Play presentation</button>
+  </template>
+
+<!-- We probably don't need this anymore now...
   <div class="controlSlide">
     <div class="controlSlideColumn">
       <button id="btnDeleteSlide">Delete slide</button>
@@ -41,24 +115,9 @@
       <button id="btnAddSlide">New slide</button>
     </div>
   </div>
+-->
 
-  <div class="EditToolsSlide">
-    <input id="inTxt" placeholder="Add text or URL" />
-    <i id="btnDelete" class="fas fa-trash-alt"></i>
-    <div class="column4">
-      <button id="btnAddText">Add text</button>
-    </div>
-    <div class="column4">
-      <button id="btnAddPicture">Add picture</button>
-    </div>
-    <div class="column4">
-      <button id="btnAddVideo">Add video</button>
-    </div>
-    <div class="column4">
-      <button id="btnAddSound">Add sound</button>
-    </div>
-    <button id="btnDisplayFullScreen">FullScreen</button>
-  </div>
+
   <script src="./js/navbar.js"></script>
   <script src="./js/ElementClass.js"></script>
   <script src="./js/SlideClass.js"></script>

@@ -11,11 +11,12 @@ let btnAddText = document.getElementById("btnAddText");
 let btnAddVideo = document.getElementById("btnAddVideo");
 let btnAddSound = document.getElementById("btnAddSound");
 let btnAddSlide = document.getElementById("btnAddSlide");
-let btnNextSlide = document.getElementById("btnNextSlide");
-let btnPreviousSlide = document.getElementById("btnPreviousSlide");
-let selectorSlide = document.getElementById("selectSlide");
-let btnDeleteSlide = document.getElementById("btnDeleteSlide");
+//let btnNextSlide = document.getElementById("btnNextSlide");
+//let btnPreviousSlide = document.getElementById("btnPreviousSlide");
+//let selectorSlide = document.getElementById("selectSlide");
+//let btnDeleteSlide = document.getElementById("btnDeleteSlide");
 let divContainer = document.getElementById("divContainer");
+let tabContent = document.getElementById('tabContent');
 
 
 //----------------- presentation object
@@ -293,4 +294,64 @@ function updateSlideMenu() {
 
     slideMenu.appendChild(newDiv);
   }
+}
+
+function showTextTool() {
+  let textToolTemplate = document.getElementById('textContent');
+  let textToolClone = textToolTemplate.content.cloneNode(true);
+  tabContent.innerHTML = "";
+  tabContent.appendChild(textToolClone);
+  let textTab = document.getElementById('textToolTab');
+  makeToolActive(textTab);
+}
+
+function showImageTool() {
+  let imageToolTemplate = document.getElementById('imageContent');
+  let imageToolClone = imageToolTemplate.content.cloneNode(true);
+  tabContent.innerHTML = "";
+  tabContent.appendChild(imageToolClone);
+  let imageTab = document.getElementById('imageToolTab');
+  makeToolActive(imageTab);
+}
+
+function showVideoTool() {
+  let videoToolTemplate = document.getElementById('videoContent');
+  let videoToolClone = videoToolTemplate.content.cloneNode(true);
+  tabContent.innerHTML = "";
+  tabContent.appendChild(videoToolClone);
+  let videoTab = document.getElementById('videoToolTab');
+  makeToolActive(videoTab);
+}
+
+function showSoundTool() {
+  let soundToolTemplate = document.getElementById('soundContent');
+  let soundToolClone = soundToolTemplate.content.cloneNode(true);
+  tabContent.innerHTML = "";
+  tabContent.appendChild(soundToolClone);
+  let soundTab = document.getElementById('soundToolTab');
+  makeToolActive(soundTab);
+}
+
+function showTransitionTool() {
+  let transitionToolTemplate = document.getElementById('transitionContent');
+  let transitionToolClone = transitionToolTemplate.content.cloneNode(true);
+  tabContent.innerHTML = "";
+  tabContent.appendChild(transitionToolClone);
+  let transitionTab = document.getElementById('transitionToolTab');
+  makeToolActive(transitionTab);
+}
+
+function showOtherTool() {
+  let otherToolTemplate = document.getElementById('toolsContent');
+  let otherToolClone = otherToolTemplate.content.cloneNode(true);
+  tabContent.innerHTML = "";
+  tabContent.appendChild(otherToolClone);
+  let otherTab = document.getElementById('otherToolTab');
+  makeToolActive(otherTab);
+}
+
+function makeToolActive(elem) {
+  let oldActiveElement = document.getElementsByClassName('active')[0];
+  oldActiveElement.classList.remove('active');
+  elem.classList.add('active');
 }

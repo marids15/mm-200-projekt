@@ -16,12 +16,12 @@ router.post('/api/user', async function(req, res, next) {
   let userExists = await db.select(queryUser);
 
   //console.log(userExists);
-  if(!userExists) {
+  if(userExists) {
     res.status(403).json({}).end();
   } else {
 
     let query = `INSERT INTO "public"."users" ("id", "username", "email", "password", "role")
-    VALUES (DEFAULT, '${userName}', '${userEmail}', '${userPass}', '${userRole}')`;
+    VALUES (DEFAULT, '${userName}', '${userEmail}', '${userPass}', '${userRole}') RETURNING *`;
 
     let status = await db.insert(query) ? 200 : 500;
     res.status(status).json({}).end();
