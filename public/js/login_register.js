@@ -86,11 +86,11 @@ async function handleLogin(response) {
   let data = await response.json();
   console.log(response);
   console.log(data);
-  localStorage.setItem('id', data.id);
-  localStorage.setItem('username', data.username);
-  localStorage.setItem('email', data.email);
-  localStorage.setItem('password', data.password);
-  localStorage.setItem('role', data.role);
+  localStorage.setItem('id', data[0].id);
+  localStorage.setItem('username', data[0].username);
+  localStorage.setItem('email', data[0].email);
+  localStorage.setItem('password', data[0].password);
+  localStorage.setItem('role', data[0].role);
   //location.href = "./personnal.html";
 }
 
