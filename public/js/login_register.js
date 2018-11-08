@@ -74,8 +74,7 @@ async function loginUser(evt) {
   }).then(response => {
     if (response.status < 400) {
       console.log('login success!!! :D');
-      storeData(response);
-      location.href = './personnal.html';
+      handleLogin(response);
     } else {
       console.log('login did not work :(');
     }
@@ -83,14 +82,14 @@ async function loginUser(evt) {
   .catch(err => console.err(err));
 }
 
-async function storeData(response) {
+async function handleLogin(response) {
   let data = await response.json();
-  console.log(data);
   localStorage.setItem('id', data.id);
   localStorage.setItem('username', data.username);
   localStorage.setItem('email', data.email);
   localStorage.setItem('password', data.password);
   localStorage.setItem('role', data.role);
+  location.href = "./personnal.html";
 }
 
 //RegisterBTN.onclick = register;
