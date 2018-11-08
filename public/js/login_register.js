@@ -85,6 +85,7 @@ async function loginUser(evt) {
 
 async function storeData(response) {
   let data = await response.json();
+  console.log(data);
   localStorage.setItem('id', data.id);
   localStorage.setItem('username', data.username);
   localStorage.setItem('email', data.email);
