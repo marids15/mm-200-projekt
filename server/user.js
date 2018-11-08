@@ -21,7 +21,7 @@ router.post('/api/user', async function(req, res, next) {
   } else {
 
     let query = `INSERT INTO "public"."users" ("id", "username", "email", "password", "role")
-    VALUES (DEFAULT, '${userName}', '${userEmail}', '${userPass}', '${userRole}') RETURNING *`;
+      VALUES (DEFAULT, '${userName}', '${userEmail}', '${userPass}', '${userRole}') RETURNING *`;
 
     let status = await db.insert(query) ? 200 : 500;
     res.status(status).json({}).end();
