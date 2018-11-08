@@ -84,6 +84,8 @@ async function loginUser(evt) {
 
 async function handleLogin(response) {
   let data = await response.json();
+  console.log(response);
+  console.log(data);
   localStorage.setItem('id', data.id);
   localStorage.setItem('username', data.username);
   localStorage.setItem('email', data.email);
