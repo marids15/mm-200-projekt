@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/presentation.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -71,47 +72,58 @@
       <h2>Edit text</h2>
       <label>Text: </label>
       <input id="inTxt" type="text" name="text" placeholder="Enter your text here">
-      <input id="btnAddText" type="submit" value="Add text">
+      <input id="btnAddText" class="btn" type="submit" value="Add text">
     </form>
     <i class="fas fa-trash-alt"></i>
   </template>
 
   <template id="imageContent">
-    <h2>Edit image</h2>
-    <label>Source of image: </label>
-    <input id="inImgSrc" name="image source" placeholder="Enter a URL">
-    <i class="fas fa-trash-alt"></i>
+    <form id="formEditingImage">
+      <h2>Edit image</h2>
+      <label>Source of image: </label>
+      <input id="inImgSrc" type="text" name="image source" placeholder="Enter a URL">
+      <input id="btnAddPicture" class="btn" type="submit" value="Add image">
+      <i class="fas fa-trash-alt"></i>
+    </form>
   </template>
 
   <template id="videoContent">
-    <h2>Edit video</h2>
-    <label>Source of video (embed link): </label>
-    <input id="inVidSrc" name="video source" placeholder="Enter a URL">
-    <p>The embed link of a YouTube video can be found by clicking 'share' beneath the video, then click on 'embed' and find the src link.</p>
-    <i class="fas fa-trash-alt"></i>
+    <form id="formEditingVideo">
+      <h2>Edit video</h2>
+      <label>Source of video (embed link): </label>
+      <input id="inVidSrc" type="text" name="video source" placeholder="Enter a URL">
+      <input id="btnAddVideo" class="btn" type="submit" value="Add video">
+      <p>The embed link of a YouTube video can be found by clicking 'share' beneath the video, then click on 'embed' and find the src link.</p>
+      <i class="fas fa-trash-alt"></i>
+    </form>
   </template>
 
   <template id="soundContent">
-    <h2>Edit sound</h2>
-    <label>Source of sound: </label>
-    <input id="inSoundSrc" name="sound source" placeholder="Enter a URL">
-    <i class="fas fa-trash-alt"></i>
+    <form id="formEditingSound">
+      <h2>Edit sound</h2>
+      <label>Source of sound: </label>
+      <input id="inSoundSrc" type="text" name="sound source" placeholder="Enter a URL">
+      <input id="btnAddSound" class="btn" type="submit" value="Add sound">
+      <i class="fas fa-trash-alt"></i>
+    </form>
   </template>
 
   <template id="presenterContent">
-    <h2>Presentation</h2>
-    <select id="timedTransitions">
-      <option value="noTimer">No timer</option>
-      <option value="10">10s</option>
-      <option value="30">30s</option>
-      <option value="60">1min</option>
-    </select>
-    <button id="btnDisplayFullScreen">Play presentation</button>
+    <form id="formEditingPresenter">
+      <h2>Presentation</h2>
+      <select id="timedTransitions">
+        <option value="noTimer">No timer</option>
+        <option value="10">10s</option>
+        <option value="30">30s</option>
+        <option value="60">1min</option>
+      </select>
+      <button id="btnDisplayFullScreen" class="btn">Play presentation</button>
+    </form>
   </template>
 
   <template id="exportContent">
     <h2>Tools</h2>
-    <button id="btnExportNotes">Download notes</button>
+    <button id="btnExportNotes" class="btn">Download notes</button>
   </template>
 
 <!-- We probably don't need this anymore now...

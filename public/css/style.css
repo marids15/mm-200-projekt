@@ -61,7 +61,10 @@ table {
   --main-color: #9FD356;
   --second-color: #3C91E6;
   --third-color: #FA824C;
+  --light: #fafafa;
   --grey: #342E37;
+  --light-grey: #EEE;
+  --grey-background-gradient: linear-gradient(0deg, #CCC, #EEE);
 
 
 /* COLOR THEME: red teints
@@ -133,13 +136,14 @@ table {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 15px;
+  font-family: var(--text-font);
   color: #EEE;
 }
 
 .navbar .active {
   background-color: var(--main-color);
-  color: white;
+  color: var(--grey);
 }
 
 .navbar a:hover {
