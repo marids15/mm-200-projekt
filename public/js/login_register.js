@@ -89,7 +89,7 @@ async function handleLogin(response) {
   localStorage.setItem('email', data.email);
   localStorage.setItem('password', data.password);
   localStorage.setItem('role', data.role);
-  location.href = "./personnal.html";
+  //location.href = "./personnal.html";
 }
 
 //RegisterBTN.onclick = register;
