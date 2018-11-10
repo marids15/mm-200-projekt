@@ -1,3 +1,10 @@
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Loading .env')
+
+  const dotenv = require('dotenv');
+  dotenv.config();
+}
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const user = require('./server/user.js');
@@ -10,7 +17,7 @@ app.use(bodyParser.json());
 app.use(user);
 
 app.use(function(err, req, res, next) {
-  console.err(err.stack);
+  console.error(err.stack);
   res.status(500).send('Error...');
 });
 
