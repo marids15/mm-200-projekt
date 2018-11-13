@@ -26,13 +26,13 @@ async function runQuery(query) {
       console.error(err);
     });
 
-    console.log(res.rows);
     if (res.rows && res.rows.length > 0) {
         response = res.rows; //returns array with resulting rows of query
     }
   } catch (e) {
-    console.error("Error: ");
-    console.log(e);
+    console.error("Error: " + e);
+  } finally {
+    client.end();
   }
 
   return response;
