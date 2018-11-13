@@ -34,10 +34,10 @@ async function updateUser(evt) {
   role: localStorage.getItem("role").value,
   oldname: localStorage.getItem("username").value,
   oldemail: localStorage.getItem("email").value,
-psw: localStorage.getItem("password").value
+psw: localStorage.getItem("password").value  })
   // password: document.getElementById('inpPsw').value
   //UPDATE "public"."users" SET "username" = 'james2' WHERE "id" = 34 AND "username" LIKE 'james' ESCAPE '#' AND "email" LIKE 'test@mytest.com' ESCAPE '#' AND "password" LIKE '123' ESCAPE '#' AND "role" = 0
-  });
+
   fetch(UPDATE_USER_URL,{
     method: 'POST',
     body: data,

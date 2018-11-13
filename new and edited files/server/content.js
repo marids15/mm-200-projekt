@@ -12,7 +12,11 @@ WHERE userid = '${id}' RETURNING *`;
 let queryResults = await db.select(contentQuery)
 
 console.log(queryResults);
-res.status(400).json(queryResults).end();
+if(queryResults) {
+  res.status(200).json(queryResults).end();
+} else {
+  res.status(401).json({}).end();
+}
 /*let status = queryResults ? 200 : 500;
 res.status(status).json(queryResults).end();
 
@@ -24,3 +28,4 @@ if (queryResults){
 }
 */
 });
+module.exports = router;

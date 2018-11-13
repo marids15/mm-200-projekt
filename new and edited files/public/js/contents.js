@@ -14,7 +14,7 @@ function postDATA(){
 async function contentFromServer() {
   let data = JSON.stringify({
   id: localStorage.getItem("id").value
-  console.log(id);
+  //console.log(id);
     });
   fetch(CONTENT_URL, {
     method: 'POST',
