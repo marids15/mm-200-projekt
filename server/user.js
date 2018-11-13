@@ -21,17 +21,18 @@ router.post('/api/user', async function(req, res, next) {
   } else {
 
     let query = `INSERT INTO "public"."users" ("id", "username", "email", "password", "role")
-    VALUES (DEFAULT, '${userName}', '${userEmail}', '${userPass}', '${userRole}') RETURNING *`;
+      VALUES (DEFAULT, '${userName}', '${userEmail}', '${userPass}', '${userRole}') RETURNING *`;
 
-    let status = await db.insert(query) ? 200 : 500;
-    res.status(status).json({}).end();
+    let user = await db.insert(query);
+    let status = user ? 200 : 500;
+    res.status(status).json(user).end();
   }
 });
 
 // Logging in
 router.post('/api/users/auth', async function(req, res, next) {
   let userName = req.body.username;
-  let userPass = req.body.pass;
+  let userPass = req.body.password;
 
   let query = `SELECT * FROM public.users t
   WHERE username = '${userName}' and password = '${userPass}'`;

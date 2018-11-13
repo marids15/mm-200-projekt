@@ -50,6 +50,7 @@ async function createUser(evt) {
   }).then(response => {
     if (response.status < 400) {
       console.log('created user!!!! :D');
+      handleLogin(response);
     } else {
       console.log('did not create user :(');
     }
@@ -74,11 +75,22 @@ async function loginUser(evt) {
   }).then(response => {
     if (response.status < 400) {
       console.log('login success!!! :D');
+      handleLogin(response);
     } else {
       console.log('login did not work :(');
     }
   }).then(data => console.log('next'))
   .catch(err => console.err(err));
+}
+
+async function handleLogin(response) {
+  let data = await response.json();
+  localStorage.setItem('id', data[0].id);
+  localStorage.setItem('username', data[0].username);
+  localStorage.setItem('email', data[0].email);
+  localStorage.setItem('password', data[0].password);
+  localStorage.setItem('role', data[0].role);
+  location.href = "./personnal.html";
 }
 
 //RegisterBTN.onclick = register;
