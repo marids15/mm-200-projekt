@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Once upon a Slide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login_signup.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body class="loginSignupPage">
+    <div class="navbar" id="top"></div>
+
+<div class="my_credentials" id="my_creds">
+<label for="MyUsername">Username</label>
+<input id="MyUsername" type="text" name="Username" value="">
+<label for="MyEmail">Email</label>
+<input id="MyEmail" type="text" name="Email" value="">
+<label for="Password">New password</label>
+<input id="Passwordinp" type="text" name="New password" value="">
+</div>
+<button type="button" id="SaveCredChanges" name="SaveCredentials"> Save Changes</button>
+<button type="button" id="DisregardChanges" name="SaveCredentials"> Disregard Changes</button>
+<button type="button" id="getdata" name="getdata"> get data</button>
+<button type="button" id="postdata" name="postdata">Post data</button>
+
+    <script src="./js/my_account.js"></script>
+    <script src="./js/navbar.js"></script>
+    <script src="./js/contents.js"></script>
+
+    <script>
+  var activePage = 3;
+  MakeNavbar(activePage);
+  </script>
+  </body>
+</html>
