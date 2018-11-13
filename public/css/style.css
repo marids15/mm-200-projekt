@@ -57,12 +57,15 @@ table {
 --grey: #5D675B;
 */
 
-/* COLOR THEME: colorful green
+/* COLOR THEME: colorful green */
   --main-color: #9FD356;
   --second-color: #3C91E6;
   --third-color: #FA824C;
+  --light: #fafafa;
   --grey: #342E37;
-*/
+  --light-grey: #EEE;
+  --grey-background-gradient: linear-gradient(0deg, #CCC, #EEE);
+
 
 /* COLOR THEME: red teints
   --main-color: #F2545B;
@@ -71,11 +74,12 @@ table {
   --grey: #19323C;
 */
 
-/* COLOR THEME: colorful */
+/* COLOR THEME: colorful
   --main-color: #FE4A49;
   --second-color: #009FB7;
   --third-color: #FED766;
   --grey: #333;
+*/
 
   --title-font: 'Pacifico', cursive;
   --text-font: 'Roboto', sans-serif;
@@ -108,38 +112,6 @@ table {
     display: block;
     text-align: left;
   }
-
-  /* For displaying slide ---------------------------------------------*/
-  .displayDivContainer {
-    width: 95%;
-    margin-top: 20px;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    margin-bottom: 20px;
-  }
-
-  .textElementSlide {
-    font-size: 7.6vw;
-  }
-
-  .vidDiv {
-    font-size: 2.5vw;
-  }
-
-  /* For displaying note ----------------------------------------------*/
-  .noteDivContainer {
-    margin-left: 2.5%;
-    margin-right: 3%;
-    width: 94.5%;
-    margin-bottom: 20px;
-  }
-
-  .noteDivContainer textarea {
-    max-width: 100%;
-    padding-bottom: 5%;
-    width: 100%;
-    height: 5%;
-  }
 }
 
 /* CSS specifically for desktops -----------------------------------------*/
@@ -148,64 +120,9 @@ table {
   .navbar i {
     display: none;
   }
-
-  /* For displaying slide ---------------------------------------------*/
-  .displayDivContainer {
-    width: 50%;
-    margin-top: 20px;
-    margin-left: 20%;
-    margin-bottom: 20px;
-    float: left;
-  }
-
-  .textElementSlide {
-    font-size: 4vw;
-  }
-
-  /* For displaying note ----------------------------------------------*/
-  .noteDivContainer {
-    padding-top: 20px;
-    margin-right: 10%;
-    float: right;
-    width: 15%;
-  }
-
-  .noteDivContainer textarea {
-    max-width: 100%;
-    padding-bottom: 100%;
-    margin-bottom: 5%;
-    width: 100%;
-    height: 100%;
-  }
-
-  .controlSlide {
-    float: left;
-    width: 50%;
-    margin-left: 20%;
-  }
-
-  .EditToolsSlide {
-    float: left;
-    width: 50%;
-    margin-left: 20%;
-  }
-
-  .vidDiv {
-    font-size: 1.5vw;
-  }
 }
 
 /* CSS for both desktop and mobile screens -------------------------------*/
-/* General css --------------------------------------------------------*/
-.column4 {
-  float: left;
-  width: 25%;
-}
-
-textarea {
-  resize: none;
-}
-
 /* For navbar ---------------------------------------------------------*/
 .navbar {
   overflow: hidden;
@@ -219,165 +136,17 @@ textarea {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 15px;
+  font-family: var(--text-font);
   color: #EEE;
 }
 
 .navbar .active {
   background-color: var(--main-color);
-  color: white;
+  color: var(--grey);
 }
 
 .navbar a:hover {
   background-color: #555;
   color: white;
-}
-
-/* For displaying slide -----------------------------------------------*/
-.displayDiv {
-  padding-top: 56.25%;
-  width: 100%;
-  background-color: #FEFEFE;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  overflow: hidden;
-  position: relative;
-}
-
-.image {
-  width : 30%;
-  position: absolute;
-}
-
-.vidElement {
-  position: relative;
-  width: 100%;
-  height: 80%;
-  border: none;
-}
-
-.vidDiv {
-  position: absolute;
-  width: 40%;
-  height: 60%;
-  display: inline-block;
-  background-color: var(--grey);
-}
-
-.vidDiv icon {
-  float: right;
-  margin: 2%;
-  padding: 2%;
-  color: var(--second-color);
-}
-
-.soundElement {
-  position: absolute;
-  width: 50%;
-}
-
-/* For tools controlling visible slide --------------------------------*/
-.controlSlide {
-  clear: both;
-}
-
-.controlSlideColumn {
-  float: left;
-  width: 20%;
-  text-align: center;
-}
-
-.controlSlideColumn i {
-  cursor: pointer;
-  font-size: 2em;
-  color: var(--second-color);
-}
-
-.controlSlideColumn p {
-  line-height: 1.2;
-}
-
-/* For tools editing slide --------------------------------------------*/
-.EditToolsSlide {
-  padding-top: 20px;
-  clear: both;
-  text-align: center;
-}
-
-.EditToolsSlide input {
-  display: block;
-  text-align: center;
-  margin: auto;
-  margin-bottom: 10px;
-}
-
-.EditToolsSlide i {
-  display: block;
-  color: var(--second-color);
-}
-
-.creationDiv {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.textElementSlide {
-  position: absolute;
-  left: 0%;
-  top: 0%;
-  background-color: var(--third-color);
-  user-select: none;
-}
-
-/* For displaying scrolling menu for slides -----------------*/
-#slideMenu{
-    width: 95%;
-    margin-top: 20px;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    margin-bottom: 20px;
-    border: 1px solid black;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-}
-
-
-.divSlideMenu{
-  padding-top: 11.250%;
-  width: 20%;
-  display: inline-block;
-  border: 1px solid red;
-  margin: 2px;
-  position: relative;
-}
-
-.divSlideMenu .textElementSlide {
-    font-size: 1.52vw;
-  }
-#slideMenu::-webkit-scrollbar {
-    width: 1em;
-}
-
-#slideMenu::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-}
-
-#slideMenu::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
-}
-
-
-@media all and (display-mode: fullscreen) {
-  .textElementSlide {
-    font-size: 8vw;
-  }
-
-  .displayDivContainer{
-    width: 100% ;
-  }
-
 }

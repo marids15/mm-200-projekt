@@ -1,36 +1,3 @@
-:root {
-/* COLOR THEME: dull green
---main-color: #ABE188;
---second-color: #F7EF99;
---third-color: #F1BB87;
---fourth-color: #F78E69;
---grey: #5D675B;
-*/
-
-/* COLOR THEME: colorful green */
-  --main-color: #9FD356;
-  --second-color: #3C91E6;
-  --third-color: #FA824C;
-  --grey: #342E37;
-  */
-
-/* COLOR THEME: red teints
-  --main-color: #F2545B;
-  --second-color: #A93F55;
-  --third-color: #8C5E58;
-  --grey: #19323C;
-*/
-
-/* COLOR THEME: colorful
-  --main-color: #FE4A49;
-  --second-color: #009FB7;
-  --third-color: #FED766;
-  --grey: #333;
-*/
-  --title-font: 'Pacifico', cursive;
-  --text-font: 'Roboto', sans-serif;
-}
-
 .loginSignupPage {
   background-image: linear-gradient(0deg, #CCC, #EEE);
   width: 100vw;
