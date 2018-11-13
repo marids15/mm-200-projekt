@@ -33,8 +33,18 @@ btnDeleteSlide.onclick = DeleteCurrentSlide;
 
 
 //--------------------------------
-setInterval("myPresentation.makeDivDraggable()",100);
-setInterval("myPresentation.makeDivSelectable()",1000);
+requestAnimationFrame(draggable);
+requestAnimationFrame(selectable);
+
+function draggable(){
+	myPresentation.makeDivDraggable();
+	requestAnimationFrame(draggable);
+}
+
+function selectable(evt){
+	myPresentation.makeDivSelectable();
+	requestAnimationFrame(selectable);
+}
 
 // ------------------- function to save note
 function saveNote() {
@@ -62,21 +72,27 @@ function btnAddTextClick(evt) {
 }
 
 //--------------- function to add image in a slide
-function addImage() {
-  myPresentation.getCurrentSlide().addImage(inTxt.value);
-  inTxt.value = "";
+function addImage(evt) {
+  evt.preventDefault();
+  let inImgSrc = document.getElementById("inImgSrc");
+  myPresentation.getCurrentSlide().addImage(inImgSrc.value);
+  inImgSrc.value = "";
 }
 
 // --------------- function to add video to a slide
-function addVideo() {
-  myPresentation.getCurrentSlide().addVideo(inTxt.value);
-  inTxt.value = "";
+function addVideo(evt) {
+  evt.preventDefault();
+  let inVidSrc = document.getElementById("inVidSrc");
+  myPresentation.getCurrentSlide().addVideo(inVidSrc.value);
+  inVidSrc.value = "";
 }
 
 // -------------- function to add sounds to a slide
-function addSound() {
-  myPresentation.getCurrentSlide().addSound(inTxt.value);
-  inTxt.value = "";
+function addSound(evt) {
+  evt.preventDefault();
+  let inSoundSrc = document.getElementById("inSoundSrc");
+  myPresentation.getCurrentSlide().addSound(inSoundSrc.value);
+  inSoundSrc.value = "";
 }
 
 //--------------- function to go to next slide
@@ -276,6 +292,11 @@ function updateSlideMenu() {
   }
 }
 
+function activeDeleteElement(){
+	let btnDelete = document.getElementById("btnDelete");
+	btnDelete.onclick = deleteElement;
+}
+
 function showTextTool() {
   let textToolTemplate = document.getElementById('textContent');
   let textToolClone = textToolTemplate.content.cloneNode(true);
@@ -285,6 +306,7 @@ function showTextTool() {
   makeToolActive(textTab);
   let formEditingText = document.getElementById("formEditingText");
   formEditingText.onsubmit = btnAddTextClick;
+  activeDeleteElement();
 }
 
 function showImageTool() {
@@ -294,6 +316,9 @@ function showImageTool() {
   tabContent.appendChild(imageToolClone);
   let imageTab = document.getElementById('imageToolTab');
   makeToolActive(imageTab);
+  let formEditingImage = document.getElementById("formEditingImage");
+  formEditingImage.onsubmit = addImage;
+  activeDeleteElement();
 }
 
 function showVideoTool() {
@@ -303,6 +328,9 @@ function showVideoTool() {
   tabContent.appendChild(videoToolClone);
   let videoTab = document.getElementById('videoToolTab');
   makeToolActive(videoTab);
+  let formEditingVideo = document.getElementById("formEditingVideo");
+  formEditingVideo.onsubmit = addVideo;
+  activeDeleteElement();
 }
 
 function showSoundTool() {
@@ -312,6 +340,9 @@ function showSoundTool() {
   tabContent.appendChild(soundToolClone);
   let soundTab = document.getElementById('soundToolTab');
   makeToolActive(soundTab);
+  let formEditingSound = document.getElementById("formEditingSound");
+  formEditingSound.onsubmit = addSound;
+  activeDeleteElement();
 }
 
 function showPresenterTool() {
