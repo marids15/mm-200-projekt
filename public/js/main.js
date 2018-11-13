@@ -359,7 +359,9 @@ function showExportTool() {
   tabContent.appendChild(exportToolClone);
   let exportTab = document.getElementById('exportToolTab');
   makeToolActive(exportTab);
+  let btnSavePresentation = document.getElementById('btnSavePresentation');
   let btnExportNotes = document.getElementById('btnExportNotes');
+  btnSavePresentation.onclick = storePresentation;
   btnExportNotes.onclick = exportNote;
 }
 
@@ -401,4 +403,46 @@ function saveData(data, filename) {
 
     window.URL.revokeObjectURL(url);
     document.body.removeChild(a);
+}
+
+//----------------- Function for storing presentation into DB
+function storePresentation() {
+  console.log(parsePresentationToJSON());
+}
+
+//----------------- Function for parsing presentation into JSON
+function parsePresentationToJSON() {
+	let myData = {};
+	myData.presentation = {
+		name : myPresentation.name,
+		currentSlideIndex : myPresentation.currentSlideIndex
+	};
+	myData.presentation.slides = [];
+
+	let slidesArray = myPresentation.getSlides();
+
+	for (let i = 0; i < slidesArray.length; i++){
+		let mySlide = {};
+		mySlide.note = slidesArray[i].getNote();
+		mySlide.elements = [];
+		let elementsArray = slidesArray[i].getElements();
+
+		for(let j = 0; j < elementsArray.length; j++){
+			let myElement = {};
+			myElement.xOffset = elementsArray[j].xOffset;
+			myElement.yOffset = elementsArray[j].yOffset;
+			myElement.initialX = elementsArray[j].initialX;
+			myElement.initialY = elementsArray[j].initialY;
+			myElement.currentX = elementsArray[j].currentX;
+			myElement.currentY = elementsArray[j].currentY;
+			myElement.type = elementsArray[j].type;
+			myElement.content = elementsArray[j].content;
+
+			mySlide.elements.push(myElement);
+		}
+		myData.presentation.slides.push(mySlide);
+	}
+	//let myJSON = JSON.stringify(myPresentation);
+	let myJSON = JSON.stringify(myData);
+  return myJSON;
 }
