@@ -3,13 +3,8 @@ const NAME = "myP";
 
 //---------------- document.getElementById variables
 let indexOfSlide = document.getElementById("indexOfSlide");
-//let inTxt  = document.getElementById("inTxt");
 let inNote = document.getElementById('inNote');
 let slideDiv = document.getElementById("slideDiv");
-//let btnAddPicture = document.getElementById("btnAddPicture");
-//let btnAddText = document.getElementById("btnAddText");
-//let btnAddVideo = document.getElementById("btnAddVideo");
-//let btnAddSound = document.getElementById("btnAddSound");
 let btnAddSlide = document.getElementById("btnAddSlide");
 let btnDeleteSlide = document.getElementById("btnDeleteSlide");
 let divContainer = document.getElementById("divContainer");
@@ -22,15 +17,8 @@ AddFirstSlide();
 
 //--------------- eventhandlers
 inNote.onchange = saveNote;
-//btnAddPicture.onclick = addImage;
-//btnAddText.onclick = btnAddTextClick;
-//btnAddVideo.onclick = addVideo;
-//btnAddSound.onclick = addSound;
-//btnDelete.onclick = deleteElement;
 btnAddSlide.onclick = AddNewSlide;
 btnDeleteSlide.onclick = DeleteCurrentSlide;
-//btnDisplayFullScreen.onclick = displayInFullScreen;
-
 
 //--------------------------------
 requestAnimationFrame(draggable);
@@ -275,6 +263,7 @@ function swipedetect(el){
     }, false);
 }
 
+// ---------------- Updates the slide scrolling menu
 function updateSlideMenu() {
   let slideMenu = document.getElementById("slideMenu");
   slideMenu.innerHTML = "";
@@ -292,11 +281,13 @@ function updateSlideMenu() {
   }
 }
 
+//---------------- Links eventhandler on delete button
 function activeDeleteElement(){
 	let btnDelete = document.getElementById("btnDelete");
 	btnDelete.onclick = deleteElement;
 }
 
+//----------------- Shows the text tool in the menu
 function showTextTool() {
   let textToolTemplate = document.getElementById('textContent');
   let textToolClone = textToolTemplate.content.cloneNode(true);
@@ -309,6 +300,7 @@ function showTextTool() {
   activeDeleteElement();
 }
 
+//------------------ Shows the image tool in the menu
 function showImageTool() {
   let imageToolTemplate = document.getElementById('imageContent');
   let imageToolClone = imageToolTemplate.content.cloneNode(true);
@@ -321,6 +313,7 @@ function showImageTool() {
   activeDeleteElement();
 }
 
+//------------------ Shows the video tool in the menu
 function showVideoTool() {
   let videoToolTemplate = document.getElementById('videoContent');
   let videoToolClone = videoToolTemplate.content.cloneNode(true);
@@ -333,6 +326,7 @@ function showVideoTool() {
   activeDeleteElement();
 }
 
+//------------------- Shows the sound tool in the menu
 function showSoundTool() {
   let soundToolTemplate = document.getElementById('soundContent');
   let soundToolClone = soundToolTemplate.content.cloneNode(true);
@@ -345,6 +339,7 @@ function showSoundTool() {
   activeDeleteElement();
 }
 
+//------------------- Shows the presenter tool in the menu
 function showPresenterTool() {
   let presenterToolTemplate = document.getElementById('presenterContent');
   let presenterToolClone = presenterToolTemplate.content.cloneNode(true);
@@ -356,6 +351,7 @@ function showPresenterTool() {
   btnDisplayFullScreen.onclick = displayInFullScreen;
 }
 
+//------------------- Shows the exporting tool in the menu
 function showExportTool() {
   let exportToolTemplate = document.getElementById('exportContent');
   let exportToolClone = exportToolTemplate.content.cloneNode(true);
@@ -367,6 +363,7 @@ function showExportTool() {
   btnExportNotes.onclick = exportNote;
 }
 
+//------------------ Highlights the active tab in the tab bar
 function makeToolActive(elem) {
   let oldActiveElement = document.getElementsByClassName('activeTab')[0];
   if (oldActiveElement) {
@@ -375,6 +372,7 @@ function makeToolActive(elem) {
   elem.classList.add('activeTab');
 }
 
+//------------------ Function for creating text out of notes
 function exportNote(){
   let title = `${myPresentation.getName()}_Note.txt`;
   let note = "";
@@ -390,6 +388,7 @@ function exportNote(){
   saveData(note,title);
 }
 
+//------------------ Function for storing the notes into a file
 function saveData(data, filename) {
     let a = document.createElement('a');
     document.body.appendChild(a);
