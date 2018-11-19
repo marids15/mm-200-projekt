@@ -348,7 +348,10 @@ function showPresenterTool() {
   let presenterTab = document.getElementById('presenterToolTab');
   makeToolActive(presenterTab);
   let btnDisplayFullScreen = document.getElementById('btnDisplayFullScreen');
+	let selectTheme = document.getElementById('selectTheme');
   btnDisplayFullScreen.onclick = displayInFullScreen;
+	selectTheme.onchange = changeTheme;
+	selectTheme.value = myPresentation.getTheme;
 }
 
 //------------------- Shows the exporting tool in the menu
@@ -370,6 +373,13 @@ function makeToolActive(elem) {
       oldActiveElement.classList.remove('activeTab');
   }
   elem.classList.add('activeTab');
+}
+
+//------------------ Changing the theme of the Presentation
+function changeTheme(evt) {
+	let theme = document.getElementById('selectTheme').value;
+	console.log(theme);
+	myPresentation.setTheme(theme);
 }
 
 //------------------ Function for creating text out of notes

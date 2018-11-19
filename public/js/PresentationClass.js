@@ -6,6 +6,7 @@ class Presentation {
     this.slides = [];
     this.currentSlideIndex = null;
     this.containerDiv = containerDiv;
+    this.theme = "Default";
   }
 
   // get name of presentation
@@ -28,9 +29,23 @@ class Presentation {
     return this.slides[this.currentSlideIndex];
   }
 
+  // get theme
+  getTheme() {
+    return this.theme;
+  }
+
   // sets the current slide to a number
   setCurrentSlideIndex(num){
     this.currentSlideIndex = num;
+  }
+
+  // set theme
+  setTheme(theme) {
+    this.theme = theme;
+
+    for (let slide of this.slides) {
+      slide.setSlideTheme("theme" + theme);
+    }
   }
 
   // add a new slide at specific index
@@ -40,6 +55,7 @@ class Presentation {
       let slideHTML = slide.getSlideHTML();
       this.containerDiv.appendChild(slideHTML);
       this.slides.splice(index, 0, slide);
+      slide.setSlideTheme("theme" + this.theme);
     }
     catch {
       console.error("Could not add slide.");
