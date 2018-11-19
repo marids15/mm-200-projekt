@@ -16,7 +16,11 @@
   <div id="MyPresentations">
     <div id="headerMyPresentations" class="headerP">
       <h1 class="h1header">MY PRESENTATIONS</h1>
-      <button type="button" id="buttonAddPresentation">Create new Presentation</button>
+      <form id="formCreatePresentation">
+        <label>Name:</label>
+        <input type="text" id="inPresentationName" required placeholder="Name of presentation">
+        <input type="submit" value="New presentation">
+      <form>
     </div>
     <div class="wrapper" id="presentations">
     </div>
@@ -24,6 +28,9 @@
 
   <script src="./js/navbar.js"></script>
   <script src="./js/personnalJS.js"></script>
+  <script src="./js/ElementClass.js"></script>
+  <script src="./js/SlideClass.js"></script>
+  <script src="./js/PresentationClass.js"></script>
   <script>
   var activePage = 2;
   MakeNavbar(activePage);

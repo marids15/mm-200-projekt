@@ -33,6 +33,8 @@ async function runQuery(query) {
   } catch (e) {
     console.error("Error: ");
     console.log(e);
+  } finally {
+    client.end();
   }
 
   return response;

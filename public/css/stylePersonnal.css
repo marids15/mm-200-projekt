@@ -47,8 +47,8 @@
 	border: 3px solid #EEE;
 	border-radius: 5px;
     grid-template-columns: 1fr 1fr;
-    
-    grid-template-areas: 
+
+    grid-template-areas:
         "miniView miniView"
         "buttonDeleteP buttonDeleteP"
         "buttonStatusP buttonPresenterP";
@@ -58,9 +58,30 @@
 .miniView {
   padding-top: 56.25%;
   width: 100%;
-  background-color: #f18973;
   overflow: hidden;
   position: relative;
+}
+
+.miniView .textElementSlide {
+	background-color: var(--third-color);
+	user-select: none;
+	/*
+	left: 0%;
+	top: 0%;
+
+	position: absolute;
+	*/
+	font-size: 1.52vw;
+}
+
+.viewFirstSlide {
+	width: 100%;
+	padding-top: 56.25%;
+	position: relative;
+}
+
+.viewFirstSlide .textElementSlide {
+	font-size: 1.52vw;
 }
 
 .buttonDeleteP{
@@ -78,4 +99,3 @@
     float: right;
     width: 100%;
 }
-

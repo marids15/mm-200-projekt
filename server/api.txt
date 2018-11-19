@@ -16,3 +16,143 @@ RESPONSE (JSON): {"username": JohnDoe"} //add token later
 
 0 = standard user role
 1 = admin
+
+
+===PRESENTATION STUFF===========================================================
+sharing options:
+0: Private
+1: Public
+2: Individual
+
+
+Create presentation:
+METHOD: POST
+ENDPOINT: api/presentations/new
+REQUEST header:--------------------------
+
+REQUEST (JSON):
+{
+  "name": "Cookies",
+  "owner": 32 (ID!!!)
+}
+RESPONSE (JSON):
+{
+  "id": 0
+  "name": "Cookies",
+  "owner": "John Doe",
+  "presentation": {
+    name: "",
+    currentSlideIndex: 0,
+    slides: []
+  }
+}
+
+--------------------------------------------------------------------------------
+Get presentation:
+METHOD: GET
+ENDPOINT: api/presentations
+REQUEST header :---------
+REQUEST (JSON): {"presentation_id": 0}
+RESPONSE (JSON):
+{
+  "id": 0,
+  "name": "Cookies",
+  "owner": "John Doe",
+  "slides": [
+  {
+    "note": "alksjdf",
+    "elements": [
+    {
+      "type": "text",
+      "x-offset": 0,
+      "y-offset": 0,
+      "content": "Hello"
+    }, {
+      "type": "img",
+      "x-offset": 0,
+      "y-offset": 0,
+      "content": "www.image.nl"
+    }]
+  }, {
+    "note": "alksjdf",
+    "elements": [
+    {
+      "type": "text",
+      "x-offset": 0,
+      "y-offset": 0,
+      "content": "Hello"
+    }, {
+      "type": "img",
+      "x-offset": 0,
+      "y-offset": 0,
+      "content": "www.image.nl"
+    }]
+  }]
+}
+
+--------------------------------------------------------------------------------
+Edit/save presentation:
+METHOD: POST
+ENDPOINT: api/presentations/save
+REQUEST header: --------------------------
+REQUEST (JSON):
+{
+  "presentation_id": 0,
+  "owner": 34, (user_id)
+  "presentation": [
+  {
+    "note": "alksjdf",
+    "elements": [
+    {
+      "type": "text",
+      "x-offset": 0,
+      "y-offset": 0,
+      "content": "Hello"
+    }, {
+      "type": "img",
+      "x-offset": 0,
+      "y-offset": 0,
+      "content": "www.image.nl"
+    }]
+  }, {
+    "note": "alksjdf",
+    "elements": [
+    {
+      "type": "text",
+      "x-offset": 0,
+      "y-offset": 0,
+      "content": "Hello"
+    }, {
+      "type": "img",
+      "x-offset": 0,
+      "y-offset": 0,
+      "content": "www.image.nl"
+    }]
+  }]
+}
+
+--------------------------------------------------------------------------------
+Delete presentation:
+METHOD: DELETE
+ENDPOINT: api/presentations
+REQUEST header: ----------
+REQUEST (JSON):
+{
+  "id": 0,
+  "name": "Cookies",
+  "owner": "John Doe",
+}
+RESPONSE: {""}
+
+
+--------------------------------------------------------------------------------
+Get all presentations of user:
+METHOD: GET
+ENDPOINT: api/presentations/:userid
+REQUEST header: -------
+REQUEST: no body
+RESPONSE: {
+  presentations: [
+  {"id": etc}
+  ]
+}
