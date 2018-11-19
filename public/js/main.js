@@ -1,5 +1,8 @@
 const NAME = "myP";
 
+// check if authorized for page
+const validToken = checkToken();
+console.log(validToken);
 
 //---------------- document.getElementById variables
 let indexOfSlide = document.getElementById("indexOfSlide");

@@ -1,6 +1,10 @@
 let buttonAddPresentation = document.getElementById("buttonAddPresentation");
 let presentations = document.getElementById("presentations");
 
+// check if authorized for page
+const validToken = checkToken();
+console.log(validToken);
+
 //-------------------------button
 
 buttonAddPresentation.onclick = addPresentation;
@@ -34,17 +38,17 @@ function addPresentation() {
 	let optionPublic = document.createElement("option");
 	optionPublic.value = "public";
 	optionPublic.innerHTML = "Public";
-	buttonStatusP.appendChild(optionPublic); 
+	buttonStatusP.appendChild(optionPublic);
 
 	let optionPrivate = document.createElement("option");
 	optionPrivate.value = "private";
 	optionPrivate.innerHTML = "Private";
-	buttonStatusP.appendChild(optionPrivate); 
+	buttonStatusP.appendChild(optionPrivate);
 
 	let optionIndividual = document.createElement("option");
 	optionIndividual.value = "individual";
 	optionIndividual.innerHTML = "Individual";
-	buttonStatusP.appendChild(optionIndividual); 
+	buttonStatusP.appendChild(optionIndividual);
 
 	let buttonPresenterP = document.createElement("button");
 	buttonPresenterP.type = "button";

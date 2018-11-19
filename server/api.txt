@@ -16,3 +16,11 @@ RESPONSE (JSON): {"username": JohnDoe"} //add token later
 
 0 = standard user role
 1 = admin
+
+
+===Checking tokens==============================================================
+Check token for loading pages:
+METHOD: POST
+ENDPOINT: api/users/token
+REQUEST (JSON): {"userID": "21", "token": "lskdjflaksjdflaksd"}
+RESPONSE (JSON): {"userID": "21"}
