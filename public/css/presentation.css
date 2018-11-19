@@ -362,8 +362,8 @@ input, button {
   position: absolute;
   left: 0%;
   top: 0%;
-  background-color: var(--third-color);
-  user-select: none;
+  /*background-color: var(--third-color);
+  user-select: none;*/
 }
 
 /* For displaying scrolling menu for slides -----------------*/

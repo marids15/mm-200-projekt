@@ -123,9 +123,9 @@ class Presentation {
     let yTopBox = container.offsetTop;
     let yBottomBox = yTopBox + container.offsetHeight;
 
-    container.addEventListener("touchstart", dragStart, false);
+  //  container.addEventListener("touchstart", dragStart, false);
     container.addEventListener("touchend", dragEnd, false);
-    container.addEventListener("touchmove", drag, false);
+  //  container.addEventListener("touchmove", drag, false);
 
     container.addEventListener("mousedown", dragStart, false);
     container.addEventListener("mouseup", dragEnd, false);

@@ -38,6 +38,11 @@
           <i class="fas fa-font"></i>
         </button>
       </div>
+      <div class="tab" title="Slide tool">
+        <button id="slideToolTab" onclick="showSlideTool()">
+          <i class="fas fa-edit"></i>
+        </button>
+      </div>
       <div class="tab" title="Image tool">
         <button id="imageToolTab" onclick="showImageTool()">
           <i class="fas fa-image"></i>
@@ -66,6 +71,15 @@
     </div>
     <div id="tabContent" class="tabContent"></div>
   </div>
+  <template id="slideContent">
+    <form id="formEditingSlide">
+      <h2>Edit Slides</h2>
+      <label>Costumizations</label>
+
+
+    </form>
+
+  </template>
 
   <template id="textContent">
     <form id="formEditingText">
@@ -73,8 +87,79 @@
       <label>Text: </label>
       <input id="inTxt" type="text" name="text" placeholder="Enter your text here" required>
       <input id="btnAddText" class="btn" type="submit" value="Add text">
+
     </form>
-    <i id="btnDelete" class="fas fa-trash-alt"></i>
+      <div id="updateTextDiv"></div>
+    <i id="btnDelete" class="fas fa-trash-alt"></i><br>
+    <button id="btnTextEditMode" class="btn" > Rich Editor </button>
+  </template>
+
+  <template id="richtextContent">
+    <form id="formEditingText">
+      <h2>Rich text-editor</h2>
+      <label>Text: </label>
+    <iframe id="inTxtRich" name="richTextField" style="width: 200px; height: 200px" styleName="texteditor"></iframe>
+      <input id="btnInsertText" class="btn" type="submit" value="Use Text">
+
+    </form>
+<div id="selElemNR1"></div>
+    <div id="handles">
+            <button id="somethingelse" onclick="execCmd('bold');"><i class="fa fa-bold"></i></button>
+            <button onclick="execCmd('italic');"><i class="fa fa-italic"></i></button>
+            <button onclick="execCmd('underline');"><i class="fa fa-underline"></i></button>
+            <button onclick="execCmd('strikeThrough');"><i class="fa fa-strikethrough"></i></button>
+            <button onclick="execCmd('justifyLeft');"><i class="fa fa-align-left"></i></button>
+            <button onclick="execCmd('justifyCenter');"><i class="fa fa-align-center"></i></button>
+            <button onclick="execCmd('justifyRight');"><i class="fa fa-align-right"></i></button>
+            <button onclick="execCmd('justifyFull');"><i class="fa fa-align-justify"></i></button>
+            <button onclick="execCmd('cut');"><i class="fa fa-cut"></i></button>
+            <button onclick="execCmd('copy');"><i class="fa fa-copy"></i></button>
+            <button onclick="execCmd('inDent');"><i class="fa fa-indent"></i></button>
+            <button onclick="execCmd('outDent');"><i class="fa fa-outdent"></i></button>
+            <button onclick="execCmd('undo');"><i class="fa fa-undo"></i></button>
+            <button onclick="execCmd('redo');"><i class="fa fa-redo"></i></button>
+            <button onclick="execCmd('insertUnorderedList');"><i class="fa fa-list-ul"></i></button>
+            <button onclick="execCmd('insertOrderedList');"><i class="fa fa-list-ol"></i></button>
+            <button onclick="execCmd('insertParagraph');"><i class="fa fa-paragraph"></i></button>
+            <select onchange="execCommandWithArg('formatBlock', this.value);">
+                <option value="H1">H1</option>
+                <option value="H2">H2</option>
+                <option value="H3">H3</option>
+                <option value="H4">H4</option>
+                <option value="H5">H5</option>
+                <option value="H6">H6</option>
+            </select>
+            <button onclick="execCmd('insertHorizontalRule');">HR</button>
+            <button onclick="execCommandWithArg('createLink', prompt('Enter a URL', 'http://'));"><i class="fa fa-link"></i></button>
+            <button onclick="execCmd('unlink');"><i class="fa fa-unlink"></i></button>
+            <button onclick="toggleSource();"><i class="fa fa-code"></i></button>
+            <button onclick="toggleEdit();">Toggle Edit</button>
+            <br />
+            <select onchange="execCommandWithArg('fontName', this.value)">
+                <option value="Aerial">Aerial</option>
+                <option value="Comic Sans Ms">Comic Sans MS</option>
+                <option value="Courier"> Courier</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Times Newroman">Times Newroman</option>
+            </select>
+            <select onchange="execCommandWithArg('fontSize', this.value)">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+            Fore Color: <input type="color" onchange="execCommandWithArg(foreColor, this.value;)">
+            Background: <input type="color" onchange="execCommandWithArg(hiliteColor, this.value;)">
+            <button onclick="execCommandWithArg('insertImage', prompt('enter the image URL',''))";><i class="fa fa-file-image"></i></button>
+            <button onclick="execCmd('selectAll');">Select All</button>
+
+        </div>
+    <i id="btnDelete" class="fas fa-trash-alt"></i><br>
+
   </template>
 
   <template id="imageContent">
@@ -131,6 +216,7 @@
   <script src="./js/SlideClass.js"></script>
   <script src="./js/PresentationClass.js"></script>
   <script src="./js/main.js"></script>
+  <script src="./js/Editor.js"></script>
   <script>
   var activePage = 3;
   MakeNavbar(activePage);

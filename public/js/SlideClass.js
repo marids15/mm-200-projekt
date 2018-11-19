@@ -102,6 +102,7 @@ class Slide {
     if (this.elements.includes(element)) {
       this.currentElement = element;
       this.setBorder();
+      doChange(element);
     }
     // when you click on the icon, which is a child of the video div:
     else if (element !== null && element.parentElement.className === "vidDiv") {

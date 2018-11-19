@@ -280,6 +280,65 @@ function updateSlideMenu() {
     slideMenu.appendChild(newDiv);
   }
 }
+//---------------- Adds text content to editor
+//var selectElement = 0;
+function doChange(value){
+	let text = value.innerHTML;
+	console.log(text);
+	//console.log(selectElement);
+		document.getElementById("inTxt").value = text;
+		document.getElementById("updateTextDiv").innerHTML =  ' <button id="btnUpdateText" class="btn" > Update Element <div id="selElemNR">'+value.id+'</div> </button>';
+//var selectedElement = value.id;
+let btnUpdate = document.getElementById("btnUpdateText");
+btnUpdate.onclick = updateTextElement;
+	/*
+	if (selectElement == 2){
+			document.getElementById('inTxtRich').contentWindow.document.body.innerHTML = text;
+	}
+	else if (selectElement < 2) {
+			document.getElementById("inTxt").value = text;
+	}
+*/
+
+	let btnEdit = document.getElementById("btnTextEditMode");
+	btnEdit.onclick = richTextTool;
+}
+
+//---------------- setting up rich text editor
+function richEdit(text, selElm){
+console.log("heytehre");
+console.log(text);
+console.log(selElm);
+if (selElm === "Not Selected any elements")
+{
+	console.log("activ");
+}
+document.getElementById("selElemNR1").innerHTML = 'Now editig editing element: <div id="selElemNR">'+selElm+'</div>';
+enableEditMode();
+	document.getElementById('inTxtRich').contentWindow.document.body.innerHTML = text;
+		let btnAddEdit = document.getElementById("btnInsertText");
+		btnAddEdit.onclick = reInsertText;
+}
+//------------------ going frm rich text to normal
+function reInsertText(){
+	let editedText = document.getElementById('inTxtRich').contentWindow.document.body.innerHTML;
+	console.log(editedText);
+	let selectedElement = document.getElementById("selElemNR").innerHTML;
+		disableEditMode();
+	let textToolTemplate = document.getElementById('textContent');
+  let textToolClone = textToolTemplate.content.cloneNode(true);
+  tabContent.innerHTML = "";
+  tabContent.appendChild(textToolClone);
+  let textTab = document.getElementById('textToolTab');
+  makeToolActive(textTab);
+  let formEditingText = document.getElementById("formEditingText");
+  formEditingText.onsubmit = btnAddTextClick;
+  activeDeleteElement();
+	document.getElementById("inTxt").value = editedText;
+document.getElementById("updateTextDiv").innerHTML =  ' <button id="btnUpdateText" class="btn" > Update Element <div id="selElemNR">'+selectedElement+'</div> </button>';
+let btnUpdate = document.getElementById("btnUpdateText");
+btnUpdate.onclick = updateTextElement;
+}
 
 //---------------- Links eventhandler on delete button
 function activeDeleteElement(){
@@ -297,9 +356,60 @@ function showTextTool() {
   makeToolActive(textTab);
   let formEditingText = document.getElementById("formEditingText");
   formEditingText.onsubmit = btnAddTextClick;
+	let btnEdit = document.getElementById("btnTextEditMode");
+	btnEdit.onclick = richTextTool;
+
+	var selectElement = 1;
   activeDeleteElement();
 }
+//------------- Slide tool options
 
+function showSlideTool() {
+  let textToolTemplate = document.getElementById('slideContent');
+  let slideToolClone = textToolTemplate.content.cloneNode(true);
+  tabContent.innerHTML = "";
+  tabContent.appendChild(slideToolClone);
+  let textTab = document.getElementById('slideToolTab');
+  makeToolActive(textTab);
+
+}
+
+
+
+//----------------- updates the text element in Presentation
+function updateTextElement(val){
+	console.log("Updating text");
+	let selectedElement = document.getElementById("selElemNR").innerHTML;
+console.log(selectedElement);
+document.getElementById(selectedElement).innerHTML = 	document.getElementById("inTxt").value;
+document.getElementById("inTxt").value= "";
+document.getElementById("updateTextDiv").innerHTML = "";
+}
+
+//----------------- Shows the rich text tool in the menu
+function richTextTool() {
+	let myText = document.getElementById("inTxt").value;
+	console.log(myText);
+	//let selectedElement = "Not Selected any elements";
+	let testerlet = document.getElementById("selElemNR");
+	console.log(testerlet);
+	if (testerlet != null){
+	let selectedElement = document.getElementById("selElemNR").innerHTML;
+console.log(selectedElement);}
+else if (testerlet == null){
+	let selectedElement = "Not Selected any elements";
+}
+  let textToolTemplate = document.getElementById('richtextContent');
+  let textToolClone = textToolTemplate.content.cloneNode(true);
+  tabContent.innerHTML = "";
+  tabContent.appendChild(textToolClone);
+  let textTab = document.getElementById('textToolTab');
+  makeToolActive(textTab);
+
+richEdit(myText, selectedElement);
+startTexfield();
+  activeDeleteElement();
+}
 //------------------ Shows the image tool in the menu
 function showImageTool() {
   let imageToolTemplate = document.getElementById('imageContent');
