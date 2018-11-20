@@ -380,6 +380,7 @@ function changeTheme(evt) {
 	let theme = document.getElementById('selectTheme').value;
 	console.log(theme);
 	myPresentation.setTheme(theme);
+	updateSlideMenu();
 }
 
 //------------------ Function for creating text out of notes
