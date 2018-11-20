@@ -41,6 +41,7 @@ class Presentation {
 
   // set theme
   setTheme(theme) {
+    console.log("setting theme: " + theme);
     this.theme = theme;
 
     for (let slide of this.slides) {

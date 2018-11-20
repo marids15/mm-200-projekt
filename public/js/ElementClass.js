@@ -17,6 +17,10 @@ class Element {
     return this.id;
   }
 
+  getType(){
+    return this.type;
+  }
+
   // gets HTML of element
   getHTMLElement() {
     if (this.type === TEXT) {
@@ -44,6 +48,8 @@ class Element {
     myText.setAttribute( 'class', 'textElementSlide');
     myText.setAttribute('spellcheck', "false");
     myText.setAttribute('id', this.id);
+    myText.typeElement = this.type;
+    myText.contentElement = this.content;
     return myText;
   }
 
@@ -54,6 +60,8 @@ class Element {
     myImage.draggable = false;
     myImage.setAttribute('id', this.id);
     myImage.className = 'image';
+    myImage.typeElement = this.type;
+    myImage.contentElement = this.content;
     return myImage;
   }
 
@@ -73,6 +81,8 @@ class Element {
 
     vidDiv.appendChild(myVidFrame);
     vidDiv.appendChild(dragIcon);
+    vidDiv.typeElement = this.type;
+    vidDiv.contentElement = this.content;
     return vidDiv;
 
     //https://www.youtube.com/embed/xbhCPt6PZIU works
@@ -87,6 +97,8 @@ class Element {
     audioElement.setAttribute('controls', '');
     audioSource.src = this.content;
     audioElement.appendChild(audioSource);
+    audioElement.typeElement = this.type;
+    audioElement.contentElement = this.content;
     return audioElement;
   }
 

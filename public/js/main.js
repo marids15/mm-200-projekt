@@ -1,5 +1,6 @@
 const NAME = "myP";
-
+const GET_PRESENTATION_URL = "/api/presentations";
+const SAVE_PRESENTATION_URL = "/api/presentations/save";
 
 //---------------- document.getElementById variables
 let indexOfSlide = document.getElementById("indexOfSlide");
@@ -10,19 +11,56 @@ let btnDeleteSlide = document.getElementById("btnDeleteSlide");
 let divContainer = document.getElementById("divContainer");
 let tabContent = document.getElementById('tabContent');
 
+//----------------- retrieving data from db
+let data = JSON.stringify({presentation_id: localStorage.getItem('presentation_id')});
+let myPresentation;
 
+fetch(GET_PRESENTATION_URL, {
+	method: 'POST',
+	headers: {
+		"Content-Type": "application/json; charset=utf-8"
+	},
+	body: data
+}).then(response => {
+if (response.status < 400) {
+	console.log('Loaded presentation! :D');
+	console.log(response);
+	loadPresentation(response);
+} else {
+	console.log('Did not load presentation :(');
+}
+}).catch(err => console.error(err));
+
+async function loadPresentation(response) {
+	let data = await response.json();
+	let presentationJSON = data[0].presentation_json;
+	console.log(presentationJSON);
+	myPresentation = parseJSONToPresentation(presentationJSON);
+	console.log(myPresentation.getSlides().length);
+	if (myPresentation.getSlides().length === 0) {
+			addFirstSlide();
+			console.log("length : " + myPresentation.getSlides().length);
+			console.log('Adding first slide...');
+	} else {
+		console.log('no first slide');
+		console.log("length : " + myPresentation.getSlides());
+		goToSlide(0);
+	}
+
+	requestAnimationFrame(draggable);
+	requestAnimationFrame(selectable);
+}
 //----------------- presentation object
-let myPresentation = new Presentation(NAME, slideDiv);
-AddFirstSlide();
+//let myPresentation = new Presentation(NAME, slideDiv);
+
 
 //--------------- eventhandlers
 inNote.onchange = saveNote;
-btnAddSlide.onclick = AddNewSlide;
-btnDeleteSlide.onclick = DeleteCurrentSlide;
+btnAddSlide.onclick = addNewSlide;
+btnDeleteSlide.onclick = deleteCurrentSlide;
 
 //--------------------------------
-requestAnimationFrame(draggable);
-requestAnimationFrame(selectable);
+
 
 function draggable(){
 	myPresentation.makeDivDraggable();
@@ -108,7 +146,7 @@ function goToSlide(num) {
 }
 
 //--------------- function to Add a new slide
-function AddNewSlide() {
+function addNewSlide() {
   myPresentation.addSlide(myPresentation.getCurrentSlideIndex() + 1);
   //myPresentation.setCurrentSlideIndex(myPresentation.getCurrentSlideIndex() + 1);
   goToNextSlide();
@@ -116,7 +154,7 @@ function AddNewSlide() {
 }
 
 // -------------- function to add the first slide
-function AddFirstSlide() {
+function addFirstSlide() {
   myPresentation.setCurrentSlideIndex(0);
   myPresentation.addSlide(0);
   updateNote();
@@ -124,12 +162,12 @@ function AddFirstSlide() {
 }
 
 //-------------- function to delete current slide
-function DeleteCurrentSlide(){
+function deleteCurrentSlide(){
   myPresentation.removeSlidesElement(myPresentation.getCurrentSlideIndex());
   //if we delete the only slide
   if( myPresentation.getSlides().length === 0){
   	myPresentation.cleanContainerDiv();
-    AddFirstSlide();
+    addFirstSlide();
   }
   //if you delete the first slide
   else if (myPresentation.getCurrentSlideIndex() === 0) {
@@ -362,7 +400,9 @@ function showExportTool() {
   tabContent.appendChild(exportToolClone);
   let exportTab = document.getElementById('exportToolTab');
   makeToolActive(exportTab);
+  let btnSavePresentation = document.getElementById('btnSavePresentation');
   let btnExportNotes = document.getElementById('btnExportNotes');
+  btnSavePresentation.onclick = storePresentation;
   btnExportNotes.onclick = exportNote;
 }
 
@@ -412,4 +452,157 @@ function saveData(data, filename) {
 
     window.URL.revokeObjectURL(url);
     document.body.removeChild(a);
+}
+
+//----------------- Function for storing presentation into DB
+async function storePresentation() {
+  let presentationData = parsePresentationToJSON();
+  let data = JSON.stringify({
+		presentation_id: localStorage.getItem('presentation_id'),
+		owner: localStorage.getItem('user_id'),
+		presentation: parsePresentationToJSON()
+  });
+
+	fetch(SAVE_PRESENTATION_URL, {
+		method: 'POST',
+		headers: {
+			"Content-Type": "application/json; charset=utf-8"
+		},
+		body: data
+	}).then(response => {
+	if (response.status < 400) {
+		console.log('Stored presentation! :D');
+		console.log(response);
+	} else {
+		console.log('Did not store presentation :(');
+	}
+	}).catch(err => console.error(err));
+
+}
+
+
+
+
+async function createUser(evt) {
+  evt.preventDefault();
+
+  let data = JSON.stringify({
+    username: document.getElementById('inpUserName').value,
+    email: document.getElementById('inpEmail').value,
+    password: document.getElementById('inpPsw').value,
+    role: USER_ROLE
+  });
+
+  fetch(CREATE_USER_URL, {
+    method: 'POST',
+    body: data,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8"
+    }
+  }).then(response => {
+    if (response.status < 400) {
+      console.log('created user!!!! :D');
+      handleLogin(response);
+    } else {
+      console.log('did not create user :(');
+    }
+  }).then(data => console.log('next'))
+  .catch(err => console.err(err));
+}
+
+//----------------- Function for parsing presentation into JSON
+function parsePresentationToJSON() {
+	let myData = {};
+	myData.presentation = {
+		name : myPresentation.name,
+		currentSlideIndex : myPresentation.currentSlideIndex,
+		theme: myPresentation.theme
+	};
+	myData.presentation.slides = [];
+
+	let slidesArray = myPresentation.getSlides();
+
+	for (let i = 0; i < slidesArray.length; i++){
+		let mySlide = {};
+		mySlide.note = slidesArray[i].getNote();
+		mySlide.elements = [];
+		let elementsArray = slidesArray[i].getElements();
+
+
+		for(let j = 0; j < elementsArray.length; j++){
+			let myElement = {};
+			myElement.xOffset = elementsArray[j].xOffset;
+			myElement.yOffset = elementsArray[j].yOffset;
+			//myElement.initialX = elementsArray[j].initialX;
+			//myElement.initialY = elementsArray[j].initialY;
+			myElement.currentX = elementsArray[j].currentX;
+			myElement.currentY = elementsArray[j].currentY;
+			myElement.typeElement = elementsArray[j].typeElement;
+			myElement.contentElement = elementsArray[j].contentElement;
+
+			let container = myPresentation.slides[i].getSlideHTML();
+			let leftPercent = (myPresentation.getSlides()[i].getElements()[j].currentX * 100 / container.offsetWidth);
+			let topPercent = (myPresentation.getSlides()[i].getElements()[j].currentY * 100 / container.offsetHeight);
+      myElement.topPercent = leftPercent;
+    	myElement.leftPercent = topPercent;
+
+			mySlide.elements.push(myElement);
+		}
+		myData.presentation.slides.push(mySlide);
+	}
+	//let myJSON = JSON.stringify(myPresentation);
+	let myJSON = JSON.stringify(myData);
+  return myJSON;
+}
+
+//------------------ load presentation from JSON to presentation class
+function parseJSONToPresentation(myJSON) {
+	//let myclass = JSON.parse(myJSON);
+	let myclass = myJSON;
+
+	let myP = new Presentation(myclass.presentation.name, slideDiv);
+	myP.setCurrentSlideIndex(0);
+	myP.addSlide(0);
+	myP.setTheme(myclass.presentation.theme);
+
+	for(let i = 0; i < myclass.presentation.slides.length; i++){
+		//myP.setCurrentSlideIndex(i);
+		//myP.addSlide(i);
+		for(let j = 0; j < myclass.presentation.slides[i].elements.length; j++){
+			if (myclass.presentation.slides[i].elements[j].typeElement === TEXT){
+				myP.getCurrentSlide().addText(myclass.presentation.slides[i].elements[j].contentElement);
+			}
+			else if(myclass.presentation.slides[i].elements[j].typeElement === IMAGE){
+				myP.getCurrentSlide().addImage(myclass.presentation.slides[i].elements[j].contentElement);
+			}
+			else if(myclass.presentation.slides[i].elements[j].typeElement === VIDEO){
+				myP.getCurrentSlide().addVideo(myclass.presentation.slides[i].elements[j].contentElement);
+			}
+			else{
+				myP.getCurrentSlide().addSound(myclass.presentation.slides[i].elements[j].contentElement);
+			}
+			//console.log(myclass.presentation.slides[i].elements[j]);
+			console.log(myP.getSlides()[i].getElements()[j]);
+			myP.getSlides()[i].getElements()[j].xOffset = myclass.presentation.slides[i].elements[j].xOffset;
+			myP.getSlides()[i].getElements()[j].yOffset = myclass.presentation.slides[i].elements[j].yOffset;
+			//myP.getSlides()[i].getElements()[j].initialX = myclass.presentation.slides[i].elements[j].initialX;
+			//myP.getSlides()[i].getElements()[j].initialY = myclass.presentation.slides[i].elements[j].initialY;
+			myP.getSlides()[i].getElements()[j].currentX = myclass.presentation.slides[i].elements[j].currentX;
+			myP.getSlides()[i].getElements()[j].currentY = myclass.presentation.slides[i].elements[j].currentY;
+
+
+			let container = myP.slides[i].getSlideHTML();
+			let leftPercent = (myP.getSlides()[i].getElements()[j].currentX * 100 / container.offsetWidth);
+			let topPercent = (myP.getSlides()[i].getElements()[j].currentY * 100 / container.offsetHeight);
+			myP.getSlides()[i].getElements()[j].setAttribute('style', `left: ${leftPercent}%;
+																																 top: ${topPercent}%`);
+
+		}
+		myP.getSlides()[i].setNote(myclass.presentation.slides[i].note);
+		if(i+1 < myclass.presentation.slides.length){
+			myP.addSlide(myP.getCurrentSlideIndex()+1);
+			myP.goToNextSlide();
+		}
+	}
+	return myP;
 }

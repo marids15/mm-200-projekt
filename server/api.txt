@@ -26,12 +26,12 @@ RESPONSE (JSON): {"id": "123", "username": "John Doe", "email":"john@doe.com"}
 1 = admin
 
 
-
 ===PRESENTATION STUFF===========================================================
 sharing options:
 0: Private
 1: Public
 2: Individual
+
 
 Create presentation:
 METHOD: POST
@@ -99,16 +99,15 @@ RESPONSE (JSON):
 }
 
 --------------------------------------------------------------------------------
-Edit presentation:
+Edit/save presentation:
 METHOD: POST
-ENDPOINT: api/presentations/id
+ENDPOINT: api/presentations/save
 REQUEST header: --------------------------
 REQUEST (JSON):
 {
-  "id": 0,
-  "name": "Cookies",
-  "owner": "John Doe",
-  "slides": [
+  "presentation_id": 0,
+  "owner": 34, (user_id)
+  "presentation": [
   {
     "note": "alksjdf",
     "elements": [
@@ -152,3 +151,16 @@ REQUEST (JSON):
   "owner": "John Doe",
 }
 RESPONSE: {""}
+
+
+--------------------------------------------------------------------------------
+Get all presentations of user:
+METHOD: GET
+ENDPOINT: api/presentations/:userid
+REQUEST header: -------
+REQUEST: no body
+RESPONSE: {
+  presentations: [
+  {"id": etc}
+  ]
+}

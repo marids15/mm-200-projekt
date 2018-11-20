@@ -109,24 +109,23 @@
   </template>
 
   <template id="presenterContent">
-
-      <h2>Presentation</h2>
-      <select id="timedTransitions">
-        <option value="noTimer">No timer</option>
-        <option value="10">10s</option>
-        <option value="30">30s</option>
-        <option value="60">1min</option>
-      </select>
-      <select id="selectTheme">
-        <option value="Default">Default theme</option>
-        <option value="Dark">Dark theme</option>
-      </select>
-      <button id="btnDisplayFullScreen" class="btn">Play presentation</button>
-
+    <h2>Presentation</h2>
+    <select id="timedTransitions">
+      <option value="noTimer">No timer</option>
+      <option value="10">10s</option>
+      <option value="30">30s</option>
+      <option value="60">1min</option>
+    </select>
+    <select id="selectTheme">
+      <option value="Default" selected>Default theme</option>
+      <option value="Dark">Dark theme</option>
+    </select>
+    <button id="btnDisplayFullScreen" class="btn">Play presentation</button>
   </template>
 
   <template id="exportContent">
     <h2>Tools</h2>
+    <button id="btnSavePresentation" class="btn">Save presentation</button>
     <button id="btnExportNotes" class="btn">Download notes</button>
   </template>
 
