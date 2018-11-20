@@ -1,3 +1,5 @@
+let themes = ["themeDefault", "themeDark"];
+
 /* === Class for creating Slide =============================================*/
 class Slide {
   // initializing slide
@@ -30,8 +32,14 @@ class Slide {
     return this.note;
   }
 
+  // sets note
   setNote(noteText) {
     this.note = noteText;
+  }
+
+  setSlideTheme(theme) {
+    this.div.classList.remove(...themes);
+    this.div.classList.add(theme);
   }
   // add image element to slide
   addImage(src) {
