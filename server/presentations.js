@@ -11,6 +11,7 @@ router.post('/api/presentations/new', async function(req, res, next) {
     presentation: {
       name: name,
       currentSlideIndex: 0,
+      theme: 'Default',
       slides: []
     }
   });

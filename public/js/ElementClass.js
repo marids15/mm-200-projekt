@@ -48,8 +48,8 @@ class Element {
     myText.setAttribute( 'class', 'textElementSlide');
     myText.setAttribute('spellcheck', "false");
     myText.setAttribute('id', this.id);
-    myText.type = this.type;
-    myText.content = this.content;
+    myText.typeElement = this.type;
+    myText.contentElement = this.content;
     return myText;
   }
 
@@ -60,8 +60,8 @@ class Element {
     myImage.draggable = false;
     myImage.setAttribute('id', this.id);
     myImage.className = 'image';
-    myImage.type = this.type;
-    myImage.content = this.content;
+    myImage.typeElement = this.type;
+    myImage.contentElement = this.content;
     return myImage;
   }
 
@@ -81,8 +81,8 @@ class Element {
 
     vidDiv.appendChild(myVidFrame);
     vidDiv.appendChild(dragIcon);
-    vidDiv.type = this.type;
-    vidDiv.content = this.content;
+    vidDiv.typeElement = this.type;
+    vidDiv.contentElement = this.content;
     return vidDiv;
 
     //https://www.youtube.com/embed/xbhCPt6PZIU works
@@ -97,8 +97,8 @@ class Element {
     audioElement.setAttribute('controls', '');
     audioSource.src = this.content;
     audioElement.appendChild(audioSource);
-    audioElement.type = this.type;
-    audioElement.content = this.content;
+    audioElement.typeElement = this.type;
+    audioElement.contentElement = this.content;
     return audioElement;
   }
 

@@ -515,7 +515,8 @@ function parsePresentationToJSON() {
 	let myData = {};
 	myData.presentation = {
 		name : myPresentation.name,
-		currentSlideIndex : myPresentation.currentSlideIndex
+		currentSlideIndex : myPresentation.currentSlideIndex,
+		theme: myPresentation.theme
 	};
 	myData.presentation.slides = [];
 
@@ -536,8 +537,14 @@ function parsePresentationToJSON() {
 			//myElement.initialY = elementsArray[j].initialY;
 			myElement.currentX = elementsArray[j].currentX;
 			myElement.currentY = elementsArray[j].currentY;
-			myElement.type = elementsArray[j].type;
-			myElement.content = elementsArray[j].content;
+			myElement.typeElement = elementsArray[j].typeElement;
+			myElement.contentElement = elementsArray[j].contentElement;
+
+			let container = myPresentation.slides[i].getSlideHTML();
+			let leftPercent = (myPresentation.getSlides()[i].getElements()[j].currentX * 100 / container.offsetWidth);
+			let topPercent = (myPresentation.getSlides()[i].getElements()[j].currentY * 100 / container.offsetHeight);
+      myElement.topPercent = leftPercent;
+    	myElement.leftPercent = topPercent;
 
 			mySlide.elements.push(myElement);
 		}
@@ -556,22 +563,23 @@ function parseJSONToPresentation(myJSON) {
 	let myP = new Presentation(myclass.presentation.name, slideDiv);
 	myP.setCurrentSlideIndex(0);
 	myP.addSlide(0);
+	myP.setTheme(myclass.presentation.theme);
 
 	for(let i = 0; i < myclass.presentation.slides.length; i++){
 		//myP.setCurrentSlideIndex(i);
 		//myP.addSlide(i);
 		for(let j = 0; j < myclass.presentation.slides[i].elements.length; j++){
-			if (myclass.presentation.slides[i].elements[j].type === TEXT){
-				myP.getCurrentSlide().addText(myclass.presentation.slides[i].elements[j].content);
+			if (myclass.presentation.slides[i].elements[j].typeElement === TEXT){
+				myP.getCurrentSlide().addText(myclass.presentation.slides[i].elements[j].contentElement);
 			}
-			else if(myclass.presentation.slides[i].elements[j].type === IMAGE){
-				myP.getCurrentSlide().addImage(myclass.presentation.slides[i].elements[j].content);
+			else if(myclass.presentation.slides[i].elements[j].typeElement === IMAGE){
+				myP.getCurrentSlide().addImage(myclass.presentation.slides[i].elements[j].contentElement);
 			}
-			else if(myclass.presentation.slides[i].elements[j].type === VIDEO){
-				myP.getCurrentSlide().addVideo(myclass.presentation.slides[i].elements[j].content);
+			else if(myclass.presentation.slides[i].elements[j].typeElement === VIDEO){
+				myP.getCurrentSlide().addVideo(myclass.presentation.slides[i].elements[j].contentElement);
 			}
 			else{
-				myP.getCurrentSlide().addSound(myclass.presentation.slides[i].elements[j].content);
+				myP.getCurrentSlide().addSound(myclass.presentation.slides[i].elements[j].contentElement);
 			}
 			//console.log(myclass.presentation.slides[i].elements[j]);
 			console.log(myP.getSlides()[i].getElements()[j]);
@@ -586,7 +594,8 @@ function parseJSONToPresentation(myJSON) {
 			let container = myP.slides[i].getSlideHTML();
 			let leftPercent = (myP.getSlides()[i].getElements()[j].currentX * 100 / container.offsetWidth);
 			let topPercent = (myP.getSlides()[i].getElements()[j].currentY * 100 / container.offsetHeight);
-			myP.getSlides()[i].getElements()[j].setAttribute('style', `left: ${leftPercent}%; top: ${topPercent}%`);
+			myP.getSlides()[i].getElements()[j].setAttribute('style', `left: ${leftPercent}%;
+																																 top: ${topPercent}%`);
 
 		}
 		myP.getSlides()[i].setNote(myclass.presentation.slides[i].note);

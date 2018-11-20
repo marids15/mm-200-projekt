@@ -98,7 +98,7 @@ async function displayPresentations(response) {
 		let imageP = document.createElement("div");
 		imageP.className = "miniView";
 		imageP.onclick = editPresentation;
-		getFirstSlideImage(presentation.presentation_json, imageP);
+
 
 		let buttonDeleteP = document.createElement("button");
 		buttonDeleteP.type = "button";
@@ -136,6 +136,7 @@ async function displayPresentations(response) {
 		newP.appendChild(buttonPresenterP);
 
 		presentations.appendChild(newP);
+		getFirstSlideImage(presentation.presentation_json, imageP);
 	}
 
 
@@ -163,22 +164,23 @@ function getFirstSlideImage(myJSON, container) {
 	let myP = new Presentation(myclass.presentation.name, container);
 	myP.setCurrentSlideIndex(0);
 	myP.addSlide(0);
+	myP.setTheme(myclass.presentation.theme);
 
 	if (myclass.presentation.slides.length == 0) {
 		console.log('empty presentation');
 	} else {
 		for(let j = 0; j < myclass.presentation.slides[0].elements.length; j++){
-			if (myclass.presentation.slides[0].elements[j].type === TEXT){
-				myP.getCurrentSlide().addText(myclass.presentation.slides[0].elements[j].content);
+			if (myclass.presentation.slides[0].elements[j].typeElement === TEXT){
+				myP.getCurrentSlide().addText(myclass.presentation.slides[0].elements[j].contentElement);
 			}
-			else if(myclass.presentation.slides[0].elements[j].type === IMAGE){
-				myP.getCurrentSlide().addImage(myclass.presentation.slides[0].elements[j].content);
+			else if(myclass.presentation.slides[0].elements[j].typeElement === IMAGE){
+				myP.getCurrentSlide().addImage(myclass.presentation.slides[0].elements[j].contentElement);
 			}
-			else if(myclass.presentation.slides[0].elements[j].type === VIDEO){
-				myP.getCurrentSlide().addVideo(myclass.presentation.slides[0].elements[j].content);
+			else if(myclass.presentation.slides[0].elements[j].typeElement === VIDEO){
+				myP.getCurrentSlide().addVideo(myclass.presentation.slides[0].elements[j].contentElement);
 			}
 			else{
-				myP.getCurrentSlide().addSound(myclass.presentation.slides[0].elements[j].content);
+				myP.getCurrentSlide().addSound(myclass.presentation.slides[0].elements[j].contentElement);
 			}
 			//console.log(myclass.presentation.slides[i].elements[j]);
 			console.log(myP.getSlides()[0].getElements()[j]);
@@ -193,7 +195,9 @@ function getFirstSlideImage(myJSON, container) {
 			let container = myP.slides[0].getSlideHTML();
 			let leftPercent = (myP.getSlides()[0].getElements()[j].currentX * 100 / container.offsetWidth);
 			let topPercent = (myP.getSlides()[0].getElements()[j].currentY * 100 / container.offsetHeight);
-			myP.getSlides()[0].getElements()[j].setAttribute('style', `left: ${leftPercent}%; top: ${topPercent}%`);
+			//myP.getSlides()[0].getElements()[j].setAttribute('style', `left: ${myclass.presentation.slides[0].elements[j].leftPercent}%;top: ${myclass.presentation.slides[0].elements[j].topPercent}%`);
+		  myP.getSlides()[0].getElements()[j].setAttribute('style', `left: ${leftPercent}%;top: ${topPercent}%`);
+
 		}
 
 	}
