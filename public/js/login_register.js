@@ -54,7 +54,7 @@ async function createUser(evt) {
     } else {
       console.log('did not create user :(');
     }
-  }).then(data => console.log('next'))
+  })
   .catch(err => console.err(err));
 }
 
@@ -79,14 +79,14 @@ async function loginUser(evt) {
     } else {
       console.log('login did not work :(');
     }
-  }).then(data => console.log('next'))
+  })
   .catch(err => console.err(err));
 }
 
 async function handleLogin(response) {
   let token = response.headers.get('Authorization');
   let data = await response.json();
-  localStorage.setItem('id', data[0].id);
+  localStorage.setItem('user_id', data[0].id);
   localStorage.setItem('username', data[0].username);
   localStorage.setItem('email', data[0].email);
   localStorage.setItem('password', data[0].password);

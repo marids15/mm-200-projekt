@@ -150,3 +150,42 @@ table {
   background-color: #555;
   color: white;
 }
+
+/* Themes ---------------------------------------------------------*/
+/* Default theme ----------------------------------------------*/
+.themeDefault {
+  background-color: #FEFEFE;
+}
+
+.themeDefault .vidDiv {
+  background-color: var(--grey);
+}
+
+.themeDefault .vidDiv icon {
+  color: var(--second-color);
+}
+
+.themeDefault .textElementSlide {
+  font-family: var(--title-font);
+  color: var(--grey);
+  /*background-color: var(--third-color);*/
+}
+
+/* Dark theme -------------------------------------------------*/
+.themeDark {
+  background-color: #222;
+}
+
+.themeDark .vidDiv {
+  background-color: var(--grey);
+}
+
+.themeDark .vidDiv icon {
+  color: var(--second-color);
+}
+
+.themeDark .textElementSlide {
+  font-family: var(--title-font);
+/*  background-color: var(--third-color);*/
+  color: #FEFEFE;
+}

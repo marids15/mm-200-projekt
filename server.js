@@ -9,12 +9,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const user = require('./server/user.js');
 const db = require('./server/db.js');
+const presentation = require('./server/presentations.js');
 const app = express();
 
 app.set('port', (process.env.PORT || 8080));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(user);
+app.use(presentation);
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);

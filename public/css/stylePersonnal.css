@@ -46,21 +46,55 @@
 .presentation {
 	border: 3px solid #EEE;
 	border-radius: 5px;
-    grid-template-columns: 1fr 1fr;
-    
-    grid-template-areas: 
-        "miniView miniView"
-        "buttonDeleteP buttonDeleteP"
-        "buttonStatusP buttonPresenterP";
-}
+  grid-template-columns: 1fr 1fr;
 
+  grid-template-areas:
+      "miniView miniView"
+      "buttonDeleteP buttonDeleteP"
+      "buttonStatusP buttonPresenterP";
+}
 
 .miniView {
   padding-top: 56.25%;
   width: 100%;
-  background-color: #f18973;
   overflow: hidden;
   position: relative;
+}
+
+.miniView .textElementSlide {
+	user-select: none;
+	left: 0%;
+	top: 0%;
+	position: absolute;
+	font-size: 1.52vw;
+}
+
+.image {
+  width : 30%;
+  position: absolute;
+}
+
+.vidElement {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  border: none;
+}
+
+.vidDiv {
+  position: absolute;
+  width: 40%;
+  height: 60%;
+  display: inline-block;
+}
+
+.vidDiv icon {
+	display: none;
+}
+
+.soundElement {
+  position: absolute;
+  width: 50%;
 }
 
 .buttonDeleteP{
@@ -78,4 +112,3 @@
     float: right;
     width: 100%;
 }
-
