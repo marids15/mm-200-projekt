@@ -62,4 +62,20 @@ function createToken(userID) {
   return sha256(process.env.TOKEN_WORD + date + userID);
 }
 
+// Get user information
+router.get('/api/users/:userid', async function(req, res) {
+  let userID = req.params.userid;
+
+  let queryUser = `SELECT * FROM public.users t
+  WHERE "user_id" = '${userID}'`;
+
+  let response = await db.select(queryUser);
+  console.log(response[0]);
+  if (response) {
+    res.status(200).json(response);
+  } else {
+    res.status(500).json({}).end();
+  }
+});
+
 module.exports = router;

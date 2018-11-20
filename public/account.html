@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Once Upon a Slide</title>
+  </head>
+  <body>
+    <div class="navbar" id="top"></div>
+
+    <h1>Personal information</h1>
+    <div class="userInfo">
+      <h3 id="dispUsername"></h3>
+      <form class="credentialsEmail" id="formEmail">
+        <label for="inEmail">Email:</label>
+        <input id="inEmail" type="email">
+        <i id="btnSaveEmail" class="fas fa-pencil-alt" type="submit"></i>
+      </form>
+      <form class="credentialsPassword" id="formPass">
+        <label for="inOldPassword">Enter old password:</label>
+        <input id="inOldPassword" type="password">
+        <label for="inNewPassword1">Enter new password:</label>
+        <input id="inNewPassword1" type="password">
+        <label for="inNewPassword2">Confirm new password:</label>
+        <input id="inNewPassword2" type="password">
+        <input type="submit" id="btnSavePwd">Save new password</input>
+      </form>
+      <form class="credentialsImage" id="formUploadImage">
+      </form>
+    </div>
+    <script src="./js/account.js"></script>
+    <script src="./js/navbar.js"></script>
+
+
+    <script>
+      var activePage = 3;
+      MakeNavbar(activePage);
+    </script>
+  </body>
+</html>
