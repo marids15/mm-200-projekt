@@ -312,7 +312,6 @@ input, button {
 .displayDiv {
   padding-top: 56.25%;
   width: 100%;
-  background-color: #FEFEFE;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   overflow: hidden;
   position: relative;
@@ -335,14 +334,12 @@ input, button {
   width: 40%;
   height: 60%;
   display: inline-block;
-  background-color: var(--grey);
 }
 
 .vidDiv icon {
   float: right;
   margin: 2%;
   padding: 2%;
-  color: var(--second-color);
 }
 
 .soundElement {
@@ -362,7 +359,6 @@ input, button {
   position: absolute;
   left: 0%;
   top: 0%;
-  background-color: var(--third-color);
   user-select: none;
 }
 
@@ -384,6 +380,10 @@ input, button {
   border: 1px solid red;
   margin: 2px;
   position: relative;
+}
+
+.divSlideMenu .vidDiv icon {
+  display: none;
 }
 
 #slideMenu::-webkit-scrollbar {
@@ -515,4 +515,43 @@ input, button {
   .displayDivContainer{
     width: 100% ;
   }
+}
+
+/* Themes ---------------------------------------------------------*/
+/* Default theme ----------------------------------------------*/
+.themeDefault {
+  background-color: #FEFEFE;
+}
+
+.themeDefault .vidDiv {
+  background-color: var(--grey);
+}
+
+.themeDefault .vidDiv icon {
+  color: var(--second-color);
+}
+
+.themeDefault .textElementSlide {
+  font-family: var(--title-font);
+  color: var(--grey);
+  /*background-color: var(--third-color);*/
+}
+
+/* Dark theme -------------------------------------------------*/
+.themeDark {
+  background-color: #222;
+}
+
+.themeDark .vidDiv {
+  background-color: var(--grey);
+}
+
+.themeDark .vidDiv icon {
+  color: var(--second-color);
+}
+
+.themeDark .textElementSlide {
+  font-family: var(--title-font);
+/*  background-color: var(--third-color);*/
+  color: #FEFEFE;
 }

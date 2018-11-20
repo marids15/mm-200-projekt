@@ -84,32 +84,13 @@ async function loginUser(evt) {
 }
 
 async function handleLogin(response) {
+  let token = response.headers.get('Authorization');
   let data = await response.json();
   localStorage.setItem('user_id', data[0].id);
   localStorage.setItem('username', data[0].username);
   localStorage.setItem('email', data[0].email);
   localStorage.setItem('password', data[0].password);
   localStorage.setItem('role', data[0].role);
+  localStorage.setItem('token', token);
   location.href = "./personnal.html";
 }
-
-//RegisterBTN.onclick = register;
-/*
-loginButton.onclick = login;
-createNewUser.onclick = newUser;
-
-function login(){
-    let USERNAME = document.getElementById("usernameINPUT").value;
-let PASSWORD = document.getElementById("passwordINPUT").value;
-        console.log(USERNAME, PASSWORD);
-    }
-    function newUser(){
-        document.getElementById("extra1").innerHTML = ` <input class="inputElementclass" type="text" id="passwordINPUT2" placeholder="Repeat password">`;
-
-        document.getElementById("extra2").innerHTML = ` <button class="inputElementclass" id="RegisterBTN">Register</button>`;
-      let Username = document.getElementById("usernameINPUT").value ="";
-       let Password = document.getElementById("passwordINPUT").value ="";
-    }
-  function register (){
-
-  }*/
