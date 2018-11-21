@@ -1,6 +1,8 @@
-const NAME = "myP";
 const GET_PRESENTATION_URL = "/api/presentations";
 const SAVE_PRESENTATION_URL = "/api/presentations/save";
+
+//---------------- variables from localStorage
+let token = localStorage.getItem('token');
 
 //---------------- document.getElementById variables
 let indexOfSlide = document.getElementById("indexOfSlide");
@@ -18,17 +20,17 @@ let myPresentation;
 fetch(GET_PRESENTATION_URL, {
 	method: 'POST',
 	headers: {
-		"Content-Type": "application/json; charset=utf-8"
+		"Content-Type": "application/json; charset=utf-8",
+    "Authorization": token
 	},
 	body: data
 }).then(response => {
-if (response.status < 400) {
-	console.log('Loaded presentation! :D');
-	console.log(response);
-	loadPresentation(response);
-} else {
-	console.log('Did not load presentation :(');
-}
+	if (response.status < 400) {
+		loadPresentation(response);
+	} else {
+		// TODO: MESSAGE
+		console.log('Did not load presentation :(');
+	}
 }).catch(err => console.error(err));
 
 async function loadPresentation(response) {
@@ -466,14 +468,16 @@ async function storePresentation() {
 	fetch(SAVE_PRESENTATION_URL, {
 		method: 'POST',
 		headers: {
-			"Content-Type": "application/json; charset=utf-8"
+			"Content-Type": "application/json; charset=utf-8",
+	    "Authorization": token
 		},
 		body: data
 	}).then(response => {
 	if (response.status < 400) {
 		console.log('Stored presentation! :D');
-		console.log(response);
+		// TODO: MESSAGE
 	} else {
+		// TODO: MESSAGE
 		console.log('Did not store presentation :(');
 	}
 	}).catch(err => console.error(err));
@@ -497,13 +501,14 @@ async function createUser(evt) {
     method: 'POST',
     body: data,
     headers: {
-      "Content-Type": "application/json; charset=utf-8"
+      "Content-Type": "application/json; charset=utf-8",
+	    "Authorization": token
     }
   }).then(response => {
     if (response.status < 400) {
-      console.log('created user!!!! :D');
       handleLogin(response);
     } else {
+			// TODO: MESSAGE
       console.log('did not create user :(');
     }
   }).then(data => console.log('next'))
@@ -554,7 +559,7 @@ function parseJSONToPresentation(myJSON) {
 
 	let myP = new Presentation(myclass.presentation.name, slideDiv);
 	myP.setCurrentSlideIndex(0);
-	myP.addSlide(0);
+	//myP.addSlide(0);
 	myP.setTheme(myclass.presentation.theme);
 
 	for(let i = 0; i < myclass.presentation.slides.length; i++){
