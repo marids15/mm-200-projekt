@@ -47,7 +47,7 @@ async function loadPresentation(response) {
 		goToSlide(0);
 	}
 
-	requestAnimationFrame(draggable);
+	//requestAnimationFrame(draggable);
 	requestAnimationFrame(selectable);
 }
 //----------------- presentation object
