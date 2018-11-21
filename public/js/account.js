@@ -1,6 +1,7 @@
 const USER_URL = "/api/users"
 
 let userID = localStorage.getItem('user_id');
+let token = localStorage.getItem('token');
 let formEmail = document.getElementById('formEmail');
 let formPass = document.getElementById('formPass');
 let formDeleteUser = document.getElementById('formDeleteUser');
@@ -12,14 +13,14 @@ formDeleteUser.onsubmit = deleteUser;
 fetch(USER_URL + `/${userID}`, {
   method: 'GET',
   headers: {
-    "Content-Type": "application/json; charset=utf-8"
+    "Content-Type": "application/json; charset=utf-8",
+    "Authorization": token
   }
 }).then(response => {
   if (response.status < 400) {
-    console.log('Got the account!')
     displayUserInfo(response);
   } else {
-    console.log('Did not load the presentation :(')
+    console.error('Did not load the presentation :(')
   }
 }).catch(error => console.error(error));
 
@@ -27,7 +28,6 @@ fetch(USER_URL + `/${userID}`, {
 // function to display user info in html
 async function displayUserInfo(response) {
   let data = await response.json();
-  console.log(data);
   let username = data[0].username;
   let email = data[0].email;
 
@@ -52,7 +52,8 @@ async function saveEmail(evt) {
   fetch(USER_URL + `/${userID}/email`, {
     method: 'POST',
     headers: {
-			"Content-Type": "application/json; charset=utf-8"
+			"Content-Type": "application/json; charset=utf-8",
+      "Authorization": token
 		},
     body: data
   }).then(response => {
@@ -77,6 +78,8 @@ async function savePassword(evt) {
   console.log('New pasword 1 : ' + newPassword1);
   console.log('New password 2: ' + newPassword2);
 
+  //  TODO: GIVE MESSAGE!!!!!!!!
+
   // confirming new password
   if (newPassword1 !== newPassword2) {
     document.getElementById('message').innerHTML = "The confirmation of your new password is invalid. Imbecile.";
@@ -92,7 +95,8 @@ async function savePassword(evt) {
     fetch(USER_URL + `/${userID}/pass`, {
       method: 'POST',
       headers: {
-  			"Content-Type": "application/json; charset=utf-8"
+  			"Content-Type": "application/json; charset=utf-8",
+        "Authorization": token
   		},
       body: data
     }).then(response => {
@@ -116,28 +120,26 @@ async function deleteUser(evt) {
     option = "1";
   }
 
-  console.log(option);
-
   let data = JSON.stringify({
     user_id: userID,
     delete_option: option
   });
 
-  let confirmed = confirm("Are you really sure that you want to delete your user account? This is not reversable!");
+  let confirmed = confirm("Are you really sure that you want to delete your user account? \nThis is not reversable!");
   if (confirmed) {
     fetch(USER_URL + `/${userID}`, {
       method: 'DELETE',
       headers: {
-        "Content-Type": "application/json; charset=utf-8"
+        "Content-Type": "application/json; charset=utf-8",
+        "Authorization": token
       },
       body: data
     }).then(response => {
       if (response.status < 400) {
-        console.log('user deleted');
         alert("Your user is deleted!");
         location.href = "./index.html";
       } else {
-        console.log('user not deleted :(');
+        console.error('user not deleted :(');
       }
 
     }).catch(error => console.error(error));

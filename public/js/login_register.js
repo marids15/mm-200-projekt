@@ -87,10 +87,6 @@ async function handleLogin(response) {
   let token = response.headers.get('Authorization');
   let data = await response.json();
   localStorage.setItem('user_id', data[0].id);
-  localStorage.setItem('username', data[0].username);
-  localStorage.setItem('email', data[0].email);
-  localStorage.setItem('password', data[0].password);
-  localStorage.setItem('role', data[0].role);
   localStorage.setItem('token', token);
   location.href = "./personnal.html";
 }

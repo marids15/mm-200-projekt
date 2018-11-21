@@ -8,6 +8,8 @@ let presentations = document.getElementById("presentations");
 //-------------------------button
 formAddPresentation.onsubmit = addPresentation;
 
+//-------------------------local storage variables
+let token = document.getElementById('token');
 
 //-------------------------variable
 let nbPresentation;
@@ -18,64 +20,52 @@ loadPresentations();
 
 
 //-------------------------functions
+// handles the creation of a new presentation
 async function addPresentation(evt) {
 	evt.preventDefault();
 
-	let name = document.getElementById('inPresentationName').value;
 	let data = JSON.stringify({
-		//name: name,
 		owner: localStorage.getItem('user_id')
 	})
 
 	fetch(CREATE_PRESENTATION_URL, {
 		method: 'POST',
 		headers: {
-			"Content-Type": "application/json; charset=utf-8"
+			"Content-Type": "application/json; charset=utf-8",
+	    "Authorization": token
 		},
 		body: data
 	}).then(response => {
 		if (response.status < 400) {
-			console.log('Created presentation! :D');
-			console.log(response);
 			handlePresentation(response);
 		} else {
+			// TODO: MESSAGE
 			console.log('Did not create presentation :(');
 		}
 	}).catch(err => console.error(err))
 }
 
+// stores response of server and redirects to edit page
 async function handlePresentation(response) {
 	let data = await response.json();
-	console.log(data);
 	localStorage.setItem('presentation_id', data[0].id);
 	location.href = "./presentation.html";
 }
-/*
-	async function handleLogin(response) {
-	  let data = await response.json();
-	  localStorage.setItem('id', data[0].id);
-	  localStorage.setItem('username', data[0].username);
-	  localStorage.setItem('email', data[0].email);
-	  localStorage.setItem('password', data[0].password);
-	  localStorage.setItem('role', data[0].role);
-	  location.href = "./personnal.html";
-	}
-}
-*/
 
+// loads presentations of user
 async function loadPresentations() {
 	let userid = localStorage.getItem('user_id');
 	fetch(GET_USER_PRESENTATIONS_URL + `/${userid}`, {
 		method: 'GET',
 		headers: {
-			"Content-Type": "application/json; charset=utf-8"
+			"Content-Type": "application/json; charset=utf-8",
+	    "Authorization": token
 		}
 	}).then(response => {
 		if (response.status < 400) {
-			console.log('Loaded presentations! :D');
-			console.log(response);
 			displayPresentations(response);
 		} else {
+			// TODO: MESSAGE
 			console.log('Did not load presentation :(');
 		}
 	}).catch(err => console.error(err))
@@ -83,7 +73,6 @@ async function loadPresentations() {
 
 async function displayPresentations(response) {
 	let data = await response.json();
-	console.log(data);
 	presentations.innerHTML = "";
 	for (let presentation of data) {
 		console.log(presentation);
@@ -92,8 +81,6 @@ async function displayPresentations(response) {
 		newP.id = id;
 		newP.className = "presentation";
 		nbPresentation++;
-
-		//let imageP = getFirstSlideImage(data);
 
 		let imageP = document.createElement("div");
 		imageP.className = "miniView";
@@ -138,10 +125,6 @@ async function displayPresentations(response) {
 		presentations.appendChild(newP);
 		getFirstSlideImage(presentation.presentation_json, imageP);
 	}
-
-
-	//add onclik proprieties
-	//imageP.setAttribute('onclick',"editPresentation(document.getElementById(id).id)");
 }
 
 
@@ -157,7 +140,6 @@ function deletePresentation (e) {
 }
 
 function getFirstSlideImage(myJSON, container) {
-	//let myclass = JSON.parse(myJSON);
 	let myclass = myJSON;
 	console.log(myclass);
 
@@ -188,13 +170,4 @@ function getFirstSlideImage(myJSON, container) {
 		}
 
 	}
-	/*
-	let imageP = document.createElement("div");
-	imageP.className = "viewFirstSlide";
-	imageP.onclick = editPresentation;
-	let copy = myP.getSlides()[0].getSlideHTML().cloneNode(true);
-	imageP.appendChild(copy);
-	*/
-
-	//return imageP;
 }
