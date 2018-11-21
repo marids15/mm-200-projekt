@@ -55,7 +55,7 @@ async function createUser(evt) {
       console.log('did not create user :(');
     }
   })
-  .catch(err => console.err(err));
+  .catch(err => console.error(err));
 }
 
 async function loginUser(evt) {
@@ -80,7 +80,7 @@ async function loginUser(evt) {
       console.log('login did not work :(');
     }
   })
-  .catch(err => console.err(err));
+  .catch(err => console.error(err));
 }
 
 async function handleLogin(response) {
