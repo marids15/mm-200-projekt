@@ -37,10 +37,12 @@ class Slide {
     this.note = noteText;
   }
 
+  // sets theme of slide
   setSlideTheme(theme) {
     this.div.classList.remove(...themes);
     this.div.classList.add(theme);
   }
+
   // add image element to slide
   addImage(src) {
     try {
@@ -49,6 +51,7 @@ class Slide {
       this.elements.push(imageHTML);
       this.div.appendChild(imageHTML);
       this.idGenerator ++;
+      this.makeDraggable(imageHTML);
     }
     catch {
       console.error("Could not add Image");
@@ -63,9 +66,10 @@ class Slide {
       this.elements.push(textHTML);
       this.div.appendChild(textHTML);
       this.idGenerator++;
+      this.makeDraggable(textHTML);
     }
-    catch {
-      console.error("Could not add Text");
+    catch(e) {
+      console.error("Could not add Text: " + e);
     }
   }
 
@@ -77,6 +81,7 @@ class Slide {
       this.elements.push(vidHTML);
       this.div.appendChild(vidHTML);
       this.idGenerator++;
+      this.makeDraggable(vidHTML);
     }
     catch {
       console.error("Could not add video");
@@ -89,6 +94,7 @@ class Slide {
     this.elements.push(soundHTML);
     this.div.appendChild(soundHTML);
     this.idGenerator++;
+    this.makeDraggable(soundHTML);
   }
 
   // deletes element from slide
@@ -97,7 +103,7 @@ class Slide {
       if (this.elements.includes(this.currentElement)) {
         this.div.removeChild(this.currentElement);
         this.elements.splice(this.elements.indexOf(this.currentElement), 1);
-        this.currentElement = null;//????
+        this.currentElement = null;
       }
     }
     catch {
@@ -138,5 +144,52 @@ class Slide {
         this.div.children[i].style.borderStyle = "none";
       //}
     }
+  }
+
+  makeDraggable(divOverlay){
+    //var divOverlay = document.getElementById ("overlay");
+    //var container = document.getElementById("slideDiv");
+    let container = this.div;
+    divOverlay.isDown = false;
+
+    divOverlay.addEventListener('mousedown', function(e) {
+        divOverlay.isDown = true;
+        divOverlay.offset = [
+            divOverlay.offsetLeft - e.clientX,
+            divOverlay.offsetTop - e.clientY
+        ];
+    }, true);
+
+    document.addEventListener('mouseup', function() {
+        divOverlay.isDown = false;
+    }, true);
+
+    document.addEventListener('mousemove', function(e) {
+        event.preventDefault();
+        if (divOverlay.isDown) {
+
+          let leftPercent;
+          let topPercent;
+
+          if ((e.clientX + divOverlay.offset[0] + divOverlay.offsetWidth) * 100 / container.offsetWidth > 100){
+            //do nothing
+          } else if ((e.clientX + divOverlay.offset[0]) * 100 / container.offsetWidth < 0){
+            //do nothing
+          } else {
+              leftPercent = ((e.clientX + divOverlay.offset[0]) * 100 / container.offsetWidth);
+          }
+
+          if (((e.clientY + divOverlay.offset[1] + divOverlay.offsetHeight) * 100 / container.offsetHeight)> 100 ){
+            //do nothing
+          } else if ((e.clientY + divOverlay.offset[1]) * 100 / container.offsetHeight < 0 ){
+            //do nothing
+          }else {
+            topPercent = ((e.clientY + divOverlay.offset[1]) * 100 / container.offsetHeight);
+          }
+
+          divOverlay.style.left = leftPercent + '%';
+          divOverlay.style.top  = topPercent + '%';
+        }
+    }, true);
   }
 }

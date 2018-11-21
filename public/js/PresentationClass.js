@@ -127,6 +127,7 @@ class Presentation {
   }
 
   // function to make elements in a div draggable
+  /*
   makeDivDraggable() {
   // thanks to https://www.kirupa.com/html5/drag.html
 
@@ -235,7 +236,7 @@ class Presentation {
       let topPercent = (activeItem.currentY * 100 / container.offsetHeight);
       activeItem.setAttribute('style', `left: ${leftPercent}%; top: ${topPercent}%`);
     }
-  }
+  }*/
 
   // function to make elements in a div selectable
   makeDivSelectable() {

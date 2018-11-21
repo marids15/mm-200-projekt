@@ -94,7 +94,27 @@
 
 .soundElement {
   position: absolute;
+  width: 20%;
+  height: 15%;
+  background-color: darkblue;
+}
+
+.soundLeft {
+  float: left;
   width: 50%;
+  height: 70%;
+  background-color: khaki;
+}
+
+.soundRight {
+  float: right;
+  width: 50%;
+  height: 70%;
+  background-color: khaki;
+}
+
+.soundDrag {
+  width: 100%;
 }
 
 .buttonDeleteP{
