@@ -17,6 +17,7 @@ class Element {
     return this.id;
   }
 
+  // gets type of element
   getType(){
     return this.type;
   }
@@ -91,15 +92,29 @@ class Element {
 
   // gets HTML for sound
   createHTMLSound() {
-    let audioElement = document.createElement('audio');
-    let audioSource = document.createElement('source');
+    let audioSource = document.createElement('audio');
+    let audioElement = document.createElement('div');
+    let playButton = document.createElement('img');
+    audioSource.id = `sound_${this.id}`;
+    playButton.className ="soundLeft";
+    playButton.setAttribute("src", "images/play.svg");
+    playButton.onclick = function(){
+      audioSource.play();
+    }
+    let stopButton = document.createElement('img');
+    stopButton.className="soundRight";
+    stopButton.setAttribute("src", "images/pause.svg");
+    stopButton.onclick = function(){
+      audioSource.pause();
+    }
     audioElement.className = "soundElement";
-    audioElement.setAttribute('controls', '');
     audioSource.src = this.content;
+    let audioDrag = document.createElement('div');
+    audioDrag.className = "soundDrag";
     audioElement.appendChild(audioSource);
-    audioElement.typeElement = this.type;
-    audioElement.contentElement = this.content;
+    audioElement.appendChild(playButton);
+    audioElement.appendChild(stopButton);
+    audioElement.appendChild(audioDrag);
     return audioElement;
   }
-
 }
