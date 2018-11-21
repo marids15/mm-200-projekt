@@ -14,9 +14,43 @@ ENDPOINT: api/users/auth
 REQUEST (JSON): {"username": "JohnDoe", "password": "password"}
 RESPONSE (JSON): {"username": JohnDoe"} //add token later
 
+Get user:
+
+METHOD: GET
+ENDPOINT: api/users/:id
+REQUEST header: ---------
+REQUEST (JSON): no body
+RESPONSE (JSON): [{"id": "123", "username": "John Doe", "email":"john@doe.com", "password"}]
+
 0 = standard user role
 1 = admin
 
+Edit user email:
+
+METHOD: POST
+ENDPOINT: api/users/:id/email
+REQUEST header: --------
+REQUEST (JSON): {"user_id": 34, "email": "john@doe.com"}
+RESPONSE (JSON): [{"id": "123", "username": "John Doe", "email":"john@doe.com", "password"}]
+
+Edit user password:
+
+METHOD: POST
+ENDPOINT: api/users/:id/pass
+REQUEST header: --------
+REQUEST (JSON): {"user_id": 42, "old_password": "12345", "new_password": "123456"}
+RESPONSE (JSON): [{"id": "123", "username": "John Doe", "email":"john@doe.com", "password"}]
+
+Delete user:
+METHOD: DELETE
+ENDPOINT: api/users/:id
+REQUEST header: -------
+REQUEST (JSON): {'user_id': 42, "delete_option": 0}
+RESPONSE (JSON): {}
+
+delete options:
+- 0: delete all presentations
+- 1: delete only private & personal presentations
 
 ===PRESENTATION STUFF===========================================================
 sharing options:

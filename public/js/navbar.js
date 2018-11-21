@@ -22,6 +22,6 @@ function MakeNavbar(evt){
   //  Makes the actual navbar
   var navi =  document.createElement("div");
   navi.id = "topnav";
-  navi.innerHTML = '<a href="index.html" '+a+' >Home</a><a href="personnal.html" '+b+' >My presentations</a><a href="my_account.html" '+c+'>My account</a><i class="fas fa-bars" onclick="expandNavigation()"></i>';
+  navi.innerHTML = '<a href="index.html" '+a+' >Home</a><a href="personnal.html" '+b+' >My presentations</a><a href="account.html" '+c+'>My account</a><i class="fas fa-bars" onclick="expandNavigation()"></i>';
   document.getElementById("top").appendChild(navi);
 }
