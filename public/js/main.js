@@ -531,20 +531,12 @@ function parsePresentationToJSON() {
 
 		for(let j = 0; j < elementsArray.length; j++){
 			let myElement = {};
-			myElement.xOffset = elementsArray[j].xOffset;
-			myElement.yOffset = elementsArray[j].yOffset;
-			//myElement.initialX = elementsArray[j].initialX;
-			//myElement.initialY = elementsArray[j].initialY;
-			myElement.currentX = elementsArray[j].currentX;
-			myElement.currentY = elementsArray[j].currentY;
+			let container = slidesArray[i].getSlideHTML();
+
+      myElement.topPercent = elementsArray[j].offsetTop * 100 / container.offsetHeight;
+      myElement.leftPercent = elementsArray[j].offsetLeft * 100 / container.offsetWidth;
 			myElement.typeElement = elementsArray[j].typeElement;
 			myElement.contentElement = elementsArray[j].contentElement;
-
-			let container = myPresentation.slides[i].getSlideHTML();
-			let leftPercent = (myPresentation.getSlides()[i].getElements()[j].currentX * 100 / container.offsetWidth);
-			let topPercent = (myPresentation.getSlides()[i].getElements()[j].currentY * 100 / container.offsetHeight);
-      myElement.topPercent = leftPercent;
-    	myElement.leftPercent = topPercent;
 
 			mySlide.elements.push(myElement);
 		}
@@ -566,8 +558,8 @@ function parseJSONToPresentation(myJSON) {
 	myP.setTheme(myclass.presentation.theme);
 
 	for(let i = 0; i < myclass.presentation.slides.length; i++){
-		//myP.setCurrentSlideIndex(i);
-		//myP.addSlide(i);
+		myP.setCurrentSlideIndex(i);
+		myP.addSlide(i);
 		for(let j = 0; j < myclass.presentation.slides[i].elements.length; j++){
 			if (myclass.presentation.slides[i].elements[j].typeElement === TEXT){
 				myP.getCurrentSlide().addText(myclass.presentation.slides[i].elements[j].contentElement);
@@ -581,28 +573,18 @@ function parseJSONToPresentation(myJSON) {
 			else{
 				myP.getCurrentSlide().addSound(myclass.presentation.slides[i].elements[j].contentElement);
 			}
-			//console.log(myclass.presentation.slides[i].elements[j]);
-			console.log(myP.getSlides()[i].getElements()[j]);
-			myP.getSlides()[i].getElements()[j].xOffset = myclass.presentation.slides[i].elements[j].xOffset;
-			myP.getSlides()[i].getElements()[j].yOffset = myclass.presentation.slides[i].elements[j].yOffset;
-			//myP.getSlides()[i].getElements()[j].initialX = myclass.presentation.slides[i].elements[j].initialX;
-			//myP.getSlides()[i].getElements()[j].initialY = myclass.presentation.slides[i].elements[j].initialY;
-			myP.getSlides()[i].getElements()[j].currentX = myclass.presentation.slides[i].elements[j].currentX;
-			myP.getSlides()[i].getElements()[j].currentY = myclass.presentation.slides[i].elements[j].currentY;
 
 
-			let container = myP.slides[i].getSlideHTML();
-			let leftPercent = (myP.getSlides()[i].getElements()[j].currentX * 100 / container.offsetWidth);
-			let topPercent = (myP.getSlides()[i].getElements()[j].currentY * 100 / container.offsetHeight);
-			myP.getSlides()[i].getElements()[j].setAttribute('style', `left: ${leftPercent}%;
-																																 top: ${topPercent}%`);
+
+			myP.getSlides()[i].getElements()[j].setAttribute('style', `left: ${myclass.presentation.slides[i].elements[j].leftPercent}%;
+																																 top: ${myclass.presentation.slides[i].elements[j].topPercent}%`);
 
 		}
 		myP.getSlides()[i].setNote(myclass.presentation.slides[i].note);
-		if(i+1 < myclass.presentation.slides.length){
+	/*	if(i+1 < myclass.presentation.slides.length){
 			myP.addSlide(myP.getCurrentSlideIndex()+1);
 			myP.goToNextSlide();
-		}
+		}*/
 	}
 	return myP;
 }

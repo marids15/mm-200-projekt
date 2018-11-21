@@ -182,21 +182,8 @@ function getFirstSlideImage(myJSON, container) {
 			else{
 				myP.getCurrentSlide().addSound(myclass.presentation.slides[0].elements[j].contentElement);
 			}
-			//console.log(myclass.presentation.slides[i].elements[j]);
-			console.log(myP.getSlides()[0].getElements()[j]);
-			myP.getSlides()[0].getElements()[j].xOffset = myclass.presentation.slides[0].elements[j].xOffset;
-			myP.getSlides()[0].getElements()[j].yOffset = myclass.presentation.slides[0].elements[j].yOffset;
-			//myP.getSlides()[i].getElements()[j].initialX = myclass.presentation.slides[i].elements[j].initialX;
-			//myP.getSlides()[i].getElements()[j].initialY = myclass.presentation.slides[i].elements[j].initialY;
-			myP.getSlides()[0].getElements()[j].currentX = myclass.presentation.slides[0].elements[j].currentX;
-			myP.getSlides()[0].getElements()[j].currentY = myclass.presentation.slides[0].elements[j].currentY;
-
-
-			let container = myP.slides[0].getSlideHTML();
-			let leftPercent = (myP.getSlides()[0].getElements()[j].currentX * 100 / container.offsetWidth);
-			let topPercent = (myP.getSlides()[0].getElements()[j].currentY * 100 / container.offsetHeight);
-			//myP.getSlides()[0].getElements()[j].setAttribute('style', `left: ${myclass.presentation.slides[0].elements[j].leftPercent}%;top: ${myclass.presentation.slides[0].elements[j].topPercent}%`);
-		  myP.getSlides()[0].getElements()[j].setAttribute('style', `left: ${leftPercent}%;top: ${topPercent}%`);
+			myP.getSlides()[0].getElements()[j].setAttribute('style', `left: ${myclass.presentation.slides[0].elements[j].leftPercent}%;
+																																 top: ${myclass.presentation.slides[0].elements[j].topPercent}%`);
 
 		}
 
