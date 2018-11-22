@@ -35,6 +35,7 @@ router.post('/api/presentations/new', async function(req, res) {
 // load already existing presentation
 router.post('/api/presentations', async function(req, res) {
   let presentationID = req.body.presentation_id;
+  let token = req.headers.Authorization;
 
   // check if token is valid
   if (checkToken(token, owner)) {   // token is valid
@@ -53,6 +54,7 @@ router.post('/api/presentations', async function(req, res) {
 router.post('/api/presentations/save', async function(req, res) {
   let presentationID = req.body.presentation_id;
   let presentation = req.body.presentation;
+  let token = req.headers.Authorization;
 
   // check if token is valid
   if (checkToken(token, owner)) { // token is valid
@@ -69,6 +71,7 @@ router.post('/api/presentations/save', async function(req, res) {
 // get all presentations from one user
 router.get('/api/presentations/:userid', async function(req, res) {
   let userid = req.params.userid;
+  let token = req.headers.Authorization;
 
   // check if token is valid
   if (checkToken(token, owner)) { // token is valid

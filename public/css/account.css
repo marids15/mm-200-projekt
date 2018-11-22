@@ -3,16 +3,39 @@
   width: 100vw;
   height: 100vh;
   font-family: sans-serif;
+  box-sizing: border-box;
 }
 
 /* for phone sized screens ---------*/
 @media only screen and (max-width: 768px) {
   .userInfo {
-    width: 80%;
-    height: 60%;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 10%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    padding: 20px;
+    margin-bottom: 5%;
+  }
+
+  hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  button {
+    width: 15%;
+  }
+
+  input[type=email] {
+    width: 83%;
+  }
+
+  input[type=password] {
+    width: 100%;
   }
 }
 
@@ -30,13 +53,28 @@
     margin-top: 20px;
     margin-bottom: 20px;
   }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  button {
+    width: 5%;
+  }
+
+  input[type=email] {
+    width: 30%;
+  }
+
+  input[type=password] {
+    width: 35%;
+  }
 }
 
 h1 {
   padding-top: 20px;
   padding-bottom: 10px;
   font-family: var(--title-font);
-  font-size: 40px;
 }
 
 h3 {
@@ -44,7 +82,6 @@ h3 {
   font-size: 20px;
   margin-top: 10px;
   margin-bottom: 20px;
-  width: 50%;
 }
 
 p {
@@ -86,7 +123,6 @@ input {
 }
 
 button {
-  width: 5%;
   box-sizing: border-box;
   margin: 0;
   height: 41px;
@@ -104,7 +140,6 @@ input[type=email] {
   border: solid 1px #DDD;
   border-radius: 2px;
   font-family: var(--text-font);
-  width: 30%;
 }
 
 input[type=submit] {
@@ -122,21 +157,11 @@ input[type=submit]:hover {
   cursor: pointer;
 }
 
-input[type=text] {
-  background-color: #fafafa;
-  box-shadow: inset 0 0 2px 0.5px rgba(0, 0, 0, 0.1);;
-  border: solid 1px #DDD;
-  border-radius: 2px;
-  font-family: var(--text-font);
-  width: 35%;
-}
-
 input[type=password] {
   background-color: #fafafa;
   box-shadow: inset 0 0 2px 0.5px rgba(0, 0, 0, 0.1);;
   border: solid 1px #DDD;
   border-radius: 2px;
-  width: 35%;
 }
 
 .danger {
