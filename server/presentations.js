@@ -87,16 +87,67 @@ router.get('/api/presentations/:userid', async function(req, res) {
   }
 });
 
+// Delete presentation of user
+router.delete('/api/presentations/:presentationid', async function(req, res) {
+  let userid = req.body.user_id;
+  let presentationid = req.body.presentation_id;
+  let token = req.headers.Authorization;
+  console.log(userid);
+  console.log(presentationid);
+
+  // check token and if user is owner of presentation
+  if (checkToken(token, userid) && checkOwner(presentationid, userid)) { // token is valid and user is owner
+    let queryDeletePresentation = `DELETE FROM "public"."presentations" WHERE "id" = '${presentationid}' RETURNING *`;
+    let deleted = await db.delete(queryDeletePresentation);
+    let status = deleted ? 200 : 500;
+    res.status(status).json({}).end();
+
+  } else { // token is invalid or user is not owner
+    res.status(403).json({}).end();
+  }
+});
+
+// Update sharing options
+router.post('/api/presentations/:presentationid/sharing', async function(req, res){
+  let userId = req.body.user_id;
+  let ugh = req.params.presentationid;
+  let presentationId = req.body.presentation_id;
+  let shareOption = req.body.share_option;
+  let token = req.headers.Authorization;
+
+  // check token and if user is owner
+  if (checkToken(token, userId) && checkOwner(userId, presentationId)) { // token is valid and user is owner
+    let queryUpdateSharing = `UPDATE "public"."presentations" SET "share_option" = '${shareOption}' WHERE "id" = ${presentationId} RETURNING *`;
+    let response = await db.update(queryUpdateSharing);
+    let status = response? 200: 500;
+    res.status(status).json({}).end();
+  } else {
+    res.status(403).json({}).end();
+  }
+});
+
 // function to check whether token and userid combination is valid, returns boolean
 async function checkToken(token, userid) {
   let query = `SELECT * FROM public.tokens t
   WHERE token = '${token}' and user_id = '${userid}'`;
-  let response = db.select(query);
+  let response = await db.select(query);
   if (response) {
     return true;
   } else {
     return false;
   }
+}
+
+// function to check whether user is owner of presentation.
+async function checkOwner(presentationid, userid) {
+    let queryIfOwner = `SELECT * FROM public.presentations t
+    WHERE id = '${presentationid}' and user_id = '${userid}'`;
+    let isOwner = await db.select(queryIfOwner);
+    if (isOwner) {
+      return true;
+    } else {
+      return false;
+    }
 }
 
 module.exports = router;

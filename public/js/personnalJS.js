@@ -1,6 +1,6 @@
 //------------------------- constants
 CREATE_PRESENTATION_URL = "/api/presentations/new";
-GET_USER_PRESENTATIONS_URL = "/api/presentations";
+PRESENTATIONS_URL = "/api/presentations";
 
 let formAddPresentation = document.getElementById("formCreatePresentation");
 let presentations = document.getElementById("presentations");
@@ -9,7 +9,8 @@ let presentations = document.getElementById("presentations");
 formAddPresentation.onsubmit = addPresentation;
 
 //-------------------------local storage variables
-let token = document.getElementById('token');
+let token = localStorage.getItem('token');
+let userid = localStorage.getItem('user_id');
 
 //-------------------------variable
 let nbPresentation;
@@ -23,10 +24,11 @@ loadPresentations();
 // handles the creation of a new presentation
 async function addPresentation(evt) {
 	evt.preventDefault();
-
+	let presentationName = document.getElementById('inPresentationName').value;
 	let data = JSON.stringify({
-		owner: localStorage.getItem('user_id')
-	})
+		owner: localStorage.getItem('user_id'),
+		name: presentationName
+	});
 
 	fetch(CREATE_PRESENTATION_URL, {
 		method: 'POST',
@@ -55,7 +57,7 @@ async function handlePresentation(response) {
 // loads presentations of user
 async function loadPresentations() {
 	let userid = localStorage.getItem('user_id');
-	fetch(GET_USER_PRESENTATIONS_URL + `/${userid}`, {
+	fetch(PRESENTATIONS_URL + `/${userid}`, {
 		method: 'GET',
 		headers: {
 			"Content-Type": "application/json; charset=utf-8",
@@ -93,37 +95,46 @@ async function displayPresentations(response) {
 		buttonDeleteP.className = "buttonDeleteP";
 		buttonDeleteP.onclick = deletePresentation;
 
-		let buttonStatusP = document.createElement("select");
-		buttonStatusP.className = "buttonStatusP";
-
-		let optionPublic = document.createElement("option");
-		optionPublic.value = "public";
-		optionPublic.innerHTML = "Public";
-		buttonStatusP.appendChild(optionPublic);
+		let buttonShareP = document.createElement("select");
+		buttonShareP.className = "buttonShareP";
+		buttonShareP.id = "selectShare" + id;
 
 		let optionPrivate = document.createElement("option");
-		optionPrivate.value = "private";
+		optionPrivate.value = 0;
 		optionPrivate.innerHTML = "Private";
-		buttonStatusP.appendChild(optionPrivate);
+		buttonShareP.appendChild(optionPrivate);
+
+		let optionPublic = document.createElement("option");
+		optionPublic.value = 1;
+		optionPublic.innerHTML = "Public";
+		buttonShareP.appendChild(optionPublic);
 
 		let optionIndividual = document.createElement("option");
-		optionIndividual.value = "individual";
+		optionIndividual.value = 2;
 		optionIndividual.innerHTML = "Individual";
-		buttonStatusP.appendChild(optionIndividual);
+		buttonShareP.appendChild(optionIndividual);
+		buttonShareP.onchange = updateShareOptions;
+		buttonShareP.selectedIndex = (presentation.share_option);
 
 		let buttonPresenterP = document.createElement("button");
 		buttonPresenterP.type = "button";
 		buttonPresenterP.innerHTML = "Presenter Mode";
 		buttonPresenterP.className = "buttonPresenterP";
 
+		let buttonEditP = document.createElement("button");
+		buttonEditP.type = "button";
+		buttonEditP.innerHTML = "EDIT PRESENTATION";
+		buttonEditP.className = "buttonEditP";
 
 		newP.appendChild(imageP);
 		newP.appendChild(buttonDeleteP);
-		newP.appendChild(buttonStatusP);
+		newP.appendChild(buttonShareP);
 		newP.appendChild(buttonPresenterP);
+		newP.appendChild(buttonEditP);
 
 		presentations.appendChild(newP);
 		getFirstSlideImage(presentation.presentation_json, imageP);
+
 	}
 }
 
@@ -135,8 +146,27 @@ function editPresentation (e) {
 
 function deletePresentation (e) {
 	let id = e.target.parentNode.id;
-	presentations.removeChild(document.getElementById(id));
-	console.log("deleting... " + id );
+	console.log(userid);
+	let data = JSON.stringify({
+		presentation_id: id,
+		user_id: userid
+	});
+
+	fetch(PRESENTATIONS_URL + `/${id}`, {
+		method: 'DELETE',
+		body: data,
+		headers: {
+			"Content-Type": "application/json; charset=utf-8",
+	    "Authorization": token
+		}
+	}).then(response => {
+		if (response.status < 400) {
+			presentations.removeChild(document.getElementById(id));
+			console.log('Presentation is removed');
+		} else {
+			console.log('presentation not removed...');
+		}
+	}).catch(error => console.error(error));
 }
 
 function getFirstSlideImage(myJSON, container) {
@@ -170,4 +200,33 @@ function getFirstSlideImage(myJSON, container) {
 		}
 
 	}
+}
+
+function updateShareOptions(evt) {
+	let presentationId = evt.target.parentNode.id;
+	let shareId = document.getElementById('selectShare' + presentationId).value;
+
+	let data = JSON.stringify({
+		presentation_id: presentationId,
+		user_id: userid,
+		share_option: shareId
+	});
+
+	fetch(PRESENTATIONS_URL + `/${presentationId}/sharing`, {
+		method: 'POST',
+		body: data,
+		headers: {
+			"Content-Type": "application/json; charset=utf-8",
+	    "Authorization": token
+		}
+	}).then(response => {
+		if (response.status < 400) {
+			console.log('Option is updated to: '+ shareId);
+			// TODO: MESSAGE
+		} else {
+			console.log('presentation updated...');
+			// TODO: MESSAGE
+		}
+	}).catch(error => console.error(error));
+
 }

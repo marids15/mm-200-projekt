@@ -168,16 +168,27 @@ REQUEST (JSON):
 --------------------------------------------------------------------------------
 Delete presentation:
 METHOD: DELETE
-ENDPOINT: api/presentations
-REQUEST header: ----------
+ENDPOINT: api/presentations/:presenationid
+REQUEST header: Authorization: token
 REQUEST (JSON):
 {
-  "id": 0,
-  "name": "Cookies",
-  "owner": "John Doe",
+  "presentation_id": 0,
+  "user_id": 42
 }
-RESPONSE: {""}
+RESPONSE: {}
 
+--------------------------------------------------------------------------------
+Update sharing options presentation:
+METHOD: POST
+ENDPOINT: api/presentations/:presentationid/sharing
+REQUEST header: Authorization: token
+REQUEST (JSON):
+{
+  "presentation_id": 0,
+  "user_id": 42,
+  "share_option": 0
+}
+RESPONSE: {}
 
 --------------------------------------------------------------------------------
 Get all presentations of user:

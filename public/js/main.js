@@ -409,8 +409,10 @@ function showExportTool() {
   makeToolActive(exportTab);
   let btnSavePresentation = document.getElementById('btnSavePresentation');
   let btnExportNotes = document.getElementById('btnExportNotes');
+	let btnExportPresentation = document.getElementById('btnExportPresentation');
   btnSavePresentation.onclick = storePresentation;
   btnExportNotes.onclick = exportNote;
+	btnExportPresentation.onclick = exportPresentation;
 }
 
 //------------------ Highlights the active tab in the tab bar
@@ -446,6 +448,12 @@ function exportNote(){
   saveData(note,title);
 }
 
+//------------------- Function for exporting presentation
+function exportPresentation () {
+	let title = `${myPresentation.name}.json`;
+	let content = parsePresentationToJSON();
+	saveData(content, title);
+}
 //------------------ Function for storing the notes into a file
 function saveData(data, filename) {
     let a = document.createElement('a');
@@ -491,6 +499,7 @@ async function storePresentation() {
 
 //----------------- Function for parsing presentation into JSON
 function parsePresentationToJSON() {
+	let tempCurrentIndex = myPresentation.getCurrentSlideIndex();
 	let myData = {};
 	myData.presentation = {
 		name : myPresentation.name,
@@ -502,6 +511,7 @@ function parsePresentationToJSON() {
 	let slidesArray = myPresentation.getSlides();
 
 	for (let i = 0; i < slidesArray.length; i++){
+		goToSlide(i);
 		let mySlide = {};
 		mySlide.note = slidesArray[i].getNote();
 		mySlide.elements = [];
@@ -523,6 +533,7 @@ function parsePresentationToJSON() {
 	}
 	//let myJSON = JSON.stringify(myPresentation);
 	let myJSON = JSON.stringify(myData);
+	goToSlide(tempCurrentIndex);
   return myJSON;
 }
 
