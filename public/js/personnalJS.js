@@ -222,10 +222,9 @@ function updateShareOptions(evt) {
 	}).then(response => {
 		if (response.status < 400) {
 			console.log('Option is updated to: '+ shareId);
-			// TODO: MESSAGE
+			showConfirmPopup('The sharing option is updated to: ' + shareId);
 		} else {
-			console.log('presentation updated...');
-			// TODO: MESSAGE
+			showErrorPopup('An error occurred, please try again later');
 		}
 	}).catch(error => console.error(error));
 
