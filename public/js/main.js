@@ -54,11 +54,8 @@ async function loadPresentation(response) {
 		goToSlide(0);
 	}
 
-	//requestAnimationFrame(draggable);
 	requestAnimationFrame(selectable);
 }
-//----------------- presentation object
-//let myPresentation = new Presentation(NAME, slideDiv);
 
 
 //--------------- eventhandlers
@@ -67,12 +64,6 @@ btnAddSlide.onclick = addNewSlide;
 btnDeleteSlide.onclick = deleteCurrentSlide;
 
 //--------------------------------
-
-
-function draggable(){
-	myPresentation.makeDivDraggable();
-	requestAnimationFrame(draggable);
-}
 
 function selectable(evt){
 	myPresentation.makeDivSelectable();
@@ -217,6 +208,7 @@ function timeout(ms) {
 
 /* View in fullscreen */
 function openFullscreen(elem) {
+
   if (elem.requestFullscreen) {
     elem.requestFullscreen();
   } else if (elem.mozRequestFullScreen) { /* Firefox */
