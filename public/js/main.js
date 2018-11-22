@@ -384,6 +384,21 @@ function showSoundTool() {
   activeDeleteElement();
 }
 
+//------------------- Shows the template tool in the menu
+function showTemplateTool() {
+	let templateToolTemplate = document.getElementById('templateContent');
+	let templateToolClone = templateToolTemplate.content.cloneNode(true);
+	tabContent.innerHTML = "";
+	tabContent.appendChild(templateToolClone);
+	let templateTab = document.getElementById('templateToolTab');
+	makeToolActive(templateTab);
+	let formTitleTemplate = document.getElementById("formTitleTemplate");
+	let formImageTemplate = document.getElementById("formImageTemplate");
+	formTitleTemplate.onsubmit = addTitleTemplate;
+	formImageTemplate.onsubmit = addImageTemplate;
+	activeDeleteElement();
+}
+
 //------------------- Shows the presenter tool in the menu
 function showPresenterTool() {
   let presenterToolTemplate = document.getElementById('presenterContent');
@@ -420,6 +435,16 @@ function makeToolActive(elem) {
       oldActiveElement.classList.remove('activeTab');
   }
   elem.classList.add('activeTab');
+}
+
+//------------------ Function for inserting title slide template
+function addTitleTemplate(evt) {
+	// TODO
+}
+
+//------------------ Function for inserting image slide template
+function addImageTemplate(evt) {
+	// TODO
 }
 
 //------------------ Changing the theme of the Presentation

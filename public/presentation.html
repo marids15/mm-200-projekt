@@ -53,6 +53,11 @@
           <i class="fas fa-music"></i>
         </button>
       </div>
+      <div class="tab" title="Template tool">
+        <button id="templateToolTab" onclick="showTemplateTool()">
+          <i class="fas fa-stamp"></i>
+        </button>
+      </div>
       <div class="tab" title="Presenter tool">
         <button id="presenterToolTab" onclick="showPresenterTool()">
           <i class="fas fa-chalkboard-teacher"></i> <!-- or maybe this one: "fas fa-star-half-alt" -->
@@ -105,6 +110,26 @@
       <input id="inSoundSrc" type="text" name="sound source" placeholder="Enter a URL" required>
       <input id="btnAddSound" class="btn" type="submit" value="Add sound">
       <i id="btnDelete" class="fas fa-trash-alt"></i>
+    </form>
+  </template>
+
+  <template id="templateContent">
+    <h2>Templates</h2>
+    <form id="formTitleTemplate">
+      <h3>Title slide</h3>
+      <label for="inTitle">Title: </label>
+      <input id="inTitle" type="text" name="title" placeholder="Enter a title" required>
+      <label for="inText">Subtitle: </label>
+      <input id="inText" type="text" name="subtitle" placeholder="Enter a subtitle">
+      <input id="btnAddTitleTemplate" class="btn" type="submit" value="Create title slide">
+    </form>
+    <form id="formImageTemplate">
+      <h3>Image slide</h3>
+      <label for="inTitle">Image url: </label>
+      <input id="inTitle" type="text" name="imageUrl" placeholder="Enter URL of image" required>
+      <label for="inText">Text: </label>
+      <input id="inText" type="text" name="text" placeholder="Enter text">
+      <input id="btnAddImageTemplate" class="btn" type="submit" value="Create title slide">
     </form>
   </template>
 
