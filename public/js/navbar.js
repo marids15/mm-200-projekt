@@ -14,14 +14,16 @@ function expandNavigation(evt) {
 var a = "";
 var b = "";
 var c = "";
+var d = "";
 // Makes navbar- and handles what is the active element
 function MakeNavbar(evt){
   if (evt == 1){a = 'class="active"';}
   if (evt == 2){b = 'class="active"';}
   if (evt == 3){c = 'class="active"';}
+  if (evt == 4){d = 'class="active"';}
   //  Makes the actual navbar
   var navi =  document.createElement("div");
   navi.id = "topnav";
-  navi.innerHTML = '<a href="index.html" '+a+' >Home</a><a href="personnal.html" '+b+' >My presentations</a><a href="account.html" '+c+'>My account</a><i class="fas fa-bars" onclick="expandNavigation()"></i>';
+  navi.innerHTML = '<a href="index.html" '+a+' >Home</a><a href="personnal.html" '+b+' >My presentations</a><a href="OfflinePresentations.html" '+c+'>Offline Presentations</a><a href="account.html" ' + d + '>My account</a><i class="fas fa-bars" onclick="expandNavigation()"></i>';
   document.getElementById("top").appendChild(navi);
 }
