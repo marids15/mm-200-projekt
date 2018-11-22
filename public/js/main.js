@@ -343,6 +343,7 @@ function showTextTool() {
   let formEditingText = document.getElementById("formEditingText");
   formEditingText.onsubmit = btnAddTextClick;
   activeDeleteElement();
+	doChange();
 }
 
 //------------------ Shows the image tool in the menu

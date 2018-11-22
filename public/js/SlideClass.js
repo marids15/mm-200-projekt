@@ -116,6 +116,9 @@ class Slide {
     if (this.elements.includes(element)) {
       this.currentElement = element;
       this.setBorder();
+      document.getElementById("updateTextDiv").innerHTML= 'Now editing element:<p class="emlNR" id="emlNR">'+element.id+'</p>';
+      document.getElementById("inTxt").value = element.innerHTML;
+      //  doChange(element);
     }
     // when you click on the icon, which is a child of the video div:
     else if (element !== null && element.parentElement.className === "vidDiv") {
@@ -137,6 +140,7 @@ class Slide {
 
   // removes all borders from elements in slide
   removeBorder() {
+
     for (let i in this.elements) {
       //if (this.div.children[i].className == "vidDiv") {
       //  this.div.children[i].style.border = "5px solid darkgrey";
