@@ -3,6 +3,7 @@ const SAVE_PRESENTATION_URL = "/api/presentations/save";
 
 //---------------- variables from localStorage
 let token = localStorage.getItem('token');
+let userID = localStorage.getItem('user_id');
 
 //---------------- document.getElementById variables
 let indexOfSlide = document.getElementById("indexOfSlide");
@@ -14,7 +15,11 @@ let divContainer = document.getElementById("divContainer");
 let tabContent = document.getElementById('tabContent');
 
 //----------------- retrieving data from db
-let data = JSON.stringify({presentation_id: localStorage.getItem('presentation_id')});
+let data = JSON.stringify({
+	presentation_id: localStorage.getItem('presentation_id'),
+	user_id: userID
+});
+
 let myPresentation;
 
 fetch(GET_PRESENTATION_URL, {
@@ -482,37 +487,6 @@ async function storePresentation() {
 	}
 	}).catch(err => console.error(err));
 
-}
-
-
-
-
-async function createUser(evt) {
-  evt.preventDefault();
-
-  let data = JSON.stringify({
-    username: document.getElementById('inpUserName').value,
-    email: document.getElementById('inpEmail').value,
-    password: document.getElementById('inpPsw').value,
-    role: USER_ROLE
-  });
-
-  fetch(CREATE_USER_URL, {
-    method: 'POST',
-    body: data,
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-	    "Authorization": token
-    }
-  }).then(response => {
-    if (response.status < 400) {
-      handleLogin(response);
-    } else {
-			// TODO: MESSAGE
-      console.log('did not create user :(');
-    }
-  }).then(data => console.log('next'))
-  .catch(err => console.err(err));
 }
 
 //----------------- Function for parsing presentation into JSON

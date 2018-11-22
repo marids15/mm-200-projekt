@@ -36,9 +36,9 @@ router.post('/api/presentations/new', async function(req, res) {
 router.post('/api/presentations', async function(req, res) {
   let presentationID = req.body.presentation_id;
   let token = req.headers.Authorization;
-
+  let userID = req.body.user_id;
   // check if token is valid
-  if (checkToken(token, owner)) {   // token is valid
+  if (checkToken(token, userID)) {   // token is valid
     let query = `SELECT * FROM public.presentations t
     WHERE id = '${presentationID}'`;
 
@@ -55,6 +55,7 @@ router.post('/api/presentations/save', async function(req, res) {
   let presentationID = req.body.presentation_id;
   let presentation = req.body.presentation;
   let token = req.headers.Authorization;
+  let owner = req.body.owner;
 
   // check if token is valid
   if (checkToken(token, owner)) { // token is valid
@@ -74,7 +75,7 @@ router.get('/api/presentations/:userid', async function(req, res) {
   let token = req.headers.Authorization;
 
   // check if token is valid
-  if (checkToken(token, owner)) { // token is valid
+  if (checkToken(token, userid)) { // token is valid
     let query = `SELECT * FROM public.presentations t
     WHERE "user_id" = '${userid}'`;
 
