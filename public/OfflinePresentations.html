@@ -5,7 +5,7 @@
   <title>Once upon a Slide</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel='icon' href='/images/favicon2.ico' type='image/x-icon'/>
-  <link rel="stylesheet" href="css/presentation.css">
+  <link rel="stylesheet" href="css/offlinePresentation.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,10 @@
 <body>
   <div class="navbar" id="top"></div>
 
-  <input id="inFile" type=file accept="application/JSON" required>
+  <label class="customFileUpload">
+    <input id="inFile" type=file accept="application/JSON">
+    <i class="fas fa-file-upload"></i>Upload presentation file
+  </label>
 
 
   <div id="divContainer" class="displayDivContainer">
@@ -31,14 +34,16 @@
     <textarea id="inNote">Write your notes here</textarea>
   </div>
 
-  <select id="timedTransitions">
-    <option value="noTimer">No timer</option>
-    <option value="10">10s</option>
-    <option value="30">30s</option>
-    <option value="60">1min</option>
-  </select>
-  <button id="btnPlayPresentation">Play presentation</button>
+  <div class="playPresentation">
+    <select id="timedTransitions">
+      <option value="noTimer">No timer</option>
+      <option value="10">10s</option>
+      <option value="30">30s</option>
+      <option value="60">1min</option>
+    </select><br>
 
+    <button id="btnPlayPresentation">Play presentation</button>
+  </div>
 
   <script src="./js/navbar.js"></script>
   <script src="./js/ElementClass.js"></script>
