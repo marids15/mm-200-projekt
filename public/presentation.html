@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel='icon' href='/images/favicon2.ico' type='image/x-icon'/>
   <link rel="stylesheet" href="css/presentation.css">
+    <link rel="stylesheet" href="css/elementStyles.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,7 +76,14 @@
       <input id="inTxt" type="text" name="text" placeholder="Enter your text here" required>
       <input id="btnAddText" class="btn" type="submit" value="Add text">
     </form>
+    <div style="text-align: center;">
     <i id="btnDelete" class="fas fa-trash-alt"></i>
+    <i id="btnClearInput" class="fas fa-broom" onclick="updatevaluefield()"></i>
+</div>
+    <div id="updateFontDiv"></div>
+    <div id="updateColorDiv"></div>
+    <div id="updateSizeDiv"></div>
+    <div class="updatediv" id="updateTextDiv"></div>
   </template>
 
   <template id="imageContent">
@@ -140,6 +148,7 @@
   <script src="./js/PresentationClass.js"></script>
   <script src="./js/checkToken.js"></script>
   <script src="./js/main.js"></script>
+  <script src="./js/elementUpdate.js"></script>
   <script>
   var activePage = 2;
   MakeNavbar(activePage);
