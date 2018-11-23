@@ -51,7 +51,9 @@ class Slide {
       this.elements.push(imageHTML);
       this.div.appendChild(imageHTML);
       this.idGenerator ++;
-      this.makeDraggable(imageHTML);
+      if (DRAGGABLE) {
+        this.makeDraggable(imageHTML);
+      }
     }
     catch {
       console.error("Could not add Image");
@@ -66,9 +68,10 @@ class Slide {
       this.elements.push(textHTML);
       this.div.appendChild(textHTML);
       this.idGenerator++;
-      this.makeDraggable(textHTML);
-    }
-    catch(e) {
+      if (DRAGGABLE) {
+        this.makeDraggable(textHTML);
+      }
+    } catch(e) {
       console.error("Could not add Text: " + e);
     }
   }
@@ -81,7 +84,9 @@ class Slide {
       this.elements.push(vidHTML);
       this.div.appendChild(vidHTML);
       this.idGenerator++;
-      this.makeDraggable(vidHTML);
+      if (DRAGGABLE) {
+        this.makeDraggable(vidHTML);
+      }
     }
     catch {
       console.error("Could not add video");
@@ -94,7 +99,9 @@ class Slide {
     this.elements.push(soundHTML);
     this.div.appendChild(soundHTML);
     this.idGenerator++;
-    this.makeDraggable(soundHTML);
+    if (DRAGGABLE) {
+      this.makeDraggable(soundHTML);
+    }
   }
 
   // deletes element from slide

@@ -3,6 +3,7 @@
 @media only screen and (max-width: 768px) {
 	.wrapper {
 	  grid-template-columns: repeat(1, 1fr);
+		grid-row-gap: 3%;
 	}
 
 	#MyPresentations {
@@ -10,12 +11,17 @@
     margin-left: 2.5%;
     margin-right: 2.5%;
 	}
+
+	.miniView .textElementSlide {
+		font-size: 7.6vw;
+	}
 }
 
 /* CSS specifically for desktops -----------------------------------------*/
 @media screen and (min-width: 768px) {
 	.wrapper {
 	  grid-template-columns: repeat(3, 1fr);
+		grid-row-gap: 10%;
 	}
 
 	#MyPresentations {
@@ -23,6 +29,14 @@
     margin-left: 10%;
     margin-right: 10%;
 	}
+
+	.miniView .textElementSlide {
+		font-size: 1.92vw;
+	}
+}
+
+#MyPresentations {
+	min-height: 100vh;
 }
 
 .personnalPage {
@@ -80,19 +94,16 @@
 
 .wrapper {
   display: grid;
-  grid-gap: 30px;
-  margin: 10px;
+  grid-column-gap: 5%;
   grid-auto-rows: auto;
 }
 
 .presentation {
 	border-radius: 3px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas:
-      "miniView miniView"
-      "buttonDeleteP buttonDeleteP"
-      "buttonStatusP buttonPresenterP"
-			"buttonEditP buttonEditP";
+      "miniView miniView miniView miniView"
+      "buttonStatusP buttonStatusP buttonDeleteP buttonEditP";
 	background-color: #FEFEFE;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -110,7 +121,7 @@
 	cursor: pointer;
 }
 
-.miniView {
+.creationDiv {
   padding-top: 56.25%;
   width: 100%;
   overflow: hidden;
@@ -122,7 +133,6 @@
 	left: 0%;
 	top: 0%;
 	position: absolute;
-	font-size: 1.52vw;
 }
 
 .image {
@@ -175,21 +185,25 @@
 
 .buttonDeleteP{
     float: right;
-    width: 50%;
+    width: 25%;
+		padding-top: 6px;
+		padding-bottom: 6px;
+		box-sizing: border-box;
 }
 
 .buttonShareP{
     float: left;
     width: 50%;
     height: 100%;
-}
-
-.buttonPresenterP{
-    float: right;
-    width: 100%;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		box-sizing: border-box;
 }
 
 .buttonEditP {
 	float: right;
-	width: 100%;
+	width: 25%;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	box-sizing: border-box;
 }
