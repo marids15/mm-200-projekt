@@ -1,3 +1,4 @@
+//--------------- Constants
 const GET_PRESENTATION_URL = "/api/presentations";
 const SAVE_PRESENTATION_URL = "/api/presentations/save";
 
@@ -5,7 +6,7 @@ const SAVE_PRESENTATION_URL = "/api/presentations/save";
 let token = localStorage.getItem('token');
 let userID = localStorage.getItem('user_id');
 
-//---------------- document.getElementById variables
+//---------------- DOM  variables
 let indexOfSlide = document.getElementById("indexOfSlide");
 let inNote = document.getElementById('inNote');
 let slideDiv = document.getElementById("slideDiv");
@@ -14,14 +15,22 @@ let btnDeleteSlide = document.getElementById("btnDeleteSlide");
 let divContainer = document.getElementById("divContainer");
 let tabContent = document.getElementById('tabContent');
 
-//----------------- retrieving data from db
+//--------------- eventhandlers
+inNote.onchange = saveNote;
+btnAddSlide.onclick = addNewSlide;
+btnDeleteSlide.onclick = deleteCurrentSlide;
+
+// --------------- Global variables
+let myPresentation;
+
+//---------------- Functions
+// retrieving data from db
 let data = JSON.stringify({
 	presentation_id: localStorage.getItem('presentation_id'),
 	user_id: userID
 });
 
-let myPresentation;
-
+// request to server for getting presentation
 fetch(GET_PRESENTATION_URL, {
 	method: 'POST',
 	headers: {
@@ -29,67 +38,47 @@ fetch(GET_PRESENTATION_URL, {
     "Authorization": token
 	},
 	body: data
-}).then(response => {
+}).then(response => { // retrieved presentation
 	if (response.status < 400) {
 		loadPresentation(response);
-	} else {
-		// TODO: MESSAGE
-		console.log('Did not load presentation :(');
+	} else { // presentation could not be loaded
+		showErrorPopup('Could not load presentation, please try again later.');
 	}
 }).catch(err => console.error(err));
 
+// loading presentation from response
 async function loadPresentation(response) {
 	let data = await response.json();
 	let presentationJSON = data[0].presentation_json;
-	console.log(presentationJSON);
 	myPresentation = parseJSONToPresentation(presentationJSON);
-	console.log(myPresentation.getSlides().length);
-	if (myPresentation.getSlides().length === 0) {
-			addFirstSlide();
-			console.log("length : " + myPresentation.getSlides().length);
-			console.log('Adding first slide...');
-	} else {
-		console.log('no first slide');
-		console.log("length : " + myPresentation.getSlides());
+	// check if presentation has slides
+	if (myPresentation.getSlides().length === 0) { // has no slides
+		addFirstSlide();
+	} else { // has slides
 		goToSlide(0);
 	}
 
-	//requestAnimationFrame(draggable);
+	// make elements selectable
 	requestAnimationFrame(selectable);
 }
-//----------------- presentation object
-//let myPresentation = new Presentation(NAME, slideDiv);
 
-
-//--------------- eventhandlers
-inNote.onchange = saveNote;
-btnAddSlide.onclick = addNewSlide;
-btnDeleteSlide.onclick = deleteCurrentSlide;
-
-//--------------------------------
-
-
-function draggable(){
-	myPresentation.makeDivDraggable();
-	requestAnimationFrame(draggable);
-}
-
+// function to make elements selectable
 function selectable(evt){
 	myPresentation.makeDivSelectable();
 	requestAnimationFrame(selectable);
 }
 
-// ------------------- function to save note
+// function to save note into local presentation
 function saveNote() {
   let noteText = inNote.value;
   myPresentation.getCurrentSlide().setNote(noteText);
 }
 
+// function to update note from local presentation
 function updateNote() {
   let noteText = myPresentation.getCurrentSlide().getNote();
   inNote.value = noteText;
 }
-
 
 //-------------------- function to display the number and the total of slide
 function displayNumberCurrentSlide() {
@@ -155,7 +144,6 @@ function goToSlide(num) {
 //--------------- function to Add a new slide
 function addNewSlide() {
   myPresentation.addSlide(myPresentation.getCurrentSlideIndex() + 1);
-  //myPresentation.setCurrentSlideIndex(myPresentation.getCurrentSlideIndex() + 1);
   goToNextSlide();
   updateSlideMenu();
 }
@@ -181,7 +169,7 @@ function deleteCurrentSlide(){
     myPresentation.setCurrentSlideIndex(myPresentation.getCurrentSlideIndex() -1);
     goToNextSlide();
   }
-
+	// if any other slide is deleted
   else {
     goToPreviousSlide();
   }
@@ -190,32 +178,117 @@ function deleteCurrentSlide(){
 
 //-------------- function to delete an element
 function deleteElement() {
-  myPresentation.getCurrentSlide().deleteElement()
+  myPresentation.getCurrentSlide().deleteElement();
 }
 
-//--------------- full screen
-async function displayInFullScreen(){
-  goToSlide(0);
-  divContainer.addEventListener("webkitfullscreenchange", onFullScreenChange, true);
-  openFullscreen(divContainer);
+// function to switch slides in presentermode with arrow keys
+function clickKeyArrowsPresenter(event){
+  let presenter = document.getElementById("presenterDiv");
+  if (event.key === "ArrowLeft"){
+      goToPreviousSlide();
+      removeChildPresenter(presenter);
+      appendChildPresenter(presenter);
+  }
+  if (event.key === "ArrowRight"){
+      goToNextSlide();
+      removeChildPresenter(presenter);
+      appendChildPresenter(presenter);
+  }
+}
 
+// function to append eventlisteners to arrow keys, and removes them when not in presentermode
+function onFullScreenChangePresenter (e) {
+    let element = e.target;
+    if (element.FScreen){ // append eventlisteners (now in presentermode)
+      window.addEventListener("keydown", clickKeyArrowsPresenter, true);
+      element.FScreen = false;
+    }
+    else{ // remove eventlisteners (not in presenter mode anymore)
+      window.removeEventListener("keydown", clickKeyArrowsPresenter, true);
+      document.body.removeChild(element);
+    }
+  }
+
+//--------------- function for appending copy of display div / note to a container
+function appendChildPresenter(presenter){
+  copySlide = divContainer.cloneNode(true);
+  copySlide.className = "displayDivContainerCopy";
+  presenter.appendChild(copySlide);
+
+  copyNote = inNote.cloneNode(true);
+  copyNote.className = "noteDivContainer";
+  presenter.appendChild(copyNote);
+}
+
+//--------------- function for removing every child of a container
+function removeChildPresenter(presenter){
+  while (presenter.firstChild) {
+      presenter.removeChild(presenter.firstChild);
+  }
+}
+
+//---------------- function to display presentation in presenter mode
+async function displayPresenterMode() {
+	goToSlide(0);
+
+	// creating temporary div
+  let presenter = document.createElement('div');
+  presenter.id = "presenterDiv";
+
+	// appending copy of displaying slide and notes to container div
+  appendChildPresenter(presenter);
+  document.body.appendChild(presenter);
+
+  presenter.addEventListener("webkitfullscreenchange", onFullScreenChangePresenter, true);
+
+  openFullscreen(presenter);
+
+	// checking if timed transition is set to a value
   let timedTransitions = document.getElementById("timedTransitions");
   let value = timedTransitions[timedTransitions.selectedIndex].value;
-  if(value !== "noTimer"){
+  if (value !== "noTimer"){ // a timer is set
     let listSlide = myPresentation.getSlides();
     for (let i = 0; i < listSlide.length - 1; i++){
-      await timeout(parseInt(value) * 1000);
-      goToNextSlide();
+      await timeout(parseInt(value) * 1000); // wait
+			// check if we are still in presenter mode
+      if(presenter.FScreenTimer){ // presenter mode
+        goToNextSlide();	// change slide
+        removeChildPresenter(presenter);
+        appendChildPresenter(presenter);
+      }
     }
     await timeout(parseInt(value) * 1000);
   }
 }
 
+//--------------- display full screen
+async function displayInFullScreen(){
+  goToSlide(0);
+  divContainer.addEventListener("webkitfullscreenchange", onFullScreenChange, true);
+  openFullscreen(divContainer);
+
+	// check if timed transition is set to value
+  let timedTransitions = document.getElementById("timedTransitions");
+  let value = timedTransitions[timedTransitions.selectedIndex].value;
+  if(value !== "noTimer"){ // timer is set
+    let listSlide = myPresentation.getSlides();
+    for (let i = 0; i < listSlide.length - 1; i++){
+      await timeout(parseInt(value) * 1000);
+			// check if still in presentation mode
+			if(divContainer.FScreenTimer){ // presentation mode
+      	goToNextSlide();
+			}
+    }
+    await timeout(parseInt(value) * 1000); // wait
+  }
+}
+
+// function for simulating timeout / wait
 function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-/* View in fullscreen */
+// function to switch an element to fullscreen */
 function openFullscreen(elem) {
   if (elem.requestFullscreen) {
     elem.requestFullscreen();
@@ -227,6 +300,7 @@ function openFullscreen(elem) {
     elem.msRequestFullscreen();
   }
   elem.FScreen = true;
+	elem.FScreenTimer = true;
 }
 
 /* Close fullscreen */
@@ -244,29 +318,31 @@ function closeFullscreen(elem) {
   console.log(" your browser doesn't support the Fullscreen API");
 }
 
-  function onFullScreenChange (e) {
-    let element = e.target;
-    if (element.FScreen){
-      window.addEventListener("keydown", clickKeyArrows, true);
-      element.FScreen = false;
-      swipedetect(divContainer);
-    }
-
-    else{
-      window.removeEventListener("keydown", clickKeyArrows, true);
-    }
+// function to append eventlisteners to arrow keys, and removes them when not in presentation mode
+function onFullScreenChange (e) {
+  let element = e.target;
+  if (element.FScreen){ // in presentation mode: add eventlisteners
+    window.addEventListener("keydown", clickKeyArrows, true);
+    element.FScreen = false;
+    swipedetect(divContainer);
   }
-
-   function clickKeyArrows(event){
-    if (event.key === "ArrowLeft"){
-        goToPreviousSlide();
-    }
-    if (event.key === "ArrowRight"){
-        goToNextSlide();
-    }
+  else { // not in presentation mode: remove eventlisteners
+    window.removeEventListener("keydown", clickKeyArrows, true);
+		element.FScreenTimer = false;
   }
+}
 
-  // credit: http://www.javascriptkit.com/javatutors/touchevents2.shtml
+// function to switch slides in presentation mode with arrow keys
+function clickKeyArrows(event){
+	if (event.key === "ArrowLeft"){
+	    goToPreviousSlide();
+	}
+	if (event.key === "ArrowRight"){
+	    goToNextSlide();
+	}
+}
+
+// function for detecting swipes on mobile devices on full screen mode
 function swipedetect(el){
 
     var touchsurface = el,
@@ -307,6 +383,10 @@ function swipedetect(el){
         e.preventDefault();
     }, false);
 }
+///////////////////////////////////////////////////////////////////////////////
+//////////////					ENDED COMMENTS HERE 			/////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
 
 // ---------------- Updates the slide scrolling menu
 function updateSlideMenu() {
@@ -319,8 +399,8 @@ function updateSlideMenu() {
     let copy = listSlide[i].getSlideHTML().cloneNode(true);
     newDiv.appendChild(copy);
     newDiv.addEventListener('click', function() {
-            goToSlide(i);
-        });
+      goToSlide(i);
+    });
 
     slideMenu.appendChild(newDiv);
   }
@@ -393,8 +473,10 @@ function showPresenterTool() {
   let presenterTab = document.getElementById('presenterToolTab');
   makeToolActive(presenterTab);
   let btnDisplayFullScreen = document.getElementById('btnDisplayFullScreen');
+	let btnDisplayPresenterMode = document.getElementById('btnDisplayPresenterMode');
 	let selectTheme = document.getElementById('selectTheme');
   btnDisplayFullScreen.onclick = displayInFullScreen;
+	btnDisplayPresenterMode.onclick = displayPresenterMode;
 	selectTheme.onchange = changeTheme;
 	selectTheme.value = myPresentation.getTheme;
 }
@@ -487,11 +569,11 @@ async function storePresentation() {
 		body: data
 	}).then(response => {
 	if (response.status < 400) {
-		console.log('Stored presentation! :D');
-		// TODO: MESSAGE
+		showConfirmPopup('Presentation is saved!');
+	} else if (response.status === 403) {
+		showErrorPopup('You are not authorized to save this presentation.');
 	} else {
-		// TODO: MESSAGE
-		console.log('Did not store presentation :(');
+		showErrorPopup('Presentation could not be stored, please try again later.');
 	}
 	}).catch(err => console.error(err));
 

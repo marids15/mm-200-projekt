@@ -187,6 +187,20 @@ table {
     width: 100%;
     height: 100%;
   }
+
+  /* For displaying in presenter mode ----------------------------------*/
+  .displayDivContainerCopy {
+    width: 95%;
+    margin-top: 20px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 20px;
+    float: right;
+  }
+
+  .displayDivContainerCopy .textElementSlide {
+    font-size: 8.5vw;
+  }
 }
 
 /* CSS specifically for desktops -----------------------------------------*/
@@ -287,6 +301,19 @@ table {
 
   .vidDiv {
     font-size: 1.5vw;
+  }
+
+  /* For displaying in presenter mode ------------------------------------*/
+  .displayDivContainerCopy {
+    width: 70%;
+    margin-top: 40px;
+    margin-right: 15%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+  }
+
+  .displayDivContainerCopy .textElementSlide {
+    font-size: 6.5vw;
   }
 }
 
@@ -485,7 +512,7 @@ input, button {
   color: var(--light);
 }
 
-.tabContent label, p {
+.tabContent label, .text {
   display: block;
   width: 100%;
   font-family: var(--text-font);
@@ -528,11 +555,11 @@ input, button {
 
 /* For presentation mode -------------------------------------*/
 @media all and (display-mode: fullscreen) {
-  .textElementSlide {
+  .displayDivContainer .textElementSlide {
     font-size: 8vw;
   }
 
-  .displayDivContainer{
+  .displayDivContainer {
     width: 100% ;
   }
 }
