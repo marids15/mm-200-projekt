@@ -124,6 +124,18 @@ router.post('/api/presentations/:presentationid/sharing', async function(req, re
   }
 });
 
+// retrieving all public presentations
+router.get('/api/public/presentations', async function(req, res) {
+  let shareOption = 1;
+
+  let queryPresentations = `SELECT * FROM public.presentations t
+  WHERE share_option = '${shareOption}'`;
+
+  let response = await db.select(queryPresentations);
+  let status = response? 200 : 500;
+  res.status(status).json(response).end();
+})
+
 // function to check whether token and userid combination is valid, returns boolean
 async function checkToken(token, userid) {
   let query = `SELECT * FROM public.tokens t
