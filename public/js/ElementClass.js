@@ -44,7 +44,9 @@ class Element {
   // gets HTML for text
   createHTMLText(){
     let myText = document.createElement("text");
-    myText.contentEditable = true;
+    if (EDITABLE) {
+      myText.contentEditable = true;
+    }
     myText.innerHTML = this.content;
     myText.setAttribute( 'class', 'textElementSlide');
     myText.setAttribute('spellcheck', "false");

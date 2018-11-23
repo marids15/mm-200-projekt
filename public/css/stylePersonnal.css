@@ -3,12 +3,17 @@
 @media only screen and (max-width: 768px) {
 	.wrapper {
 	  grid-template-columns: repeat(1, 1fr);
+		grid-row-gap: 3%;
 	}
 
 	#MyPresentations {
 		width: 95%;
-	    margin-left: 2.5%;
-	    margin-right: 2.5%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+	}
+
+	.miniView .textElementSlide {
+		font-size: 7.6vw;
 	}
 }
 
@@ -16,46 +21,107 @@
 @media screen and (min-width: 768px) {
 	.wrapper {
 	  grid-template-columns: repeat(3, 1fr);
+		grid-row-gap: 10%;
 	}
 
 	#MyPresentations {
-		width: 70%;
-	    margin-left: 15%;
-	    margin-right: 15%;
+		width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+	}
+
+	.miniView .textElementSlide {
+		font-size: 1.92vw;
 	}
 }
 
+#MyPresentations {
+	min-height: 100vh;
+}
 
+.personnalPage {
+	width: 100%;
+	height: 100%;
+	background-image: var(--grey-background-gradient);
+}
 
-.headerP{
+.headerP {
 	font-family: sans-serif;
 	font-size: 20px;
-	border: 3px solid #333;
 	border-radius: 5px;
-	margin: 10px;
 	float: center;
+	text-align: center;
+	margin-bottom: 50px;
+	margin-top: 30px;
+}
+
+.headerP h1 {
+	font-family: var(--title-font);
+	font-size: 40px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.headerP label {
+	font-size: 15px;
+}
+
+.headerP input[type=text] {
+	background-color: #fafafa;
+	box-shadow: inset 0 0 2px 0.5px rgba(0, 0, 0, 0.1);;
+  border: solid 1px #BBB;
+  border-radius: 2px;
+  font-family: var(--text-font);
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	width: 25%;
+}
+
+.headerP input[type=submit] {
+	background-image: linear-gradient(to bottom right, var(--second-color), var(--main-color));
+  border: none;
+  border-radius: 4px;
+  font-family: var(--text-font);
+  color: var(--grey);
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+	padding: 20px;
+	padding-top: 5px;
+  padding-bottom: 5px;
+	margin-left: 1%;
 }
 
 .wrapper {
   display: grid;
-  grid-gap: 10px;
-  margin: 10px;
+  grid-column-gap: 5%;
   grid-auto-rows: auto;
 }
 
 .presentation {
-	border: 3px solid #EEE;
-	border-radius: 5px;
-  grid-template-columns: 1fr 1fr;
-
+	border-radius: 3px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas:
-      "miniView miniView"
-      "buttonDeleteP buttonDeleteP"
-      "buttonStatusP buttonPresenterP"
-			"buttonEditP buttonEditP";
+      "miniView miniView miniView miniView"
+      "buttonStatusP buttonStatusP buttonDeleteP buttonEditP";
+	background-color: #FEFEFE;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.miniView {
+.presentation button {
+	background-image: linear-gradient(to bottom right, var(--second-color), var(--main-color));
+	border: 1px solid #fefefe;
+	border-radius: 3px;
+  font-family: var(--text-font);
+  color: var(--grey);
+  box-sizing: border-box;
+}
+
+.presentation button:hover {
+	cursor: pointer;
+}
+
+.creationDiv {
   padding-top: 56.25%;
   width: 100%;
   overflow: hidden;
@@ -67,7 +133,6 @@
 	left: 0%;
 	top: 0%;
 	position: absolute;
-	font-size: 1.52vw;
 }
 
 .image {
@@ -120,21 +185,25 @@
 
 .buttonDeleteP{
     float: right;
-    width: 50%;
+    width: 25%;
+		padding-top: 6px;
+		padding-bottom: 6px;
+		box-sizing: border-box;
 }
 
 .buttonShareP{
     float: left;
     width: 50%;
     height: 100%;
-}
-
-.buttonPresenterP{
-    float: right;
-    width: 100%;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		box-sizing: border-box;
 }
 
 .buttonEditP {
 	float: right;
-	width: 100%;
+	width: 25%;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	box-sizing: border-box;
 }

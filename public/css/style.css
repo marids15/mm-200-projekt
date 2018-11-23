@@ -151,6 +151,68 @@ table {
   color: white;
 }
 
+/* Popup messages --------------------------------------------------------*/
+
+.confirmMessage {
+  top: 50px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  position: absolute;
+  z-index: 10;
+  background-color: #cbe5a7;
+  border: 2px solid var(--main-color);
+  border-radius: 3px;
+}
+
+.confirmMessage p {
+  float: left;
+  padding: 10px;
+  padding-left: 20px;
+  color: #3a5613;
+  font-family: var(--text-font);
+  font-size: 14px;
+}
+
+.confirmMessage button {
+  background-color: #cbe5a7;
+  color: #3a5613;
+  float: right;
+  right: 0;
+  margin: 10px;
+  border: none;
+}
+
+.errorMessage {
+  top: 50px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  position: absolute;
+  z-index: 10;
+  background-color: #ffceb7;
+  border: 2px solid var(--third-color);
+  border-radius: 3px;
+}
+
+.errorMessage p {
+  float: left;
+  padding: 10px;
+  padding-left: 20px;
+  color: #7c4024;
+  font-family: var(--text-font);
+  font-size: 14px;
+}
+
+.errorMessage button {
+  background-color: #ffceb7;
+  color: #7c4024;
+  float: right;
+  right: 0;
+  margin: 10px;
+  border: none;
+}
+
 /* Themes ---------------------------------------------------------*/
 /* Default theme ----------------------------------------------*/
 .themeDefault {

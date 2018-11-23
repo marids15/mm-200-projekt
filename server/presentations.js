@@ -92,8 +92,6 @@ router.delete('/api/presentations/:presentationid', async function(req, res) {
   let userid = req.body.user_id;
   let presentationid = req.body.presentation_id;
   let token = req.headers.Authorization;
-  console.log(userid);
-  console.log(presentationid);
 
   // check token and if user is owner of presentation
   if (checkToken(token, userid) && checkOwner(presentationid, userid)) { // token is valid and user is owner
