@@ -46,7 +46,11 @@ router.post('/api/users/auth', async function(req, res, next) {
     let tokenQuery = `SELECT * FROM public.tokens t WHERE user_id = '${user[0].id}'`;
 
     let token = await db.select(tokenQuery);
-    res.status(200).set({'Authorization': token[0].token}).json(user); // send token to client
+    if (token) {
+      res.status(200).set({'Authorization': token[0].token}).json(user).end(); // send token to client
+    } else {
+      res.status(500).json({}).end();
+    }
   } else {
     res.status(401).json({}).end();
   }
