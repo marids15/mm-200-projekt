@@ -72,9 +72,9 @@ class Element {
   createHTMLVideo() {
     let myVidFrame = document.createElement('iframe');
     let vidDiv = document.createElement('div');
-    let dragIcon = document.createElement('icon');
+    let dragIcon = document.createElement('image');
     vidDiv.className = "vidDiv"
-    dragIcon.className = "fas fa-arrows-alt";
+    dragIcon.setAttribute("src", "images/dragging.jpg");
 
     myVidFrame.src = this.content;
     myVidFrame.frameborder = "0";
