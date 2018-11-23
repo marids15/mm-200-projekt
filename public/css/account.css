@@ -122,7 +122,7 @@ input {
   box-sizing: border-box;
 }
 
-button {
+.emailButton {
   box-sizing: border-box;
   margin: 0;
   height: 41px;

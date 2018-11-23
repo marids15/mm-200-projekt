@@ -139,7 +139,7 @@ router.post('/api/users/:userid/pass', async function(req, res) {
         res.status(500).json({}).end();
       }
     } else {  // old password is not valid
-      res.status(403).json({}).end();
+      res.status(400).json({}).end();
     }
   } else {  // token is not valid
     res.status(403).json({}).end();

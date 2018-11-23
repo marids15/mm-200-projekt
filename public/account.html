@@ -20,7 +20,7 @@
       <form class="credentialsEmail" id="formEmail">
         <label for="inEmail">Email:</label>
         <input id="inEmail" type="email">
-        <button type="submit">
+        <button class="emailButton" type="submit">
           <i id="btnSaveEmail" class="fas fa-pencil-alt" type="submit"></i>
         </button>
       </form>
@@ -32,8 +32,8 @@
         <input id="inNewPassword1" type="password" required>
         <label for="inNewPassword2">Confirm new password:</label>
         <input id="inNewPassword2" type="password" required> <br>
-        <input type="submit" id="btnSavePwd" value="Save new password">
         <p id="message"></p>
+        <input type="submit" id="btnSavePwd" value="Save new password">
       </form>
       <form class="credentialsImage" id="formUploadImage">
       </form>
@@ -49,6 +49,7 @@
       </form>
     </div>
     <script src="./js/checkToken.js"></script>
+    <script src="./js/popupMessage.js"></script>
     <script src="./js/account.js"></script>
     <script src="./js/navbar.js"></script>
 
