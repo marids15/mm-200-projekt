@@ -151,7 +151,7 @@ function onFullScreenChange (e) {
   if (element.FScreen){ // in presentation mode: add eventlisteners
     window.addEventListener("keydown", clickKeyArrows, true);
     element.FScreen = false;
-    swipedetect(divContainer);
+    swipedetect(divContainer, 'presentation');
   }
 
   else {  // not in presentation mode: remove eventlisteners
@@ -171,7 +171,7 @@ function clickKeyArrows(event){
 }
 
 // function for detecting swipes on mobile devices on full screen mode
-function swipedetect(el){
+function swipedetect(el, mode){
 
     var touchsurface = el,
     startX,
@@ -195,21 +195,39 @@ function swipedetect(el){
     }, false)
 
     touchsurface.addEventListener('touchend', function(e){
-        var touchobj = e.changedTouches[0];
-        let distX = touchobj.pageX - startX; // get horizontal dist traveled by finger while in contact with surface
-        let distY = touchobj.pageY - startY; // get vertical dist traveled by finger while in contact with surface
-        let elapsedTime = new Date().getTime() - startTime // get time elapsed
-        if (elapsedTime <= allowedTime){ // first condition for awipe met
-            if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
-                (distX < 0)? goToPreviousSlide() : goToNextSlide();
-            }
-            else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
-                console.log("exit");
-                closeFullscreen(divContainer);
-            }
-        }
-        e.preventDefault();
+      var touchobj = e.changedTouches[0];
+      let distX = touchobj.pageX - startX; // get horizontal dist traveled by finger while in contact with surface
+      let distY = touchobj.pageY - startY; // get vertical dist traveled by finger while in contact with surface
+      let elapsedTime = new Date().getTime() - startTime // get time elapsed
+      if (elapsedTime <= allowedTime){ // first condition for awipe met
+        if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+					if(mode === "presentation"){
+						(distX < 0)? goToPreviousSlide() : goToNextSlide();
+					}
+					else if (mode === 'presenter'){
+						let presenter = document.getElementById('presenterDiv');
+						if(distX < 0){
+							goToPreviousSlide();
+							removeChildPresenter(presenter);
+							appendChildPresenter(presenter);
+						}else{
+							goToNextSlide();
+							removeChildPresenter(presenter);
+							appendChildPresenter(presenter);                }
+						}
+          }
+          else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+            console.log("exit");
+          }
+      }
+      e.preventDefault();
     }, false);
+}
+
+// function to update note from local presentation
+function updateNote() {
+  let noteText = myPresentation.getCurrentSlide().getNote();
+  inNote.value = noteText;
 }
 
 // -------------- function to go to next slide
@@ -254,6 +272,7 @@ function onFullScreenChangePresenter (e) {
   if (element.FScreen){ // append eventlisteners (now in presentermode)
     window.addEventListener("keydown", clickKeyArrowsPresenter, true);
     element.FScreen = false;
+    swipedetect(element, 'presenter');
   }
   else{ // remove eventlisteners (not in presenter mode anymore)
     window.removeEventListener("keydown", clickKeyArrowsPresenter, true);
