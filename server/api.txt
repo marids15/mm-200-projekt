@@ -82,7 +82,7 @@ RESPONSE (JSON):
 }
 
 --------------------------------------------------------------------------------
-Get presentation:
+Get specific presentation of user:
 METHOD: GET
 ENDPOINT: api/presentations
 REQUEST header :---------
@@ -168,16 +168,27 @@ REQUEST (JSON):
 --------------------------------------------------------------------------------
 Delete presentation:
 METHOD: DELETE
-ENDPOINT: api/presentations
-REQUEST header: ----------
+ENDPOINT: api/presentations/:presenationid
+REQUEST header: Authorization: token
 REQUEST (JSON):
 {
-  "id": 0,
-  "name": "Cookies",
-  "owner": "John Doe",
+  "presentation_id": 0,
+  "user_id": 42
 }
-RESPONSE: {""}
+RESPONSE: {}
 
+--------------------------------------------------------------------------------
+Update sharing options presentation:
+METHOD: POST
+ENDPOINT: api/presentations/:presentationid/sharing
+REQUEST header: Authorization: token
+REQUEST (JSON):
+{
+  "presentation_id": 0,
+  "user_id": 42,
+  "share_option": 0
+}
+RESPONSE: {}
 
 --------------------------------------------------------------------------------
 Get all presentations of user:
@@ -186,6 +197,19 @@ ENDPOINT: api/presentations/:userid
 REQUEST header: -------
 REQUEST: no body
 RESPONSE: {
+  presentations: [
+  {"id": etc}
+  ]
+}
+
+--------------------------------------------------------------------------------
+Get all public presentations:
+METHOD: GET
+ENDPOINT: api/public/presentations
+REQUEST header: no header (no token needed, you do not need to be logged in to view this page);
+REQUEST (JSON): no body
+RESPONSE:
+{
   presentations: [
   {"id": etc}
   ]

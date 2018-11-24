@@ -151,6 +151,68 @@ table {
   color: white;
 }
 
+/* Popup messages --------------------------------------------------------*/
+
+.confirmMessage {
+  top: 50px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  position: absolute;
+  z-index: 10;
+  background-color: #cbe5a7;
+  border: 2px solid var(--main-color);
+  border-radius: 3px;
+}
+
+.confirmMessage p {
+  float: left;
+  padding: 10px;
+  padding-left: 20px;
+  color: #3a5613;
+  font-family: var(--text-font);
+  font-size: 14px;
+}
+
+.confirmMessage button {
+  background-color: #cbe5a7;
+  color: #3a5613;
+  float: right;
+  right: 0;
+  margin: 10px;
+  border: none;
+}
+
+.errorMessage {
+  top: 50px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  position: absolute;
+  z-index: 10;
+  background-color: #ffceb7;
+  border: 2px solid var(--third-color);
+  border-radius: 3px;
+}
+
+.errorMessage p {
+  float: left;
+  padding: 10px;
+  padding-left: 20px;
+  color: #7c4024;
+  font-family: var(--text-font);
+  font-size: 14px;
+}
+
+.errorMessage button {
+  background-color: #ffceb7;
+  color: #7c4024;
+  float: right;
+  right: 0;
+  margin: 10px;
+  border: none;
+}
+
 /* Themes ---------------------------------------------------------*/
 /* Default theme ----------------------------------------------*/
 .themeDefault {
@@ -158,11 +220,7 @@ table {
 }
 
 .themeDefault .vidDiv {
-  background-color: var(--grey);
-}
-
-.themeDefault .vidDiv icon {
-  color: var(--second-color);
+  background-color: var(--light-grey);
 }
 
 .themeDefault .textElementSlide {
@@ -177,15 +235,60 @@ table {
 }
 
 .themeDark .vidDiv {
-  background-color: var(--grey);
-}
-
-.themeDark .vidDiv icon {
-  color: var(--second-color);
+  background-color: var(--light-grey);
 }
 
 .themeDark .textElementSlide {
   font-family: var(--title-font);
 /*  background-color: var(--third-color);*/
   color: #FEFEFE;
+}
+
+/* Geometric theme -------------------------------------------*/
+.themeGeometric {
+  background-image: url('/images/backgrounds/geometric.jpg');
+  background-size: cover;
+}
+
+.themeGeometric .vidDiv {
+  background-color: var(--light-grey);
+}
+
+.themeGeometric .textElementSlide {
+  font-family: var(--text-font);
+  color: var(--grey);
+  font-weight: bold;
+}
+
+/* Washed forest theme ----------------------------------------*/
+.themeWashed {
+  background-image: url('/images/backgrounds/washed_forest.jpg');
+  background-size: cover;
+}
+
+.themeWashed .vidDiv {
+  background-color: var(--main-color);
+}
+
+.themeWashed .textElementSlide {
+  font-family: var(--text-font);
+  color: black;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Wood theme -----------------------------------------------*/
+.themeWood {
+  background-image: url('/images/backgrounds/wood.jpg');
+  background-size: cover;
+}
+
+.themeWood .vidDiv {
+  background-color: var(--light-grey);
+}
+
+.themeWood .textElementSlide {
+  font-family: var(--text-font);
+  color: black;
+  font-weight: bold;
 }
