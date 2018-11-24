@@ -24,6 +24,7 @@ async function loadPresentations() {
 			displayPresentations(response);
 		} else if (response.status === 500) { // server error
       showErrorPopup('Could not load public presentations, please try again later.');
+		}
 	}).catch(err => console.error(err))
 }
 
