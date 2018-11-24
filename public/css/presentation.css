@@ -366,25 +366,32 @@ input, button {
   position: absolute;
   width: 20%;
   height: 15%;
-  background-color: darkblue;
+  background-color: var(--light-grey);
 }
 
 .soundLeft {
   float: left;
   width: 50%;
   height: 70%;
-  background-color: khaki;
+  background-color: var(--second-color);
 }
 
 .soundRight {
   float: right;
   width: 50%;
   height: 70%;
-  background-color: khaki;
+  background-color: var(--main-color);
 }
 
 .soundDrag {
   width: 100%;
+}
+
+.soundDrag img {
+  float: right;
+  margin: 2%;
+  margin-right: 4%;
+  width: 10%;
 }
 
 .creationDiv {
