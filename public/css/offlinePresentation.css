@@ -135,6 +135,20 @@ table {
     margin-left: 35%;
     margin-right: 35%;
   }
+
+  /* For displaying in presenter mode ----------------------------------*/
+  .displayDivContainerCopy {
+    width: 95%;
+    margin-top: 20px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 20px;
+    float: right;
+  }
+
+  .displayDivContainerCopy .textElementSlide {
+    font-size: 8.5vw;
+  }
 }
 
 /* CSS specifically for desktops -----------------------------------------*/
@@ -225,6 +239,19 @@ table {
     box-sizing: border-box;
     float: left;
     height: 40px;
+  }
+
+  /* For displaying in presenter mode ------------------------------------*/
+  .displayDivContainerCopy {
+    width: 70%;
+    margin-top: 40px;
+    margin-right: 15%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+  }
+
+  .displayDivContainerCopy .textElementSlide {
+    font-size: 6.5vw;
   }
 }
 
