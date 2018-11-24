@@ -115,3 +115,7 @@ font-family: Arial, Helvetica, sans-serif !important;
   font-size: 28vw !important;
 }
 }
+
+.updatediv{
+  display: none;
+}

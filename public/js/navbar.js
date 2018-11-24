@@ -17,13 +17,32 @@ var c = "";
 var d = "";
 // Makes navbar- and handles what is the active element
 function MakeNavbar(evt){
+  let tokentest = localStorage.getItem("token");
+  //console.log(tokentest);
+  let logedinornot = "";
+  if (tokentest.length > 12){
+  //  console.log("testedtokennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+    logedinornot = '<i class="fas fa-power-off" onclick="log_out()"></i>';
+  }
   if (evt == 1){a = 'class="active"';}
   if (evt == 2){b = 'class="active"';}
   if (evt == 3){c = 'class="active"';}
   if (evt == 4){d = 'class="active"';}
+    if (evt == 9){b = 'class="active"';}
   //  Makes the actual navbar
   var navi =  document.createElement("div");
   navi.id = "topnav";
-  navi.innerHTML = '<a href="index.html" '+a+' >Home</a><a href="personnal.html" '+b+' >My presentations</a><a href="OfflinePresentations.html" '+c+'>Offline Presentations</a><a href="account.html" ' + d + '>My account</a><i class="fas fa-bars" onclick="expandNavigation()"></i>';
+  navi.innerHTML = '<a href="index.html" '+a+' >Home</a><a href="personnal.html" '+b+' >My presentations</a>'+logedinornot+'<a href="OfflinePresentations.html" '+c+'>Offline Presentations</a><a href="account.html" ' + d + '>My account</a><i class="fas fa-bars" onclick="expandNavigation()"></i>';
   document.getElementById("top").appendChild(navi);
+}
+
+function log_out(){
+  //let msg = "offLoged";
+  if (activePage == 9){
+  storePresentation();
+}
+  localStorage.setItem("token","offLoged");
+  localStorage.setItem("user_id","offLoged");
+  //console.log("loggeroffer");
+    location.href = "./index.html";
 }
