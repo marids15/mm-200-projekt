@@ -102,7 +102,9 @@ async function displayInFullScreen(){
     let listSlide = myPresentation.getSlides();
     for (let i = 0; i < listSlide.length - 1; i++){
       await timeout(parseInt(value) * 1000);
-      goToNextSlide();
+      if (divContainer.FScreenTimer) {
+        goToNextSlide();
+      }
     }
     await timeout(parseInt(value) * 1000);
   }
@@ -124,6 +126,7 @@ function openFullscreen(elem) {
     elem.msRequestFullscreen();
   }
   elem.FScreen = true;
+  elem.FScreenTimer = true;
 }
 
 /* Close fullscreen */
@@ -151,6 +154,7 @@ function onFullScreenChange (e) {
 
   else{
     window.removeEventListener("keydown", clickKeyArrows, true);
+    element.FScreenTimer = false;
   }
 }
 
@@ -287,7 +291,6 @@ function appendChildPresenter(presenter){
 
   copyNote = inNote.cloneNode(true);
   copyNote.className = "noteDivContainer";
-  copyNote.width = '100%';
   presenter.appendChild(copyNote);
 }
 

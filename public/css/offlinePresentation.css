@@ -191,7 +191,7 @@ table {
   }
 
   .divSlideMenu .textElementSlide {
-      font-size: 0.864vw;
+      font-size: 0.75vw;
   }
 
   /* For creating and deleting slides --------------------------------*/
@@ -252,6 +252,17 @@ table {
 
   .displayDivContainerCopy .textElementSlide {
     font-size: 6.5vw;
+  }
+
+  /* For presentation mode -------------------------------------*/
+  @media all and (display-mode: fullscreen) {
+    .noteDivContainer{
+      width: 70%;
+      height: 5%;
+      margin-right: 20%;
+      margin-left: 10%;
+      float: right;
+    }
   }
 }
 
@@ -391,6 +402,10 @@ input[type="file"] {
   position: relative;
 }
 
+.divSlideMenu .textElementSlide {
+  white-space: normal;
+}
+
 .divSlideMenu .vidDiv icon {
   display: none;
 }
@@ -436,6 +451,11 @@ input[type="file"] {
   color: #FFF;
   box-sizing: border-box;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* For presenter mode ---------------------------------------*/
+.noteDivContainerCopy {
+
 }
 /* For presentation mode -------------------------------------*/
 @media all and (display-mode: fullscreen) {

@@ -223,12 +223,6 @@ table {
   background-color: var(--light-grey);
 }
 
-/*
-.themeDefault .vidDiv icon {
-  color: var(--second-color);
-}
-*/
-
 .themeDefault .textElementSlide {
   font-family: var(--title-font);
   color: var(--grey);
@@ -244,12 +238,57 @@ table {
   background-color: var(--light-grey);
 }
 
-.themeDark .vidDiv icon {
-  color: var(--second-color);
-}
-
 .themeDark .textElementSlide {
   font-family: var(--title-font);
 /*  background-color: var(--third-color);*/
   color: #FEFEFE;
+}
+
+/* Geometric theme -------------------------------------------*/
+.themeGeometric {
+  background-image: url('/images/backgrounds/geometric.jpg');
+  background-size: cover;
+}
+
+.themeGeometric .vidDiv {
+  background-color: var(--light-grey);
+}
+
+.themeGeometric .textElementSlide {
+  font-family: var(--text-font);
+  color: var(--grey);
+  font-weight: bold;
+}
+
+/* Washed forest theme ----------------------------------------*/
+.themeWashed {
+  background-image: url('/images/backgrounds/washed_forest.jpg');
+  background-size: cover;
+}
+
+.themeWashed .vidDiv {
+  background-color: var(--main-color);
+}
+
+.themeWashed .textElementSlide {
+  font-family: var(--text-font);
+  color: black;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Wood theme -----------------------------------------------*/
+.themeWood {
+  background-image: url('/images/backgrounds/wood.jpg');
+  background-size: cover;
+}
+
+.themeWood .vidDiv {
+  background-color: var(--light-grey);
+}
+
+.themeWood .textElementSlide {
+  font-family: var(--text-font);
+  color: black;
+  font-weight: bold;
 }

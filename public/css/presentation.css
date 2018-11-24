@@ -139,7 +139,7 @@ table {
   }
 
   .textElementSlide {
-    font-size: 7.6vw;
+    font-size: 8vw;
   }
 
   .textElementSlide:focus {
@@ -154,7 +154,7 @@ table {
   }
 
   .divSlideMenu .textElementSlide {
-      font-size: 1.52vw;
+      font-size: 1.6vw;
   }
 
   /* For creating and deleting slide ----------------------------------*/
@@ -269,7 +269,7 @@ table {
   }
 
   .divSlideMenu .textElementSlide {
-      font-size: 0.864vw;
+      font-size: 0.75vw;
   }
 
   /* For creating and deleting slides --------------------------------*/
@@ -420,6 +420,10 @@ input, button {
   border: 1px solid red;
   margin: 2px;
   position: relative;
+}
+
+.divSlideMenu .textElementSlide {
+  white-space: normal;
 }
 
 .divSlideMenu .vidDiv img {
