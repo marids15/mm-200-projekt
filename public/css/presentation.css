@@ -139,15 +139,11 @@ table {
   }
 
   .textElementSlide {
-    font-size: 7.6vw;
+    font-size: 8vw;
   }
 
   .textElementSlide:focus {
     outline: none;
-  }
-
-  .vidDiv {
-    font-size: 2.5vw;
   }
 
   /* For displaying scrolling slide menu ------------------------------*/
@@ -158,7 +154,7 @@ table {
   }
 
   .divSlideMenu .textElementSlide {
-      font-size: 1.52vw;
+      font-size: 1.6vw;
   }
 
   /* For creating and deleting slide ----------------------------------*/
@@ -273,7 +269,7 @@ table {
   }
 
   .divSlideMenu .textElementSlide {
-      font-size: 0.864vw;
+      font-size: 0.75vw;
   }
 
   /* For creating and deleting slides --------------------------------*/
@@ -297,10 +293,6 @@ table {
     padding: 5px;
     width: 100%;
     height: 100%;
-  }
-
-  .vidDiv {
-    font-size: 1.5vw;
   }
 
   /* For displaying in presenter mode ------------------------------------*/
@@ -363,35 +355,43 @@ input, button {
   display: inline-block;
 }
 
-.vidDiv icon {
+.vidDiv img {
   float: right;
   margin: 2%;
-  padding: 2%;
+  margin-right: 4%;
+  width: 10%;
 }
 
 .soundElement {
   position: absolute;
   width: 20%;
   height: 15%;
-  background-color: darkblue;
+  background-color: var(--light-grey);
 }
 
 .soundLeft {
   float: left;
   width: 50%;
   height: 70%;
-  background-color: khaki;
+  background-color: var(--second-color);
 }
 
 .soundRight {
   float: right;
   width: 50%;
   height: 70%;
-  background-color: khaki;
+  background-color: var(--main-color);
 }
 
 .soundDrag {
   width: 100%;
+}
+
+.soundDrag img {
+  float: right;
+  margin: 2%;
+  margin-right: 4%;
+  width: 10%;
 }
 
 .creationDiv {
@@ -429,7 +429,11 @@ input, button {
   position: relative;
 }
 
-.divSlideMenu .vidDiv icon {
+.divSlideMenu .textElementSlide {
+  white-space: normal;
+}
+
+.divSlideMenu .vidDiv img {
   display: none;
 }
 

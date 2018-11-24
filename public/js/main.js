@@ -198,16 +198,16 @@ function clickKeyArrowsPresenter(event){
 
 // function to append eventlisteners to arrow keys, and removes them when not in presentermode
 function onFullScreenChangePresenter (e) {
-    let element = e.target;
-    if (element.FScreen){ // append eventlisteners (now in presentermode)
-      window.addEventListener("keydown", clickKeyArrowsPresenter, true);
-      element.FScreen = false;
-    }
-    else{ // remove eventlisteners (not in presenter mode anymore)
-      window.removeEventListener("keydown", clickKeyArrowsPresenter, true);
-      document.body.removeChild(element);
-    }
+  let element = e.target;
+  if (element.FScreen){ // append eventlisteners (now in presentermode)
+    window.addEventListener("keydown", clickKeyArrowsPresenter, true);
+    element.FScreen = false;
   }
+  else{ // remove eventlisteners (not in presenter mode anymore)
+    window.removeEventListener("keydown", clickKeyArrowsPresenter, true);
+    document.body.removeChild(element);
+  }
+}
 
 //--------------- function for appending copy of display div / note to a container
 function appendChildPresenter(presenter){
