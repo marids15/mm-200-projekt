@@ -502,7 +502,6 @@ function showTemplateTool() {
 	let formImageTemplate = document.getElementById("formImageTemplate");
 	formTitleTemplate.onsubmit = addTitleTemplate;
 	formImageTemplate.onsubmit = addImageTemplate;
-	activeDeleteElement();
 }
 
 //------------------- Shows the presenter tool in the menu
