@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel='icon' href='/images/favicon2.ico' type='image/x-icon'/>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/account.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -19,7 +20,7 @@
       <form class="credentialsEmail" id="formEmail">
         <label for="inEmail">Email:</label>
         <input id="inEmail" type="email">
-        <button type="submit">
+        <button class="emailButton" type="submit">
           <i id="btnSaveEmail" class="fas fa-pencil-alt" type="submit"></i>
         </button>
       </form>
@@ -31,8 +32,8 @@
         <input id="inNewPassword1" type="password" required>
         <label for="inNewPassword2">Confirm new password:</label>
         <input id="inNewPassword2" type="password" required> <br>
-        <input type="submit" id="btnSavePwd" value="Save new password">
         <p id="message"></p>
+        <input type="submit" id="btnSavePwd" value="Save new password">
       </form>
       <form class="credentialsImage" id="formUploadImage">
       </form>
@@ -43,17 +44,18 @@
       <h3><i class="fas fa-exclamation-triangle danger"></i> Delete account</h3>
       <form id="formDeleteUser">
         <input id="radAll" type="radio" name="deleteOption" value="0" checked>Delete all my presentations<br>
-        <input id="radSome" type="radio" name="deleteOption" value="1">Delete only my private and personal presentations<br>
+        <input id="radSome" type="radio" name="deleteOption" value="1">Delete only my private and individual presentations<br>
         <input type="submit" value="Delete account">
       </form>
     </div>
     <script src="./js/checkToken.js"></script>
+    <script src="./js/popupMessage.js"></script>
     <script src="./js/account.js"></script>
     <script src="./js/navbar.js"></script>
 
 
     <script>
-      var activePage = 3;
+      var activePage = 4;
       MakeNavbar(activePage);
     </script>
   </body>

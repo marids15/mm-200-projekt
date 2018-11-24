@@ -1,3 +1,4 @@
+//--------------- Constants
 const GET_PRESENTATION_URL = "/api/presentations";
 const SAVE_PRESENTATION_URL = "/api/presentations/save";
 
@@ -5,7 +6,7 @@ const SAVE_PRESENTATION_URL = "/api/presentations/save";
 let token = localStorage.getItem('token');
 let userID = localStorage.getItem('user_id');
 
-//---------------- document.getElementById variables
+//---------------- DOM  variables
 let indexOfSlide = document.getElementById("indexOfSlide");
 let inNote = document.getElementById('inNote');
 let slideDiv = document.getElementById("slideDiv");
@@ -14,14 +15,22 @@ let btnDeleteSlide = document.getElementById("btnDeleteSlide");
 let divContainer = document.getElementById("divContainer");
 let tabContent = document.getElementById('tabContent');
 
-//----------------- retrieving data from db
+//--------------- eventhandlers
+inNote.onchange = saveNote;
+btnAddSlide.onclick = addNewSlide;
+btnDeleteSlide.onclick = deleteCurrentSlide;
+
+// --------------- Global variables
+let myPresentation;
+
+//---------------- Functions
+// retrieving data from db
 let data = JSON.stringify({
 	presentation_id: localStorage.getItem('presentation_id'),
 	user_id: userID
 });
 
-let myPresentation;
-
+// request to server for getting presentation
 fetch(GET_PRESENTATION_URL, {
 	method: 'POST',
 	headers: {
@@ -29,58 +38,47 @@ fetch(GET_PRESENTATION_URL, {
     "Authorization": token
 	},
 	body: data
-}).then(response => {
+}).then(response => { // retrieved presentation
 	if (response.status < 400) {
 		loadPresentation(response);
-	} else {
-		// TODO: MESSAGE
-		console.log('Did not load presentation :(');
+	} else { // presentation could not be loaded
+		showErrorPopup('Could not load presentation, please try again later.');
 	}
 }).catch(err => console.error(err));
 
+// loading presentation from response
 async function loadPresentation(response) {
 	let data = await response.json();
 	let presentationJSON = data[0].presentation_json;
-	console.log(presentationJSON);
 	myPresentation = parseJSONToPresentation(presentationJSON);
-	console.log(myPresentation.getSlides().length);
-	if (myPresentation.getSlides().length === 0) {
-			addFirstSlide();
-			console.log("length : " + myPresentation.getSlides().length);
-			console.log('Adding first slide...');
-	} else {
-		console.log('no first slide');
-		console.log("length : " + myPresentation.getSlides());
+	// check if presentation has slides
+	if (myPresentation.getSlides().length === 0) { // has no slides
+		addFirstSlide();
+	} else { // has slides
 		goToSlide(0);
 	}
 
+	// make elements selectable
 	requestAnimationFrame(selectable);
 }
 
-
-//--------------- eventhandlers
-inNote.onchange = saveNote;
-btnAddSlide.onclick = addNewSlide;
-btnDeleteSlide.onclick = deleteCurrentSlide;
-
-//--------------------------------
-
+// function to make elements selectable
 function selectable(evt){
 	myPresentation.makeDivSelectable();
 	requestAnimationFrame(selectable);
 }
 
-// ------------------- function to save note
+// function to save note into local presentation
 function saveNote() {
   let noteText = inNote.value;
   myPresentation.getCurrentSlide().setNote(noteText);
 }
 
+// function to update note from local presentation
 function updateNote() {
   let noteText = myPresentation.getCurrentSlide().getNote();
   inNote.value = noteText;
 }
-
 
 //-------------------- function to display the number and the total of slide
 function displayNumberCurrentSlide() {
@@ -146,7 +144,6 @@ function goToSlide(num) {
 //--------------- function to Add a new slide
 function addNewSlide() {
   myPresentation.addSlide(myPresentation.getCurrentSlideIndex() + 1);
-  //myPresentation.setCurrentSlideIndex(myPresentation.getCurrentSlideIndex() + 1);
   goToNextSlide();
   updateSlideMenu();
 }
@@ -172,7 +169,7 @@ function deleteCurrentSlide(){
     myPresentation.setCurrentSlideIndex(myPresentation.getCurrentSlideIndex() -1);
     goToNextSlide();
   }
-
+	// if any other slide is deleted
   else {
     goToPreviousSlide();
   }
@@ -181,32 +178,117 @@ function deleteCurrentSlide(){
 
 //-------------- function to delete an element
 function deleteElement() {
-  myPresentation.getCurrentSlide().deleteElement()
+  myPresentation.getCurrentSlide().deleteElement();
 }
 
-//--------------- full screen
-async function displayInFullScreen(){
-  goToSlide(0);
-  divContainer.addEventListener("webkitfullscreenchange", onFullScreenChange, true);
-  openFullscreen(divContainer);
+// function to switch slides in presentermode with arrow keys
+function clickKeyArrowsPresenter(event){
+  let presenter = document.getElementById("presenterDiv");
+  if (event.key === "ArrowLeft"){
+      goToPreviousSlide();
+      removeChildPresenter(presenter);
+      appendChildPresenter(presenter);
+  }
+  if (event.key === "ArrowRight"){
+      goToNextSlide();
+      removeChildPresenter(presenter);
+      appendChildPresenter(presenter);
+  }
+}
 
+// function to append eventlisteners to arrow keys, and removes them when not in presentermode
+function onFullScreenChangePresenter (e) {
+  let element = e.target;
+  if (element.FScreen){ // append eventlisteners (now in presentermode)
+    window.addEventListener("keydown", clickKeyArrowsPresenter, true);
+    element.FScreen = false;
+  }
+  else{ // remove eventlisteners (not in presenter mode anymore)
+    window.removeEventListener("keydown", clickKeyArrowsPresenter, true);
+    document.body.removeChild(element);
+  }
+}
+
+//--------------- function for appending copy of display div / note to a container
+function appendChildPresenter(presenter){
+  copySlide = divContainer.cloneNode(true);
+  copySlide.className = "displayDivContainerCopy";
+  presenter.appendChild(copySlide);
+
+  copyNote = inNote.cloneNode(true);
+  copyNote.className = "noteDivContainer";
+  presenter.appendChild(copyNote);
+}
+
+//--------------- function for removing every child of a container
+function removeChildPresenter(presenter){
+  while (presenter.firstChild) {
+      presenter.removeChild(presenter.firstChild);
+  }
+}
+
+//---------------- function to display presentation in presenter mode
+async function displayPresenterMode() {
+	goToSlide(0);
+
+	// creating temporary div
+  let presenter = document.createElement('div');
+  presenter.id = "presenterDiv";
+
+	// appending copy of displaying slide and notes to container div
+  appendChildPresenter(presenter);
+  document.body.appendChild(presenter);
+
+  presenter.addEventListener("webkitfullscreenchange", onFullScreenChangePresenter, true);
+
+  openFullscreen(presenter);
+
+	// checking if timed transition is set to a value
   let timedTransitions = document.getElementById("timedTransitions");
   let value = timedTransitions[timedTransitions.selectedIndex].value;
-  if(value !== "noTimer"){
+  if (value !== "noTimer"){ // a timer is set
     let listSlide = myPresentation.getSlides();
     for (let i = 0; i < listSlide.length - 1; i++){
-      await timeout(parseInt(value) * 1000);
-      goToNextSlide();
+      await timeout(parseInt(value) * 1000); // wait
+			// check if we are still in presenter mode
+      if(presenter.FScreenTimer){ // presenter mode
+        goToNextSlide();	// change slide
+        removeChildPresenter(presenter);
+        appendChildPresenter(presenter);
+      }
     }
     await timeout(parseInt(value) * 1000);
   }
 }
 
+//--------------- display full screen
+async function displayInFullScreen(){
+  goToSlide(0);
+  divContainer.addEventListener("webkitfullscreenchange", onFullScreenChange, true);
+  openFullscreen(divContainer);
+
+	// check if timed transition is set to value
+  let timedTransitions = document.getElementById("timedTransitions");
+  let value = timedTransitions[timedTransitions.selectedIndex].value;
+  if (value !== "noTimer") { // timer is set
+    let listSlide = myPresentation.getSlides();
+    for (let i = 0; i < listSlide.length - 1; i++){
+      await timeout(parseInt(value) * 1000);
+			// check if still in presentation mode
+			if(divContainer.FScreenTimer){ // presentation mode
+      	goToNextSlide();
+			}
+    }
+    await timeout(parseInt(value) * 1000); // wait
+  }
+}
+
+// function for simulating timeout / wait
 function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-/* View in fullscreen */
+// function to switch an element to fullscreen */
 function openFullscreen(elem) {
 
   if (elem.requestFullscreen) {
@@ -219,6 +301,7 @@ function openFullscreen(elem) {
     elem.msRequestFullscreen();
   }
   elem.FScreen = true;
+	elem.FScreenTimer = true;
 }
 
 /* Close fullscreen */
@@ -236,29 +319,31 @@ function closeFullscreen(elem) {
   console.log(" your browser doesn't support the Fullscreen API");
 }
 
-  function onFullScreenChange (e) {
-    let element = e.target;
-    if (element.FScreen){
-      window.addEventListener("keydown", clickKeyArrows, true);
-      element.FScreen = false;
-      swipedetect(divContainer);
-    }
-
-    else{
-      window.removeEventListener("keydown", clickKeyArrows, true);
-    }
+// function to append eventlisteners to arrow keys, and removes them when not in presentation mode
+function onFullScreenChange (e) {
+  let element = e.target;
+  if (element.FScreen){ // in presentation mode: add eventlisteners
+    window.addEventListener("keydown", clickKeyArrows, true);
+    element.FScreen = false;
+    swipedetect(divContainer);
   }
-
-   function clickKeyArrows(event){
-    if (event.key === "ArrowLeft"){
-        goToPreviousSlide();
-    }
-    if (event.key === "ArrowRight"){
-        goToNextSlide();
-    }
+  else { // not in presentation mode: remove eventlisteners
+    window.removeEventListener("keydown", clickKeyArrows, true);
+		element.FScreenTimer = false;
   }
+}
 
-  // credit: http://www.javascriptkit.com/javatutors/touchevents2.shtml
+// function to switch slides in presentation mode with arrow keys
+function clickKeyArrows(event){
+	if (event.key === "ArrowLeft"){
+	    goToPreviousSlide();
+	}
+	if (event.key === "ArrowRight"){
+	    goToNextSlide();
+	}
+}
+
+// function for detecting swipes on mobile devices on full screen mode
 function swipedetect(el){
 
     var touchsurface = el,
@@ -305,20 +390,21 @@ function updateSlideMenu() {
   let slideMenu = document.getElementById("slideMenu");
   slideMenu.innerHTML = "";
   let listSlide = myPresentation.getSlides();
+
+	// for every slide create a new mini div
   for (let i = 0; i < listSlide.length; i++){
     let newDiv = document.createElement("div");
     newDiv.className = "divSlideMenu";
     let copy = listSlide[i].getSlideHTML().cloneNode(true);
     newDiv.appendChild(copy);
-    newDiv.addEventListener('click', function() {
-            goToSlide(i);
-        });
-
+    newDiv.addEventListener('click', function() { // when clicked on mini div, go to that slide
+      goToSlide(i);
+    });
     slideMenu.appendChild(newDiv);
   }
 }
 
-//---------------- Links eventhandler on delete button
+//---------------- Links eventhandler on delete button for deleting elements
 function activeDeleteElement(){
 	let btnDelete = document.getElementById("btnDelete");
 	btnDelete.onclick = deleteElement;
@@ -326,12 +412,16 @@ function activeDeleteElement(){
 
 //----------------- Shows the text tool in the menu
 function showTextTool() {
+	// get text tool from template to html
   let textToolTemplate = document.getElementById('textContent');
   let textToolClone = textToolTemplate.content.cloneNode(true);
   tabContent.innerHTML = "";
   tabContent.appendChild(textToolClone);
+
   let textTab = document.getElementById('textToolTab');
-  makeToolActive(textTab);
+  makeToolActive(textTab); 	// highlight correct tab
+
+	// add eventhandler to form
   let formEditingText = document.getElementById("formEditingText");
   formEditingText.onsubmit = btnAddTextClick;
   activeDeleteElement();
@@ -339,12 +429,16 @@ function showTextTool() {
 
 //------------------ Shows the image tool in the menu
 function showImageTool() {
+	// get image tool from template to html
   let imageToolTemplate = document.getElementById('imageContent');
   let imageToolClone = imageToolTemplate.content.cloneNode(true);
   tabContent.innerHTML = "";
   tabContent.appendChild(imageToolClone);
+
   let imageTab = document.getElementById('imageToolTab');
-  makeToolActive(imageTab);
+  makeToolActive(imageTab);	// highlight correct tab
+
+	// add eventhandler to form
   let formEditingImage = document.getElementById("formEditingImage");
   formEditingImage.onsubmit = addImage;
   activeDeleteElement();
@@ -352,12 +446,16 @@ function showImageTool() {
 
 //------------------ Shows the video tool in the menu
 function showVideoTool() {
+	// get video tool from template to html
   let videoToolTemplate = document.getElementById('videoContent');
   let videoToolClone = videoToolTemplate.content.cloneNode(true);
   tabContent.innerHTML = "";
   tabContent.appendChild(videoToolClone);
+
   let videoTab = document.getElementById('videoToolTab');
-  makeToolActive(videoTab);
+  makeToolActive(videoTab);	// highlight correct tab
+
+	// add eventhandler to form
   let formEditingVideo = document.getElementById("formEditingVideo");
   formEditingVideo.onsubmit = addVideo;
   activeDeleteElement();
@@ -365,12 +463,16 @@ function showVideoTool() {
 
 //------------------- Shows the sound tool in the menu
 function showSoundTool() {
+	// get sound tool from template to html
   let soundToolTemplate = document.getElementById('soundContent');
   let soundToolClone = soundToolTemplate.content.cloneNode(true);
   tabContent.innerHTML = "";
   tabContent.appendChild(soundToolClone);
+
   let soundTab = document.getElementById('soundToolTab');
-  makeToolActive(soundTab);
+  makeToolActive(soundTab);	// highlight correct tab
+
+	// add eventhandler to form
   let formEditingSound = document.getElementById("formEditingSound");
   formEditingSound.onsubmit = addSound;
   activeDeleteElement();
@@ -378,46 +480,57 @@ function showSoundTool() {
 
 //------------------- Shows the presenter tool in the menu
 function showPresenterTool() {
+	// get presenter tool from template to html
   let presenterToolTemplate = document.getElementById('presenterContent');
   let presenterToolClone = presenterToolTemplate.content.cloneNode(true);
   tabContent.innerHTML = "";
   tabContent.appendChild(presenterToolClone);
+
   let presenterTab = document.getElementById('presenterToolTab');
-  makeToolActive(presenterTab);
+  makeToolActive(presenterTab);	// highlight correct tab
+
+	// add eventhandlers to inputs
   let btnDisplayFullScreen = document.getElementById('btnDisplayFullScreen');
+	let btnDisplayPresenterMode = document.getElementById('btnDisplayPresenterMode');
 	let selectTheme = document.getElementById('selectTheme');
   btnDisplayFullScreen.onclick = displayInFullScreen;
+	btnDisplayPresenterMode.onclick = displayPresenterMode;
 	selectTheme.onchange = changeTheme;
 	selectTheme.value = myPresentation.getTheme;
 }
 
 //------------------- Shows the exporting tool in the menu
 function showExportTool() {
+	// get export tool from template to html
   let exportToolTemplate = document.getElementById('exportContent');
   let exportToolClone = exportToolTemplate.content.cloneNode(true);
   tabContent.innerHTML = "";
   tabContent.appendChild(exportToolClone);
+
   let exportTab = document.getElementById('exportToolTab');
-  makeToolActive(exportTab);
+  makeToolActive(exportTab);	// highlight correct tab
+
+	// add eventhandlers to inputs
   let btnSavePresentation = document.getElementById('btnSavePresentation');
   let btnExportNotes = document.getElementById('btnExportNotes');
+	let btnExportPresentation = document.getElementById('btnExportPresentation');
   btnSavePresentation.onclick = storePresentation;
   btnExportNotes.onclick = exportNote;
+	btnExportPresentation.onclick = exportPresentation;
 }
 
 //------------------ Highlights the active tab in the tab bar
 function makeToolActive(elem) {
   let oldActiveElement = document.getElementsByClassName('activeTab')[0];
-  if (oldActiveElement) {
+  if (oldActiveElement) { // remove previous highlight
       oldActiveElement.classList.remove('activeTab');
   }
-  elem.classList.add('activeTab');
+  elem.classList.add('activeTab'); // hightlight correct tab
 }
 
 //------------------ Changing the theme of the Presentation
 function changeTheme(evt) {
 	let theme = document.getElementById('selectTheme').value;
-	console.log(theme);
 	myPresentation.setTheme(theme);
 	updateSlideMenu();
 }
@@ -427,34 +540,52 @@ function exportNote(){
   let title = `${myPresentation.getName()}_Note.txt`;
   let note = "";
   let listSlide = myPresentation.getSlides();
-  for (let i = 0; i < listSlide.length; i++){
+  for (let i = 0; i < listSlide.length; i++){ // get the notes of every slide
     note += `Slide ${i+1}`;
     note += '\n\n';
+
+		// filter out the standard note
     if (listSlide[i].getNote() !== "Write your notes here"){
       note += listSlide[i].getNote();
       note += '\n\n\n';
     }
   }
+
+	// create a file out of this data
   saveData(note,title);
 }
 
-//------------------ Function for storing the notes into a file
-function saveData(data, filename) {
-    let a = document.createElement('a');
-    document.body.appendChild(a);
-    a.style = "display: none";
-    let blob = new Blob([data], {type: "octet/stream"});
-    let url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.download = filename;
-    a.click();
+//------------------- Function for exporting presentation
+function exportPresentation () {
+	let title = `${myPresentation.name}.json`;
+	let content = parsePresentationToJSON();
 
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
+	// create a file out of this data
+	saveData(content, title);
+}
+//------------------ Function for storing data into a file
+function saveData(data, filename) {
+	// create a temporary element
+  let a = document.createElement('a');
+  document.body.appendChild(a);
+  a.style = "display: none";
+
+	// create a file
+  let blob = new Blob([data], {type: "octet/stream"});
+  let url = window.URL.createObjectURL(blob);
+  a.href = url;
+  a.download = filename;
+	// simulate click on temporary element to download file
+  a.click();
+
+	// remove temporary element
+  window.URL.revokeObjectURL(url);
+  document.body.removeChild(a);
 }
 
 //----------------- Function for storing presentation into DB
 async function storePresentation() {
+	// get json from presentation
   let presentationData = parsePresentationToJSON();
   let data = JSON.stringify({
 		presentation_id: localStorage.getItem('presentation_id'),
@@ -462,6 +593,7 @@ async function storePresentation() {
 		presentation: parsePresentationToJSON()
   });
 
+	// request for saving presentation
 	fetch(SAVE_PRESENTATION_URL, {
 		method: 'POST',
 		headers: {
@@ -470,19 +602,19 @@ async function storePresentation() {
 		},
 		body: data
 	}).then(response => {
-	if (response.status < 400) {
-		console.log('Stored presentation! :D');
-		// TODO: MESSAGE
-	} else {
-		// TODO: MESSAGE
-		console.log('Did not store presentation :(');
-	}
+		if (response.status < 400) { // presentation stored
+			showConfirmPopup('Presentation is saved!');
+		} else if (response.status === 403) { // user not authorized
+			showErrorPopup('You are not authorized to save this presentation.');
+		} else {	// something else is wrong (server)
+			showErrorPopup('Presentation could not be stored, please try again later.');
+		}
 	}).catch(err => console.error(err));
-
 }
 
 //----------------- Function for parsing presentation into JSON
 function parsePresentationToJSON() {
+	let tempCurrentIndex = myPresentation.getCurrentSlideIndex();
 	let myData = {};
 	myData.presentation = {
 		name : myPresentation.name,
@@ -493,19 +625,24 @@ function parsePresentationToJSON() {
 
 	let slidesArray = myPresentation.getSlides();
 
+	// for every slide create object
 	for (let i = 0; i < slidesArray.length; i++){
+		goToSlide(i);
 		let mySlide = {};
 		mySlide.note = slidesArray[i].getNote();
 		mySlide.elements = [];
 		let elementsArray = slidesArray[i].getElements();
 
-
+		// for every element create object
 		for(let j = 0; j < elementsArray.length; j++){
 			let myElement = {};
 			let container = slidesArray[i].getSlideHTML();
 
+			// set coordinates
       myElement.topPercent = elementsArray[j].offsetTop * 100 / container.offsetHeight;
       myElement.leftPercent = elementsArray[j].offsetLeft * 100 / container.offsetWidth;
+
+			// set type and content
 			myElement.typeElement = elementsArray[j].typeElement;
 			myElement.contentElement = elementsArray[j].contentElement;
 
@@ -513,49 +650,48 @@ function parsePresentationToJSON() {
 		}
 		myData.presentation.slides.push(mySlide);
 	}
-	//let myJSON = JSON.stringify(myPresentation);
+
+	// create json from the objects
 	let myJSON = JSON.stringify(myData);
+	goToSlide(tempCurrentIndex);
   return myJSON;
 }
 
 //------------------ load presentation from JSON to presentation class
 function parseJSONToPresentation(myJSON) {
-	//let myclass = JSON.parse(myJSON);
 	let myclass = myJSON;
 
 	let myP = new Presentation(myclass.presentation.name, slideDiv);
 	myP.setCurrentSlideIndex(0);
-	//myP.addSlide(0);
 	myP.setTheme(myclass.presentation.theme);
 
+	// for every slide in object create slide
 	for(let i = 0; i < myclass.presentation.slides.length; i++){
 		myP.setCurrentSlideIndex(i);
 		myP.addSlide(i);
+
+		// for every element in object create element in slide
 		for(let j = 0; j < myclass.presentation.slides[i].elements.length; j++){
-			if (myclass.presentation.slides[i].elements[j].typeElement === TEXT){
+			if (myclass.presentation.slides[i].elements[j].typeElement === TEXT){ // is text element
 				myP.getCurrentSlide().addText(myclass.presentation.slides[i].elements[j].contentElement);
 			}
-			else if(myclass.presentation.slides[i].elements[j].typeElement === IMAGE){
+			else if(myclass.presentation.slides[i].elements[j].typeElement === IMAGE){ // is image element
 				myP.getCurrentSlide().addImage(myclass.presentation.slides[i].elements[j].contentElement);
 			}
-			else if(myclass.presentation.slides[i].elements[j].typeElement === VIDEO){
+			else if(myclass.presentation.slides[i].elements[j].typeElement === VIDEO){ // is video element
 				myP.getCurrentSlide().addVideo(myclass.presentation.slides[i].elements[j].contentElement);
 			}
-			else{
+			else{ // is sound element
 				myP.getCurrentSlide().addSound(myclass.presentation.slides[i].elements[j].contentElement);
 			}
 
-
-
+			// set position
 			myP.getSlides()[i].getElements()[j].setAttribute('style', `left: ${myclass.presentation.slides[i].elements[j].leftPercent}%;
 																																 top: ${myclass.presentation.slides[i].elements[j].topPercent}%`);
-
 		}
+
+		// set note
 		myP.getSlides()[i].setNote(myclass.presentation.slides[i].note);
-	/*	if(i+1 < myclass.presentation.slides.length){
-			myP.addSlide(myP.getCurrentSlideIndex()+1);
-			myP.goToNextSlide();
-		}*/
 	}
 	return myP;
 }

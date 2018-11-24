@@ -44,7 +44,9 @@ class Element {
   // gets HTML for text
   createHTMLText(){
     let myText = document.createElement("text");
-    myText.contentEditable = true;
+    if (EDITABLE) {
+      myText.contentEditable = true;
+    }
     myText.innerHTML = this.content;
     myText.setAttribute( 'class', 'textElementSlide');
     myText.setAttribute('spellcheck', "false");
@@ -70,9 +72,9 @@ class Element {
   createHTMLVideo() {
     let myVidFrame = document.createElement('iframe');
     let vidDiv = document.createElement('div');
-    let dragIcon = document.createElement('icon');
+    let dragIcon = document.createElement('img');
     vidDiv.className = "vidDiv"
-    dragIcon.className = "fas fa-arrows-alt";
+    dragIcon.setAttribute("src", "images/dragging.png");
 
     myVidFrame.src = this.content;
     myVidFrame.frameborder = "0";
@@ -111,10 +113,19 @@ class Element {
     audioSource.src = this.content;
     let audioDrag = document.createElement('div');
     audioDrag.className = "soundDrag";
+
+    let dragIcon = document.createElement('img');
+    dragIcon.setAttribute("src", "images/dragging.png");
+
     audioElement.appendChild(audioSource);
     audioElement.appendChild(playButton);
     audioElement.appendChild(stopButton);
+    audioDrag.appendChild(dragIcon);
     audioElement.appendChild(audioDrag);
+    
+    audioElement.typeElement = this.type;
+    audioElement.contentElement = this.content;
+
     return audioElement;
   }
 }

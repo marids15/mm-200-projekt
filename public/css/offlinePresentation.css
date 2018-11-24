@@ -1,18 +1,6 @@
 /* set every css property to default:----------------------------------------*/
 
-html, body, div, span, applet, object,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+* {
   margin: 0;
   padding: 0;
   border: 0;
@@ -57,75 +45,21 @@ table {
 
   --title-font
   --text-font
+
+  logo color: #61aab0
 */
 
 
 /* CSS specifically for mobile screens -----------------------------------*/
 @media only screen and (max-width: 768px) {
-  /* For edit tools ---------------------------------------------------*/
-  .editToolsSlide {
+  /* For input file field ---------------------------------------------*/
+  .customFileUpload {
+    width: 95%;
+    margin-top: 20px;
     margin-left: 2.5%;
     margin-right: 2.5%;
-    margin-top: 20px;
-    width: 95%;
-    height: 50%;
-  }
-
-  .tabContainer {
-    top: 0;
-    width: 100%;
-    height: 10%;
-    display: inline-block;
-  }
-
-  .tab button {
-    width: 15%;
-    height: 40px;
-    padding-top: 1.5%;
-    padding-bottom: 1.5%;
-    margin-right: 2%;
-    border-radius: 8px 8px 0px 0px;
-    font-size: 20px;
-    float: left;
-  }
-
-  .tab.last button {
-    margin-right: 0px;
-  }
-
-  .tabContent {
-    width: 100%;
-    margin-top: 0px;
-    border-radius: 0px 0px 5px 5px;
-    padding: 20px;
     box-sizing: border-box;
-  }
-
-  .tabContent h2 {
-    font-family: var(--title-font);
-    font-size: 30px;
-    margin-bottom: 20px;
-  }
-
-  .tabContent label, p {
-    display: block;
-    width: 100%;
-    font-family: var(--text-font);
-    font-size: 14px;
-  }
-
-  .tabContent input[type=text] {
-    background-color: #fafafa;
-    box-shadow: inset 0 0 2px 0.5px rgba(0, 0, 0, 0.1);;
-    border: solid 1px #BBB;
-    border-radius: 2px;
-    font-family: var(--text-font);
-    margin-top: 4px;
-    margin-bottom: 8px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 2px;
-    width: 100%;
+    text-align: center;
   }
 
   /* For displaying slide ---------------------------------------------*/
@@ -139,11 +73,15 @@ table {
   }
 
   .textElementSlide {
-    font-size: 8vw;
+    font-size: 7.6vw;
   }
 
   .textElementSlide:focus {
     outline: none;
+  }
+
+  .vidDiv {
+    font-size: 2.5vw;
   }
 
   /* For displaying scrolling slide menu ------------------------------*/
@@ -154,17 +92,13 @@ table {
   }
 
   .divSlideMenu .textElementSlide {
-      font-size: 1.6vw;
+      font-size: 1.52vw;
   }
 
   /* For creating and deleting slide ----------------------------------*/
   .createDeleteSlide {
     margin-left: 2.5%;
     width: 95%;
-  }
-
-  .createDeleteSlide button {
-    font-size: 3vw;
   }
 
   /* For displaying note ----------------------------------------------*/
@@ -182,6 +116,24 @@ table {
     padding: 5px;
     width: 100%;
     height: 100%;
+  }
+  /* For playing presentation ------------------------------------------*/
+  .playPresentation {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 15px;
+  }
+
+  .playPresentation button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .playPresentation select {
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
   }
 
   /* For displaying in presenter mode ----------------------------------*/
@@ -201,52 +153,22 @@ table {
 
 /* CSS specifically for desktops -----------------------------------------*/
 @media screen and (min-width: 768px) {
-  .rightSide {
-    width: 60%;
-    float: right;
-  }
-
-  /* For edit tools ---------------------------------------------------*/
-  .editToolsSlide {
-    float: left;
-    margin-left: 10px;
-    margin-top: 40px;
-    width: 30%;
-    height: 50%;
-  }
-
-  .tabContainer {
-    width: 20%;
-    height: 100%;
-    float: left;
-  }
-
-  .tab button {
-    width: 100%;
-    height: 65px;
-    margin-bottom: 2px;
-    border-radius: 8px 0px 0px 8px;
-    font-size: 20px;
+  /* For input file field ---------------------------------------------*/
+  .customFileUpload {
+    width: 40%;
+    margin-top: 20px;
+    margin-left: 30%;
+    margin-right: 30%;
     box-sizing: border-box;
-  }
-
-  .tabContent {
-    width: 80%;
-    height: 400px;
-    border-radius: 0px 5px 5px 0px;
-    float: right;
-    padding: 20px;
-    padding-top: 30px;
-    background-color: var(--grey);
-    box-sizing: border-box;
+    text-align: center;
   }
 
   /* For displaying slide ---------------------------------------------*/
   .displayDivContainer {
-    width: 70%;
+    width: 40%;
     margin-top: 40px;
-    margin-right: 15%;
-    margin-left: 10%;
+    margin-right: 30%;
+    margin-left: 30%;
     margin-bottom: 20px;
   }
 
@@ -256,9 +178,9 @@ table {
 
   /* For displaying scrolling slide menu ------------------------------*/
   #slideMenu{
-      width: 70%;
-      margin-right: 20%;
-      margin-left: 10%;
+      width: 40%;
+      margin-right: 30%;
+      margin-left: 30%;
       margin-top: 20px;
       margin-bottom: 20px;
       border: 1px solid black;
@@ -274,17 +196,17 @@ table {
 
   /* For creating and deleting slides --------------------------------*/
   .createDeleteSlide {
-    width: 70%;
-    margin-right: 20%;
-    margin-left: 10%;
+    width: 40%;
+    margin-right: 30%;
+    margin-left: 30%;
   }
 
   /* For displaying note ----------------------------------------------*/
   .noteDivContainer {
-    width: 70%;
+    width: 40%;
     height: 5%;
-    margin-right: 20%;
-    margin-left: 10%;
+    margin-right: 30%;
+    margin-left: 30%;
     float: right;
   }
 
@@ -293,6 +215,30 @@ table {
     padding: 5px;
     width: 100%;
     height: 100%;
+    margin-bottom: 15px;
+  }
+
+  .vidDiv {
+    font-size: 1.5vw;
+  }
+
+  /* For playing presentation ------------------------------------------*/
+  .playPresentation button {
+    width: 17%;
+    margin-top: 15px;
+    margin-right: 30%;
+    float: right;
+    box-sizing: border-box;
+    height: 40px;
+  }
+
+  .playPresentation select {
+    margin-top: 15px;
+    width: 17%;
+    margin-left: 30%;
+    box-sizing: border-box;
+    float: left;
+    height: 40px;
   }
 
   /* For displaying in presenter mode ------------------------------------*/
@@ -306,6 +252,17 @@ table {
 
   .displayDivContainerCopy .textElementSlide {
     font-size: 6.5vw;
+  }
+
+  /* For presentation mode -------------------------------------*/
+  @media all and (display-mode: fullscreen) {
+    .noteDivContainer{
+      width: 70%;
+      height: 5%;
+      margin-right: 20%;
+      margin-left: 10%;
+      float: right;
+    }
   }
 }
 
@@ -321,10 +278,34 @@ body, html {
 textarea {
   resize: none;
   box-sizing: border-box;
+  background-color: #fafafa;
 }
 
 input, button {
   box-sizing: border-box;
+}
+
+/* For file upload ----------------------------------------------------*/
+input[type="file"] {
+  display: none;
+}
+
+.customFileUpload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-image: linear-gradient(to bottom right, var(--second-color), var(--main-color));
+  border: none;
+  border-radius: 4px;
+  font-family: var(--text-font);
+  color: #FFF;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.customFileUpload i {
+  margin: 5px;
+  margin-right: 10px;
 }
 
 /* For displaying slide -----------------------------------------------*/
@@ -355,11 +336,10 @@ input, button {
   display: inline-block;
 }
 
-.vidDiv img {
+.vidDiv icon {
   float: right;
   margin: 2%;
-  margin-right: 4%;
-  width: 10%;
+  padding: 2%;
 }
 
 .soundElement {
@@ -433,7 +413,7 @@ input, button {
   white-space: normal;
 }
 
-.divSlideMenu .vidDiv img {
+.divSlideMenu .vidDiv icon {
   display: none;
 }
 
@@ -453,21 +433,24 @@ input, button {
 /* For deleting and adding slides -------------------------------------*/
 .createDeleteSlide {
   text-align: center;
-}
-
-.createDeleteSlide p {
-  display: block;
-  position: relative;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-  width: 35%;
-  float: left;
   color: var(--grey);
+  margin-bottom: 15px;
+  font-family: var(--text-font);
+  font-size: 15px;
 }
 
-.createDeleteSlide button {
-  width: 30%;
-  margin-bottom: 20px;
+/* for playing presentation -------------------------------------------*/
+.playPresentation select {
+  background-color: #fafafa;
+  padding: 5px;
+  font-family: var(--text-font);
+  font-size: 14px;
+}
+
+.playPresentation button {
+  display: inline-block;
+  padding: 12px;
+  cursor: pointer;
   background-image: linear-gradient(to bottom right, var(--second-color), var(--main-color));
   border: none;
   border-radius: 4px;
@@ -475,95 +458,19 @@ input, button {
   color: #FFF;
   box-sizing: border-box;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
-  float: left;
-  padding-top: 1.5%;
-  padding-bottom: 1.5%;
 }
 
-/* For tools editing slide --------------------------------------------*/
-.tab button {
-  background-color: var(--main-color);
-  border: none;
-  font-family: var(--text-font);
-  color: var(--grey);
-}
+/* For presenter mode ---------------------------------------*/
+.noteDivContainerCopy {
 
-.tab button.activeTab {
-  background-color: var(--grey);
-  color: var(--main-color);
 }
-
-.tab button:hover {
-  cursor: pointer;
-}
-
-.tab button:focus {
-  outline: none;
-}
-
-.tabContent {
-  position: relative;
-  color: var(--light);
-  line-height: 1.2;
-  background-color: var(--grey);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.tabContent h2 {
-  font-family: var(--title-font);
-  font-size: 30px;
-  margin-bottom: 20px;
-  color: var(--light);
-}
-
-.tabContent label, .text {
-  display: block;
-  width: 100%;
-  font-family: var(--text-font);
-  font-size: 14px;
-  color: var(--light);
-}
-
-.tabContent input[type=text] {
-  background-color: var(--light);
-  box-shadow: inset 0 0 2px 0.5px rgba(0, 0, 0, 0.1);;
-  border: solid 1px #BBB;
-  border-radius: 2px;
-  font-family: var(--text-font);
-  margin-top: 4px;
-  margin-bottom: 8px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 2px;
-  width: 100%;
-}
-
-.btn {
-  width: 100%;
-  margin-bottom: 20px;
-  margin-top: 10px;
-  background-image: linear-gradient(to bottom right, var(--second-color), var(--main-color));
-  border: none;
-  border-radius: 4px;
-  font-family: var(--text-font);
-  color: var(--grey);
-  box-sizing: border-box;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
-  padding-top: 1.5%;
-  padding-bottom: 1.5%;
-}
-
-.btn:hover {
-  cursor: pointer;
-}
-
 /* For presentation mode -------------------------------------*/
 @media all and (display-mode: fullscreen) {
-  .displayDivContainer .textElementSlide {
+  .textElementSlide {
     font-size: 8vw;
   }
 
-  .displayDivContainer {
+  .displayDivContainer{
     width: 100% ;
   }
 }
