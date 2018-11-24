@@ -565,7 +565,9 @@ function addTitleTemplate(evt) {
 	myPresentation.getCurrentSlide().addText(templateTitle);
 	let elements = myPresentation.getCurrentSlide().getElements();
 	let justAddedTitle = elements[elements.length - 1];
-	justAddedTitle.style.left = '20%';
+
+
+	justAddedTitle.style.left = slideDiv.offsetWidth / 2 - (justAddedTitle.offsetWidth/2) + 'px';
 	justAddedTitle.style.top = '20%';
 	myPresentation.getCurrentSlide().addText(templateText);
 	let justAddedText = elements[elements.length - 1];
