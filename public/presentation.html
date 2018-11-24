@@ -24,7 +24,7 @@
 
     <div class="createDeleteSlide">
       <button id="btnAddSlide">New slide</button>
-      <p id="indexOfSlide">Slide number 1 (total: 1)</p>
+      <p class="text" id="indexOfSlide">Slide number 1 (total: 1)</p>
       <button id="btnDeleteSlide">Delete slide</button>
     </div>
 
@@ -102,7 +102,7 @@
       <label>Source of video (embed link): </label>
       <input id="inVidSrc" type="text" name="video source" placeholder="Enter a URL" required>
       <input id="btnAddVideo" class="btn" type="submit" value="Add video">
-      <p>The embed link of a YouTube video can be found by clicking 'share' beneath the video, then click on 'embed' and find the src link.</p>
+      <p class="text">The embed link of a YouTube video can be found by clicking 'share' beneath the video, then click on 'embed' and find the src link.</p>
       <i id="btnDelete" class="fas fa-trash-alt"></i>
     </form>
   </template>
@@ -119,17 +119,23 @@
 
   <template id="presenterContent">
     <h2>Presentation</h2>
+    <h3>Select theme</h3>
+    <select id="selectTheme" name="select-themes">
+      <option value="Default" selected>Default theme</option>
+      <option value="Dark">Dark theme</option>
+      <option value="Geometric">Geometric theme</option>
+      <option value="Washed">Washed forest theme</option>
+      <option value="Wood">Wood theme</option>
+    </select>
+    <h3>Playing presentation</h3>
     <select id="timedTransitions">
       <option value="noTimer">No timer</option>
       <option value="10">10s</option>
       <option value="30">30s</option>
       <option value="60">1min</option>
     </select>
-    <select id="selectTheme">
-      <option value="Default" selected>Default theme</option>
-      <option value="Dark">Dark theme</option>
-    </select>
     <button id="btnDisplayFullScreen" class="btn">Play presentation</button>
+    <button id="btnDisplayPresenterMode" class="btn">Play in presenter mode</button>
   </template>
 
   <template id="exportContent">
@@ -147,6 +153,7 @@
   <script src="./js/SlideClass.js"></script>
   <script src="./js/PresentationClass.js"></script>
   <script src="./js/checkToken.js"></script>
+  <script src="./js/popupMessage.js"></script>
   <script src="./js/main.js"></script>
   <script src="./js/elementUpdate.js"></script>
   <script>

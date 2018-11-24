@@ -15,6 +15,8 @@ var a = "";
 var b = "";
 var c = "";
 var d = "";
+var e = "";
+
 // Makes navbar- and handles what is the active element
 function MakeNavbar(evt){
   let tokentest = localStorage.getItem("token");
@@ -28,11 +30,20 @@ function MakeNavbar(evt){
   if (evt == 2){b = 'class="active"';}
   if (evt == 3){c = 'class="active"';}
   if (evt == 4){d = 'class="active"';}
-    if (evt == 9){b = 'class="active"';}
+  if (evt == 5){e = 'class="active"';}
+  if (evt == 9){b = 'class="active"';}
+
   //  Makes the actual navbar
   var navi =  document.createElement("div");
   navi.id = "topnav";
-  navi.innerHTML = '<a href="index.html" '+a+' >Home</a><a href="personnal.html" '+b+' >My presentations</a>'+logedinornot+'<a href="OfflinePresentations.html" '+c+'>Offline Presentations</a><a href="account.html" ' + d + '>My account</a><i class="fas fa-bars" onclick="expandNavigation()"></i>';
+  navi.innerHTML = '<a href="index.html" '+ a +
+    '>Home</a><a href="personnal.html" '+ b +
+    '>My Presentations</a><a href="OfflinePresentations.html" ' + c +
+    '>Offline Presentations</a><a href="account.html" ' + d +
+    '>My Account</a><a href="publicPresentations.html" ' + e +
+    '>Public Presentations</a>' +
+    logedinornot +
+    '<i class="fas fa-bars" onclick="expandNavigation()"></i>';
   document.getElementById("top").appendChild(navi);
 }
 

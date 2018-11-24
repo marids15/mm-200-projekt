@@ -135,6 +135,20 @@ table {
     margin-left: 35%;
     margin-right: 35%;
   }
+
+  /* For displaying in presenter mode ----------------------------------*/
+  .displayDivContainerCopy {
+    width: 95%;
+    margin-top: 20px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 20px;
+    float: right;
+  }
+
+  .displayDivContainerCopy .textElementSlide {
+    font-size: 8.5vw;
+  }
 }
 
 /* CSS specifically for desktops -----------------------------------------*/
@@ -177,7 +191,7 @@ table {
   }
 
   .divSlideMenu .textElementSlide {
-      font-size: 0.864vw;
+      font-size: 0.75vw;
   }
 
   /* For creating and deleting slides --------------------------------*/
@@ -225,6 +239,30 @@ table {
     box-sizing: border-box;
     float: left;
     height: 40px;
+  }
+
+  /* For displaying in presenter mode ------------------------------------*/
+  .displayDivContainerCopy {
+    width: 70%;
+    margin-top: 40px;
+    margin-right: 15%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+  }
+
+  .displayDivContainerCopy .textElementSlide {
+    font-size: 6.5vw;
+  }
+
+  /* For presentation mode -------------------------------------*/
+  @media all and (display-mode: fullscreen) {
+    .noteDivContainer{
+      width: 70%;
+      height: 5%;
+      margin-right: 20%;
+      margin-left: 10%;
+      float: right;
+    }
   }
 }
 
@@ -308,25 +346,32 @@ input[type="file"] {
   position: absolute;
   width: 20%;
   height: 15%;
-  background-color: darkblue;
+  background-color: var(--light-grey);
 }
 
 .soundLeft {
   float: left;
   width: 50%;
   height: 70%;
-  background-color: khaki;
+  background-color: var(--second-color);
 }
 
 .soundRight {
   float: right;
   width: 50%;
   height: 70%;
-  background-color: khaki;
+  background-color: var(--main-color);
 }
 
 .soundDrag {
   width: 100%;
+}
+
+.soundDrag img {
+  float: right;
+  margin: 2%;
+  margin-right: 4%;
+  width: 10%;
 }
 
 .creationDiv {
@@ -362,6 +407,10 @@ input[type="file"] {
   border: 1px solid red;
   margin: 2px;
   position: relative;
+}
+
+.divSlideMenu .textElementSlide {
+  white-space: normal;
 }
 
 .divSlideMenu .vidDiv icon {
@@ -409,6 +458,11 @@ input[type="file"] {
   color: #FFF;
   box-sizing: border-box;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* For presenter mode ---------------------------------------*/
+.noteDivContainerCopy {
+
 }
 /* For presentation mode -------------------------------------*/
 @media all and (display-mode: fullscreen) {

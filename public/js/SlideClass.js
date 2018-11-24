@@ -167,44 +167,72 @@ class Slide {
     let container = this.div;
     divOverlay.isDown = false;
 
-    divOverlay.addEventListener('mousedown', function(e) {
-        divOverlay.isDown = true;
+    divOverlay.addEventListener('mousedown', dragStart, true);
+    divOverlay.addEventListener('touchstart', dragStart, true);
+
+    document.addEventListener('mousemove', dragMove, true);
+    document.addEventListener('touchmove', dragMove, true);
+
+    document.addEventListener('mouseup', dragEnd, true);
+    document.addEventListener('touchend', dragEnd, true);
+
+    function dragStart(e) {
+      divOverlay.isDown = true;
+
+      if(e.type === 'mousedown'){
         divOverlay.offset = [
             divOverlay.offsetLeft - e.clientX,
             divOverlay.offsetTop - e.clientY
         ];
-    }, true);
+      }else{
+        divOverlay.offset = [
+            divOverlay.offsetLeft - e.touches[0].clientX,
+            divOverlay.offsetTop - e.touches[0].clientY
+        ];
+      }
 
-    document.addEventListener('mouseup', function() {
-        divOverlay.isDown = false;
-    }, true);
+    }
 
-    document.addEventListener('mousemove', function(e) {
-        event.preventDefault();
-        if (divOverlay.isDown) {
+    function dragMove(e) {
+      //e.preventDefault();
+      if (divOverlay.isDown) {
 
-          let leftPercent;
-          let topPercent;
+        let leftPercent;
+        let topPercent;
+        let newClientX;
+        let newClientY;
 
-          if ((e.clientX + divOverlay.offset[0] + divOverlay.offsetWidth) * 100 / container.offsetWidth > 100){
-            //do nothing
-          } else if ((e.clientX + divOverlay.offset[0]) * 100 / container.offsetWidth < 0){
-            //do nothing
-          } else {
-              leftPercent = ((e.clientX + divOverlay.offset[0]) * 100 / container.offsetWidth);
-          }
-
-          if (((e.clientY + divOverlay.offset[1] + divOverlay.offsetHeight) * 100 / container.offsetHeight)> 100 ){
-            //do nothing
-          } else if ((e.clientY + divOverlay.offset[1]) * 100 / container.offsetHeight < 0 ){
-            //do nothing
-          }else {
-            topPercent = ((e.clientY + divOverlay.offset[1]) * 100 / container.offsetHeight);
-          }
-
-          divOverlay.style.left = leftPercent + '%';
-          divOverlay.style.top  = topPercent + '%';
+        if(e.type === 'mousemove'){
+          newClientX = e.clientX;
+          newClientY = e.clientY;
+        }else{
+          newClientX = e.touches[0].clientX;
+          newClientY = e.touches[0].clientY;
         }
-    }, true);
+
+        if ((newClientX + divOverlay.offset[0] + divOverlay.offsetWidth) * 100 / container.offsetWidth > 100){
+          //do nothing
+        } else if ((newClientX + divOverlay.offset[0]) * 100 / container.offsetWidth < 0){
+          //do nothing
+        } else {
+            leftPercent = ((newClientX + divOverlay.offset[0]) * 100 / container.offsetWidth);
+        }
+
+        if (((newClientY + divOverlay.offset[1] + divOverlay.offsetHeight) * 100 / container.offsetHeight)> 100 ){
+          //do nothing
+        } else if ((newClientY + divOverlay.offset[1]) * 100 / container.offsetHeight < 0 ){
+          //do nothing
+        }else {
+          topPercent = ((newClientY + divOverlay.offset[1]) * 100 / container.offsetHeight);
+        }
+
+        divOverlay.style.left = leftPercent + '%';
+        divOverlay.style.top  = topPercent + '%';
+      }
+    }
+
+    function dragEnd() {
+      divOverlay.isDown = false;
+    }
   }
 }
