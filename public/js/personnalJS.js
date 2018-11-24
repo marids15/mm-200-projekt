@@ -128,8 +128,15 @@ async function displayPresentations(response) {
 		buttonEditP.id = id + 'editButton';
 		buttonEditP.onclick = editPresentation;
 
+		let nameDiv = document.createElement('div');
+		let name = document.createElement('h2');
+		nameDiv.className = "namePresentation";
+		name.innerHTML = presentation.presentation_json.presentation.name;
+		nameDiv.appendChild(name);
+
 		// appending all the elements in the container
 		newP.appendChild(imageP);
+		newP.appendChild(nameDiv);
 		newP.appendChild(buttonDeleteP);
 		newP.appendChild(buttonShareP);
 		newP.appendChild(buttonEditP);
