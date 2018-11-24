@@ -105,6 +105,7 @@ hr {
   border-radius: 3px;
   box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.19);
   box-sizing: border-box;
+  margin-bottom: 30px;
 }
 
 label {
