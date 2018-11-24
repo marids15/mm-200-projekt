@@ -420,13 +420,17 @@ input, button {
     box-sizing: border-box;
 }
 
-.divSlideMenu{
+.divSlideMenu {
   padding-top: 11.250%;
   width: 20%;
   display: inline-block;
-  border: 1px solid red;
+  border: 1px solid var(--third-color);
   margin: 2px;
   position: relative;
+}
+
+.activeSlide {
+  border: 5px solid var(--third-color);
 }
 
 .divSlideMenu .textElementSlide {

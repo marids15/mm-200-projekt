@@ -406,7 +406,10 @@ function updateSlideMenu() {
 	// for every slide create a new mini div
   for (let i = 0; i < listSlide.length; i++){
     let newDiv = document.createElement("div");
-    newDiv.className = "divSlideMenu";
+		newDiv.className = "divSlideMenu";
+		if (myPresentation.getCurrentSlideIndex() == i){
+			newDiv.className += ' activeSlide';
+		}
     let copy = listSlide[i].getSlideHTML().cloneNode(true);
     newDiv.appendChild(copy);
     newDiv.addEventListener('click', function() { // when clicked on mini div, go to that slide

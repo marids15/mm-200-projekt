@@ -226,7 +226,7 @@ table {
 .themeDefault .textElementSlide {
   font-family: var(--title-font);
   color: var(--grey);
-  /*background-color: var(--third-color);*/
+  background-color: none;
 }
 
 /* Dark theme -------------------------------------------------*/
@@ -240,7 +240,7 @@ table {
 
 .themeDark .textElementSlide {
   font-family: var(--title-font);
-/*  background-color: var(--third-color);*/
+  background-color: none;
   color: #FEFEFE;
 }
 
@@ -258,6 +258,7 @@ table {
   font-family: var(--text-font);
   color: var(--grey);
   font-weight: bold;
+  background-color: none;
 }
 
 /* Washed forest theme ----------------------------------------*/
@@ -291,4 +292,21 @@ table {
   font-family: var(--text-font);
   color: black;
   font-weight: bold;
+  background-color: none;
+}
+
+/* Dark wall theme -------------------------------------------*/
+.themeDarkWall {
+  background-image: url('/images/backgrounds/dark_wall.jpg');
+  background-size: cover;
+}
+
+.themeDarkWall .vidDiv {
+  background-color: var(--light-grey);
+}
+
+.themeDarkWall .textElementSlide {
+  color: var(--light-grey);
+  font-family: 'Varela Round', sans-serif;
+  background-color: rgba(0, 0, 0, 0.4);
 }
