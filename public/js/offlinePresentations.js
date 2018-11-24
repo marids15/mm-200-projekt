@@ -1,5 +1,7 @@
+/* Global variables --------------------------------*/
 let myPresentation;
 
+/* DOM variables --------------------------------------*/
 let slideDiv = document.getElementById("slideDiv");
 let indexOfSlide = document.getElementById("indexOfSlide");
 let inNote = document.getElementById('inNote');
@@ -9,20 +11,19 @@ let btnPlayPresentation = document.getElementById('btnPlayPresentation');
 let btnPlayPresenterMode = document.getElementById('btnPlayPresenterMode');
 
 //--------------- eventhandlers
-//inNote.onchange = saveNote;
 inFile.onchange = readFile;
 btnPlayPresentation.onclick = displayInFullScreen;
 btnPlayPresenterMode.onclick = displayPresenterMode;
 
+// function that reads a file
 function readFile(evt) {
-  console.log('reading file...');
   let reader = new FileReader();
   reader.onload = loadPresentation;
   reader.readAsText(evt.target.files[0]);
 }
 
+// function to display presentation from file
 function loadPresentation(evt) {
-  console.log('loading data ...');
   let txtPresentation = evt.target.result;
   let jsonPresentation = JSON.parse(txtPresentation);
   myPresentation = parseJSONToPresentation(jsonPresentation);
@@ -34,31 +35,34 @@ function updateSlideMenu() {
   let slideMenu = document.getElementById("slideMenu");
   slideMenu.innerHTML = "";
   let listSlide = myPresentation.getSlides();
+
+  // for every slide create a new mini div
   for (let i = 0; i < listSlide.length; i++){
     let newDiv = document.createElement("div");
     newDiv.className = "divSlideMenu";
     let copy = listSlide[i].getSlideHTML().cloneNode(true);
     newDiv.appendChild(copy);
-    newDiv.addEventListener('click', function() {
-            goToSlide(i);
-        });
-
+    newDiv.addEventListener('click', function() { // when clicked on mini div, go to that slide
+      goToSlide(i);
+    });
     slideMenu.appendChild(newDiv);
   }
 }
 
+// ------------------- load presentation from json to presentation
 function parseJSONToPresentation(myJSON) {
-	//let myclass = JSON.parse(myJSON);
 	let myclass = myJSON;
 
 	let myP = new Presentation(myclass.presentation.name, slideDiv);
 	myP.setCurrentSlideIndex(0);
-	//myP.addSlide(0);
 	myP.setTheme(myclass.presentation.theme);
 
+  // for every slide in object create slide
 	for(let i = 0; i < myclass.presentation.slides.length; i++){
 		myP.setCurrentSlideIndex(i);
 		myP.addSlide(i);
+
+    // for every element in object create element in slide
 		for(let j = 0; j < myclass.presentation.slides[i].elements.length; j++){
 			if (myclass.presentation.slides[i].elements[j].typeElement === TEXT){
 				myP.getCurrentSlide().addText(myclass.presentation.slides[i].elements[j].contentElement);
@@ -69,24 +73,18 @@ function parseJSONToPresentation(myJSON) {
 			else if(myclass.presentation.slides[i].elements[j].typeElement === VIDEO){
 				myP.getCurrentSlide().addVideo(myclass.presentation.slides[i].elements[j].contentElement);
 			}
-			else{
+			else { // sound element
 				myP.getCurrentSlide().addSound(myclass.presentation.slides[i].elements[j].contentElement);
 			}
 
-
-
+      // set position
 			myP.getSlides()[i].getElements()[j].setAttribute('style', `left: ${myclass.presentation.slides[i].elements[j].leftPercent}%;
 																																 top: ${myclass.presentation.slides[i].elements[j].topPercent}%`);
-
 		}
+
+    // set note
 		myP.getSlides()[i].setNote(myclass.presentation.slides[i].note);
-	/*	if(i+1 < myclass.presentation.slides.length){
-			myP.addSlide(myP.getCurrentSlideIndex()+1);
-			myP.goToNextSlide();
-		}*/
 	}
-
-
 	return myP;
 }
 
@@ -96,13 +94,15 @@ async function displayInFullScreen(){
   divContainer.addEventListener("webkitfullscreenchange", onFullScreenChange, true);
   openFullscreen(divContainer);
 
+  // check if timed transition is set to value
   let timedTransitions = document.getElementById("timedTransitions");
   let value = timedTransitions[timedTransitions.selectedIndex].value;
-  if(value !== "noTimer"){
+  if (value !== "noTimer") {  // timer is set
     let listSlide = myPresentation.getSlides();
     for (let i = 0; i < listSlide.length - 1; i++){
       await timeout(parseInt(value) * 1000);
-      if (divContainer.FScreenTimer) {
+      // check if still in presentation mode
+      if (divContainer.FScreenTimer) {  // presentation mode
         goToNextSlide();
       }
     }
@@ -110,6 +110,7 @@ async function displayInFullScreen(){
   }
 }
 
+// function for simulating timeout / wait
 function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -144,29 +145,32 @@ function closeFullscreen(elem) {
   console.log(" your browser doesn't support the Fullscreen API");
 }
 
+// function to append eventlisteners to arrow keys, and removes them when not in presentation mode
 function onFullScreenChange (e) {
   let element = e.target;
-  if (element.FScreen){
+  if (element.FScreen){ // in presentation mode: add eventlisteners
     window.addEventListener("keydown", clickKeyArrows, true);
     element.FScreen = false;
     swipedetect(divContainer);
   }
 
-  else{
+  else {  // not in presentation mode: remove eventlisteners
     window.removeEventListener("keydown", clickKeyArrows, true);
     element.FScreenTimer = false;
   }
 }
 
- function clickKeyArrows(event){
+// function to switch slides in presentation mode with arrow keys
+function clickKeyArrows(event){
   if (event.key === "ArrowLeft"){
-      goToPreviousSlide();
+    goToPreviousSlide();
   }
   if (event.key === "ArrowRight"){
-      goToNextSlide();
+    goToNextSlide();
   }
 }
 
+// function for detecting swipes on mobile devices on full screen mode
 function swipedetect(el){
 
     var touchsurface = el,
@@ -208,6 +212,7 @@ function swipedetect(el){
     }, false);
 }
 
+// -------------- function to go to next slide
 function goToNextSlide(){
   myPresentation.goToNextSlide();
   displayNumberCurrentSlide();
@@ -230,18 +235,6 @@ function goToSlide(num) {
   updateNote();
   updateSlideMenu();
 }
-
-// ------------------- function to save note
-function saveNote() {
-  let noteText = inNote.value;
-  myPresentation.getCurrentSlide().setNote(noteText);
-}
-
-function updateNote() {
-  let noteText = myPresentation.getCurrentSlide().getNote();
-  inNote.value = noteText;
-}
-
 
 //-------------------- function to display the number and the total of slide
 function displayNumberCurrentSlide() {
