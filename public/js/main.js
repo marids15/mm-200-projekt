@@ -556,12 +556,34 @@ function makeToolActive(elem) {
 
 //------------------ Function for inserting title slide template
 function addTitleTemplate(evt) {
-	// TODO
+	evt.preventDefault();
+	let templateTitle = document.getElementById('inTitle').value;
+	let templateText = document.getElementById('inTitleText').value;
+	myPresentation.getCurrentSlide().addText(templateTitle);
+	let elements = myPresentation.getCurrentSlide().getElements();
+	let justAddedTitle = elements[elements.length - 1];
+	justAddedTitle.style.left = '20%';
+	justAddedTitle.style.top = '20%';
+	myPresentation.getCurrentSlide().addText(templateText);
+	let justAddedText = elements[elements.length - 1];
+	justAddedText.style.left = '10%';
+	justAddedText.style.top = '40%';
 }
 
 //------------------ Function for inserting image slide template
 function addImageTemplate(evt) {
-	// TODO
+	evt.preventDefault();
+	let templateImageSrc = document.getElementById('inURL').value;
+	let templateImageText = document.getElementById('inImageText').value;
+	myPresentation.getCurrentSlide().addImage(templateImageSrc);
+	let elements = myPresentation.getCurrentSlide().getElements();
+	let justAddedImage = elements[elements.length - 1];
+	justAddedImage.style.left = '60%';
+	justAddedImage.style.top = '20%';
+	myPresentation.getCurrentSlide().addText(templateImageText);
+	let justAddedText = elements[elements.length - 1];
+	justAddedText.style.left = '12%';
+	justAddedText.style.top = '20%';
 }
 
 //------------------ Changing the theme of the Presentation

@@ -120,16 +120,16 @@
       <h3>Title slide</h3>
       <label for="inTitle">Title: </label>
       <input id="inTitle" type="text" name="title" placeholder="Enter a title" required>
-      <label for="inText">Subtitle: </label>
-      <input id="inText" type="text" name="subtitle" placeholder="Enter a subtitle">
+      <label for="inTitleText">Subtitle: </label>
+      <input id="inTitleText" type="text" name="subtitle" placeholder="Enter a subtitle">
       <input id="btnAddTitleTemplate" class="btn" type="submit" value="Create title slide">
     </form>
     <form id="formImageTemplate">
       <h3>Image slide</h3>
-      <label for="inTitle">Image url: </label>
-      <input id="inTitle" type="text" name="imageUrl" placeholder="Enter URL of image" required>
-      <label for="inText">Text: </label>
-      <input id="inText" type="text" name="text" placeholder="Enter text">
+      <label for="inURL">Image url: </label>
+      <input id="inURL" type="text" name="imageUrl" placeholder="Enter URL of image" required>
+      <label for="inImageText">Text: </label>
+      <input id="inImageText" type="text" name="text" placeholder="Enter text">
       <input id="btnAddImageTemplate" class="btn" type="submit" value="Create title slide">
     </form>
   </template>
@@ -144,7 +144,7 @@
       <option value="Washed">Washed forest theme</option>
       <option value="Wood">Wood theme</option>
     </select>
-    <h3>Playing presentation</h3>
+    <h3 id="playPresentationTitle">Playing presentation</h3>
     <select id="timedTransitions">
       <option value="noTimer">No timer</option>
       <option value="10">10s</option>

@@ -524,6 +524,10 @@ input, button {
   font-size: 17px;
 }
 
+#playPresentationTitle {
+  margin-top: 30px;
+}
+
 .tabContent label, .text {
   display: block;
   width: 100%;
