@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Once upon a Slide</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel='icon' href='/images/favicon2.ico' type='image/x-icon'/>
+  <link rel="stylesheet" href="css/publicPresentations.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="publicPresentationsPage">
+  <div class="navbar" id="top"></div>
+
+  <div id="publicPresentations">
+    <div id="headerPresentations" class="headerP">
+      <h1>Public Presentations</h1>
+    </div>
+    <div class="wrapper" id="presentations">
+    </div>
+  </div>
+
+  <script>
+  const DRAGGABLE = false;
+  const EDITABLE = false;
+  </script>
+
+  <script src="./js/navbar.js"></script>
+  <script src="./js/ElementClass.js"></script>
+  <script src="./js/SlideClass.js"></script>
+  <script src="./js/PresentationClass.js"></script>
+  <script src="./js/checkToken.js"></script>
+  <script src="./js/popupMessage.js"></script>
+  <script src="./js/publicPresentations.js"></script>
+  <script>
+  var activePage = 2;
+  MakeNavbar(activePage);
+  </script>
+</body>
+</html>
