@@ -37,6 +37,7 @@
 
 #publicPresentations {
 	min-height: 100vh;
+	margin-bottom: 80px; /* *------------------------------------ changed this!!!! -------------------*/
 }
 
 .publicPresentationsPage {
