@@ -220,12 +220,14 @@ table {
 }
 
 .themeDefault .vidDiv {
-  background-color: var(--grey);
+  background-color: var(--light-grey);
 }
 
+/*
 .themeDefault .vidDiv icon {
   color: var(--second-color);
 }
+*/
 
 .themeDefault .textElementSlide {
   font-family: var(--title-font);
@@ -239,7 +241,7 @@ table {
 }
 
 .themeDark .vidDiv {
-  background-color: var(--grey);
+  background-color: var(--light-grey);
 }
 
 .themeDark .vidDiv icon {

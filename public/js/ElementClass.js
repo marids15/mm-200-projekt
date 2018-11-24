@@ -72,9 +72,9 @@ class Element {
   createHTMLVideo() {
     let myVidFrame = document.createElement('iframe');
     let vidDiv = document.createElement('div');
-    let dragIcon = document.createElement('image');
+    let dragIcon = document.createElement('img');
     vidDiv.className = "vidDiv"
-    dragIcon.setAttribute("src", "images/dragging.jpg");
+    dragIcon.setAttribute("src", "images/dragging.png");
 
     myVidFrame.src = this.content;
     myVidFrame.frameborder = "0";

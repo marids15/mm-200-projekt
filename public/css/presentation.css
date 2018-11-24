@@ -146,10 +146,6 @@ table {
     outline: none;
   }
 
-  .vidDiv {
-    font-size: 2.5vw;
-  }
-
   /* For displaying scrolling slide menu ------------------------------*/
   #slideMenu {
     width: 95%;
@@ -299,10 +295,6 @@ table {
     height: 100%;
   }
 
-  .vidDiv {
-    font-size: 1.5vw;
-  }
-
   /* For displaying in presenter mode ------------------------------------*/
   .displayDivContainerCopy {
     width: 70%;
@@ -363,10 +355,11 @@ input, button {
   display: inline-block;
 }
 
-.vidDiv icon {
+.vidDiv img {
   float: right;
   margin: 2%;
-  padding: 2%;
+  margin-right: 4%;
+  width: 10%;
 }
 
 .soundElement {
@@ -429,7 +422,7 @@ input, button {
   position: relative;
 }
 
-.divSlideMenu .vidDiv icon {
+.divSlideMenu .vidDiv img {
   display: none;
 }
 
