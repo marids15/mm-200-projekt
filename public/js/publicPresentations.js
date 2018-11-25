@@ -115,7 +115,7 @@ function parsePresentationToJSON(id) {
 			// set type and content
 			myElement.typeElement = elementsArray[j].typeElement;
 			myElement.contentElement = elementsArray[j].contentElement;
-
+			myElement.classElement = elementsArray[j].classList.value;
 			mySlide.elements.push(myElement);
 		}
 		myData.presentation.slides.push(mySlide);
