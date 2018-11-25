@@ -661,9 +661,14 @@ function parsePresentationToJSON() {
 
 			// set type and content
 			myElement.typeElement = elementsArray[j].typeElement;
-			myElement.contentElement = elementsArray[j].contentElement;
+			if (myElement.typeElement == TEXT) {
+				console.log('this is text ; elementArray value: ' + elementsArray[j].innerHTML);
+				myElement.contentElement =  elementsArray[j].innerHTML;
+			} else {
+				myElement.contentElement = elementsArray[j].contentElement;
+			}
 			myElement.classElement = elementsArray[j].classList.value;
-console.log(myElement.classElement);
+			console.log(myElement.classElement);
 			mySlide.elements.push(myElement);
 		}
 		myData.presentation.slides.push(mySlide);
