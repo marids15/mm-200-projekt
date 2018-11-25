@@ -44,7 +44,7 @@ let sizes = ["XS","Small", "Large", "XL"];
 // function to change font size from selected option
 function changeFontSize(){
   let textbox = myPresentation.getCurrentSlide().getCurrentElement();
-  if (textbox !== 'null'){
+  if (textbox !== null){
     if(textbox.typeElement === TEXT) {
       let fontSize = document.getElementById("setFontSize").value;
       if(fontSize == "Default"){
@@ -67,7 +67,7 @@ let colore = ["bluefont", "darkfont", "redfont", "pinkfont"];
 // function to change font color from selected option
 function changeColor(evt) {
   let textbox = myPresentation.getCurrentSlide().getCurrentElement();
-  if (textbox !== 'null'){
+  if (textbox !== null){
     if(textbox.typeElement === TEXT) {
     	let color = document.getElementById('setFontColor').value;
 
@@ -103,7 +103,7 @@ let fonts = ["TimesFont", "ArialFont", "ComicFont", "ImpactFont", "CourierFont"]
 // function to change font family from selected option
 function changeFont(){
   let textbox = myPresentation.getCurrentSlide().getCurrentElement();
-  if (textbox !== 'null'){
+  if (textbox !== null){
     if(textbox.typeElement === TEXT) {
       let font = document.getElementById('setFont').value;
 
@@ -140,6 +140,7 @@ function changeFont(){
 
 function updateTools(){
   let textbox = myPresentation.getCurrentSlide().getCurrentElement();
+  document.getElementById('inTxt').value = `${textbox.innerHTML}`;
 
   switch(textbox.classList[1]) {
     case "TimesFont" :

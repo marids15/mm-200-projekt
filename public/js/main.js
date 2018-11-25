@@ -59,14 +59,9 @@ async function loadPresentation(response) {
 	}
 
 	// make elements selectable
-	requestAnimationFrame(selectable);
+	myPresentation.makeDivSelectable();
 }
 
-// function to make elements selectable
-function selectable(evt){
-	myPresentation.makeDivSelectable();
-	requestAnimationFrame(selectable);
-}
 
 // function to save note into local presentation
 function saveNote() {
@@ -127,6 +122,7 @@ function goToNextSlide(){
   displayNumberCurrentSlide();
   updateNote();
   updateSlideMenu();
+	myPresentation.makeDivSelectable();
 }
 
 //--------------- function to go to previous slide
@@ -135,6 +131,7 @@ function goToPreviousSlide(){
   displayNumberCurrentSlide();
   updateNote();
   updateSlideMenu();
+	myPresentation.makeDivSelectable();
 }
 
 //------------- displays slide by an index
@@ -143,6 +140,7 @@ function goToSlide(num) {
   displayNumberCurrentSlide();
   updateNote();
   updateSlideMenu();
+	myPresentation.makeDivSelectable();
 }
 
 //--------------- function to Add a new slide
