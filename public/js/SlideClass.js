@@ -1,4 +1,4 @@
-let themes = ["themeDefault", "themeDark"];
+let themes = ["themeDefault", "themeDark", "themeGeometric", "themeWashed", "themeWood", "themeDarkWall"];
 
 /* === Class for creating Slide =============================================*/
 class Slide {
