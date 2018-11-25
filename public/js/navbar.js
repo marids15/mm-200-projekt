@@ -20,10 +20,8 @@ var e = "";
 // Makes navbar- and handles what is the active element
 function MakeNavbar(evt){
   let tokentest = localStorage.getItem("token");
-  //console.log(tokentest);
   let logedinornot = "";
   if (tokentest && tokentest.length > 12){
-  //  console.log("testedtokennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
     logedinornot = '<a class="btnLogOff" onclick="logOut()">Log out<i class="fas fa-power-off"></i></a>';
   }
   if (evt == 1){a = 'class="active"';}
@@ -48,13 +46,10 @@ function MakeNavbar(evt){
 }
 
 function logOut(){
-  console.log('logging off');
-  //let msg = "offLoged";
   if (activePage == 9){
   storePresentation();
 }
   localStorage.setItem("token","offLoged");
   localStorage.setItem("user_id","offLoged");
-  //console.log("loggeroffer");
-    location.href = "./index.html";
+  location.href = "./index.html";
 }

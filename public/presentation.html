@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/presentation.css">
   <link rel="stylesheet" href="css/elementStyles.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto|Varela+Round" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -53,6 +53,11 @@
       <div class="tab" title="Sound tool">
         <button id="soundToolTab" onclick="showSoundTool()">
           <i class="fas fa-music"></i>
+        </button>
+      </div>
+      <div class="tab" title="Template tool">
+        <button id="templateToolTab" onclick="showTemplateTool()">
+          <i class="fas fa-stamp"></i>
         </button>
       </div>
       <div class="tab" title="Presenter tool">
@@ -116,6 +121,26 @@
     </form>
   </template>
 
+  <template id="templateContent">
+    <h2>Templates</h2>
+    <form id="formTitleTemplate">
+      <h3>Title slide</h3>
+      <label for="inTitle">Title: </label>
+      <input id="inTitle" type="text" name="title" placeholder="Enter a title" required>
+      <label for="inTitleText">Subtitle: </label>
+      <input id="inTitleText" type="text" name="subtitle" placeholder="Enter a subtitle">
+      <input id="btnAddTitleTemplate" class="btn" type="submit" value="Create title slide">
+    </form>
+    <form id="formImageTemplate">
+      <h3>Image slide</h3>
+      <label for="inURL">Image url: </label>
+      <input id="inURL" type="text" name="imageUrl" placeholder="Enter URL of image" required>
+      <label for="inImageText">Text: </label>
+      <input id="inImageText" type="text" name="text" placeholder="Enter text">
+      <input id="btnAddImageTemplate" class="btn" type="submit" value="Create title slide">
+    </form>
+  </template>
+
   <template id="presenterContent">
     <h2>Presentation</h2>
     <h3>Select theme</h3>
@@ -125,8 +150,9 @@
       <option value="Geometric">Geometric theme</option>
       <option value="Washed">Washed forest theme</option>
       <option value="Wood">Wood theme</option>
+      <option value="DarkWall">Dark wall theme</option>
     </select>
-    <h3>Playing presentation</h3>
+    <h3 id="playPresentationTitle">Playing presentation</h3>
     <select id="timedTransitions">
       <option value="noTimer">No timer</option>
       <option value="10">10s</option>

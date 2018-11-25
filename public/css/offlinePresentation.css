@@ -460,6 +460,16 @@ input[type="file"] {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
 }
 
+#btnPlayPresentation i {
+  float: left;
+  margin-right: 2.5%;
+}
+
+#btnPlayPresenterMode i {
+  float: left;
+  margin-right: 2.5%;
+}
+
 /* For presenter mode ---------------------------------------*/
 .noteDivContainerCopy {
 

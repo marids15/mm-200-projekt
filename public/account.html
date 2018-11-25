@@ -6,47 +6,49 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/account.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto|Varela+Round" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Once Upon a Slide</title>
   </head>
   <body class="accountPage">
     <div class="navbar" id="top"></div>
 
-    <div class="userInfo">
-      <h1>Personal information</h1>
-      <hr>
-      <h3 id="dispUsername"></h3>
-      <form class="credentialsEmail" id="formEmail">
-        <label for="inEmail">Email:</label>
-        <input id="inEmail" type="email">
-        <button class="emailButton" type="submit">
-          <i id="btnSaveEmail" class="fas fa-pencil-alt" type="submit"></i>
-        </button>
-      </form>
-      <h3>Change password</h3>
-      <form class="credentialsPassword" id="formPass">
-        <label for="inOldPassword">Enter old password:</label>
-        <input id="inOldPassword" type="password" required>
-        <label for="inNewPassword1">Enter new password:</label>
-        <input id="inNewPassword1" type="password" required>
-        <label for="inNewPassword2">Confirm new password:</label>
-        <input id="inNewPassword2" type="password" required> <br>
-        <p id="message"></p>
-        <input type="submit" id="btnSavePwd" value="Save new password">
-      </form>
-      <form class="credentialsImage" id="formUploadImage">
-      </form>
-    </div>
+    <div class="allUserInfo">
+      <div class="userInfo">
+        <h1>Personal information</h1>
+        <hr>
+        <h3 id="dispUsername"></h3>
+        <form class="credentialsEmail" id="formEmail">
+          <label for="inEmail">Email:</label>
+          <input id="inEmail" type="email">
+          <button class="emailButton" type="submit">
+            <i id="btnSaveEmail" class="fas fa-pencil-alt" type="submit"></i>
+          </button>
+        </form>
+        <h3>Change password</h3>
+        <form class="credentialsPassword" id="formPass">
+          <label for="inOldPassword">Enter old password:</label>
+          <input id="inOldPassword" type="password" required>
+          <label for="inNewPassword1">Enter new password:</label>
+          <input id="inNewPassword1" type="password" required>
+          <label for="inNewPassword2">Confirm new password:</label>
+          <input id="inNewPassword2" type="password" required> <br>
+          <p id="message"></p>
+          <input type="submit" id="btnSavePwd" value="Save new password">
+        </form>
+        <form class="credentialsImage" id="formUploadImage">
+        </form>
+      </div>
 
-    <div class= "userInfo">
+      <div class= "userInfo">
 
-      <h3><i class="fas fa-exclamation-triangle danger"></i> Delete account</h3>
-      <form id="formDeleteUser">
-        <input id="radAll" type="radio" name="deleteOption" value="0" checked>Delete all my presentations<br>
-        <input id="radSome" type="radio" name="deleteOption" value="1">Delete only my private and individual presentations<br>
-        <input type="submit" value="Delete account">
-      </form>
+        <h3><i class="fas fa-exclamation-triangle danger"></i> Delete account</h3>
+        <form id="formDeleteUser">
+          <input id="radAll" type="radio" name="deleteOption" value="0" checked>Delete all my presentations<br>
+          <input id="radSome" type="radio" name="deleteOption" value="1">Delete only my private and individual presentations<br>
+          <input type="submit" value="Delete account">
+        </form>
+      </div>
     </div>
     <script src="./js/checkToken.js"></script>
     <script src="./js/popupMessage.js"></script>
