@@ -32,8 +32,5 @@ function showErrorPopup(message){
 
 function removePopup(evt) {
   let body = document.body;
-  console.log(body);
-  console.log(evt.target);
-  console.log(evt.currentTarget.parentElement);
   body.removeChild(evt.currentTarget.parentElement);
 }

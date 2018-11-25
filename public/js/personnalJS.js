@@ -202,8 +202,8 @@ function getFirstSlideImage(myJSON, container) {
 	myP.setTheme(myJSON.presentation.theme);
 
 	// check for empty presentation
-	if (myJSON.presentation.slides.length == 0) { // empty presentation
-		console.log('empty presentation');
+	if (myJSON.presentation.slides.length == 0) {
+		// empty presentation
 	} else {	// non empty presentation
 		// append every element (text, image, video, sound) to presentation
 		for (let j = 0; j < myJSON.presentation.slides[0].elements.length; j++){

@@ -41,9 +41,7 @@ class Presentation {
 
   // set theme
   setTheme(theme) {
-    console.log("setting theme: " + theme);
     this.theme = theme;
-
     for (let slide of this.slides) {
       slide.setSlideTheme("theme" + theme);
     }
@@ -93,15 +91,15 @@ class Presentation {
       this.currentSlideIndex++;
       this.containerDiv.appendChild(this.slides[this.currentSlideIndex].getSlideHTML());
     }
-    else{
-      console.log("Error : it's the last slide!");
+    else {
+      // last slide
     }
   }
 
   // handles everything to go to previous slide
   goToPreviousSlide(){
     if (this.currentSlideIndex  === 0){
-      console.log("Error : it's the first slide!");
+      // first slide
     }
     else{
       if (this.currentSlideIndex < this.slides.length){
@@ -122,7 +120,7 @@ class Presentation {
       this.containerDiv.appendChild(this.slides[this.currentSlideIndex].getSlideHTML());
     }
     else{
-      console.log("Error : this slide dosen't exist!");
+      // slide doesn't exist
     }
   }
 

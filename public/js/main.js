@@ -318,7 +318,7 @@ function closeFullscreen(elem) {
   } else if (elem.msExitFullscreen) { /* IE/Edge */
     elem.msExitFullscreen();
   }
-  console.log(" your browser doesn't support the Fullscreen API");
+  showErrorPopup(" your browser doesn't support the Fullscreen API");
 }
 
 // function to append eventlisteners to arrow keys, and removes them when not in presentation mode
@@ -392,7 +392,7 @@ function swipedetect(el, mode){
 						}
           }
           else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
-            console.log("exit");
+            // exit
           }
       }
       e.preventDefault();
@@ -577,9 +577,12 @@ function addTitleTemplate(evt) {
 	// adding the subtitle
 	myPresentation.getCurrentSlide().addText(inTemplateText.value);
 	let justAddedText = elements[elements.length - 1]; // get the newly added subtitle as element
+	// set fontSize
+	justAddedText.className += " Small";
+
 	// position the subtitle correctly
 	justAddedText.style.left = ((slideDiv.offsetWidth / 2 - (justAddedText.offsetWidth / 2)) / slideDiv.offsetWidth) * 100 + '%';
-	justAddedText.style.top = '40%';
+	justAddedText.style.top = '50%';
 
 	// empty input fields
 	inTemplateTitle.value = "";
@@ -729,13 +732,11 @@ function parsePresentationToJSON() {
 			// set type and content
 			myElement.typeElement = elementsArray[j].typeElement;
 			if (myElement.typeElement == TEXT) {
-				console.log('this is text ; elementArray value: ' + elementsArray[j].innerHTML);
 				myElement.contentElement =  elementsArray[j].innerHTML;
 			} else {
 				myElement.contentElement = elementsArray[j].contentElement;
 			}
 			myElement.classElement = elementsArray[j].classList.value;
-			console.log(myElement.classElement);
 			mySlide.elements.push(myElement);
 		}
 		myData.presentation.slides.push(mySlide);
