@@ -223,6 +223,7 @@ function getFirstSlideImage(myJSON, container) {
 			// set correct position of element
 			myP.getSlides()[0].getElements()[j].setAttribute('style', `left: ${myJSON.presentation.slides[0].elements[j].leftPercent}%;
 																																 top: ${myJSON.presentation.slides[0].elements[j].topPercent}%`);
+			myP.getSlides()[0].getElements()[j].className = `${myJSON.presentation.slides[0].elements[j].classElement}` ;
 		}
 	}
 }

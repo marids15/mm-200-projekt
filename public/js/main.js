@@ -59,14 +59,9 @@ async function loadPresentation(response) {
 	}
 
 	// make elements selectable
-	requestAnimationFrame(selectable);
+	myPresentation.makeDivSelectable();
 }
 
-// function to make elements selectable
-function selectable(evt){
-	myPresentation.makeDivSelectable();
-	requestAnimationFrame(selectable);
-}
 
 // function to save note into local presentation
 function saveNote() {
@@ -89,7 +84,11 @@ function displayNumberCurrentSlide() {
 function btnAddTextClick(evt) {
   evt.preventDefault();
   let inTxt = document.getElementById('inTxt');
-  myPresentation.getCurrentSlide().addText(inTxt.value);
+	let color = document.getElementById('setFontColor').value;
+	let font = document.getElementById('setFont').value;
+	let fontSize = document.getElementById("setFontSize").value;
+	let listClass = font + ' ' + color + ' ' + fontSize;
+  myPresentation.getCurrentSlide().addText(inTxt.value , listClass, myPresentation.getCurrentSlideIndex());
   inTxt.value = "";
 }
 
@@ -97,7 +96,7 @@ function btnAddTextClick(evt) {
 function addImage(evt) {
   evt.preventDefault();
   let inImgSrc = document.getElementById("inImgSrc");
-  myPresentation.getCurrentSlide().addImage(inImgSrc.value);
+  myPresentation.getCurrentSlide().addImage(inImgSrc.value, myPresentation.getCurrentSlideIndex());
   inImgSrc.value = "";
 }
 
@@ -105,7 +104,7 @@ function addImage(evt) {
 function addVideo(evt) {
   evt.preventDefault();
   let inVidSrc = document.getElementById("inVidSrc");
-  myPresentation.getCurrentSlide().addVideo(inVidSrc.value);
+  myPresentation.getCurrentSlide().addVideo(inVidSrc.value, myPresentation.getCurrentSlideIndex());
   inVidSrc.value = "";
 }
 
@@ -113,7 +112,7 @@ function addVideo(evt) {
 function addSound(evt) {
   evt.preventDefault();
   let inSoundSrc = document.getElementById("inSoundSrc");
-  myPresentation.getCurrentSlide().addSound(inSoundSrc.value);
+  myPresentation.getCurrentSlide().addSound(inSoundSrc.value, myPresentation.getCurrentSlideIndex());
   inSoundSrc.value = "";
 }
 
@@ -123,6 +122,7 @@ function goToNextSlide(){
   displayNumberCurrentSlide();
   updateNote();
   updateSlideMenu();
+	myPresentation.makeDivSelectable();
 }
 
 //--------------- function to go to previous slide
@@ -131,6 +131,7 @@ function goToPreviousSlide(){
   displayNumberCurrentSlide();
   updateNote();
   updateSlideMenu();
+	myPresentation.makeDivSelectable();
 }
 
 //------------- displays slide by an index
@@ -139,6 +140,7 @@ function goToSlide(num) {
   displayNumberCurrentSlide();
   updateNote();
   updateSlideMenu();
+	myPresentation.makeDivSelectable();
 }
 
 //--------------- function to Add a new slide
@@ -437,6 +439,7 @@ function showTextTool() {
   let formEditingText = document.getElementById("formEditingText");
   formEditingText.onsubmit = btnAddTextClick;
   activeDeleteElement();
+	doChange();
 }
 
 //------------------ Shows the image tool in the menu
@@ -656,8 +659,14 @@ function parsePresentationToJSON() {
 
 			// set type and content
 			myElement.typeElement = elementsArray[j].typeElement;
-			myElement.contentElement = elementsArray[j].contentElement;
-
+			if (myElement.typeElement == TEXT) {
+				console.log('this is text ; elementArray value: ' + elementsArray[j].innerHTML);
+				myElement.contentElement =  elementsArray[j].innerHTML;
+			} else {
+				myElement.contentElement = elementsArray[j].contentElement;
+			}
+			myElement.classElement = elementsArray[j].classList.value;
+			console.log(myElement.classElement);
 			mySlide.elements.push(myElement);
 		}
 		myData.presentation.slides.push(mySlide);
@@ -686,6 +695,7 @@ function parseJSONToPresentation(myJSON) {
 		for(let j = 0; j < myclass.presentation.slides[i].elements.length; j++){
 			if (myclass.presentation.slides[i].elements[j].typeElement === TEXT){ // is text element
 				myP.getCurrentSlide().addText(myclass.presentation.slides[i].elements[j].contentElement);
+				//myP.getSlides()[i].getElements()[j].className += myclass.presentation.slides[i].elements[j].classElement.value;
 			}
 			else if(myclass.presentation.slides[i].elements[j].typeElement === IMAGE){ // is image element
 				myP.getCurrentSlide().addImage(myclass.presentation.slides[i].elements[j].contentElement);
@@ -700,6 +710,7 @@ function parseJSONToPresentation(myJSON) {
 			// set position
 			myP.getSlides()[i].getElements()[j].setAttribute('style', `left: ${myclass.presentation.slides[i].elements[j].leftPercent}%;
 																																 top: ${myclass.presentation.slides[i].elements[j].topPercent}%`);
+			myP.getSlides()[i].getElements()[j].className = `${myclass.presentation.slides[i].elements[j].classElement}` ;
 		}
 
 		// set note
