@@ -217,6 +217,7 @@ table {
 /* Default theme ----------------------------------------------*/
 .themeDefault {
   background-color: #FEFEFE;
+  background-image: none;
 }
 
 .themeDefault .vidDiv {
@@ -227,11 +228,13 @@ table {
   font-family: var(--title-font);
   color: var(--grey);
   background-color: none;
+  font-weight: normal;
 }
 
 /* Dark theme -------------------------------------------------*/
 .themeDark {
   background-color: #222;
+  background-image: none;
 }
 
 .themeDark .vidDiv {
@@ -242,12 +245,14 @@ table {
   font-family: var(--title-font);
   background-color: none;
   color: #FEFEFE;
+  font-weight: normal;
 }
 
 /* Geometric theme -------------------------------------------*/
 .themeGeometric {
   background-image: url('/images/backgrounds/geometric.jpg');
   background-size: cover;
+  background-color: none;
 }
 
 .themeGeometric .vidDiv {
@@ -265,6 +270,7 @@ table {
 .themeWashed {
   background-image: url('/images/backgrounds/washed_forest.jpg');
   background-size: cover;
+  background-color: none;
 }
 
 .themeWashed .vidDiv {
@@ -282,6 +288,7 @@ table {
 .themeWood {
   background-image: url('/images/backgrounds/wood.jpg');
   background-size: cover;
+  background-color: none;
 }
 
 .themeWood .vidDiv {
@@ -299,6 +306,7 @@ table {
 .themeDarkWall {
   background-image: url('/images/backgrounds/dark_wall.jpg');
   background-size: cover;
+  background-color: none;
 }
 
 .themeDarkWall .vidDiv {
@@ -309,4 +317,5 @@ table {
   color: var(--light-grey);
   font-family: 'Varela Round', sans-serif;
   background-color: rgba(0, 0, 0, 0.4);
+  font-weight: normal;
 }

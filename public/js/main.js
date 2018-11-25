@@ -560,35 +560,53 @@ function makeToolActive(elem) {
 //------------------ Function for inserting title slide template
 function addTitleTemplate(evt) {
 	evt.preventDefault();
-	let templateTitle = document.getElementById('inTitle').value;
-	let templateText = document.getElementById('inTitleText').value;
-	myPresentation.getCurrentSlide().addText(templateTitle);
+	let inTemplateTitle = document.getElementById('inTitle');
+	let inTemplateText = document.getElementById('inTitleText');
+
+	// adding the title
+	myPresentation.getCurrentSlide().addText(inTemplateTitle.value);
 	let elements = myPresentation.getCurrentSlide().getElements();
-	let justAddedTitle = elements[elements.length - 1];
-
-
-	justAddedTitle.style.left = slideDiv.offsetWidth / 2 - (justAddedTitle.offsetWidth/2) + 'px';
+	let justAddedTitle = elements[elements.length - 1]; // get the newly added title as element
+	// position the title correctly
+	justAddedTitle.style.left = ((slideDiv.offsetWidth / 2 - (justAddedTitle.offsetWidth / 2)) / slideDiv.offsetWidth) * 100 + '%';
 	justAddedTitle.style.top = '20%';
-	myPresentation.getCurrentSlide().addText(templateText);
-	let justAddedText = elements[elements.length - 1];
-	justAddedText.style.left = '10%';
+
+	// adding the subtitle
+	myPresentation.getCurrentSlide().addText(inTemplateText.value);
+	let justAddedText = elements[elements.length - 1]; // get the newly added subtitle as element
+	// position the subtitle correctly
+	justAddedText.style.left = ((slideDiv.offsetWidth / 2 - (justAddedText.offsetWidth / 2)) / slideDiv.offsetWidth) * 100 + '%';
 	justAddedText.style.top = '40%';
+
+	// empty input fields
+	inTemplateTitle.value = "";
+	inTemplateText.value = "";
 }
 
 //------------------ Function for inserting image slide template
 function addImageTemplate(evt) {
 	evt.preventDefault();
-	let templateImageSrc = document.getElementById('inURL').value;
-	let templateImageText = document.getElementById('inImageText').value;
-	myPresentation.getCurrentSlide().addImage(templateImageSrc);
+	let inTemplateImageSrc = document.getElementById('inURL');
+	let inTemplateImageText = document.getElementById('inImageText');
+
+	// adding the image
+	myPresentation.getCurrentSlide().addImage(inTemplateImageSrc.value);
 	let elements = myPresentation.getCurrentSlide().getElements();
-	let justAddedImage = elements[elements.length - 1];
-	justAddedImage.style.left = '60%';
-	justAddedImage.style.top = '20%';
-	myPresentation.getCurrentSlide().addText(templateImageText);
-	let justAddedText = elements[elements.length - 1];
-	justAddedText.style.left = '12%';
-	justAddedText.style.top = '20%';
+	let justAddedImage = elements[elements.length - 1]; // get the newly added image as element
+	// position the image
+	justAddedImage.style.left = ((slideDiv.offsetWidth / 2 - (justAddedImage.offsetWidth / 2)) / slideDiv.offsetWidth) * 100 + '%';
+	justAddedImage.style.top = '30%';
+
+	// adding the text
+	myPresentation.getCurrentSlide().addText(inTemplateImageText.value);
+	let justAddedText = elements[elements.length - 1]; // get the newly added text as element
+	// position the text
+	justAddedText.style.left = ((slideDiv.offsetWidth / 2 - (justAddedText.offsetWidth / 2)) / slideDiv.offsetWidth) * 100 + '%';
+	justAddedText.style.top = '7%';
+
+	// clear inputfields
+	inTemplateImageSrc.value = "";
+	inTemplateImageText.value = "";
 }
 
 //------------------ Changing the theme of the Presentation
