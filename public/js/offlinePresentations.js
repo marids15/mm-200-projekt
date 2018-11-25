@@ -80,7 +80,8 @@ function parseJSONToPresentation(myJSON) {
       // set position
 			myP.getSlides()[i].getElements()[j].setAttribute('style', `left: ${myclass.presentation.slides[i].elements[j].leftPercent}%;
 																																 top: ${myclass.presentation.slides[i].elements[j].topPercent}%`);
-		}
+      myP.getSlides()[i].getElements()[j].className = `${myclass.presentation.slides[i].elements[j].classElement}` ;
+    }
 
     // set note
 		myP.getSlides()[i].setNote(myclass.presentation.slides[i].note);

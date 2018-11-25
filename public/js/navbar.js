@@ -19,11 +19,20 @@ var e = "";
 
 // Makes navbar- and handles what is the active element
 function MakeNavbar(evt){
+  let tokentest = localStorage.getItem("token");
+  //console.log(tokentest);
+  let logedinornot = "";
+  if (tokentest && tokentest.length > 12){
+  //  console.log("testedtokennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+    logedinornot = '<a class="btnLogOff" onclick="logOut()">Log out<i class="fas fa-power-off"></i></a>';
+  }
   if (evt == 1){a = 'class="active"';}
   if (evt == 2){b = 'class="active"';}
   if (evt == 3){c = 'class="active"';}
   if (evt == 4){d = 'class="active"';}
   if (evt == 5){e = 'class="active"';}
+  if (evt == 9){b = 'class="active"';}
+
   //  Makes the actual navbar
   var navi =  document.createElement("div");
   navi.id = "topnav";
@@ -33,6 +42,19 @@ function MakeNavbar(evt){
     '>Offline Presentations</a><a href="account.html" ' + d +
     '>My Account</a><a href="publicPresentations.html" ' + e +
     '>Public Presentations</a>' +
-    '<i class="fas fa-bars" onclick="expandNavigation()"></i>';
+    logedinornot +
+    '<i class="fas fa-bars iconBurger" onclick="expandNavigation()"></i>';
   document.getElementById("top").appendChild(navi);
+}
+
+function logOut(){
+  console.log('logging off');
+  //let msg = "offLoged";
+  if (activePage == 9){
+  storePresentation();
+}
+  localStorage.setItem("token","offLoged");
+  localStorage.setItem("user_id","offLoged");
+  //console.log("loggeroffer");
+    location.href = "./index.html";
 }

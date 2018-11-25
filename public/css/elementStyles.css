@@ -1,0 +1,210 @@
+:root{
+  --blue: blue;
+  --dark: #6f7072;
+  --pink: #dd1ccd;
+  --red: #d1001f;
+  --Times: "Times New Roman", Times, serif ;
+}
+.selectBox{
+  width: 100%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  background-image: linear-gradient(to bottom right, var(--second-color), var(--main-color));
+  border: none;
+  border-radius: 4px;
+  font-family: var(--text-font);
+  color: var(--grey);
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+}
+.emlNR{
+  float: left;
+}
+.bluefont{
+  color:var(--blue) !important;
+}
+.redfont{
+    color: var(--red) !important;
+}
+.darkfont{
+  color: var(--dark) !important;
+}
+.pinkfont{
+    color: var(--pink) !important;
+}
+
+.TimesFont{
+font-family: var(--Times) !important;
+}
+.ArialFont{
+font-family: Arial, Helvetica, sans-serif !important;
+}
+.ComicFont{
+  font-family: "Comic Sans MS", cursive, sans-serif !important;
+}
+.ImpactFont{
+  font-family: Impact, Charcoal, sans-serif !important;
+}
+.CourierFont{
+  font-family: "Courier New", Courier, monospace !important;
+}
+
+/* For mobile screeens ------------------------------------*/
+@media only screen and (max-width: 768px) {
+  .displayDiv .Small{
+    font-size: 4.359vw !important;
+  }
+
+  .displayDivContainerCopy .Small{
+    font-size: 4.58vw !important;
+  }
+
+  .divSlideMenu .Small{
+    font-size: 0.858vw !important;
+  }
+
+  .miniView .Small {
+    font-size: 4.5vw;
+  }
+
+  .displayDiv .XS{
+    font-size: 2.5vw !important;
+  }
+
+  .displayDivContainerCopy .XS{
+    font-size:  2.6vw !important;
+  }
+
+  .divSlideMenu .XS{
+    font-size: 0.45vw !important;
+  }
+
+  .miniView .XS{
+    font-size: 2vw !important;
+  }
+
+  .displayDiv .Large {
+    font-size: 14vw !important;
+  }
+
+  .divSlideMenu .Large {
+    font-size: 2.7vw !important;
+  }
+
+  .displayDivContainerCopy .Large {
+    font-size: 15vw !important;
+  }
+
+  .miniView .Large {
+    font-size: 14vw !important;
+  }
+
+  .displayDiv .XL {
+    font-size: 30vw !important;
+  }
+
+  .divSlideMenu .XL {
+    font-size: 6vw !important;
+  }
+
+  .displayDivContainerCopy .XL {
+    font-size: 33vw !important;
+  }
+
+  .miniView .XL {
+    font-size: 29vw !important;
+  }
+}
+
+/* For desktop screens -----------------------------------------------*/
+@media screen and (min-width: 768px) {
+  .displayDiv .Small {
+    font-size: 2vw !important;
+  }
+
+  .displayDivContainerCopy .Small {
+    font-size: 3.35vw !important;
+  }
+
+  .divSlideMenu .Small{
+    font-size: 0.395vw !important;
+  }
+
+  .miniView .Small {
+    font-size: 1vw !important;
+  }
+
+  .displayDiv .XS {
+    font-size: 1vw !important;
+  }
+
+  .displayDivContainerCopy .XS {
+    font-size: 1.8vw !important;
+  }
+
+  .divSlideMenu .XS {
+    font-size: 0.2vw !important;
+  }
+
+  .miniView .XS {
+    font-size: 0.5vw !important;
+  }
+
+  .displayDiv .Large {
+    font-size: 6vw !important;
+  }
+
+  .divSlideMenu .Large{
+    font-size: 1.2vw !important;
+  }
+
+  .displayDivContainerCopy .Large {
+    font-size: 10vw !important;
+  }
+
+  .miniView .Large {
+    font-size: 3.5vw !important;
+  }
+
+  .displayDiv .XL {
+    font-size: 14vw !important;
+  }
+
+  .divSlideMenu .XL {
+    font-size: 2.8vw !important;
+  }
+
+  .displayDivContainerCopy .XL {
+    font-size: 24vw !important;
+  }
+
+  .miniView .XL {
+    font-size: 8vw !important;
+  }
+}
+
+/* full screen ------------------------------------------*/
+@media all and (display-mode: fullscreen) {
+  .displayDivContainer .Small{
+    font-size: 4.75vw !important;
+  }
+
+  .displayDivContainer .XS {
+    font-size: 2.5vw !important;
+  }
+
+  .displayDivContainer .Large {
+    font-size: 15vw !important;
+  }
+
+  .displayDivContainer .XL {
+    font-size: 34vw !important;
+  }
+
+}
+
+.updatediv{
+  display: none;
+}

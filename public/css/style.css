@@ -92,7 +92,7 @@ table {
     display: none;
   }
 
-  .navbar i {
+  .navbar .iconBurger {
     float: right;
     display: block;
     font-size: 16px;
@@ -101,7 +101,7 @@ table {
     color: var(--third-color);
   }
 
-  .navbar.expanded i {
+  .navbar.expanded .iconBurger {
     position: absolute;
     right: 0;
     top: 0;
@@ -117,8 +117,12 @@ table {
 /* CSS specifically for desktops -----------------------------------------*/
 @media screen and (min-width: 768px) {
   /* For navbar -------------------------------------------------------*/
-  .navbar i {
+  .navbar .iconBurger {
     display: none;
+  }
+
+  .navbar .btnLogOff {
+    float: right;
   }
 }
 
@@ -151,6 +155,18 @@ table {
   color: white;
 }
 
+.navbar .btnLogOff {
+  color: var(--third-color);
+}
+
+.navbar .btnLogOff:hover {
+  color: var(--third-color);
+  cursor: pointer;
+}
+
+.navbar .btnLogOff i {
+  margin-left: 8px;
+}
 /* Popup messages --------------------------------------------------------*/
 
 .confirmMessage {

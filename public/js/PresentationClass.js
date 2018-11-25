@@ -126,118 +126,6 @@ class Presentation {
     }
   }
 
-  // function to make elements in a div draggable
-  /*
-  makeDivDraggable() {
-  // thanks to https://www.kirupa.com/html5/drag.html
-
-    let container = this.slides[this.currentSlideIndex].getSlideHTML();
-    let activeItem = null;
-    let active = false;
-
-    //div position
-    let xLeftBox = container.offsetLeft;
-    let xRightBox = xLeftBox + container.offsetWidth;
-    let yTopBox = container.offsetTop;
-    let yBottomBox = yTopBox + container.offsetHeight;
-
-    container.addEventListener("touchstart", dragStart, false);
-    container.addEventListener("touchend", dragEnd, false);
-    container.addEventListener("touchmove", drag, false);
-
-    container.addEventListener("mousedown", dragStart, false);
-    container.addEventListener("mouseup", dragEnd, false);
-    container.addEventListener("mousemove", drag, false);
-
-    // initialize for dragging
-    function dragStart(e) {
-
-      if (e.target !== e.currentTarget) {
-        active = true;
-
-        // this is the item we are interacting with
-        activeItem = e.target;
-
-        if (activeItem !== null) {
-          if (!activeItem.xOffset) {
-            activeItem.xOffset = 0;
-          }
-
-          if (!activeItem.yOffset) {
-            activeItem.yOffset = 0;
-          }
-
-          if (e.type === "touchstart") {
-            activeItem.initialX = e.touches[0].clientX - activeItem.xOffset;
-            activeItem.initialY = e.touches[0].clientY - activeItem.yOffset;
-          }
-          else {
-            activeItem.initialX = e.clientX - activeItem.xOffset;
-            activeItem.initialY = e.clientY - activeItem.yOffset;
-          }
-        }
-      }
-    }
-
-    // leaves the element at the place where the mouse went up
-    function dragEnd(e) {
-      if (activeItem !== null) {
-        activeItem.initialX = activeItem.currentX;
-        activeItem.initialY = activeItem.currentY;
-
-        //convert left and top frompx to %
-        let leftPercent = (activeItem.currentX * 100 / container.offsetWidth);
-        let topPercent = (activeItem.currentY * 100 / container.offsetHeight);
-        activeItem.setAttribute('style', `left: ${leftPercent}%; top: ${topPercent}%`);
-      }
-      active = false;
-      activeItem = null;
-    }
-
-    //handles the dragging of elements
-    function drag(e) {
-      if (active) {
-        if (e.type === "touchmove") {
-          e.preventDefault();
-          activeItem.currentX = e.touches[0].clientX - activeItem.initialX;
-          activeItem.currentY = e.touches[0].clientY - activeItem.initialY;
-        }
-        else {
-          activeItem.currentX = e.clientX - activeItem.initialX;
-          activeItem.currentY = e.clientY - activeItem.initialY;
-        }
-
-        //check if text stay inside the box
-        if ((activeItem.currentX + activeItem.offsetWidth)> xRightBox){
-          activeItem.currentX = (container.offsetWidth - activeItem.offsetWidth) ;
-        }
-
-        if (activeItem.currentX < xLeftBox ){
-          activeItem.currentX = 0;
-        }
-
-        if ((activeItem.currentY + activeItem.offsetHeight)> yBottomBox ){
-          activeItem.currentY = (container.offsetHeight - activeItem.offsetHeight);
-        }
-
-        if (activeItem.currentY < yTopBox ){
-          activeItem.currentY = 0;
-        }
-
-        activeItem.xOffset = activeItem.currentX;
-        activeItem.yOffset = activeItem.currentY;
-        setTranslate(activeItem.currentX, activeItem.currentY, activeItem);
-      }
-    }
-
-    // makes movement of elements visible
-    function setTranslate(xPos, yPos, el) {
-      let leftPercent = (activeItem.currentX * 100 / container.offsetWidth);
-      let topPercent = (activeItem.currentY * 100 / container.offsetHeight);
-      activeItem.setAttribute('style', `left: ${leftPercent}%; top: ${topPercent}%`);
-    }
-  }*/
-
   // function to make elements in a div selectable
   makeDivSelectable() {
     let myCurrentSlideHTML = this.slides[this.currentSlideIndex].getSlideHTML();
@@ -254,6 +142,26 @@ class Presentation {
         if (activeElement !== myCurrentSlideHTML){
           myCurrentSlide.selectElement(activeElement);
           myCurrentSlide.setBorder();
+          switch (activeElement.typeElement) {
+            case TEXT:
+              showTextTool();
+              updateTools();
+              break;
+            case IMAGE:
+              showImageTool();
+              break;
+            case VIDEO:
+              showVideoTool();
+              break;
+            case SOUND:
+              showSoundTool();
+              break;
+            default:
+              //
+              break;
+          }
+
+
         }
       }
     }

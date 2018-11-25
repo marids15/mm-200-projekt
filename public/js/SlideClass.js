@@ -61,10 +61,11 @@ class Slide {
   }
 
   // add text element to slide
-  addText(text) {
+  addText(text , listClass) {
     try {
       let myText = new Element(TEXT, text, this.idGenerator);
       let textHTML = myText.getHTMLElement();
+      textHTML.className += ' ' + listClass;
       this.elements.push(textHTML);
       this.div.appendChild(textHTML);
       this.idGenerator++;
@@ -123,6 +124,9 @@ class Slide {
     if (this.elements.includes(element)) {
       this.currentElement = element;
       this.setBorder();
+      if(document.getElementById('textToolTab').className.includes("active")){
+        document.getElementById("inTxt").value = element.innerHTML;
+      }
     }
     // when you click on the icon, which is a child of the video div:
     else if (element !== null && element.parentElement.className === "vidDiv") {
@@ -131,6 +135,10 @@ class Slide {
     }
     else {
       this.currentElement = null;
+
+      if(document.getElementById('textToolTab').className.includes("active")){
+        document.getElementById("inTxt").value = "";
+      }
     }
   }
 
