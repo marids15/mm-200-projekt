@@ -51,20 +51,22 @@ let sizes = ["XS","Small", "Large", "XL"];
 // function to change font size from selected option
 function changeFontSize(){
   let textbox = myPresentation.getCurrentSlide().getCurrentElement();
-  if (textbox !== 'null' && textbox.typeElement === TEXT) {
-    let fontSize = document.getElementById("setFontSize").value;
-    if(fontSize == "Default"){
-      textbox.classList.remove(...sizes);
+  if (textbox !== 'null'){
+    if(textbox.typeElement === TEXT) {
+      let fontSize = document.getElementById("setFontSize").value;
+      if(fontSize == "Default"){
+        textbox.classList.remove(...sizes);
+      }
+      else {
+        textbox.classList.remove(...sizes);
+        textbox.classList.add(fontSize);
+      }
     }
-    else {
-      textbox.classList.remove(...sizes);
-      textbox.classList.add(fontSize);
+    else{ //it's not text element
+      alert("not a text element");
     }
+    updateSlideMenu();
   }
-  else{ //it's not text element
-    alert("not a text element");
-  }
-  updateSlideMenu();
 }
 
 let colore = ["bluefont", "darkfont", "pinkfont"];
@@ -72,33 +74,35 @@ let colore = ["bluefont", "darkfont", "pinkfont"];
 // function to change font color from selected option
 function changeColor(evt) {
   let textbox = myPresentation.getCurrentSlide().getCurrentElement();
-  if (textbox !== 'null'&& textbox.typeElement === TEXT) {
-  	let color = document.getElementById('setFontColor').value;
+  if (textbox !== 'null'){
+    if(textbox.typeElement === TEXT) {
+    	let color = document.getElementById('setFontColor').value;
 
-    if (color == "bluefont"){
-      textbox.classList.remove(...colore);
-      textbox.classList.add("bluefont");
+      if (color == "bluefont"){
+        textbox.classList.remove(...colore);
+        textbox.classList.add("bluefont");
+      }
+      else if (color== "Default"){
+        textbox.classList.remove(...colore);
+      }
+      else if (color == "darkfont"){
+        textbox.classList.remove(...colore);
+        textbox.classList.add("darkfont");
+      }
+      else if (color == "pinkfont"){
+        textbox.classList.remove(...colore);
+        textbox.classList.add("pinkfont");
+      }
+      else if (color == "redfont"){
+        textbox.classList.remove(...colore);
+        textbox.classList.add("redfont");
+      }
     }
-    else if (color== "Default"){
-      textbox.classList.remove(...colore);
+    else{
+      alert("not a text element");
     }
-    else if (color == "darkfont"){
-      textbox.classList.remove(...colore);
-      textbox.classList.add("darkfont");
-    }
-    else if (color == "pinkfont"){
-      textbox.classList.remove(...colore);
-      textbox.classList.add("pinkfont");
-    }
-    else if (color == "redfont"){
-      textbox.classList.remove(...colore);
-      textbox.classList.add("redfont");
-    }
+  	updateSlideMenu();
   }
-  else{
-    alert("not a text element");
-  }
-	updateSlideMenu();
 }
 
 let fonts = ["TimesFont", "ArialFont", "ComicFont", "ImpactFont", "CourierFont"];
@@ -106,35 +110,37 @@ let fonts = ["TimesFont", "ArialFont", "ComicFont", "ImpactFont", "CourierFont"]
 // function to change font family from selected option
 function changeFont(){
   let textbox = myPresentation.getCurrentSlide().getCurrentElement();
-  if (textbox !== 'null'&& textbox.typeElement === TEXT) {
-    let font = document.getElementById('setFont').value;
+  if (textbox !== 'null'){
+    if(textbox.typeElement === TEXT) {
+      let font = document.getElementById('setFont').value;
 
-    if (font == "TimesFont"){
-      textbox.classList.remove(...fonts);
-      textbox.classList.add("TimesFont");
+      if (font == "TimesFont"){
+        textbox.classList.remove(...fonts);
+        textbox.classList.add("TimesFont");
+      }
+      if (font == "ArialFont"){
+        textbox.classList.remove(...fonts);
+        textbox.classList.add("ArialFont");
+      }
+      if (font == "ComicFont"){
+        textbox.classList.remove(...fonts);
+        textbox.classList.add("ComicFont");
+      }
+      if (font == "ImpactFont"){
+        textbox.classList.remove(...fonts);
+        textbox.classList.add("ImpactFont");
+      }
+      if (font == "CourierFont"){
+        textbox.classList.remove(...fonts);
+        textbox.classList.add("CourierFont");
+      }
+      if (font == "Default"){
+        textbox.classList.remove(...fonts);
+      }
     }
-    if (font == "ArialFont"){
-      textbox.classList.remove(...fonts);
-      textbox.classList.add("ArialFont");
+    else{
+      alert("not a text element");
     }
-    if (font == "ComicFont"){
-      textbox.classList.remove(...fonts);
-      textbox.classList.add("ComicFont");
-    }
-    if (font == "ImpactFont"){
-      textbox.classList.remove(...fonts);
-      textbox.classList.add("ImpactFont");
-    }
-    if (font == "CourierFont"){
-      textbox.classList.remove(...fonts);
-      textbox.classList.add("CourierFont");
-    }
-    if (font == "Default"){
-      textbox.classList.remove(...fonts);
-    }
+    updateSlideMenu();
   }
-  else{
-    alert("not a text element");
-  }
-  updateSlideMenu();
 }
