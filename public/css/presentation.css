@@ -79,11 +79,11 @@ table {
   }
 
   .tab button {
-    width: 15%;
+    width: 13%;
     height: 40px;
     padding-top: 1.5%;
     padding-bottom: 1.5%;
-    margin-right: 2%;
+    margin-right: 1.5%;
     border-radius: 8px 8px 0px 0px;
     font-size: 20px;
     float: left;
@@ -232,7 +232,7 @@ table {
 
   .tabContent {
     width: 80%;
-    height: 400px;
+    height: 467px;
     border-radius: 0px 5px 5px 0px;
     float: right;
     padding: 20px;
@@ -420,13 +420,17 @@ input, button {
     box-sizing: border-box;
 }
 
-.divSlideMenu{
+.divSlideMenu {
   padding-top: 11.250%;
   width: 20%;
   display: inline-block;
-  border: 1px solid red;
+  border: 1px solid var(--third-color);
   margin: 2px;
   position: relative;
+}
+
+.activeSlide {
+  border: 5px solid var(--third-color);
 }
 
 .divSlideMenu .textElementSlide {
@@ -514,6 +518,18 @@ input, button {
   font-size: 30px;
   margin-bottom: 20px;
   color: var(--light);
+}
+
+
+.tabContent h3 {
+  font-family: var(--text-font);
+  color: var(--third-color);
+  margin-bottom: 5px;
+  font-size: 17px;
+}
+
+#playPresentationTitle {
+  margin-top: 30px;
 }
 
 .tabContent label, .text {

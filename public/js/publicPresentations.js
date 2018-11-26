@@ -9,10 +9,8 @@ loadPresentations();
 let allPresentations = [];
 
 //-------------------------functions
-// loads presentations of user
+// loads all public presentations
 async function loadPresentations() {
-	let userid = localStorage.getItem('user_id');
-
 	// request for loading public presentations
 	fetch(PUBLIC_PRESENTATIONS_URL, {
 		method: 'GET',

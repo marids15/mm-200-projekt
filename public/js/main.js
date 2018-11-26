@@ -318,7 +318,7 @@ function closeFullscreen(elem) {
   } else if (elem.msExitFullscreen) { /* IE/Edge */
     elem.msExitFullscreen();
   }
-  console.log(" your browser doesn't support the Fullscreen API");
+  showErrorPopup(" your browser doesn't support the Fullscreen API");
 }
 
 // function to append eventlisteners to arrow keys, and removes them when not in presentation mode
@@ -392,7 +392,7 @@ function swipedetect(el, mode){
 						}
           }
           else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
-            console.log("exit");
+            // exit
           }
       }
       e.preventDefault();
@@ -408,7 +408,10 @@ function updateSlideMenu() {
 	// for every slide create a new mini div
   for (let i = 0; i < listSlide.length; i++){
     let newDiv = document.createElement("div");
-    newDiv.className = "divSlideMenu";
+		newDiv.className = "divSlideMenu";
+		if (myPresentation.getCurrentSlideIndex() == i){
+			newDiv.className += ' activeSlide';
+		}
     let copy = listSlide[i].getSlideHTML().cloneNode(true);
     newDiv.appendChild(copy);
     newDiv.addEventListener('click', function() { // when clicked on mini div, go to that slide
@@ -493,6 +496,20 @@ function showSoundTool() {
   activeDeleteElement();
 }
 
+//------------------- Shows the template tool in the menu
+function showTemplateTool() {
+	let templateToolTemplate = document.getElementById('templateContent');
+	let templateToolClone = templateToolTemplate.content.cloneNode(true);
+	tabContent.innerHTML = "";
+	tabContent.appendChild(templateToolClone);
+	let templateTab = document.getElementById('templateToolTab');
+	makeToolActive(templateTab);
+	let formTitleTemplate = document.getElementById("formTitleTemplate");
+	let formImageTemplate = document.getElementById("formImageTemplate");
+	formTitleTemplate.onsubmit = addTitleTemplate;
+	formImageTemplate.onsubmit = addImageTemplate;
+}
+
 //------------------- Shows the presenter tool in the menu
 function showPresenterTool() {
 	// get presenter tool from template to html
@@ -541,6 +558,61 @@ function makeToolActive(elem) {
       oldActiveElement.classList.remove('activeTab');
   }
   elem.classList.add('activeTab'); // hightlight correct tab
+}
+
+//------------------ Function for inserting title slide template
+function addTitleTemplate(evt) {
+	evt.preventDefault();
+	let inTemplateTitle = document.getElementById('inTitle');
+	let inTemplateText = document.getElementById('inTitleText');
+
+	// adding the title
+	myPresentation.getCurrentSlide().addText(inTemplateTitle.value);
+	let elements = myPresentation.getCurrentSlide().getElements();
+	let justAddedTitle = elements[elements.length - 1]; // get the newly added title as element
+	// position the title correctly
+	justAddedTitle.style.left = ((slideDiv.offsetWidth / 2 - (justAddedTitle.offsetWidth / 2)) / slideDiv.offsetWidth) * 100 + '%';
+	justAddedTitle.style.top = '20%';
+
+	// adding the subtitle
+	myPresentation.getCurrentSlide().addText(inTemplateText.value);
+	let justAddedText = elements[elements.length - 1]; // get the newly added subtitle as element
+	// set fontSize
+	justAddedText.className += " Small";
+
+	// position the subtitle correctly
+	justAddedText.style.left = ((slideDiv.offsetWidth / 2 - (justAddedText.offsetWidth / 2)) / slideDiv.offsetWidth) * 100 + '%';
+	justAddedText.style.top = '50%';
+
+	// empty input fields
+	inTemplateTitle.value = "";
+	inTemplateText.value = "";
+}
+
+//------------------ Function for inserting image slide template
+function addImageTemplate(evt) {
+	evt.preventDefault();
+	let inTemplateImageSrc = document.getElementById('inURL');
+	let inTemplateImageText = document.getElementById('inImageText');
+
+	// adding the image
+	myPresentation.getCurrentSlide().addImage(inTemplateImageSrc.value);
+	let elements = myPresentation.getCurrentSlide().getElements();
+	let justAddedImage = elements[elements.length - 1]; // get the newly added image as element
+	// position the image
+	justAddedImage.style.left = ((slideDiv.offsetWidth / 2 - (justAddedImage.offsetWidth / 2)) / slideDiv.offsetWidth) * 100 + '%';
+	justAddedImage.style.top = '30%';
+
+	// adding the text
+	myPresentation.getCurrentSlide().addText(inTemplateImageText.value);
+	let justAddedText = elements[elements.length - 1]; // get the newly added text as element
+	// position the text
+	justAddedText.style.left = ((slideDiv.offsetWidth / 2 - (justAddedText.offsetWidth / 2)) / slideDiv.offsetWidth) * 100 + '%';
+	justAddedText.style.top = '7%';
+
+	// clear inputfields
+	inTemplateImageSrc.value = "";
+	inTemplateImageText.value = "";
 }
 
 //------------------ Changing the theme of the Presentation
@@ -660,13 +732,11 @@ function parsePresentationToJSON() {
 			// set type and content
 			myElement.typeElement = elementsArray[j].typeElement;
 			if (myElement.typeElement == TEXT) {
-				console.log('this is text ; elementArray value: ' + elementsArray[j].innerHTML);
 				myElement.contentElement =  elementsArray[j].innerHTML;
 			} else {
 				myElement.contentElement = elementsArray[j].contentElement;
 			}
 			myElement.classElement = elementsArray[j].classList.value;
-			console.log(myElement.classElement);
 			mySlide.elements.push(myElement);
 		}
 		myData.presentation.slides.push(mySlide);
