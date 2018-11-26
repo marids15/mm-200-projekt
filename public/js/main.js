@@ -22,11 +22,19 @@ btnDeleteSlide.onclick = deleteCurrentSlide;
 
 // --------------- Global variables
 let myPresentation;
+let presentationID;
 
 //---------------- Functions
+let param = location.search;
+if (param) {
+	presentationID = param.replace('?', '');
+} else {
+	presentationID = localStorage.getItem('presentation_id');
+}
+
 // retrieving data from db
 let data = JSON.stringify({
-	presentation_id: localStorage.getItem('presentation_id'),
+	presentation_id: presentationID,
 	user_id: userID
 });
 
@@ -723,7 +731,7 @@ async function storePresentation() {
 	// get json from presentation
   let presentationData = parsePresentationToJSON();
   let data = JSON.stringify({
-		presentation_id: localStorage.getItem('presentation_id'),
+		presentation_id: presentationID,
 		owner: localStorage.getItem('user_id'),
 		presentation: parsePresentationToJSON()
   });
