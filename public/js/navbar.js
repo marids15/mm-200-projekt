@@ -48,8 +48,8 @@ function MakeNavbar(evt){
 
 function logOut(){
   if (activePage == 9){
-  storePresentation();
-}
+    storePresentation();
+  }
   localStorage.setItem("token","offLoged");
   localStorage.setItem("user_id","offLoged");
   location.href = "./index.html";

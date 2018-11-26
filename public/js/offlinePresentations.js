@@ -138,11 +138,12 @@ function closeFullscreen(elem) {
   } else if (elem.mozCancelFullScreen) { /* Firefox */
     elem.mozCancelFullScreen();
   } else if (elem.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+    console.log("ok");
     elem.webkitExitFullscreen();
   } else if (elem.msExitFullscreen) { /* IE/Edge */
     elem.msExitFullscreen();
   }
-  showErrorPopup(" your browser doesn't support the Fullscreen API");
+  console.log(" your browser doesn't support the Fullscreen API");
 }
 
 // function to append eventlisteners to arrow keys, and removes them when not in presentation mode
@@ -217,7 +218,7 @@ function swipedetect(el, mode){
 						}
           }
           else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
-            //exit
+            console.log("exit");
           }
       }
       e.preventDefault();
