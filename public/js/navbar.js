@@ -22,9 +22,9 @@ function MakeNavbar(evt){
   let tokentest = localStorage.getItem("token");
   //console.log(tokentest);
   let logedinornot = "";
-  if (tokentest.length > 12){
+  if (tokentest && tokentest.length > 12){
   //  console.log("testedtokennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-    logedinornot = '<i class="fas fa-power-off" onclick="log_out()"></i>';
+    logedinornot = '<a class="btnLogOff" onclick="logOut()">Log out<i class="fas fa-power-off"></i></a>';
   }
   let isave ="";
   if (evt == 1){a = 'class="active"';}
@@ -44,11 +44,12 @@ function MakeNavbar(evt){
     '>My Account</a><a '+ isave +' href="publicPresentations.html" ' + e +
     '>Public Presentations</a>' +
     logedinornot +
-    '<i class="fas fa-bars" onclick="expandNavigation()"></i>';
+    '<i class="fas fa-bars iconBurger" onclick="expandNavigation()"></i>';
   document.getElementById("top").appendChild(navi);
 }
 
-function log_out(){
+function logOut(){
+  console.log('logging off');
   //let msg = "offLoged";
   if (activePage == 9){
   storePresentation();

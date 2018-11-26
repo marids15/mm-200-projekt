@@ -59,14 +59,9 @@ async function loadPresentation(response) {
 	}
 
 	// make elements selectable
-	requestAnimationFrame(selectable);
+	myPresentation.makeDivSelectable();
 }
 
-// function to make elements selectable
-function selectable(evt){
-	myPresentation.makeDivSelectable();
-	requestAnimationFrame(selectable);
-}
 
 // function to save note into local presentation
 function saveNote() {
@@ -127,6 +122,7 @@ function goToNextSlide(){
   displayNumberCurrentSlide();
   updateNote();
   updateSlideMenu();
+	myPresentation.makeDivSelectable();
 }
 
 //--------------- function to go to previous slide
@@ -135,6 +131,7 @@ function goToPreviousSlide(){
   displayNumberCurrentSlide();
   updateNote();
   updateSlideMenu();
+	myPresentation.makeDivSelectable();
 }
 
 //------------- displays slide by an index
@@ -143,6 +140,7 @@ function goToSlide(num) {
   displayNumberCurrentSlide();
   updateNote();
   updateSlideMenu();
+	myPresentation.makeDivSelectable();
 }
 
 //--------------- function to Add a new slide
@@ -661,9 +659,14 @@ function parsePresentationToJSON() {
 
 			// set type and content
 			myElement.typeElement = elementsArray[j].typeElement;
-			myElement.contentElement = elementsArray[j].contentElement;
+			if (myElement.typeElement == TEXT) {
+				console.log('this is text ; elementArray value: ' + elementsArray[j].innerHTML);
+				myElement.contentElement =  elementsArray[j].innerHTML;
+			} else {
+				myElement.contentElement = elementsArray[j].contentElement;
+			}
 			myElement.classElement = elementsArray[j].classList.value;
-console.log(myElement.classElement);
+			console.log(myElement.classElement);
 			mySlide.elements.push(myElement);
 		}
 		myData.presentation.slides.push(mySlide);
