@@ -249,6 +249,11 @@ function updateShareOptions(evt) {
 		}
 	}).then(response => {
 		if (response.status < 400) { // option updated
+			console.log(shareOption);
+			if (shareOption == 2) {
+				let shareLink = 'http://localhost:8080/presentation.html?' + presentationId;
+				showConfirmPopup(`The sharing option is updated to Individual. With sharing this link, other users can view and edit this presentation: <a href="${shareLink}">${shareLink}</a>`);
+			}
 			showConfirmPopup('The sharing option is updated to ' + getShareOption(shareOption));
 		} else if (response.status === 403) { 	// user not authorized
 			showErrorPopup('You are not authorized for setting this shareOption.');

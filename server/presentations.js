@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 var db = require("./db.js");
+const SHARE_INDIVIDUAL = 2;
 
 // Create new presentation
 router.post('/api/presentations/new', async function(req, res) {
@@ -40,7 +41,7 @@ router.post('/api/presentations', async function(req, res) {
   // check if token is valid
   if (checkToken(token, userID)) {   // token is valid
     let query = `SELECT * FROM public.presentations t
-    WHERE id = '${presentationID}'`;
+    WHERE id = '${presentationID}' AND (user_id = '${userID}' OR share_option = '${SHARE_INDIVIDUAL}')`;
 
     let presentation = await db.select(query);
     let status = presentation ? 200 : 500;
@@ -55,13 +56,13 @@ router.post('/api/presentations/save', async function(req, res) {
   let presentationID = req.body.presentation_id;
   let presentation = req.body.presentation;
   let token = req.headers.Authorization;
-  let owner = req.body.owner;
+  let owner = req.body.owner; // id of owner
 
   // check if token is valid
   if (checkToken(token, owner)) { // token is valid
-    let query = `UPDATE "public"."presentations" SET "presentation_json" = '${presentation}' WHERE "id" = ${presentationID} RETURNING *`;
+    let query = `UPDATE "public"."presentations" SET "presentation_json" = '${presentation}'
+    WHERE "id" = '${presentationID}' AND (user_id = '${owner}' OR share_option = '${SHARE_INDIVIDUAL}') RETURNING *`;
     let response = await db.update(query);
-
     let status = response ? 200 : 500;
     res.status(status).json(response).end();
   } else { // token is invalid

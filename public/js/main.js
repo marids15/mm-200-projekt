@@ -22,11 +22,19 @@ btnDeleteSlide.onclick = deleteCurrentSlide;
 
 // --------------- Global variables
 let myPresentation;
+let presentationID;
 
 //---------------- Functions
+let param = location.search;
+if (param) {
+	presentationID = param.replace('?', '');
+} else {
+	presentationID = localStorage.getItem('presentation_id');
+}
+
 // retrieving data from db
 let data = JSON.stringify({
-	presentation_id: localStorage.getItem('presentation_id'),
+	presentation_id: presentationID,
 	user_id: userID
 });
 
@@ -83,27 +91,13 @@ function displayNumberCurrentSlide() {
 //--------------- function to Add text in a slide
 function btnAddTextClick(evt) {
   evt.preventDefault();
-	if(myPresentation.getCurrentSlide().getCurrentElement() === null){
-		let inTxt = document.getElementById('inTxt');
-		let color = document.getElementById('setFontColor').value;
-		let font = document.getElementById('setFont').value;
-		let fontSize = document.getElementById("setFontSize").value;
-		let listClass = font + ' ' + color + ' ' + fontSize;
-		myPresentation.getCurrentSlide().addText(inTxt.value , listClass, myPresentation.getCurrentSlideIndex());
-		inTxt.value = "";
-	}
-	else {
-		myPresentation.getCurrentSlide().selectElement(null);
-		myPresentation.getCurrentSlide().removeBorder();
-	}
-	myPresentation.getCurrentSlide().currentElement = null;
-}
-
-//-------------------------------- function to synchronize edit text from tools to presentation box
-function updateTextSynchrone(){
-	if(myPresentation.getCurrentSlide().getCurrentElement() !== null){
-		myPresentation.getCurrentSlide().getCurrentElement().innerHTML = document.getElementById('inTxt').value;
-	}
+  let inTxt = document.getElementById('inTxt');
+	let color = document.getElementById('setFontColor').value;
+	let font = document.getElementById('setFont').value;
+	let fontSize = document.getElementById("setFontSize").value;
+	let listClass = font + ' ' + color + ' ' + fontSize;
+  myPresentation.getCurrentSlide().addText(inTxt.value , listClass, myPresentation.getCurrentSlideIndex());
+  inTxt.value = "";
 }
 
 //--------------- function to add image in a slide
@@ -137,10 +131,6 @@ function goToNextSlide(){
   updateNote();
   updateSlideMenu();
 	myPresentation.makeDivSelectable();
-	if(document.getElementById('inTxt')){
-		document.getElementById('inTxt').value = '';
-	}
-	myPresentation.getCurrentSlide().currentElement = null;
 }
 
 //--------------- function to go to previous slide
@@ -150,10 +140,6 @@ function goToPreviousSlide(){
   updateNote();
   updateSlideMenu();
 	myPresentation.makeDivSelectable();
-	if(document.getElementById('inTxt')){
-		document.getElementById('inTxt').value = '';
-	}
-	myPresentation.getCurrentSlide().currentElement = null;
 }
 
 //------------- displays slide by an index
@@ -163,10 +149,6 @@ function goToSlide(num) {
   updateNote();
   updateSlideMenu();
 	myPresentation.makeDivSelectable();
-	if(document.getElementById('inTxt')){
-		document.getElementById('inTxt').value = '';
-	}
-	myPresentation.getCurrentSlide().currentElement = null;
 }
 
 //--------------- function to Add a new slide
@@ -174,10 +156,6 @@ function addNewSlide() {
   myPresentation.addSlide(myPresentation.getCurrentSlideIndex() + 1);
   goToNextSlide();
   updateSlideMenu();
-	if(document.getElementById('inTxt')){
-		document.getElementById('inTxt').value = '';
-	}
-	myPresentation.getCurrentSlide().currentElement = null;
 }
 
 // -------------- function to add the first slide
@@ -186,10 +164,6 @@ function addFirstSlide() {
   myPresentation.addSlide(0);
   updateNote();
   updateSlideMenu();
-	if(document.getElementById('inTxt')){
-		document.getElementById('inTxt').value = '';
-	}
-	myPresentation.getCurrentSlide().currentElement = null;
 }
 
 //-------------- function to delete current slide
@@ -210,10 +184,6 @@ function deleteCurrentSlide(){
     goToPreviousSlide();
   }
   updateSlideMenu();
-	if(document.getElementById('inTxt')){
-		document.getElementById('inTxt').value = '';
-	}
-	myPresentation.getCurrentSlide().currentElement = null;
 }
 
 //-------------- function to delete an element
@@ -479,18 +449,8 @@ function showTextTool() {
 	// add eventhandler to form
   let formEditingText = document.getElementById("formEditingText");
   formEditingText.onsubmit = btnAddTextClick;
-	formEditingText.oninput = updateTextSynchrone;
   activeDeleteElement();
 	doChange();
-
-	if(myPresentation.getCurrentSlide().getCurrentElement() !== null && myPresentation.getCurrentSlide().getCurrentElement().typeElement !== TEXT){
-		myPresentation.getCurrentSlide().selectElement(null);
-		myPresentation.getCurrentSlide().removeBorder();
-		myPresentation.getCurrentSlide().currentElement = null;
-	}
-	else if(myPresentation.getCurrentSlide().getCurrentElement() !== null && myPresentation.getCurrentSlide().getCurrentElement().typeElement === TEXT){
-		document.getElementById('inTxt').value = myPresentation.getCurrentSlide().getCurrentElement().innerHTML;
-	}
 }
 
 //------------------ Shows the image tool in the menu
@@ -722,8 +682,10 @@ function saveData(data, filename) {
 async function storePresentation() {
 	// get json from presentation
   let presentationData = parsePresentationToJSON();
+
+
   let data = JSON.stringify({
-		presentation_id: localStorage.getItem('presentation_id'),
+		presentation_id: presentationID,
 		owner: localStorage.getItem('user_id'),
 		presentation: parsePresentationToJSON()
   });
