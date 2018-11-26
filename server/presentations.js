@@ -108,7 +108,6 @@ router.delete('/api/presentations/:presentationid', async function(req, res) {
 // Update sharing options
 router.post('/api/presentations/:presentationid/sharing', async function(req, res){
   let userId = req.body.user_id;
-  let ugh = req.params.presentationid;
   let presentationId = req.body.presentation_id;
   let shareOption = req.body.share_option;
   let token = req.headers.Authorization;
