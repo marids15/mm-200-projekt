@@ -9,7 +9,7 @@ class Slide {
     this.elements = [];
     this.currentElement = null;
     this.idGenerator = 0;
-    this.note = "Write your notes here";
+    this.note = "";
   }
 
   // get HTML of slide
