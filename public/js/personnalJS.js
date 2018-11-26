@@ -250,7 +250,8 @@ function updateShareOptions(evt) {
 	}).then(response => {
 		if (response.status < 400) { // option updated
 			if (shareOption == SHARE_INDIVIDUAL) {
-				let shareLink = 'http://localhost:8080/presentation.html?' + presentationId;
+				//let shareLink = 'http://localhost:8080/presentation.html?' + presentationId; <-- local link
+				let shareLink = 'https://once-upon-a-slide.herokuapp.com/presentation.html?' + presentationId;
 				showConfirmPopup(`The sharing option is updated to Individual. With sharing this link, other users can view and edit this presentation: <a href="${shareLink}">${shareLink}</a>`);
 			} else {
 				showConfirmPopup('The sharing option is updated to ' + getShareOption(shareOption));
