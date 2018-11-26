@@ -26,21 +26,22 @@ function MakeNavbar(evt){
   //  console.log("testedtokennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
     logedinornot = '<i class="fas fa-power-off" onclick="log_out()"></i>';
   }
+  let isave ="";
   if (evt == 1){a = 'class="active"';}
   if (evt == 2){b = 'class="active"';}
   if (evt == 3){c = 'class="active"';}
   if (evt == 4){d = 'class="active"';}
   if (evt == 5){e = 'class="active"';}
-  if (evt == 9){b = 'class="active"';}
+  if (evt == 9){b = 'class="active"'; isave = 'onclick="storePresentation()"';}
 
   //  Makes the actual navbar
   var navi =  document.createElement("div");
   navi.id = "topnav";
-  navi.innerHTML = '<a href="index.html" '+ a +
-    '>Home</a><a href="personnal.html" '+ b +
-    '>My Presentations</a><a href="OfflinePresentations.html" ' + c +
-    '>Offline Presentations</a><a href="account.html" ' + d +
-    '>My Account</a><a href="publicPresentations.html" ' + e +
+  navi.innerHTML = '<a '+ isave +' href="index.html" '+ a +
+    '>Home</a><a '+ isave +' href="personnal.html" '+ b +
+    '>My Presentations</a><a '+ isave +' href="OfflinePresentations.html" ' + c +
+    '>Offline Presentations</a><a '+ isave +' href="account.html" ' + d +
+    '>My Account</a><a '+ isave +' href="publicPresentations.html" ' + e +
     '>Public Presentations</a>' +
     logedinornot +
     '<i class="fas fa-bars" onclick="expandNavigation()"></i>';
@@ -54,6 +55,7 @@ function log_out(){
 }
   localStorage.setItem("token","offLoged");
   localStorage.setItem("user_id","offLoged");
+  alert("you have now loged off");
   //console.log("loggeroffer");
     location.href = "./index.html";
 }
