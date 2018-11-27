@@ -1,56 +1,61 @@
 ===USER STUFF===================================================================
+User roles:
+0 = standard user role
+1 = admin
+
 
 Create user:
 
 METHOD: POST
 ENDPOINT: api/user
 REQUEST (JSON): {"username": "John Doe", "email": "john.doe@email.com", "password": "password1", "role": '0'}
-RESPONSE (JSON): {"id": "000001", "username": "John Doe", "email":"john.doe@email.com", "password": "password1"}
+RESPONSE header: Authorization: [hashed token]
+RESPONSE (JSON): {"id": "000001", "username": "John Doe", "email":"john.doe@email.com", "password": "password1", "role": '0'}
 
 Login:
 
 METHOD: POST
 ENDPOINT: api/users/auth
 REQUEST (JSON): {"username": "JohnDoe", "password": "password"}
+RESPONSE header: Authorization: [hashed token]
 RESPONSE (JSON): {"username": JohnDoe"} //add token later
 
 Get user:
 
 METHOD: GET
 ENDPOINT: api/users/:id
-REQUEST header: ---------
+REQUEST header: Authorization: [token]
 REQUEST (JSON): no body
-RESPONSE (JSON): [{"id": "123", "username": "John Doe", "email":"john@doe.com", "password"}]
-
-0 = standard user role
-1 = admin
+RESPONSE (JSON): [{"id": "123", "username": "John Doe", "email":"john@doe.com", "password": "o12341jsakdjaajs080", "role": "0"}]
 
 Edit user email:
 
 METHOD: POST
 ENDPOINT: api/users/:id/email
-REQUEST header: --------
+REQUEST header: Authorization: [token]
 REQUEST (JSON): {"user_id": 34, "email": "john@doe.com"}
-RESPONSE (JSON): [{"id": "123", "username": "John Doe", "email":"john@doe.com", "password"}]
+RESPONSE (JSON): [{"id": "123", "username": "John Doe", "email":"john@doe.com", "password": "o12341jsakdjaajs080", "role": "0"}]
 
 Edit user password:
 
 METHOD: POST
 ENDPOINT: api/users/:id/pass
-REQUEST header: --------
+REQUEST header: Authorization: [token]
 REQUEST (JSON): {"user_id": 42, "old_password": "12345", "new_password": "123456"}
-RESPONSE (JSON): [{"id": "123", "username": "John Doe", "email":"john@doe.com", "password"}]
+RESPONSE (JSON): [{"id": "123", "username": "John Doe", "email":"john@doe.com", "password": "o12341jsakdjaajs080", "role": "0"}]
 
 Delete user:
 METHOD: DELETE
 ENDPOINT: api/users/:id
-REQUEST header: -------
+REQUEST header: Authorization: [token]
 REQUEST (JSON): {'user_id': 42, "delete_option": 0}
 RESPONSE (JSON): {}
 
 delete options:
 - 0: delete all presentations
 - 1: delete only private & personal presentations
+
+
 
 ===PRESENTATION STUFF===========================================================
 sharing options:
@@ -60,116 +65,178 @@ sharing options:
 
 
 Create presentation:
+
 METHOD: POST
 ENDPOINT: api/presentations/new
-REQUEST header:--------------------------
-
+REQUEST header: Authorization: token
 REQUEST (JSON):
 {
   "name": "Cookies",
-  "owner": 32 (ID!!!)
+  "owner": 32 (ID)
 }
 RESPONSE (JSON):
 {
   "id": 0
-  "name": "Cookies",
-  "owner": "John Doe",
-  "presentation": {
-    name: "",
-    currentSlideIndex: 0,
-    slides: []
-  }
+  "user_id": "42",
+  "presentation_json": {
+    "presentation": {
+      "name": "name",
+      "currentSlideIndex": '0',
+      "theme": "Default",
+      "slides": []
+    }
+  },
+  "share_option": "0"
 }
 
 --------------------------------------------------------------------------------
 Get specific presentation of user:
+
 METHOD: GET
 ENDPOINT: api/presentations
-REQUEST header :---------
+REQUEST header: Authorization: [token]
 REQUEST (JSON): {"presentation_id": 0}
 RESPONSE (JSON):
 {
-  "id": 0,
-  "name": "Cookies",
-  "owner": "John Doe",
-  "slides": [
-  {
-    "note": "alksjdf",
-    "elements": [
-    {
-      "type": "text",
-      "x-offset": 0,
-      "y-offset": 0,
-      "content": "Hello"
-    }, {
-      "type": "img",
-      "x-offset": 0,
-      "y-offset": 0,
-      "content": "www.image.nl"
-    }]
-  }, {
-    "note": "alksjdf",
-    "elements": [
-    {
-      "type": "text",
-      "x-offset": 0,
-      "y-offset": 0,
-      "content": "Hello"
-    }, {
-      "type": "img",
-      "x-offset": 0,
-      "y-offset": 0,
-      "content": "www.image.nl"
-    }]
-  }]
+  "id": 0
+  "user_id": "42",
+  "presentation_json": {
+    "presentation": {
+      "name": "name",
+      "currentSlideIndex": '0',
+      "theme": "Default",
+      "slides": {
+        "note": "alksjdf",
+        "elements": [
+        {
+          "type": "text",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "Hello"
+        }, {
+          "type": "img",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "www.image.nl"
+        }]
+      }, {
+        "note": "alksjdf",
+        "elements": [
+        {
+          "type": "text",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "Hello"
+        }, {
+          "type": "img",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "www.image.nl"
+        }]
+      }]
+    }
+  },
+  "share_option": "0"
 }
+
 
 --------------------------------------------------------------------------------
 Edit/save presentation:
+
 METHOD: POST
 ENDPOINT: api/presentations/save
-REQUEST header: --------------------------
+REQUEST header: Authorization: [token]
 REQUEST (JSON):
 {
   "presentation_id": 0,
   "owner": 34, (user_id)
-  "presentation": [
-  {
-    "note": "alksjdf",
-    "elements": [
-    {
-      "type": "text",
-      "x-offset": 0,
-      "y-offset": 0,
-      "content": "Hello"
-    }, {
-      "type": "img",
-      "x-offset": 0,
-      "y-offset": 0,
-      "content": "www.image.nl"
-    }]
-  }, {
-    "note": "alksjdf",
-    "elements": [
-    {
-      "type": "text",
-      "x-offset": 0,
-      "y-offset": 0,
-      "content": "Hello"
-    }, {
-      "type": "img",
-      "x-offset": 0,
-      "y-offset": 0,
-      "content": "www.image.nl"
-    }]
-  }]
+  "presentation": {
+    "presentation": {
+      "name": "name",
+      "currentSlideIndex": '0',
+      "theme": "Default",
+      "slides": {
+        "note": "alksjdf",
+        "elements": [
+        {
+          "type": "text",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "Hello"
+        }, {
+          "type": "img",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "www.image.nl"
+        }]
+      }, {
+        "note": "alksjdf",
+        "elements": [
+        {
+          "type": "text",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "Hello"
+        }, {
+          "type": "img",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "www.image.nl"
+        }]
+      }]
+    }
+  }
 }
+RESPONSE (JSON):
+{
+  "id": 0
+  "user_id": "42",
+  "presentation_json": {
+    "presentation": {
+      "name": "name",
+      "currentSlideIndex": '0',
+      "theme": "Default",
+      "slides": {
+        "note": "alksjdf",
+        "elements": [
+        {
+          "type": "text",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "Hello"
+        }, {
+          "type": "img",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "www.image.nl"
+        }]
+      }, {
+        "note": "alksjdf",
+        "elements": [
+        {
+          "type": "text",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "Hello"
+        }, {
+          "type": "img",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "www.image.nl"
+        }]
+      }]
+    }
+  },
+  "share_option": "0"
+}
+
 
 --------------------------------------------------------------------------------
 Delete presentation:
+
 METHOD: DELETE
-ENDPOINT: api/presentations/:presenationid
-REQUEST header: Authorization: token
+ENDPOINT: api/presentations/:presentationid
+REQUEST header: Authorization: [token]
 REQUEST (JSON):
 {
   "presentation_id": 0,
@@ -177,11 +244,13 @@ REQUEST (JSON):
 }
 RESPONSE: {}
 
+
 --------------------------------------------------------------------------------
 Update sharing options presentation:
+
 METHOD: POST
 ENDPOINT: api/presentations/:presentationid/sharing
-REQUEST header: Authorization: token
+REQUEST header: Authorization: [token]
 REQUEST (JSON):
 {
   "presentation_id": 0,
@@ -190,27 +259,106 @@ REQUEST (JSON):
 }
 RESPONSE: {}
 
+
 --------------------------------------------------------------------------------
 Get all presentations of user:
+
 METHOD: GET
 ENDPOINT: api/presentations/:userid
-REQUEST header: -------
+REQUEST header: Authorization: [token]
 REQUEST: no body
-RESPONSE: {
-  presentations: [
-  {"id": etc}
-  ]
-}
+RESPONSE: [
+{
+  "id": 0
+  "user_id": "42",
+  "presentation_json": {
+    "presentation": {
+      "name": "name",
+      "currentSlideIndex": '0',
+      "theme": "Default",
+      "slides": {
+        "note": "alksjdf",
+        "elements": [
+        {
+          "type": "text",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "Hello"
+        }, {
+          "type": "img",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "www.image.nl"
+        }]
+      }, {
+        "note": "alksjdf",
+        "elements": [
+        {
+          "type": "text",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "Hello"
+        }, {
+          "type": "img",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "www.image.nl"
+        }]
+      }]
+    }
+  },
+  "share_option": "0"
+}, { etc...}
+]
+
 
 --------------------------------------------------------------------------------
 Get all public presentations:
+
 METHOD: GET
 ENDPOINT: api/public/presentations
 REQUEST header: no header (no token needed, you do not need to be logged in to view this page);
 REQUEST (JSON): no body
-RESPONSE:
+RESPONSE:[
 {
-  presentations: [
-  {"id": etc}
-  ]
-}
+  "id": 0
+  "user_id": "42",
+  "presentation_json": {
+    "presentation": {
+      "name": "name",
+      "currentSlideIndex": '0',
+      "theme": "Default",
+      "slides": {
+        "note": "alksjdf",
+        "elements": [
+        {
+          "type": "text",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "Hello"
+        }, {
+          "type": "img",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "www.image.nl"
+        }]
+      }, {
+        "note": "alksjdf",
+        "elements": [
+        {
+          "type": "text",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "Hello"
+        }, {
+          "type": "img",
+          "x-offset": 0,
+          "y-offset": 0,
+          "content": "www.image.nl"
+        }]
+      }]
+    }
+  },
+  "share_option": "0"
+}, { etc...}
+]

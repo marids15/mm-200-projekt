@@ -1,7 +1,7 @@
 //------------------------- constants
-CREATE_PRESENTATION_URL = "/api/presentations/new";
-PRESENTATIONS_URL = "/api/presentations";
-
+const CREATE_PRESENTATION_URL = "/api/presentations/new";
+const PRESENTATIONS_URL = "/api/presentations";
+const SHARE_INDIVIDUAL = 2;
 // ----------------------- DOM elements
 let formAddPresentation = document.getElementById("formCreatePresentation");
 let presentations = document.getElementById("presentations");
@@ -249,7 +249,13 @@ function updateShareOptions(evt) {
 		}
 	}).then(response => {
 		if (response.status < 400) { // option updated
-			showConfirmPopup('The sharing option is updated to ' + getShareOption(shareOption));
+			if (shareOption == SHARE_INDIVIDUAL) {
+				//let shareLink = 'http://localhost:8080/presentation.html?' + presentationId; <-- local link
+				let shareLink = 'https://once-upon-a-slide.herokuapp.com/presentation.html?' + presentationId;
+				showConfirmPopup(`The sharing option is updated to Individual. With sharing this link, other users can view and edit this presentation: <a href="${shareLink}">${shareLink}</a>`);
+			} else {
+				showConfirmPopup('The sharing option is updated to ' + getShareOption(shareOption));
+			}
 		} else if (response.status === 403) { 	// user not authorized
 			showErrorPopup('You are not authorized for setting this shareOption.');
 		} else { // other (server) error

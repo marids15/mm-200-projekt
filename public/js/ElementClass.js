@@ -87,9 +87,6 @@ class Element {
     vidDiv.typeElement = this.type;
     vidDiv.contentElement = this.content;
     return vidDiv;
-
-    //https://www.youtube.com/embed/xbhCPt6PZIU works
-    //https://www.youtube.com/embed/dmKeIlJq4gM doesn't
   }
 
   // gets HTML for sound
@@ -122,7 +119,7 @@ class Element {
     audioElement.appendChild(stopButton);
     audioDrag.appendChild(dragIcon);
     audioElement.appendChild(audioDrag);
-    
+
     audioElement.typeElement = this.type;
     audioElement.contentElement = this.content;
 
