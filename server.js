@@ -1,3 +1,4 @@
+// to run local test environments
 if (process.env.NODE_ENV !== 'production') {
   console.log('Loading .env')
 
